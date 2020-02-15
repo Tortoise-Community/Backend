@@ -1,0 +1,389 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Tortoise Community</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="We are a discord based community of/for programmers and developers focused around Python and Machine learning">
+	<meta name="keywords" content="Python,Machine learning, community, Tortoise community , tortoise python,discord python , python discord community, discord python chat,developers, python ">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->   
+	<link href="{% static 'img/real.ico' %}" rel="shortcut icon"/>
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Chewy|Lilita+One&display=swap" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}"/>
+
+
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script type="text/javascript">
+		function displayQuestion(answer) {
+
+
+	if (answer == "Other") { // hide the div that is not selected
+  
+		document.getElementById('other').style.display = "block";
+		document.getElementById('sponsor').style.display = "none";
+		document.getElementById('issue').style.display = "none";
+		document.getElementById('user').style.display = "none";
+		document.getElementById('infraction').style.display = "none";
+		document.getElementById('partner').style.display = "none";
+
+	} else if (answer == "Report-User") {
+  
+	  document.getElementById('other').style.display = "none";
+	  document.getElementById('sponsor').style.display = "none";
+	  document.getElementById('issue').style.display = "block";
+	  document.getElementById('user').style.display = "block";
+	  document.getElementById('infraction').style.display = "none";
+	  document.getElementById('partner').style.display = "none";
+  
+	}else if (answer == "Sponsorship") {
+  
+	  document.getElementById('other').style.display = "none";
+	  document.getElementById('sponsor').style.display = "block";
+	  document.getElementById('issue').style.display = "none";
+	  document.getElementById('user').style.display = "none";
+	  document.getElementById('infraction').style.display = "none";
+	  document.getElementById('partner').style.display = "none";
+	
+	}
+	else if (answer == "Issue-Report") {
+  
+		document.getElementById('other').style.display = "none";
+		document.getElementById('sponsor').style.display = "none";
+		document.getElementById('issue').style.display = "block";
+		document.getElementById('user').style.display = "none";
+		document.getElementById('infraction').style.display = "none";
+		document.getElementById('partner').style.display = "none";
+		
+	  
+	}
+	else if (answer == "Appeal-Infraction") {
+  
+			document.getElementById('other').style.display = "none";
+			document.getElementById('sponsor').style.display = "none";
+			document.getElementById('issue').style.display = "none";
+			document.getElementById('user').style.display = "block";
+			document.getElementById('infraction').style.display = "block";
+			document.getElementById('partner').style.display = "none";
+		  
+	}else if (answer == "Partnership") {
+  
+		document.getElementById('other').style.display = "none";
+		document.getElementById('sponsor').style.display = "none";
+		document.getElementById('issue').style.display = "none";
+		document.getElementById('user').style.display = "none";
+		document.getElementById('infraction').style.display = "none";
+		document.getElementById('partner').style.display = "block";
+	  
+}
+}
+	</script>
+
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header section -->
+	<header class="header-section">
+		<div class="container">
+			<!-- logo -->
+			<a class="site-logo" href="index.html">
+				<img src="{% static 'img/logo.png' %}" alt="">
+			</a>
+			
+			<!-- responsive -->
+			<div class="nav-switch">
+				<i class="fa fa-bars"></i>
+			</div>
+			<!-- site menu -->
+			<nav class="main-menu">
+				<ul>
+					<li><a href="{% url 'home' %}">Home</a></li>
+					<li><a href="{% url 'events' %}">Events</a></li>
+					<li><a href="{% url 'projects' %}">Projects</a></li>
+					<li><a href="{% url 'members' %}">Members</a></li>
+					<li><a href="{% url 'contact' %}">Contact</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<!-- Header section end -->
+	{% if News %}
+	<div class="latest-news-section">
+		<div class="ln-title">UPDATES</div>
+		<div class="news-ticker">
+			<div class="news-ticker-contant">
+				{% for N in News %}
+				{% if N.choice == 'Live' %}
+				 <a href="events"><div class="nt-item"><span class="red">Live</span>{{N.news}}</div></a>
+			    {% elif N.choice == 'News'  %}
+				<a href="events"><div class="nt-item"><span class="green">News</span>{{N.news}}</div></a>
+				{% else %}
+				<a href="events"><div class="nt-item"><span class="purple">Announcement</span>{{N.news}}</div></a>
+				{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{% endif %}
+	<!-- Latest news section end -->
+
+	<!-- Page info section -->
+	<section class="page-info-section set-bg" data-setbg="{% static 'img/page-top-bg/5.jpg' %}">
+		<div class="pi-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-5 col-lg-6 text-white">
+						<h2>Contact us</h2>
+						<p>Reach us from here if you are not part of the community. You can report issues, sponsor our events, report violations or appeal for the infraction you have recieved</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page info section -->
+	{% if H %}
+	<div id="myModal" class="poppup" style="display:block;" >
+
+			<!-- Modal content -->
+			<div class="poppup-content">
+			<span class="close">&times;</span>
+			<p>Request processed successfully!</p>
+			</div>
+	</div>
+	{% endif %}
+
+	<!-- Page section -->
+	<section class="page-section spad contact-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 mb-5 mb-lg-0">
+					<h4 class="comment-title">Tortoise Community</h4>
+					<p>A discord based community of/for programmers and developers focused around Python and Machine learning</p>
+					<div class="row">
+						<div class="col-md-9">
+							<ul class="contact-info-list">
+								<!--<li><div class="cf-left">Phone</div><div class="cf-right">+53 345 7953 32453</div></li>-->
+								<li><div class="cf-left">E-mail</div><div class="cf-right">tortoisecommunity@gmail.com</div></li>
+							</ul>
+						</div>
+					</div>
+					<div class="social-links">
+						<a href="https://github.com/Tortoise-Community"><i class="fa fa-github fa-lg"></i></a>
+						<a href="#"><i class="fa fa-reddit fa-lg "></i></a>
+						<a href="#"><i class="fa fa-twitter"></i></a>
+						<a href="#"><i class="fa fa-youtube-play fa-lg"></i></a>
+						<a href="#"><i class="fa fa-facebook fa-lg"></i></a>
+						<a href="#"><i class="fa fa-instagram fa-lg"></i></a>
+					</div>
+				</div>
+				<div class="col-lg-8">
+					<div class="contact-form-warp">
+						<h4 class="comment-title">Reach Us</h4>
+						<form class="comment-form" action="handle" method="POST" >
+							{% csrf_token %}
+							<div class="row">
+								<div class="col-md-6">
+									<input type="text" placeholder="Name"  name="name" required>
+								</div>
+								<div class="col-md-6">
+									<input type="email" placeholder="Email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"  name="email" required>
+								</div>
+								<div class="col-lg-12">
+									  <div class="form-group">
+									    <label for="seeAnotherField">Subject</label><br>
+									      <select onchange="displayQuestion(this.value)" class="form-control"  name="subject" required>
+									         <option value="none" selected disabled hidden> --select-- </option>
+									         <option value="Report-User">Report user</option>
+									         <option value="Issue-Report">Report issue</option>
+											 <option value="Sponsorship">Sponsor us</option>
+											 <option value="Partnership">Partner up</option>
+									         <option value="Appeal-Infraction">Appeal infraction</option>
+											 <option value="Other">Other</option>
+									      </select>  
+									   </div>
+											<div id="other" style="display:none;"><br/>
+												<label>Enter the subject:</label>
+												<input type="text" placeholder="subject"  name="othersub">
+											</div>
+											<div id="user" class="row">
+													<div class="col-md-6">
+															<label>Username:</label> 
+															<input type="text" placeholder="Ryuga_hideki"  name="username">
+													</div>
+													<div class="col-md-6">
+															<label>Tag:</label> 
+															<input type="text" name="tag"   placeholder="#1234" pattern="[1-9]{4}">
+													</div>
+											</div>
+											<div id="infraction" class="row">
+												<div class="col-md-6">	
+												<label>Infraction type:</label><br>
+												<select name="infraction-type" class="form-controly" >
+													<option value="none" selected disabled hidden> --select-- </option>
+													<option value="mute">Mute</option>
+													<option value="kick">Kick</option>
+													<option value="ban">Ban</option>
+												</select>
+												</div><br>
+												<div class="col-md-6">
+													<label>Date:</label><br>
+													<input type="date"  class="form-controly" name ="date"  ><br><br>
+													<label>Reason:</label> 
+													<input type="text" name="reason" placeholder="Violated T&C"  >
+												</div>
+											</div>
+											<div id="sponsor">
+												<label>What would you like to sponsor:</label><br>
+												<select name="sponsor-type" class="form-controly" name="sponsor-type" >
+												<option value="none" selected disabled hidden>--select-- </option>
+												<option value="Coding-Event">Code Jam</option>
+												<option value="CTF-Event">CTF-Event</option>
+												<option value="Team-Events">Team-Event</option>
+												<option value="Project">Project</option>
+											    </select>
+											</div>
+											<div id="issue" class="row">
+													<div class="col-md-12">
+															<label>Enter the issue: </label>
+															<input type="text" name="issue" >
+													</div>
+											</div>
+											<div id="partner" class="row">
+													<div class="col-md-6">
+															<label>Server Name:</label> 
+															<input type="text" placeholder="Tortoise" name="server-name" >
+													</div>
+													<div class="col-md-6">
+															<label>Server Topic</label> 
+															<input type="text"  placeholder="Programmming " name="server-topic" >
+													</div>
+													<div class="col-md-6">
+															<label>Invitaiton link</label> 
+															<input type="text" placeholder="https://discord.gg/99SKwQd" name="server-invite" >
+													</div>
+												
+											</div>
+
+                                <br><textarea placeholder="Message" name="message"></textarea>
+									<button class="site-btn btn-sm" type="submit">Send</button>
+									
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page section end -->
+
+
+
+	<!-- Footer top section -->
+	<section class="footer-top-section">
+			<div class="container">
+				<div class="footer-top-bg">
+					<img src="{% static 'img/footer-top-bg.png' %}" alt="">
+				</div>
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="footer-logo text-white">
+							<img src="{% static 'img/footer-logo.png' %}" alt="">
+							<p>Rush to our discord server</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<iframe src="https://discordapp.com/widget?id=577192344529404154&theme=dark" width="315" height="500" allowtransparency="true" frameborder="0"></iframe>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<div class="footer-widget">
+							<h4 class="fw-title">Team Tortoise</h4>
+							<div class="top-comment">
+								{% for T in Team %}
+								<div class="tc-item">
+									<div class="tc-thumb set-bg" data-setbg="{{T.profilepic.url}}"></div>
+									<div class="tc-content">
+										<p><a href="#">{{T.name}}</a><br><span>Designation: </span>{{T.designation}}</p>
+										<p><span>Nickname: </span> <a class="tc-date">{{T.nickname}}</a></p>
+									</div>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Footer top section end -->
+
+	
+
+	<footer class="footer-section">
+		<div class="container">
+			<ul class="footer-menu">
+				<li><i><a class="fa fa-github " href="https://github.com/Tortoise-Community" target="_blank"> Github</a></i></li>
+				<li><i><a class="fa fa-reddit" href="https://www.reddit.com/user/Tortoise_Community" target="_blank"> Reddit</a></i></li>
+				<li><a class="fa fa-youtube-play" href="#"> Youtube</a></li>
+				<li><a class="fa fa-instagram" href="#"> Instagram</a></li>
+				<li><a class="fa fa-facebook-square" href="#"> Facebook</a></li>
+			</ul>
+			<p class="copyright">
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tortoise Community | <a href="{% url 'credits' %}"target='_blank'>All rights reserved </a></p>
+		</div>
+	</footer>
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'js/jquery.marquee.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+	<script>
+			// Get the modal
+			var poppup = document.getElementById("myModal");
+			
+			// Get the button that opens the modal
+			var btn = document.getElementById("myBtn");
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+			
+			// When the user clicks the button, open the modal 
+
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+				poppup.style.display = "none";
+			}
+			
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+			  if (event.target == poppup) {
+				poppup.style.display = "none";
+			  }
+			}
+			</script>
+
+
+	<!-- load for map -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWTIlluowDL-X4HbYQt3aDw_oi2JP0Krc&sensor=false"></script>
+	<script src="{% static 'js/map.js' %}"></script>
+
+    </body>
+</html>
