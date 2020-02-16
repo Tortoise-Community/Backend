@@ -2,7 +2,7 @@ from django.shortcuts import render , HttpResponse,redirect
 from websitedata.models import *
 from .oauth import Oauth
 from userdata.models import Members
-from userdata.discord_handler import Display
+
 
 
 
