@@ -60,7 +60,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Tortoise.urls'
 ROOT_HOSTCONF = 'Tortoise.hosts'
-DEFAULT_HOST = "www"
+DEFAULT_HOST = "api"
 
 TEMPLATES = [
     {
