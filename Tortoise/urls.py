@@ -38,7 +38,7 @@ urlpatterns = [
     url(r'^projects', views.projects,name='projects'),
     url(r'^credits', views.credits,name='credits'),
     url(r'^announcements', views.announcements,name='announcements'),
-    path('api/',include('userdata.urls')),
+    #path('api/',include('userdata.urls')),
 
 ]
     

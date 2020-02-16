@@ -43,9 +43,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'userdata.apps.UserdataConfig',
     'rest_framework.authtoken',
+    'django_hosts',
 ]
 
 MIDDLEWARE = [
+    'django_hosts.middleware.HostsRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,9 +55,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 ROOT_URLCONF = 'Tortoise.urls'
+ROOT_HOSTCONF = 'Tortoise.hosts'
+DEFAULT_HOST = "www"
 
 TEMPLATES = [
     {
