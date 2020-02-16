@@ -8,6 +8,6 @@ router = routers.DefaultRouter()
 urlpatterns = [
 path('', include(router.urls)),
 path('api-auth/', include('rest_framework.urls')),
-path('/members',views.members),
+path('members',views.members),
 path('members/edit/<int:id>',views.members_edit),
 ]
