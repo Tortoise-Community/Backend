@@ -144,7 +144,7 @@ MEDIA_URL = '/media/'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'tortoisecommunity@gmail.com'
-EMAIL_HOST_PASSWORD = 'WcHtBhTu'
+EMAIL_HOST_PASSWORD = 'WVWrLL8j7Zm5gYq#322@'
 EMAIL_USE_TLS = True
 #Discord bot sync 
 
