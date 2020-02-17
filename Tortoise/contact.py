@@ -1,26 +1,11 @@
-import smtplib
 from . import settings ,views 
 from django.shortcuts import render , HttpResponse,redirect
-
-
-sender = settings.mail_id
-password = settings.mail_password
+from django.core.mail import send_mail
 
 
 
-def mail(recipient,name,subject):
-    subject = subject
-    message = get_message(name,subject)
-    content = 'From:Tortoise Community <{}>\nTo:{}\nSubject:{}\n\n{}'.format(sender,recipient,subject,message)
-    server = smtplib.SMTP('smtp.gmail.com:587')
-    server.starttls()
-    server.ehlo()
-    server.login(sender ,password)
-    server.sendmail(sender, recipient, content)
-    server.quit()
 
-
-#form data
+#Contact data
 def contact(request,method=['GET','POST']):
     if request.method == 'POST':
         name = request.POST["name"]
@@ -39,7 +24,9 @@ def contact(request,method=['GET','POST']):
         server_invite = request.POST['server-invite']
         message = request.POST['message']
         try: 
-         mail(email,name,subject)
+         msg = get_message(name,subject)
+         send_mail(subject, msg, 'Tortoise Community <tortoisecommunity@gmail.com>', ['{}'.format(email)])
+
         except:
          pass
         H =True

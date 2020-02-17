@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'dwi06wnak8r3##it7^f9-4z^nmnye=_n=a2^xx=#o8k=)dt1yf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -79,7 +79,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Tortoise.wsgi.application'
-SECURE_SSL_REDIRECT = 'True'
+#SECURE_SSL_REDIRECT = 'True'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -141,12 +141,14 @@ MEDIA_URL = '/media/'
 
 # Mail Transfer Module Handlers
 
-mail_id = "tortoisecommunity@gmail.com"
-mail_password = "WcHtBhTu"
-
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'tortoisecommunity@gmail.com'
+EMAIL_HOST_PASSWORD = 'WcHtBhTu'
+EMAIL_USE_TLS = True
 #Discord bot sync 
 
-Encryption_key = "Ae2Y$7%h#@"
+#Encryption_key = "Ae2Y$7%h#@"
 
 
 #JWT Authentication 
