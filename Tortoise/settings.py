@@ -79,7 +79,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Tortoise.wsgi.application'
-
+SECURE_SSL_REDIRECT = 'True'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
