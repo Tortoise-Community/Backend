@@ -1,15 +1,14 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
 	<title>Tortoise Community</title>
 	<meta charset="UTF-8">
-	<meta name="description" content="We are a discord based community of/for programmers and developers focused around Python and Machine learning">
-	<meta name="keywords" content="Python,Machine learning, community, Tortoise community , tortoise python,discord python , python discord community, discord python chat,developers, python ">
+	<meta name="description" content="Game Warrior Template">
+	<meta name="keywords" content="warrior, game, creative, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Favicon -->   
-	<link href="{% static 'img/real.ico' %}" rel="shortcut icon"/>
+	<link href="{% static 'img/favicon.ico' %}" rel="shortcut icon"/>
 
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
@@ -21,9 +20,6 @@
 	<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}"/>
 	<link rel="stylesheet" href="{% static 'css/style.css' %}"/>
 	<link rel="stylesheet" href="{% static 'css/animate.css' %}"/>
-	<!--Icons-->
-	<script src="https://kit.fontawesome.com/5e4b131067.js" crossorigin="anonymous"></script>
-	<script src="https://kit.fontawesome.com/d1ddaa1e53.js" crossorigin="anonymous"></script>
 
 
 	<!--[if lt IE 9]>
@@ -45,7 +41,7 @@
 			<a class="site-logo" href="index.html">
 				<img src="{% static 'img/logo.png' %}" alt="">
 			</a>
-			<br>
+			
 			<!-- responsive -->
 			<div class="nav-switch">
 				<i class="fa fa-bars"></i>
@@ -64,17 +60,36 @@
 	</header>
 	<!-- Header section end -->
 
+	<!-- Latest news section -->
+	{% if News %}
+	<div class="latest-news-section">
+		<div class="ln-title">UPDATES</div>
+		<div class="news-ticker">
+			<div class="news-ticker-contant">
+				{% for N in News %}
+				{% if N.choice == 'Live' %}
+				 <a href="events"><div class="nt-item"><span class="red">Live</span>{{N.news}}</div></a>
+			    {% elif N.choice == 'News'  %}
+				<a href="events"><div class="nt-item"><span class="green">News</span>{{N.news}}</div></a>
+				{% else %}
+				<a href="events"><div class="nt-item"><span class="purple">Announcement</span>{{N.news}}</div></a>
+				{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{% endif %}
 
-
-    
 
 	<!-- Page info section -->
-	<section class="page-info-section set-bg" data-setbg="{% static 'img/page-top-bg/6.jpg' %}">
+	<section class="page-info-section set-bg" data-setbg="{% static 'img/page-top-bg/1.jpg' %}">
 		<div class="pi-content">
 			<div class="container">
 				<div class="row">
-					<div class="col-xl-5 col-lg-6 text-white blurcard">
-						<h2  >{{P.name}}</h2>
+					<div class="col-xl-5 col-lg-6 text-white">
+
+						<h2>Privacy Policy</h2>
+						<p>Here are the records all the Live/Ended Events,Participate in our events and win cool prizes and perks.<br>Rank up inside the server and earn higher roles </p>
 					</div>
 				</div>
 			</div>
@@ -84,38 +99,39 @@
 
 
 	<!-- Page section -->
-	<section class="page-section single-blog-page spad">
+	<section class="page-section recent-game-page spad">
 		<div class="container">
-			<div class="row tint">
-
-					<div style="align-items: left;padding:4px 4px;">
-						    <div class="fas fa-history git"><span class="change-font"> Commits 4</span></div>	
-							<div class="fa fa-code-fork git"> <span class="change-font"> Forks 5</span></div>
-							<div class="fas fa-star git"> <span class="change-font"> Stars 5</span></div>
-							<div class="fas fa-user-friends git"><span class="change-font"> Contributors 4</span></div>	
-					</div>
-				<div class="col-lg-12"><h2 class="eventbox">{{P.name}}</h2>
-					<div>
-						<div class="{{P.status}}">{{P.get_status_display}}</div>
-					</div>
-
-					<div class="blog-content" >
-						<h4>{{P.label}}</h4>
-						<a href="" class="meta-comment"></a>
-						<pre style="font-family:Verdana, Geneva, Tahoma,bold, sans-serif;color:white;">{{P.brief}}</pre>
-					</div>	
-				</div>
-			</div>
-			<br>
 			<div class="row">
-			<a href="{{P.github}}"><button class="github fab fa-github"><span class="change-font" > View in Github</span></button></a>
-		    {% if P.invite %}
-			<a href="{{P.invite}}"><button class="invite fa fa-plus-square"><span class="change-font"> Invite to your server</span></button></a>
-			{% endif %}
+				<div class="col-lg-7">
+					<div class="row">
+                        {% if Privacy %}
+                        {% for P in Privacy %}
+                        <h2>{{P.header}}</h2><br><br>
+                        <p>{{P.content}}</p>
+                        <p>{{P.extra}}</p>
+                        {% endfor %}
+                        {% endif %}
+					</div>
+				</div>
+				<!-- sidebar -->
+				<div class="col-lg-5 col-md-7 sidebar pt-5 pt-lg-0">
+					<!-- widget --> 
+					<div class="widget-item">
+						<h3>Change log</h3>
+					</div>
+                    {% if Change %}
+                    {% for C in Change %}
+                    <h6><span>{{C.date}}</span> : {{C.content}}</h6> 
+                    {% endfor %}
+					{% else %}
+					<h6>No changes untill now</h6>
+					{% endif %}
+				</div>
 			</div>
 		</div>
 	</section>
 	<!-- Page section end -->
+    -->
 
 	<!-- Footer top section -->
 	<section class="footer-top-section">
@@ -137,7 +153,7 @@
 					<div class="footer-widget">
 						<h4 class="fw-title">Team Tortoise</h4>
 						<div class="top-comment">
-						 {% for T in Team %}
+							{% for T in Team %}
 							<div class="tc-item">
 								<div class="tc-thumb set-bg" data-setbg="{{T.profilepic.url}}"></div>
 								<div class="tc-content">
@@ -168,7 +184,6 @@
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tortoise Community | <a href="{% url 'credits' %}"target='_blank'>All rights reserved </a></p>
 		</div>
 	</footer>
-
 
 	<!--====== Javascripts & Jquery ======-->
 	<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>

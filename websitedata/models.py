@@ -45,6 +45,8 @@ class Events(models.Model):
     desc = models.TextField(default=None)
 
 
+
+
 class Projects(models.Model):
     STATUS = [
         ("cata yellow","Completed"),("cata purple","Refactoring"),('cata red','Started'),('cata green','Upcoming')
@@ -60,3 +62,12 @@ class Projects(models.Model):
     
 
 
+class Privacy(models.Model):
+    header = models.CharField(max_length=150)
+    content = models.TextField(default=None,blank=True)
+    extra  = models.TextField(default=None,blank=True,null=True)
+
+
+class Changes(models.Model):
+    date = models.DateField()
+    content = models.TextField(default=None)

@@ -25,7 +25,7 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     url(r'^members/verify', views.verify ,name='verify'),
     url(r'^members', views.members, name = 'members'),
     path("",views.index),
@@ -38,7 +38,7 @@ urlpatterns = [
     url(r'^projects', views.projects,name='projects'),
     url(r'^credits', views.credits,name='credits'),
     url(r'^announcements', views.announcements,name='announcements'),
-    #path('api/',include('userdata.urls')),
+    url(r'^privacy', views.privacy,name='privacy'),
 
 ]
     

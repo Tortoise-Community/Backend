@@ -26,6 +26,8 @@ LiveEvents = Events.objects.filter(status='Live')
 Events = Events.objects.filter(status__in=['Live','Ended'])
 Projects = Projects.objects.all()
 Members = Members.objects.all().order_by('perks')[:10]
+Privacy = Privacy.objects.all()
+Changes = Changes.objects.all()
 
 def index(request):
     return render(request,"index.html",{'Slides':Slides,'News':News,'Team':Team,'Upcoming':Upcoming,'RecEvents':RecEvents,'Projects':Projects,'LiveEvents':LiveEvents})
@@ -66,7 +68,10 @@ def members(request):
     return render(request,"members.html",{'Team':Team,'Members':Members})    
 
 def credits(request):
-    return render(request,"credits.html")       
+    return render(request,"credits.html")    
+
+def privacy(request):
+    return render(request,"privacy.html",{'Privacy':Privacy,'Change':Changes,'Team':Team})     
 
 def announcements(request):
     return render(request,"announcements.html")       
