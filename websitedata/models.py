@@ -63,7 +63,7 @@ class Projects(models.Model):
 
 
 class Privacy(models.Model):
-    header = models.CharField(max_length=150)
+    header = models.CharField(max_length=150,blank=True)
     content = models.TextField(default=None,blank=True)
     extra  = models.TextField(default=None,blank=True,null=True)
 
