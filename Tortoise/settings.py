@@ -148,8 +148,10 @@ EMAIL_HOST_PASSWORD = 'WVWrLL8j7Zm5gYq#322@'
 EMAIL_USE_TLS = True
 #Discord bot sync 
 
+BOT_TOKEN = 'test'
 #Encryption_key = "Ae2Y$7%h#@"
-
+#Github
+GITHUB_ACCESS_TOKEN = "fce61a82b96ce03aea3198292a05d6e1535e08ca"
 
 #JWT Authentication 
 

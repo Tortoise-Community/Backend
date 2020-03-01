@@ -90,18 +90,15 @@
 		<div class="pi-content">
 			<div class="container">
 				 {% if not Verified %}
-                    <div class="col-md-4 col-lg-2 text-white centerpiece">
+                    <div class="centerpiece">
 						<a href="{{Oauth.discord_login_url}}"><button class="verify" type="button">Sign in with Discord</button></a>
 					</div>
 				{% endif %}
 				{% if Verified %}
 				<div class="col-xl-5 col-lg-6 text-black centerpiece" >
 					<div class="blurcard">
-
 						<label>You have successfully Verified</label>
-
 					</div>
-					
 				</div>
 				{% endif %}
 			</div>

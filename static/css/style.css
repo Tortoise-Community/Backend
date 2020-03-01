@@ -1095,6 +1095,7 @@ ol {
 	
 }
 
+
 .single-blog-page .blog-thumb .rgi-extra .rgi-star,
 .single-blog-page .blog-thumb .rgi-extra .rgi-heart {
 	height: 35px;
@@ -1642,10 +1643,10 @@ ol {
 		font-size: 40px;
 	}
 	.verify{
-		padding: 5px 10px;
-		font-size: 15px;
-		border-radius: 8px;
-	    box-shadow: 0 5px #2C2F33;
+		padding: 3px 7px;
+		font-size: 12px;
+		border-radius: 5px;
+	    box-shadow: 0 3px #2C2F33;
 	}
 }
 }
