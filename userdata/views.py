@@ -52,3 +52,6 @@ def members_edit(request,id):
         queryset.delete()
         return HttpResponse(status=204)     
 
+
+def api():
+    return render(request,'api.html')

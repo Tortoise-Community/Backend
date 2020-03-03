@@ -92,7 +92,8 @@
 						    <div class="fas fa-history git"><span class="change-font"> Commits {{Stats.commits}}</span></div>	
 							<div class="fa fa-code-fork git"> <span class="change-font"> Forks {{Stats.forks}}</span></div>
 							<div class="fas fa-star git"> <span class="change-font"> Stars {{Stats.stars}}</span></div>
-							<div class="fas fa-user-friends git"><span class="change-font"> Contributors {{Stats.contributors}}</span></div>	
+							<div class="fas fa-user-friends git"><span class="change-font"> Contributors {{Stats.contributors}}</span></div>
+
 					</div>
 				<div class="col-lg-12"><h2 class="eventbox">{{P.name}}</h2>
 					<div>
@@ -108,7 +109,7 @@
 			</div>
 			<br>
 			<div class="row">
-			<a href="{{P.github}}"><button class="github fab fa-github"><span class="change-font" > View in Github</span></button></a>
+			<a href="{{P.github}}"></a><button class="fab fa-github" class="github"><span class="change-font" > View in Github</span></button></a>
 		    {% if P.invite %}
 			<a href="{{P.invite}}"><button class="invite fa fa-plus-square"><span class="change-font"> Invite to your server</span></button></a>
 			{% endif %}

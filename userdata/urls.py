@@ -6,7 +6,8 @@ router = routers.DefaultRouter()
 #router.register('members',views.MemberView)
 
 urlpatterns = [
-path('', include(router.urls)),
+path('bot/', include(router.urls)),
+path('',views.api),
 path('api-auth/', include('rest_framework.urls')),
 path('members',views.members),
 path('members/edit/<int:id>',views.members_edit),

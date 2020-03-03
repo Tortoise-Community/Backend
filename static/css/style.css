@@ -1696,7 +1696,6 @@ ol {
 	text-decoration: none;
 	cursor: pointer;
   }
-.cl
 
   .github{
 	  color:#333;
@@ -1764,4 +1763,7 @@ ol {
 	position: absolute;
     top: 50%;
 	left: 40%;
+}
+.privacy{
+	color: navy;
 }
