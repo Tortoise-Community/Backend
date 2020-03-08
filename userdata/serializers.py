@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Members
+from .models import Members,Projects
 from . import views
 
 class MemberSerializer(serializers.ModelSerializer):
@@ -13,3 +13,7 @@ class AllSerializer(serializers.ModelSerializer):
         model = Members
         fields ='__all__'     
 
+class ProjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        models = Projects
+        fields = 'github'
