@@ -45,3 +45,9 @@ class Projects(models.Model):
     status = models.CharField(max_length=16,choices = STATUS ,default = 'Upcoming')
     github =  models.URLField(blank=True)
     invite = models.URLField(blank=True)
+    commits = models.IntegerField(blank=True,null=True)
+    stars = models.IntegerField(blank=True,null=True)
+    forks = models.IntegerField(blank=True,null=True)
+    collaborators = models.IntegerField(blank=True,null=True)
+
+

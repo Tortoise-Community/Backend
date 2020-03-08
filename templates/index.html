@@ -210,8 +210,8 @@
 				<h2>Recent Projects</h2>
 			</div>
 			<div class="row">
-				{% for P in Projects %} 
-				<div class="col-lg-3 col-md-6"><a href="projects/{{P.pk}}">
+				{% for P in Projects %} <a href="projects/{P.pk}"></a>
+				<div class="col-lg-3 col-md-6">
 					<div class="review-item">
 						<div class="review-cover set-bg" data-setbg="{{P.coverimage.url}}">
 							<div class="{{P.status}}">{{P.rating}}</div>
@@ -220,7 +220,7 @@
 							<h5>{{P.name}}</h5>
 							<p>{{P.label}}</p>
 						</div>
-					</div></a>
+					</div>
 				</div>
 				{% endfor %}
 			</div>

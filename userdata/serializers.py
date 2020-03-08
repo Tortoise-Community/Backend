@@ -13,7 +13,12 @@ class AllSerializer(serializers.ModelSerializer):
         model = Members
         fields ='__all__'     
 
+class GithubSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Projects
+        fields = ['pk','github']
+
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
-        models = Projects
-        fields = 'github'
+        model = Projects
+        fields = ['commits','stars','forks','collaborators']        
