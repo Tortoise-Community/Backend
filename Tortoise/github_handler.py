@@ -1,5 +1,4 @@
 from github import Github
-from github import CommitStatus 
 from Tortoise.settings import GITHUB_ACCESS_TOKEN
 
 g = Github(GITHUB_ACCESS_TOKEN)
@@ -23,5 +22,5 @@ class git():
         self.stars = repo.stargazers_count
         self.contributors = repo.get_contributors().totalCount
         self.forks = repo.get_forks().totalCount
-        #self.created_at = repo.created_at()
+
 

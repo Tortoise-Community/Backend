@@ -38,31 +38,31 @@
 		<div class="loader"></div>
 	</div>
 
-	<!-- Header section -->
-	<header class="header-section">
-		<div class="container">
-			<!-- logo -->
-			<a class="site-logo" href="index.html">
-				<img src="{% static 'img/logo.png' %}" alt="">
-			</a>
-			<br>
-			<!-- responsive -->
-			<div class="nav-switch">
-				<i class="fa fa-bars"></i>
-			</div>
-			<!-- site menu -->
-			<nav class="main-menu">
-				<ul>
-					<li><a href="{% url 'home' %}">Home</a></li>
-					<li><a href="{% url 'events' %}">Events</a></li>
-					<li><a href="{% url 'projects' %}">Projects</a></li>
-					<li><a href="{% url 'members' %}">Members</a></li>
-					<li><a href="{% url 'contact' %}">Contact</a></li>
-				</ul>
-			</nav>
+<!-- Header section -->
+<header class="header-section">
+	<div class="container">
+		<!-- logo -->
+		<a class="site-logo" href="index.html">
+			<img src="{% static 'img/logo.png' %}" alt="">
+		</a>
+		
+		<!-- responsive -->
+		<div class="nav-switch">
+			<i class="fa fa-bars"></i>
 		</div>
-	</header>
-	<!-- Header section end -->
+		<!-- site menu -->
+		<nav class="main-menu">
+			<ul>
+				<li><a href="{% url 'home' %}">Home</a></li>
+				<li><a href="{% url 'events' %}">Events</a></li>
+				<li><a href="{% url 'projects' %}">Projects</a></li>
+				<li><a href="{% url 'members' %}">Members</a></li>
+				<li><a href="{% url 'contact' %}">Contact</a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+<!-- Header section end -->
 
 
 

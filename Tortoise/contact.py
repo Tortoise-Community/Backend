@@ -4,6 +4,10 @@ from django.core.mail import send_mail
 
 
 
+def send_data(**payload):
+    package = {"contact":payload}
+
+
 
 #Contact data
 def contact(request,method=['GET','POST']):

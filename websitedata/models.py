@@ -45,22 +45,7 @@ class Events(models.Model):
     desc = models.TextField(default=None)
 
 
-
-
-class Projects(models.Model):
-    STATUS = [
-        ("cata yellow","Completed"),("cata purple","Refactoring"),('cata red','Started'),('cata green','Upcoming')
-    ]
-    name = models.CharField(max_length=15)
-    coverimage = models.ImageField(upload_to='img/bgimgs')
-    rating = models.FloatField(default=None,blank=True)
-    label =  models.CharField(max_length=100,default=None)
-    brief = models.TextField(default=None)
-    status = models.CharField(max_length=16,choices = STATUS ,default = 'Upcoming')
-    github =  models.URLField(blank=True)
-    invite = models.URLField(blank=True)
     
-
 
 class Privacy(models.Model):
     header = models.CharField(max_length=150,blank=True)
