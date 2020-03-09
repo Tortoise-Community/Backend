@@ -48,6 +48,6 @@ class Projects(models.Model):
     commits = models.IntegerField(blank=True,null=True)
     stars = models.IntegerField(blank=True,null=True)
     forks = models.IntegerField(blank=True,null=True)
-    collaborators = models.IntegerField(blank=True,null=True)
+    contributors = models.IntegerField(blank=True,null=True)
 
 
