@@ -21,4 +21,4 @@ class GithubSerializer(serializers.ModelSerializer):
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Projects
-        fields = ['commits','stars','forks','collaborators']        
+        fields = ['commits','stars','forks','contributors']        
