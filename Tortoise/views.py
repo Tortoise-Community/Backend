@@ -2,7 +2,6 @@ from django.shortcuts import render , HttpResponse,redirect
 from websitedata.models import *
 from .oauth import Oauth
 from userdata.models import *
-from Tortoise.github_handler import git
 
 
 
@@ -15,9 +14,8 @@ def get_event(request, item_name):
     return render(request, 'event.html', {'E':E,'Team':Team})
 
 def get_project(request,item_name):
-    P = Projects.get(pk = item_name)
-    Stats = git(P.github)
-    return render(request,'project.html',{'P':P,'Team':Team,'Stats':Stats})   
+    Project = Projects.get(pk = item_name)
+    return render(request,'project.html',{'Project':Project,'Team':Team})   
     
 Slides = Slider.objects.all()
 News = News.objects.all()

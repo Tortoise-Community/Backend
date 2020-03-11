@@ -74,7 +74,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-5 col-lg-6 text-white blurcard">
-						<h2  >{{P.name}}</h2>
+						<h2  >{{Project.name}}</h2>
 					</div>
 				</div>
 			</div>
@@ -89,29 +89,29 @@
 			<div class="row tint">
 
 					<div style="align-items: left;padding:4px 4px;">
-						    <div class="fas fa-history git"><span class="change-font"> Commits {{Stats.commits}}</span></div>	
-							<div class="fa fa-code-fork git"> <span class="change-font"> Forks {{Stats.forks}}</span></div>
-							<div class="fas fa-star git"> <span class="change-font"> Stars {{Stats.stars}}</span></div>
-							<div class="fas fa-user-friends git"><span class="change-font"> Contributors {{Stats.contributors}}</span></div>
+						    <div class="fas fa-history git"><span class="change-font"> Commits {{Project.commits}}</span></div>	
+							<div class="fa fa-code-fork git"> <span class="change-font"> Forks {{Project.forks}}</span></div>
+							<div class="fas fa-star git"> <span class="change-font"> Stars {{Project.stars}}</span></div>
+							<div class="fas fa-user-friends git"><span class="change-font"> Contributors {{Project.contributors}}</span></div>
 
 					</div>
-				<div class="col-lg-12"><h2 class="eventbox">{{P.name}}</h2>
+				<div class="col-lg-12"><h2 class="eventbox">{{Project.name}}</h2>
 					<div>
-						<div class="{{P.status}}">{{P.get_status_display}}</div>
+						<div class="{{Project.status}}">{{Project.get_status_display}}</div>
 					</div>
 
 					<div class="blog-content" >
-						<h4>{{P.label}}</h4>
+						<h4>{{Project.label}}</h4>
 						<a href="" class="meta-comment"></a>
-						<pre style="font-family:Verdana, Geneva, Tahoma,bold, sans-serif;color:white;">{{P.brief}}</pre>
+						<pre style="font-family:Verdana, Geneva, Tahoma,bold, sans-serif;color:white;">{{Project.brief}}</pre>
 					</div>	
 				</div>
 			</div>
 			<br>
 			<div class="row">
-			<a href="{{P.github}}"></a><button class="fab fa-github" class="github"><span class="change-font" > View in Github</span></button></a>
-		    {% if P.invite %}
-			<a href="{{P.invite}}"><button class="invite fa fa-plus-square"><span class="change-font"> Invite to your server</span></button></a>
+			<a href="{{Project.github}}"></a><button class="fab fa-github" class="github"><span class="change-font" > View in Github</span></button></a>
+		    {% if Project.invite %}
+			<a href="{{Project.invite}}"><button class="invite fa fa-plus-square"><span class="change-font"> Invite to your server</span></button></a>
 			{% endif %}
 			</div>
 		</div>
