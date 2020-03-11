@@ -28,6 +28,7 @@ class Members(models.Model):
     warnings = ArrayField(models.CharField(max_length=300),null=True,default=default_array)
     roles = ArrayField(models.IntegerField(),null=True,default=default_array)
     muted_until = models.DateTimeField(blank=True, null=True)
+    activity = models.CharField(max_length=100,default=None,blank=True,null=True)
 
     class Meta:
         unique_together = (('user_id', 'guild_id'),)
