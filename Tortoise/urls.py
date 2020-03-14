@@ -38,6 +38,9 @@ urlpatterns = [
     url(r'^credits', views.credits,name='credits'),
     url(r'^announcements', views.announcements,name='announcements'),
     url(r'^privacy', views.privacy,name='privacy'),
+    url(r'^rules', views.rules,name='rules'),
+
+
 
 ]
     
