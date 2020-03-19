@@ -30,6 +30,7 @@ def contact(request,method=['GET','POST']):
         try: 
          msg = get_message(name,subject)
          send_mail(subject, msg, 'Tortoise Community <tortoisecommunity@gmail.com>', ['{}'.format(email)])
+         send_data(name=name,email=email,subject=subject,other=other,username=username,tag=tag,infraction_type=infraction_type,date=date,reason=reason,sponsor_type=sponsor_type,issue=issue,server_name=server_name,server_topic=server_topic,server_invite=server_invite,message=message)
 
         except:
          pass

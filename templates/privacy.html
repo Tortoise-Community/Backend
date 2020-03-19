@@ -133,44 +133,8 @@
 		</div>
 	</section>
 	<!-- Page section end -->
-    -->
 
-	<!-- Footer top section -->
-	<section class="footer-top-section">
-		<div class="container">
-			<div class="footer-top-bg">
-				<img src="{% static 'img/footer-top-bg.png' %}" alt="">
-			</div>
-			<div class="row">
-				<div class="col-lg-4">
-					<div class="footer-logo text-white">
-						<img src="{% static 'img/footer-logo.png' %}" alt="">
-						<p>Rush to our discord server</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<iframe src="https://discordapp.com/widget?id=577192344529404154&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="footer-widget">
-						<h4 class="fw-title">Team Tortoise</h4>
-						<div class="top-comment">
-							{% for T in Team %}
-							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="{{T.profilepic.url}}"></div>
-								<div class="tc-content">
-									<p><a href="#">{{T.name}}</a><br><span>Designation: </span>{{T.designation}}</p>
-									<p><span>Nickname: </span> <a class="tc-date">{{T.nickname}}</a></p>
-								</div>
-							</div>
-							{% endfor %}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Footer top section end -->
+
 
 	
 	<footer class="footer-section">

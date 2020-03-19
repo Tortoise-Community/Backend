@@ -76,7 +76,7 @@ def privacy(request):
     return render(request,"privacy.html",{'Privacy':Privacy,'Change':Changes,'Team':Team})     
 
 def announcements(request):
-    return render(request,"announcements.html",{'Team':Team})       
+    return render(request,"billboard.html",{'Team':Team})       
 
 def x(request):
     res = Members.objects.all()
