@@ -119,52 +119,17 @@
 	</section>
 	<!-- Page section end -->
 
-	<!-- Footer top section -->
-	<section class="footer-top-section">
-		<div class="container">
-			<div class="footer-top-bg">
-				<img src="{% static 'img/footer-top-bg.png' %}" alt="">
-			</div>
-			<div class="row">
-				<div class="col-lg-4">
-					<div class="footer-logo text-white">
-						<img src="{% static 'img/footer-logo.png' %}" alt="">
-						<p>Rush to our discord server</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<iframe src="https://discordapp.com/widget?id=577192344529404154&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="footer-widget">
-						<h4 class="fw-title">Team Tortoise</h4>
-						<div class="top-comment">
-						 {% for T in Team %}
-							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="{{T.profilepic.url}}"></div>
-								<div class="tc-content">
-									<p><a href="#">{{T.name}}</a><br><span>Designation: </span>{{T.designation}}</p>
-									<p><span>Nickname: </span> <a class="tc-date">{{T.nickname}}</a></p>
-								</div>
-							</div>
-							{% endfor %}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Footer top section end -->
+
 
 	
 	<footer class="footer-section">
 		<div class="container">
 			<ul class="footer-menu">
-				<li><i><a class="fa fa-github " href="https://github.com/Tortoise-Community" target="_blank"> Github</a></i></li>
-				<li><i><a class="fa fa-reddit" href="https://www.reddit.com/user/Tortoise_Community" target="_blank"> Reddit</a></i></li>
-				<li><a class="fa fa-twitter" href="https://twitter.com/PythonTortoise" target="_blank"> Twitter</a></li>
-				<li><a class="fa fa-instagram" href="https://www.instagram.com/Tortoise_Python_Community/" target="_blank"> Instagram</a></li>
-				<li><a class="fa fa-facebook-square" href="https://www.facebook.com/Tortoise-Python-Community-103144314517830" target="_blank"> Facebook</a></li>
+				<li><i><a class="fab fa-github " href="https://github.com/Tortoise-Community" target="_blank"> Github</a></i></li>
+				<li><i><a class="fab fa-reddit" href="https://www.reddit.com/user/Tortoise_Community" target="_blank"> Reddit</a></i></li>
+				<li><a class="fab fa-twitter" href="https://twitter.com/PythonTortoise" target="_blank"> Twitter</a></li>
+				<li><a class="fab fa-instagram" href="https://www.instagram.com/Tortoise_Python_Community/" target="_blank"> Instagram</a></li>
+				<li><a class="fab fa-facebook-square" href="https://www.facebook.com/Tortoise-Python-Community-103144314517830" target="_blank"> Facebook</a></li>
 			</ul>
 			<p class="copyright">
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tortoise Community | <a href="{% url 'credits' %}"target='_blank'>All rights reserved </a></p>
