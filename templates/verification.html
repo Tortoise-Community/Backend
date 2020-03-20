@@ -13,7 +13,8 @@
 	
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Chewy|Lilita+One&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Chewy|Lilita+One|Oxanium&display=swap" rel="stylesheet">
+		
 	
 	
 		<!-- Stylesheets -->
@@ -87,13 +88,37 @@
 
 	<!-- Page info section -->
 	<section class="page-info-section1 set-bg" data-setbg="{% static 'img/verify.jpg' %}">
-		<div class="pi-content">
-			<div class="container">
-				 {% if not Verified %}
+				<div class="verification">
+					<div class="verification-wrapper">
+						<div class="verification-top">
+							<h3>Tortoise <span>Community</span></h3>
+							<h5>Sign-in to verify</h5>
+						</div>
+						<fieldset class="field_set">
+							<legend visible="true" style="width:auto;"><h5>Permissions required</h5></legend>
+						<div class="verification-bottom">
+							<ul>
+								<li>Access your email</li>
+								<li>Access username</li>
+								<li>Access avatar</li>
+							</ul>
+						</div>
+						</fieldset>
+						<div class="verification-footer">
+							<p>Note: We use discord Oauth2 system for the verification</p>
+							<a href="{{Oauth.discord_login_url}}"><button class="verify" type="button">Sign in with Discord</button></a>
+						</div>
+
+
+					</div>
+				</div>
+            <!--		
+		        {% if not Verified %}
                     <div class="centerpiece">
-						<a href="{{Oauth.discord_login_url}}"><button class="verify" type="button">Sign in with Discord</button></a>
+						
 					</div>
 				{% endif %}
+
 				{% if Verified %}
 				<div class="col-xl-5 col-lg-6 text-black centerpiece" >
 					<div class="blurcard">
@@ -101,26 +126,25 @@
 					</div>
 				</div>
 				{% endif %}
-			</div>
-		</div>
+			-->			
+
 	</section>
 	<!-- Page info section -->
 
 
 	
 	
-	<!-- Footer section -->
 	<footer class="footer-section">
 		<div class="container">
 			<ul class="footer-menu">
-				<li><a href="{% url 'home' %}">Home</a></li>
-				<li><a href="{% url 'events' %}">Events</a></li>
-				<li><a href="{% url 'projects' %}">Projects</a></li>
-				<li><a href="{% url 'members' %}">Members</a></li>
-				<li><a href="{% url 'contact' %}">Contact</a></li>
+				<li><i><a class="fa fa-github " href="https://github.com/Tortoise-Community" target="_blank"> Github</a></i></li>
+				<li><i><a class="fa fa-reddit" href="https://www.reddit.com/user/Tortoise_Community" target="_blank"> Reddit</a></i></li>
+				<li><a class="fa fa-twitter" href="https://twitter.com/PythonTortoise" target="_blank"> Twitter</a></li>
+				<li><a class="fa fa-instagram" href="https://www.instagram.com/Tortoise_Python_Community/" target="_blank"> Instagram</a></li>
+				<li><a class="fa fa-facebook-square" href="https://www.facebook.com/Tortoise-Python-Community-103144314517830" target="_blank"> Facebook</a></li>
 			</ul>
 			<p class="copyright">
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tortoise Community | All rights reserved </p>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tortoise Community | <a href="{% url 'credits' %}"target='_blank'>All rights reserved </a></p>
 		</div>
 	</footer>
 

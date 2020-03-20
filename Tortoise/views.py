@@ -75,13 +75,16 @@ def credits(request):
 def privacy(request):
     return render(request,"privacy.html",{'Privacy':Privacy,'Change':Changes,'Team':Team})     
 
+#UNDER DEVELOPMENT
 def announcements(request):
     return render(request,"billboard.html",{'Team':Team})       
 
-def x(request):
-    res = Members.objects.all()
-    return HttpResponse(res)
-
 def rules(request):
     return render(request,"rules.html",{'Team':Team})
+
+def staff(request):
+    pass
+
+def privacy(request):
+    pass
 
