@@ -1777,13 +1777,12 @@ ol {
 	margin-right: auto;
 	min-width: 300px;
 	width: 23%; 
-	height: 45%; 
+	height: 60%; 
 	background: #1a1a1a;
 	border-radius: 20px;
 	box-shadow: 0 0 30px 0 #333;
-
-	
-}
+	max-height: 400px;
+} 
 .verification-wrapper{
 	padding: 2px 5px;
 }
@@ -1825,6 +1824,4 @@ ol {
 	margin-left: 45px;
 	margin-right: 45px;
 	margin-top: 55px;
-
-
 }
