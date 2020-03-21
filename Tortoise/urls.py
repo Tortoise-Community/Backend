@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^members/verify', views.verify ,name='verify'),
     url(r'^members', views.members, name = 'members'),
     path("",views.index),
-    path('verified/',views.verified),
+    path('verification/',views.verified),
     url(r'^home', views.index ,name='home'),
     re_path(r'^events/(?P<item_name>[0-9]{1,3})' , views.get_event),
     url(r'^events/',views.events , name = 'events'),
