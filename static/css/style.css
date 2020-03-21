@@ -1777,10 +1777,11 @@ ol {
 	margin-right: auto;
 	min-width: 300px;
 	width: 23%; 
-	height: 45%; 
+	height: 60%; 
 	background: #1a1a1a;
 	border-radius: 20px;
 	box-shadow: 0 0 30px 0 #333;
+	max-height: 400px;
 
 	
 }
@@ -1827,4 +1828,88 @@ ol {
 	margin-top: 55px;
 
 
+}
+.verified{
+	margin: auto auto;
+	position: relative;
+}
+
+.verified fieldset{
+	width: 80%;
+	height: 70%;
+}
+
+.verified h5,p{
+	margin: 6px;
+	position: relative;
+}
+.verified p{
+	font-size: 70%
+}
+
+.loaderx {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: 4px solid #ffb320;
+  animation: loaderx 2s infinite ease;
+  border-radius: 2px;
+}
+
+.loader-innerx {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background-color:#ffb320;
+  animation: loader-innerx 2s infinite ease-in;
+}
+
+@keyframes loaderx {
+  0% {
+    transform: rotate(0deg);
+  }
+  
+  25% {
+    transform: rotate(180deg);
+  }
+  
+  50% {
+    transform: rotate(180deg);
+  }
+  
+  75% {
+    transform: rotate(360deg);
+  }
+  
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-innerx {
+  0% {
+    height: 0%;
+  }
+  
+  25% {
+    height: 0%;
+  }
+  
+  50% {
+    height: 100%;
+  }
+  
+  75% {
+    height: 100%;
+  }
+  
+  100% {
+    height: 0%;
+  }
+}
+
+.loading{
+	padding: 20px 45%;
+	position: relative;
 }

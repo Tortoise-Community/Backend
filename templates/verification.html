@@ -97,14 +97,14 @@
 					<div class="verification-wrapper">
 						<div class="verification-top">
 							<h3>Tortoise <span>Community</span></h3>
-							{% if  Verified %}
+							{% if not Verified %}
 							<h5>Sign-in to verify</h5>
 							{% endif %}
-							{% if not Verified %}
+							{% if Verified %}
 							<h5>Verification Successfull!</h5>
 							{% endif %}
 						</div>
-						{% if  Verified %}
+						{% if not Verified %}
 						<fieldset>
 							<legend visible="true" style="width:auto;"><h5>Permissions required</h5></legend>
 						<div class="verification-bottom">
@@ -120,10 +120,19 @@
 							<a href="{{Oauth.discord_login_url}}"><button class="verify" type="button">Sign in with Discord</button></a>
 						</div>
 						{% endif %}
+						{% if Verified %}
 						<div class="verified">
-                           <h5>You will be redirected to the server in a moment</h5>
-
+							<fieldset>
+                           <h5 style="font-size: 20px; font-family: Helvetica;">You will be redirected to the server in a moment</h5>
+                           <p>The data we collect will be stored in machine readable format and will not be disclosed to any third parties</p>
+                           <p>For more infomation on why we collect this data and how we use it, click <a href="{% url 'privacy' %}">here</a></p>
+							</fieldset>
 						</div>
+						<div class="loading">
+						<span class="loaderx" style="display: block !important;"><span class="loader-innerx"></span></span>
+						</div>
+						{% endif %}
+
 					</div>
 				</div>
 	</section>
