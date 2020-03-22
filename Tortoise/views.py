@@ -77,7 +77,7 @@ def privacypolicy(request):
 
 #UNDER DEVELOPMENT
 def announcements(request):
-    return render(request,"billboard.html",{'Team':Team})       
+    return render(request,"announcements.html",{'Team':Team})       
 
 def rules(request):
     return render(request,"rules.html",{'Team':Team})
