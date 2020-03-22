@@ -72,7 +72,7 @@ def members(request):
 def credits(request):
     return render(request,"credits.html")    
 
-def privacy(request):
+def privacypolicy(request):
     return render(request,"privacy.html",{'Privacy':Privacy,'Change':Changes,'Team':Team})     
 
 #UNDER DEVELOPMENT

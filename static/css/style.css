@@ -1832,6 +1832,7 @@ ol {
 .verified{
 	margin: auto auto;
 	position: relative;
+	padding: 5px 5px;
 }
 
 .verified fieldset{
@@ -1912,4 +1913,8 @@ ol {
 .loading{
 	padding: 20px 45%;
 	position: relative;
+}
+.privacypolicy p{
+
+font-size: 15px;
 }
