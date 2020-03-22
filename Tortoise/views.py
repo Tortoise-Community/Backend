@@ -2,6 +2,8 @@ from django.shortcuts import render , HttpResponse,redirect
 from websitedata.models import *
 from .oauth import Oauth
 from userdata.models import *
+from .discord_handler import SocketSend
+
 
 
 
@@ -63,6 +65,8 @@ def verified(request):
     if email:   
         Verified = True
         Members.objects.filter(user_id = id).update(email=email,verified=True)
+        package = {"Verify":id}
+        SocketSend(package)
     if id is None :
         return render(request,"verification.html",{'Oauth':Oauth})
     else :  

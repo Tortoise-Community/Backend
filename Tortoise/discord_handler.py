@@ -1,69 +1,27 @@
-'''import socket
+import socket
 import json
 
-#from settings import BOT_TOKEN
+SERVER_TOKEN = "tortoise_123_test"
 
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.setblocking(0)
-request = None
+# Connection
+SERVER = "34.68.150.139"
+PORT = 15555
 
 
-
-class DiscordHandler():
+def SocketSend(payload):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    
-    
-
-
-
-
-def send(id,value):
-    package = {id:value} 
-    payload = json.dumps(package)
+    server.connect((SERVER, PORT))
+    auth = {"Auth": SERVER_TOKEN}
+    auth = json.dumps(auth)
+    server.send(auth.encode('utf-8'))
+    payload = json.dumps(payload)
+    server.send(payload.encode('utf-8'))
     try:
-        server.send(request.encode('utf8'))
-        response = server.recv(255).decode('utf8')
-        return response.get('status')
-    except ConnectionAbortedError:
-        print("aborted")
+        response = server.recv(2000).decode('unicode_escape')
 
-       
-
-                 
-def connection():
-    try:
-        server.connect(("34.68.150.139", 15555))
-        send("Auth","test")
-        resp = send("Send","test")
-        print(resp)
     except ConnectionAbortedError:
         print("Connection closed by server.")
-
-
-
-
-
-
-try:
-    while request != 'quit':
-        request_input = input('1 for auth, 2 for sending to text channel >> ')
-        if request_input == "1":
-            request = get_token_request()
-        elif request_input == "2":
-            request = get_send_channel_request()
-        else:
-            continue
-
-        print("Sending to server .. ", end="")
-        request = json.dumps(request)
-        server.send(request.encode('utf8'))
-        try:
-            response = server.recv(255).decode('utf8')
-        except ConnectionAbortedError:
-            print("Connection closed by server.")
-            break
-        print("Server response:", response)
-except KeyboardInterrupt:
+    print("Server response:", response)
     server.close()
 
-'''   
+
