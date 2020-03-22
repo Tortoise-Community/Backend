@@ -58,9 +58,11 @@ def verified(request):
     code = request.GET.get("code")
     access_token = Oauth.get_access_token(code)
     user_json = Oauth.get_user_json(access_token)
-    username = user_json.get("email")   
-    Verified = True
-    id = user_json.get("id")   
+    id = user_json.get("id")  
+    email = user_json.get("email")
+    if email:   
+        Verified = True
+        Members.objects.filter(user_id = id).update(email=email,verified=True)
     if id is None :
         return render(request,"verification.html",{'Oauth':Oauth})
     else :  
