@@ -25,7 +25,7 @@ RecEvents = Events.objects.filter(status='Ended').order_by('enddate')[:3]
 LiveEvents = Events.objects.filter(status='Live')
 Events = Events.objects.filter(status__in=['Live','Ended'])
 Projects = Projects.objects.all()
-Members = Members.objects.all().order_by('perks')[:10]
+Memberx = Members.objects.all().order_by('perks')[:10]
 Privacy = Privacy.objects.all()
 Changes = Changes.objects.all()
 
@@ -69,7 +69,7 @@ def verified(request):
         return render(request,"verification.html",{'Verified':Verified})  
 
 def members(request):
-    return render(request,"members.html",{'Team':Team,'Members':Members})    
+    return render(request,"members.html",{'Team':Team,'Members':Memberx})    
 
 def credits(request):
     return render(request,"credits.html")    
