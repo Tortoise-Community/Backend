@@ -1702,6 +1702,10 @@ ol {
 	cursor: pointer;
   }
 
+  .mod1{
+	  padding:10px 12px !important;
+	  font-size: 18px;
+  }
   .githux{
 	  color:#333;
 	  border:none;

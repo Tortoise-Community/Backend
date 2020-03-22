@@ -22,3 +22,8 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Projects
         fields = ['commits','stars','forks','contributors']        
+
+class VerificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Members
+        fields = ['verified']

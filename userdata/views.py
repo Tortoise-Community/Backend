@@ -81,3 +81,13 @@ def projects_edit(request,pk):
             return JsonResponse(serializer.data,status=200)   
         else:
          return JsonResponse(serializer.errors,status =400)
+
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
+def is_verified(request,id):
+    queryset = get_object_or_404(Members,user_id = id)
+    serializer = VerificationSerializer(queryset)
+    return JsonResponse (serializer.data,safe=False)
+    

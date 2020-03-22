@@ -16,6 +16,7 @@ def default_strikes():
 
 
 class Members(models.Model):
+    name = models.CharField(max_length=100,default=None,blank=True,null=True)
     user_id = models.BigIntegerField(primary_key=True)
     guild_id = models.BigIntegerField()
     email = models.TextField(blank=True, null=True)
