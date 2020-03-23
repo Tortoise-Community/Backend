@@ -27,3 +27,8 @@ class VerificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Members
         fields = ['verified']
+
+class TopSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Members
+        fields = ['user_id']

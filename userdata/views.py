@@ -96,6 +96,6 @@ def is_verified(request,id):
 @permission_classes((IsAuthenticated, ))
 def get_top_members(request):
     queryset  = Members.objects.all().order_by('perks')[:10]
-    serializer = MemberSerializer(queryset,many=True)
-    return JsonResponse (serializer.data,safe=False)
+    serializer = TopSerializer(queryset,many=True)
+    return JsonResponse(serializer.data,safe=False)
         
