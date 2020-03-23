@@ -14,4 +14,5 @@ path('members/edit/<int:id>',views.members_edit),
 path('projects/',views.projects),
 path('projects/edit/<int:pk>',views.projects_edit),
 path('verify-confirmation/<int:id>',views.is_verified),
+path('top-members',views.get_top_members),
 ]

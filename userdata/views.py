@@ -91,3 +91,11 @@ def is_verified(request,id):
     serializer = VerificationSerializer(queryset)
     return JsonResponse (serializer.data,safe=False)
     
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
+def get_top_members(request):
+    queryset  = Members.objects.all.order_by('perks')[:10]
+    serializer = MemberSerializer(queryset)
+    return JsonResponse (serializer.data,safe=False)
+        
