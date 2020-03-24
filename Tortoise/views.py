@@ -66,7 +66,7 @@ def verified(request):
         Verified = True
         try:
            Members.objects.filter(user_id = id).update(email=email,verified=True)
-           package = {"Verify":id}#{"endpoint":"verify","data":id}
+           package = {"endpoint":"verify","data":id}
            SocketSend(package)
         except: 
             pass   
