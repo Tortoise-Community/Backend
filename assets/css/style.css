@@ -1833,3 +1833,8 @@ ol {
 .verified{
 	padding: 5px 5px;
 }
+.emailerror{
+	background-color:  #f08e8e ;
+	backdrop-filter: blur(5px);
+	padding: 1px;
+}
