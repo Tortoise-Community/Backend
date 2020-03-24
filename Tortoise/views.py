@@ -64,10 +64,13 @@ def verified(request):
     email = user_json.get("email")
     if email:   
         Verified = True
-        Members.objects.filter(user_id = id).update(email=email,verified=True)
-        package = {"Verify":id}
-        SocketSend(package)
-    if id is None :
+        try:
+           Members.objects.filter(user_id = id).update(email=email,verified=True)
+           package = {"Verify":id}#{"endpoint":"verify","data":id}
+           SocketSend(package)
+        except: 
+            pass   
+    if email is None :
         return render(request,"verification.html",{'Oauth':Oauth})
     else :  
         return render(request,"verification.html",{'Verified':Verified})  

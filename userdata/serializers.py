@@ -5,7 +5,7 @@ from . import views
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model=Members
-        fields = ['user_id','guild_id']
+        fields = ['user_id','guild_id','join_date']
 
 
 class AllSerializer(serializers.ModelSerializer):

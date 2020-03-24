@@ -22,7 +22,7 @@ def members(request):
             serializer.save()
             return JsonResponse(serializer.data,status=201,safe=False)   
         else:
-         return JsonResponse('{"response":"error"}')
+         return JsonResponse('{"response":500}')
     elif request.method == 'GET':
         queryset = Members.objects.all()
         serializer = AllSerializer(queryset,many=True)
