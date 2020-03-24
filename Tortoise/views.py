@@ -44,10 +44,7 @@ def events(request):
     
 def verify(request):
     return render(request,"verification.html",{'Oauth':Oauth})        
-
-def contact(request):
-    return render(request,"contact.html",{'Team':Team})     
-
+   
 
 def event(request):
     return render(request,"event.html",{'Team':Team})      
@@ -95,9 +92,4 @@ def announcements(request):
 def rules(request):
     return render(request,"rules.html",{'Team':Team})
 
-def staff(request):
-    pass
-
-def privacy(request):
-    pass
 
