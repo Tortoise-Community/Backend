@@ -70,8 +70,12 @@ def verified(request):
            SocketSend(package)
         except: 
             pass   
-    if email is None :
-        return render(request,"verification.html",{'Oauth':Oauth})
+    if code is None :
+        emailerror = False
+        return render(request,"verification.html",{'Oauth':Oauth,'emailerror':emailerror})
+    elif email is None:
+        emailerror = True
+        return render(request,"verification.html",{'Oauth':Oauth,'emailerror':emailerror}) 
     else :  
         return render(request,"verification.html",{'Verified':Verified})  
 
