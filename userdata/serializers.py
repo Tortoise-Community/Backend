@@ -4,8 +4,8 @@ from . import views
 
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Members
-        fields = ['user_id','guild_id','join_date','member','name','tag']
+        model= Members
+        fields = ['user_id','guild_id','join_date']
 
 
 class AllSerializer(serializers.ModelSerializer):
@@ -32,3 +32,8 @@ class TopSerializer(serializers.ModelSerializer):
     class Meta:
         model = Members
         fields = ['user_id']
+
+class MemberPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Members
+        fields = ['user_id','guild_id','join_date','member','name','tag']

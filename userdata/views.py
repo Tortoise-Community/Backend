@@ -17,7 +17,7 @@ def members(request):
     if request.method == 'POST':
         json_parser = JSONParser()
         data = json_parser.parse(request)
-        serializer = MemberSerializer(data = data)
+        serializer = MemberPostSerializer(data = data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data,status=201,safe=False)   
