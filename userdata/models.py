@@ -31,6 +31,7 @@ class Members(models.Model):
     roles = ArrayField(models.IntegerField(),null=True,default=default_array)
     muted_until = models.DateTimeField(blank=True, null=True)
     activity = models.CharField(max_length=100,default=None,blank=True,null=True)
+    member = models.BooleanField(blank=True,null=True,default=False)
 
     class Meta:
         unique_together = (('user_id', 'guild_id'),)
