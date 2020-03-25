@@ -35,10 +35,10 @@ urlpatterns = [
     url(r'^pages/contact', contact.contact,name='contact'),
     re_path(r'^pages/projects/(?P<item_name>[0-9]{1,3})' , views.get_project),
     url(r'^pages/projects', views.projects,name='projects'),
-    url(r'^credits', views.credits,name='credits'),
-    url(r'^announcements', views.announcements,name='announcements'),
-    url(r'^privacy', views.privacypolicy,name='privacy'),
-    url(r'^rules', views.rules,name='rules'),
+    url(r'^pages/credits', views.credits,name='credits'),
+    url(r'^pages/announcements', views.announcements,name='announcements'),
+    url(r'^pages/privacy', views.privacypolicy,name='privacy'),
+    url(r'^pages/rules', views.rules,name='rules'),
 
 
 

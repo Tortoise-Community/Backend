@@ -63,7 +63,7 @@ def verified(request):
         Verified = True
         try:
            Members.objects.filter(user_id = id).update(email=email,verified=True)
-           package = {"verify":id}#{"endpoint":"verify","data":id}
+           package = {"endpoint":"verify","data":id}
            SocketSend(package)
         except: 
             pass   
@@ -83,11 +83,7 @@ def credits(request):
     return render(request,"credits.html")    
 
 def privacypolicy(request):
-    return render(request,"privacy.html",{'Privacy':Privacy,'Change':Changes,'Team':Team})     
-
-#UNDER DEVELOPMENT
-def announcements(request):
-    return render(request,"announcements.html",{'Team':Team})       
+    return render(request,"privacy.html",{'Privacy':Privacy,'Change':Changes,'Team':Team})           
 
 def rules(request):
     return render(request,"rules.html",{'Team':Team})
