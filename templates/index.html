@@ -130,9 +130,37 @@
 {% endif %}
 
 
+{% if Upcoming %}
+<!-- Upcoming Events -->
+<section class="tournaments-section spad">
+	<div class="container">
+		<div class="tournament-title">Upcoming Events</div>
+		<div class="row">
+			{% for U in Upcoming %}
+			<div class="col-md-6">
+				<div class="tournament-item mb-4 mb-lg-0">
+					<div class="ti-notic">{{U.eventtype}}</div>
+					<div class="ti-content">
+						<div class="ti-thumb set-bg" data-setbg="{{U.coverimage.url}}"></div>
+						<div class="ti-text">
+							<h4>{{U.name}}</h4>
+							<ul>
+								<li><span>Event Begins: </span>{{U.duedate}}</li>
+								<li><span>Event Ends: </span>{{U.enddate}}</li>
+								<li><span>Event Host: </span>{{U.host}}</li>
+							</ul>
+							<p><span>Prizes:  </span><span style="color:pink;">{{U.prize}}</span></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+<!-- Upcoming Events section end -->
+{% endif %}
 
-
-	<!-- Feature section end -->
 
 
  {% if RecEvents %}
@@ -144,7 +172,7 @@
 			</div>
 			<div class="row">
 				{% for R in RecEvents %}
-				<a href="events/{{R.pk}}"><div class="col-lg-4 col-md-6">
+				<a href="pages/events/{{R.pk}}"><div class="col-lg-4 col-md-6">
 					<div class="recent-game-item">
 						<div class="rgi-thumb set-bg" data-setbg="{{R.coverimage.url}}">
 							{%if R.eventtype == 'CTF-Event' %}
@@ -170,36 +198,6 @@
 	</section>
 	<!-- Recent events section end -->
 {% endif %}
-   {% if Upcoming %}
-	<!-- Upcoming Events -->
-	<section class="tournaments-section spad">
-		<div class="container">
-			<div class="tournament-title">Upcoming Events</div>
-			<div class="row">
-                {% for U in Upcoming %}
-				<div class="col-md-6">
-					<div class="tournament-item mb-4 mb-lg-0">
-						<div class="ti-notic">{{U.eventtype}}</div>
-						<div class="ti-content">
-							<div class="ti-thumb set-bg" data-setbg="{{U.coverimage.url}}"></div>
-							<div class="ti-text">
-								<h4>{{U.name}}</h4>
-								<ul>
-									<li><span>Event Begins: </span>{{U.duedate}}</li>
-									<li><span>Event Ends: </span>{{U.enddate}}</li>
-									<li><span>Event Host: </span>{{U.host}}</li>
-								</ul>
-								<p><span>Prizes:  </span><span style="color:pink;">{{U.prize}}</span></p>
-							</div>
-						</div>
-					</div>
-				</div>
-				{% endfor %}
-			</div>
-		</div>
-	</section>
-	<!-- Upcoming Events section end -->
-   {% endif %}
 
 	<!-- Project section --><!---
 	{% if Projects %}

@@ -6,6 +6,6 @@ host_patterns = patterns(
     '',
     host(r'www', 'Tortoise.urls', name='www'),
     host(r'api', 'userdata.urls', name='api'),
-    host(r'admin', 'Tortoise.admin_urls', name='admin'),
+    host(r'staff', 'Tortoise.admin_urls', name='staff'),
 
 )
