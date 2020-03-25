@@ -2,10 +2,10 @@ from rest_framework import serializers
 from .models import Members,Projects
 from . import views
 
-class MemberSerializer(serializers.ModelSerializer):
+class MemberRoleSerializer(serializers.ModelSerializer):
     class Meta:
         model= Members
-        fields = ['user_id','guild_id','join_date']
+        fields = ['roles']
 
 
 class AllSerializer(serializers.ModelSerializer):
