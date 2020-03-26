@@ -1858,6 +1858,7 @@ ol {
 {
 	background-color: #f0f3f4;
 	padding: 20px 30px;
+	font-weight: bold;
 	
 }
 
@@ -1865,12 +1866,15 @@ ol {
 {
 	background-color: #f0f3f4;
 	padding: 40px 30px;
-	
+	font-family: 'Roboto', sans-serif !important;
+	font-weight: bold;
 }
 
 .privacyx
 {
 	background-color:  #eaeaea;
 	padding: 20px 30px;
+	font-family: 'Roboto', sans-serif !important;
+	
 	
 }

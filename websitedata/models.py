@@ -48,7 +48,6 @@ class Events(models.Model):
     
 
 class Privacy(models.Model):
-    number = models.IntegerField(blank=True,null=True)
     header = models.CharField(max_length=150,blank=True)
     content = models.TextField(default=None,blank=True)
     extra  = models.TextField(default=None,blank=True,null=True)
