@@ -1863,7 +1863,14 @@ ol {
 
 .change-log
 {
-	background-color:  #f8f9f9;
+	background-color: #f0f3f4;
+	padding: 40px 30px;
+	
+}
+
+.privacyx
+{
+	background-color:  #eaeaea;
 	padding: 20px 30px;
 	
 }
