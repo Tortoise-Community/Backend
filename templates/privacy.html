@@ -4,7 +4,7 @@
 <head>
 	<title>Tortoise Community</title>
 	<meta charset="UTF-8">
-	<meta name="description" content="Game Warrior Template">
+	<meta name="description" content="Information about the data we collect and how we use them">
 	<meta name="keywords" content="warrior, game, creative, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Favicon -->   
@@ -34,31 +34,32 @@
 		<div class="loader"></div>
 	</div>
 
-<!-- Header section -->
-<header class="header-section">
-	<div class="container">
-		<!-- logo -->
-		<a class="site-logo" href="index.html">
-			<img src="{% static 'img/logo.png' %}" alt="">
-		</a>
-		
-		<!-- responsive -->
-		<div class="nav-switch">
-			<i class="fa fa-bars"></i>
+	<!-- Header section -->
+	<header class="header-section">
+		<div class="container">
+			<!-- logo -->
+			<a class="site-logo" href="index.html">
+				<img src="{% static 'img/logo.png' %}" alt="">
+			</a>
+			
+			<!-- responsive -->
+			<div class="nav-switch">
+				<i class="fa fa-bars"></i>
+			</div>
+			<br>
+			<!-- site menu -->
+			<nav class="main-menu">
+				<ul>
+					<li><a href="{% url 'home' %}">Home</a></li>
+					<li><a href="{% url 'events' %}">Events</a></li>
+					<li><a href="{% url 'projects' %}">Projects</a></li>
+					<li><a href="{% url 'members' %}">Community</a></li>
+					<li><a href="{% url 'contact' %}">Contact</a></li>
+				</ul>
+			</nav>
 		</div>
-		<!-- site menu -->
-		<nav class="main-menu">
-			<ul>
-				<li><a href="{% url 'home' %}">Home</a></li>
-				<li><a href="{% url 'events' %}">Events</a></li>
-				<li><a href="{% url 'projects' %}">Projects</a></li>
-				<li><a href="{% url 'members' %}">Members</a></li>
-				<li><a href="{% url 'contact' %}">Contact</a></li>
-			</ul>
-		</nav>
-	</div>
-</header>
-<!-- Header section end -->
+	</header>
+	<!-- Header section end -->
 
 	<!-- Latest news section -->
 	{% if News %}
@@ -87,11 +88,13 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-5 col-lg-6 text-white">
-
 						<h2>Privacy Policy</h2>
-						<p>Information about the data we collect and their usage.</p>
+						<p>Information on the data we collect about you and their usage.</p>
 					</div>
 				</div>
+				<a href="{% url 'members' %}"><button class="githux mod1">Developers</button></a>
+				<a href="{% url 'rules' %}"><button class="githux mod1">Rules</button></a>
+				<a href="{% url 'privacy' %}"><button class="githux mod1 buttonactive">Privacy</button></a>
 			</div>
 		</div>
 	</section>
@@ -99,17 +102,15 @@
 
 
 	<!-- Page section -->
-	<section class="page-section recent-game-page spad">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8">
-					<div class="row">
-						<div class="privacypolicy">
-							
+		<section class="page-section single-blog-page spad">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="row">	
                         {% if Privacy %}
                         {% for P in Privacy %}
 						<h2>{{P.header}}</h2>
-						<div style="color: black; font-size: 10px;">
+						<div class="privacypolicy" style="color: black !important; font-size: 20px;">
 						  <p>{{P.content}}</p>
                           <p>{{P.extra}}</p>
 						</div>
@@ -118,12 +119,11 @@
 						</div>
 
 					</div>
-				</div>
 				<!-- sidebar -->
-				<div class="col-lg-4 col-md-7 sidebar pt-5 pt-lg-0">
+				<div class="col-lg-4 col-md-7 sidebar pt-5 pt-lg-0 change-log">
 					<!-- widget --> 
 					<div class="widget-item">
-						<h3>Change log</h3>
+						<h3><u>Change log</u></h3>
 					</div>
                     {% if Change %}
                     {% for C in Change %}
@@ -133,9 +133,9 @@
 					<h6>No changes untill now</h6>
 					{% endif %}
 				</div>
+				</div>
 			</div>
-		</div>
-	</section>
+     	</section>
 	<!-- Page section end -->
 
 

@@ -1704,8 +1704,12 @@ ol {
 
   .mod1{
 	  padding:10px 12px !important;
-	  width: 90px;
+	  width: 120px;
 	  font-size: 18px;
+  }
+  .buttonactive{
+	  background-color: #333 !important;
+	  color:#f5f5f5 !important;
   }
   .githux{
 	  color:#333;
@@ -1848,4 +1852,18 @@ ol {
 	font-family: 'Roboto', sans-serif;
 	font-size: 18px;
 	font-weight:500 ;
+}
+
+.privacypolicy
+{
+	background-color: #f0f3f4;
+	padding: 20px 30px;
+	
+}
+
+.change-log
+{
+	background-color:  #f8f9f9;
+	padding: 20px 30px;
+	
 }

@@ -1704,7 +1704,12 @@ ol {
 
   .mod1{
 	  padding:10px 12px !important;
+	  width: 120px;
 	  font-size: 18px;
+  }
+  .buttonactive{
+	  background-color: #333 !important;
+	  color:#f5f5f5 !important;
   }
   .githux{
 	  color:#333;
