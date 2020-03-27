@@ -27,7 +27,7 @@ RecEvents = Events.objects.filter(status='Ended').order_by('enddate')[:3]
 LiveEvents = Events.objects.filter(status='Live')
 Events = Events.objects.filter(status__in=['Live','Ended'])
 Projects = Projects.objects.all().order_by('id')
-Memberx = Members.objects.all().order_by('perks')[:20]
+Memberx = Members.objects.all().order_by('-perks')[:20]
 Privacy = Privacy.objects.all()
 Changes = Changes.objects.all()
 
