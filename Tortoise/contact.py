@@ -1,11 +1,13 @@
 from . import settings ,views 
 from django.shortcuts import render , HttpResponse,redirect
 from django.core.mail import send_mail
-
+from .discord_handler import SocketSend
 
 
 def send_data(**payload):
-    package = {"contact":payload}
+    package = {"endpoint":"contact","data":payload}
+    SocketSend(package)
+    
 
 
 
