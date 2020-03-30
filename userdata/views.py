@@ -8,7 +8,6 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
 from rest_framework.decorators import api_view
-from Tortoise.discord_handler import DiscordSend
 # Create your views here.
 
 @csrf_exempt
@@ -119,19 +118,3 @@ def get_member_roles(request,id):
             return JsonResponse(serializer.data,status=200)   
         else:
          return JsonResponse(serializer.errors,status =400)
-
-
-
-@csrf_exempt
-@api_view(['POST'])
-def git_push(request,id):
-    queryset = get_object_or_404(Members,user_id = id)
-    if queryset['member'] = True:
-       headers = dict(request.headers)
-       if header['X-Github-Event'] == 'push':
-           data = request.data
-           payload = "New commit by: {}".format(data['commits'][0]['author']['name'])
-           DiscordSend(payload)
-
-        
-

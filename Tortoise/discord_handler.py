@@ -1,7 +1,5 @@
 import socket
 import json
-import discord
-from discord import Webhook, RequestsWebhookAdapter, File
 
 SERVER_TOKEN = "tortoise_123_test"
 
@@ -27,10 +25,3 @@ def SocketSend(payload):
     server.close()
 
 
-
-
-def DiscordSend(payload):
-    webhook = Webhook.partial(693151706023985322, 'YfglGAFaqfzYIr-fU0JBZZzuXZpEVZFy3VqAlZwNE4qkJ9lmvxdnGY1TTUpLndH1wj6s',\
-    adapter=RequestsWebhookAdapter())
-    embed = discord.Embed(title="TEST PUBLIC API",description=payload)
-    webhook.send(embed = embed)
