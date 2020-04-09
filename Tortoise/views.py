@@ -30,7 +30,7 @@ Projects = Projects.objects.all().order_by('id')
 Memberx = Members.objects.all().order_by('-perks')[:20]
 Privacy = Privacy.objects.all()
 Changes = Changes.objects.all()
-Rules = Rules.objects.all().order_by('number')[2:]
+Rules = Rules.objects.all().order_by('number')[1:]
 
 
 
