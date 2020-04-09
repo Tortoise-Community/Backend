@@ -30,6 +30,7 @@ Projects = Projects.objects.all().order_by('id')
 Memberx = Members.objects.all().order_by('-perks')[:20]
 Privacy = Privacy.objects.all()
 Changes = Changes.objects.all()
+Rules = Rules.objects.all().order_by('number')[2:]
 
 
 
@@ -86,6 +87,6 @@ def privacypolicy(request):
     return render(request,"privacy.html",{'Privacy':Privacy,'Change':Changes,'Team':Team})           
 
 def rules(request):
-    return render(request,"rules.html",{'Team':Team})
+    return render(request,"rules.html",{'Rules':Rules,'Team':Team})
 
 

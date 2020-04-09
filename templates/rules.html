@@ -93,14 +93,9 @@
                 <blockquote>
                     <ol>
                         <li>Follow the <a href="https://discordapp.com/guidelines">Discord Community Guidelines</a> and <a href="https://discordapp.com/terms">Terms Of Service.</a></li>
-                        <li>Be active and participate in community events.</li>
-                        <li>Don't use Racial/Homophobic or other slurs that are abusive. Respect all members and staffs.</li>
-                        <li>No unapproved advertising, including requests for paid work. Projects can be showcased in #project-showcase.</li>
-                        <li>Do not spam or use self-bots inside the server.</li>
-                        <li>Do not try to mention @everyone or mass mention members.</li>
-                        <li>Don't mention staff unless its an emergency. If you wish to ask them a question use mod mail (DM @Tortoise Bot)</li>
-                        <li>Keep discussions relevant to channel topics.</li>
-                        <li>No NSFW contents are allowed inside the server. Use of them will result in an Infraction.</li>
+						{% for R in Rules %}
+						<li>{R.statement}</li>
+						{% endfor %}
                     </ol>
                 </blockquote>
             </div>
