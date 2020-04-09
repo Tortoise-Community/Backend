@@ -11,7 +11,6 @@ class MemberRoleSerializer(serializers.ModelSerializer):
 class AllSerializer(serializers.ModelSerializer):
     class Meta:
         model = Members
-        fields ='__all__'    
         exclude = ('email',) 
 
 class GithubSerializer(serializers.ModelSerializer):
