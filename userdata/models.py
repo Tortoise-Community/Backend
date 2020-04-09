@@ -54,4 +54,8 @@ class Projects(models.Model):
     forks = models.IntegerField(blank=True,null=True)
     contributors = models.IntegerField(blank=True,null=True)
 
+class Rules(models.Model):
+    number = models.IntegerField(blank=True,null=True)
+    statement = models.TextField(blank=True,null=True)    
+
 

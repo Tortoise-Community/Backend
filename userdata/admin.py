@@ -4,3 +4,5 @@ from .models import Members,Projects
 # Register your models here.
 admin.site.register(Members)
 admin.site.register(Projects)
+admin.site.register(Rules)
+
