@@ -12,7 +12,7 @@ class AllSerializer(serializers.ModelSerializer):
     class Meta:
         model = Members
         fields ='__all__'    
-        exclude = ('email') 
+        exclude = ('email',) 
 
 class GithubSerializer(serializers.ModelSerializer):
     class Meta:
