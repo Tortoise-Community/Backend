@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Members,Projects
+from .models import Members,Projects,Rules
 from . import views
 
 class MemberRoleSerializer(serializers.ModelSerializer):
@@ -37,3 +37,8 @@ class MemberPostSerializer(serializers.ModelSerializer):
     class Meta:
         model= Members
         fields = ['user_id','guild_id','join_date','member','name','tag']
+
+class RulesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rules
+        fields = '__all__'        

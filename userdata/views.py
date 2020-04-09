@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from rest_framework import viewsets
-from .models import Members,Projects
+from .models import Members,Projects,Rules
 from .serializers import *
 from django.http import JsonResponse,HttpResponse
 from rest_framework.parsers import JSONParser
@@ -118,3 +118,11 @@ def get_member_roles(request,id):
             return JsonResponse(serializer.data,status=200)   
         else:
          return JsonResponse(serializer.errors,status =400)
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
+def get_rules(request):
+    queryset  = Rules.objects.all()
+    serializer = RulesSerializer(queryset,many=True)
+    return JsonResponse(serializer.data,safe=False)         
