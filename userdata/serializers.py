@@ -41,4 +41,4 @@ class MemberPostSerializer(serializers.ModelSerializer):
 class RulesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rules
-        fields = ['number','statement']      
+        fields = ['number','alias','statement']      
