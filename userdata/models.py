@@ -56,6 +56,7 @@ class Projects(models.Model):
 
 class Rules(models.Model):
     number = models.IntegerField(blank=True,null=True)
-    statement = models.TextField(blank=True,null=True)    
+    statement = models.TextField(blank=True,null=True)
+    alias = ArrayField(models.CharField(max_length=20),null=True,default=default_array,blank=True)   
 
 
