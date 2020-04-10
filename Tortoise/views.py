@@ -41,7 +41,7 @@ def projects(request):
     return render(request,"projects.html",{'Team':Team,"Projects" : Projects,'siteurls':SiteUrls})    
 
 def events(request):
-    return render(request,"events.html",{'Events':Events,'Team':Team,'Upcoming':Upcoming,'siteurls':SiteUrls)        
+    return render(request,"events.html",{'Events':Events,'Team':Team,'Upcoming':Upcoming,'siteurls':SiteUrls})        
                   
 
 def verified(request):
