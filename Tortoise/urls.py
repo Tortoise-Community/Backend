@@ -25,7 +25,6 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    url(r'^members/verify', views.verify ,name='verify'),
     url(r'^pages/members', views.members, name = 'members'),
     path("",views.index),
     path('verification/',views.verified),
