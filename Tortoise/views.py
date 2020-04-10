@@ -35,7 +35,7 @@ Rules = Rules.objects.all().order_by('number')[1:]
 
 
 def index(request):
-    return render(request,"index.html",{'Slides':Slides,'News':News,'Team':Team,'Upcoming':Upcoming,'RecEvents':RecEvents,'Projects':Projects,'LiveEvents':LiveEvents,'siteurls':SiteUrls)
+    return render(request,"index.html",{'Slides':Slides,'News':News,'Team':Team,'Upcoming':Upcoming,'RecEvents':RecEvents,'Projects':Projects,'LiveEvents':LiveEvents,'siteurls':SiteUrls})
 
 def projects(request):
     return render(request,"projects.html",{'Team':Team,"Projects" : Projects,'siteurls':SiteUrls})    
