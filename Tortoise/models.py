@@ -3,7 +3,9 @@ from django.db import models
 # Create your models here.
 
 class SiteUrls():
+    #Page top
     verificationimg = "https://cdn.discordapp.com/attachments/649868379372388352/698159203696640041/verification.jpg"
+    site_logo = "https://cdn.discordapp.com/attachments/649868379372388352/698236524872859748/logo.png"
     #Index
     recent_event_img = "https://cdn.discordapp.com/attachments/649868379372388352/698225354653040722/fire.png"
     live_event_img = "https://cdn.discordapp.com/attachments/649868379372388352/698214532899930122/ilovecoding.png"
