@@ -13,11 +13,11 @@ from .models import SiteUrls
 
 def get_event(request, item_name):
     E = Events.get(pk = item_name)
-    return render(request, 'event.html', {'E':E,'Team':Team})
+    return render(request, 'event.html', {'E':E,'Team':Team,'siteurls':SiteUrls})
 
 def get_project(request,item_name):
     Project = Projects.get(pk = item_name)
-    return render(request,'project.html',{'Project':Project,'Team':Team})   
+    return render(request,'project.html',{'Project':Project,'Team':Team,'siteurls':SiteUrls})   
     
 Slides = Slider.objects.all()
 News = News.objects.all()
@@ -35,24 +35,24 @@ Rules = Rules.objects.all().order_by('number')[1:]
 
 
 def index(request):
-    return render(request,"index.html",{'Slides':Slides,'News':News,'Team':Team,'Upcoming':Upcoming,'RecEvents':RecEvents,'Projects':Projects,'LiveEvents':LiveEvents})
+    return render(request,"index.html",{'Slides':Slides,'News':News,'Team':Team,'Upcoming':Upcoming,'RecEvents':RecEvents,'Projects':Projects,'LiveEvents':LiveEvents,'siteurls':SiteUrls)
 
 def projects(request):
-    return render(request,"projects.html",{'Team':Team,"Projects" : Projects})    
+    return render(request,"projects.html",{'Team':Team,"Projects" : Projects,'siteurls':SiteUrls})    
 
 def events(request):
-    return render(request,"events.html",{'Events':Events,'Team':Team,'Upcoming':Upcoming})        
+    return render(request,"events.html",{'Events':Events,'Team':Team,'Upcoming':Upcoming,'siteurls':SiteUrls)        
     
 def verify(request):
-    return render(request,"verification.html",{'Oauth':Oauth})        
+    return render(request,"verification.html",{'Oauth':Oauth,'siteurls':SiteUrls})        
    
 
 def event(request):
-    return render(request,"event.html",{'Team':Team})      
+    return render(request,"event.html",{'Team':Team,'siteurls':SiteUrls})      
 
 
 def vamp(request):
-    return render(request,"event.html",{"E":E,'Team':Team})                
+    return render(request,"event.html",{"E":E,'Team':Team,'siteurls':SiteUrls})                
 
 def verified(request):
     code = request.GET.get("code")
@@ -78,15 +78,15 @@ def verified(request):
         return render(request,"verification.html",{'Verified':Verified,'siteurls':SiteUrls})  
 
 def members(request):
-    return render(request,"members.html",{'Team':Team,'Members':Memberx})    
+    return render(request,"members.html",{'Team':Team,'Members':Memberx,'siteurls':SiteUrls})    
 
 def credits(request):
     return render(request,"credits.html")    
 
 def privacypolicy(request):
-    return render(request,"privacy.html",{'Privacy':Privacy,'Change':Changes,'Team':Team})           
+    return render(request,"privacy.html",{'Privacy':Privacy,'Change':Changes,'Team':Team,'siteurls':SiteUrls})           
 
 def rules(request):
-    return render(request,"rules.html",{'Rules':Rules,'Team':Team})
+    return render(request,"rules.html",{'Rules':Rules,'Team':Team,'siteurls':SiteUrls})
 
 
