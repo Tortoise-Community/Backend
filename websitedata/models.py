@@ -7,7 +7,7 @@ class Slider(models.Model):
     HeadCrumb1 = models.CharField(max_length=20)
     Span = models.CharField(max_length=20,blank=True)
     HeadCrumb2 = models.CharField(max_length=20,blank=True)
-    Slideimage = models.ImageField(upload_to='img')
+    Slideimageurl = models.URLField(blank=True)
     Subhead = models.CharField(max_length=50,blank=True)
     Note = models.TextField(blank=True)
     
