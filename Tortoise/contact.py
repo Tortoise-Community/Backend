@@ -2,7 +2,7 @@ from . import settings ,views
 from django.shortcuts import render , HttpResponse,redirect
 from django.core.mail import send_mail
 from .discord_handler import SocketSend
-
+from .models import SiteUrls
 
 def send_data(**payload):
     package = {"endpoint":"contact","data":payload}
@@ -40,9 +40,9 @@ def contact(request,method=['GET','POST']):
         except:
             pass    
         H =True
-        return render(request,"contact.html",{'Team':views.Team,'H':H})
+        return render(request,"contact.html",{'Team':views.Team,'H':H,'siteurls':SiteUrls})
     else:
-        return render(request,"contact.html",{'Team':views.Team})    
+        return render(request,"contact.html",{'Team':views.Team,'siteurls':SiteUrls})    
 
 
 
