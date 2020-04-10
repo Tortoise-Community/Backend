@@ -3,7 +3,7 @@ from websitedata.models import *
 from .oauth import Oauth
 from userdata.models import *
 from .discord_handler import SocketSend
-
+from .discord_cdn_models import CdnUrls
 
 
 
@@ -70,12 +70,12 @@ def verified(request):
             pass   
     if code is None :
         emailerror = False
-        return render(request,"verification.html",{'Oauth':Oauth,'emailerror':emailerror})
+        return render(request,"verification.html",{'Oauth':Oauth,'emailerror':emailerror,'url':CdnUrls})
     elif email is None:
         emailerror = True
-        return render(request,"verification.html",{'Oauth':Oauth,'emailerror':emailerror}) 
+        return render(request,"verification.html",{'Oauth':Oauth,'emailerror':emailerror,'url':CdnUrls}) 
     else :  
-        return render(request,"verification.html",{'Verified':Verified})  
+        return render(request,"verification.html",{'Verified':Verified,'url':CdnUrls})  
 
 def members(request):
     return render(request,"members.html",{'Team':Team,'Members':Memberx})    
