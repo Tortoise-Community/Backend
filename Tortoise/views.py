@@ -42,17 +42,7 @@ def projects(request):
 
 def events(request):
     return render(request,"events.html",{'Events':Events,'Team':Team,'Upcoming':Upcoming,'siteurls':SiteUrls)        
-    
-def verify(request):
-    return render(request,"verification.html",{'Oauth':Oauth,'siteurls':SiteUrls})        
-   
-
-def event(request):
-    return render(request,"event.html",{'Team':Team,'siteurls':SiteUrls})      
-
-
-def vamp(request):
-    return render(request,"event.html",{"E":E,'Team':Team,'siteurls':SiteUrls})                
+                  
 
 def verified(request):
     code = request.GET.get("code")
