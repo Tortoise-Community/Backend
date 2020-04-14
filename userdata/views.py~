@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from rest_framework import viewsets
-from .models import Members,Projects,Rules
+from .models import *
 from .serializers import *
 from django.http import JsonResponse,HttpResponse
 from rest_framework.parsers import JSONParser
@@ -136,5 +136,47 @@ def get_rules(request):
     serializer = RulesSerializer(queryset,many=True)
     return JsonResponse(serializer.data,safe=False)   
     
+    
+@csrf_exempt
+@api_view(['PUT','GET'])
+@permission_classes((IsAuthenticated, ))
+def bot_status(request,id):
+	queryset = get_object_or_404(ServerUtils,guild_id = id)
+   if request.method == 'GET':
+   	serializer = StatusSerializer(queryset)
+   	return JsonResponse(serializer.data,safe=False)
+   elif request.method == 'PUT':
+   	json_parser = JSONParser()
+   	data = json_parser.parse(request)
+   	serializer = StatusSerializer(queryset,data=data)
+   	if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data,status=200)   
+        else:
+         return JsonResponse(serializer.errors,status =400)	
+         
+@csrf_exempt
+@api_view(['PUT','GET'])
+@permission_classes((IsAuthenticated, ))
+def get_services(request,id):
+	queryset = get_object_or_404(ServerUtils,guild_id = id)
+   if request.method == 'GET':
+   	serializer = ServiceSerializer(queryset)
+   	return JsonResponse(serializer.data,safe=False)
+   elif request.method == 'PUT':
+   	json_parser = JSONParser()
+   	data = json_parser.parse(request)
+   	serializer = ServiceSerializer(queryset,data=data)
+   	if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data,status=200)   
+        else:
+         return JsonResponse(serializer.errors,status =400)        
+         
+	
+	
+	
+	
+	    
     
           
