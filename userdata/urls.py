@@ -17,5 +17,5 @@ path('private/verify-confirmation/<int:id>/',views.is_verified),
 path('private/top-members/',views.get_top_members),
 path('private/members/<int:id>/roles/',views.get_member_roles),
 path('private/rules/',views.get_rules),
-#path('private/ping/',views.ping)
+path('private/ping/',views.ping)
 ]

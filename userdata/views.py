@@ -12,6 +12,11 @@ from rest_framework.decorators import api_view
 
 
 
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes([])
+def ping(request):
+	return JsonResponse({"status":200},status=200,safe=False)
    
 
 @csrf_exempt
