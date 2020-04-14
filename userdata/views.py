@@ -136,7 +136,7 @@ def get_rules(request):
     serializer = RulesSerializer(queryset,many=True)
     return JsonResponse(serializer.data,safe=False)   
     
-
+'''  
  
 @csrf_exempt
 @api_view(['PUT','GET'])
@@ -155,7 +155,7 @@ def manage_bot_status(request,id):
             return JsonResponse(serializer.data,status=200)   
       else:
          return JsonResponse(serializer.errors,status =400)	
-'''         
+       
 @csrf_exempt
 @api_view(['PUT','GET'])
 @permission_classes((IsAuthenticated, ))
