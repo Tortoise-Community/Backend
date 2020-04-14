@@ -16,7 +16,7 @@ from rest_framework.decorators import api_view
 @api_view(['GET'])
 @permission_classes([])
 def ping(request):
-	return HttpResponse(status=200,safe=False)
+	return HttpResponse(status=200)
 
 
 @csrf_exempt
