@@ -153,7 +153,25 @@ def get_services(request,id):
             serializer.save()
             return JsonResponse(serializer.data,status=200)   
         else:
-         return JsonResponse(serializer.errors,status =400)
+         return JsonResponse(serializer.errors,status =400) 
+
+@csrf_exempt
+@api_view(['PUT','GET'])
+@permission_classes((IsAuthenticated, ))
+def manage_bot_status(request,id):
+    queryset = get_object_or_404(ServerUtils,guild_id = id)
+    if request.method == 'GET':
+        serializer = ServiceSerializer(queryset)
+        return JsonResponse (serializer.data,safe=False)
+    elif request.method == 'PUT':
+        json_parser = JSONParser()
+        data = json_parser.parse(request)
+        serializer = ServiceSerializer(queryset,data = data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data,status=200)   
+        else:
+         return JsonResponse(serializer.errors,status =400)	
 	
 	    
     
