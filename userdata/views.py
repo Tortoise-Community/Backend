@@ -153,7 +153,7 @@ def bot_status(request,id):
    	if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data,status=200)   
-        else:
+      else:
          return JsonResponse(serializer.errors,status =400)	
          
 @csrf_exempt
@@ -171,7 +171,7 @@ def get_services(request,id):
    	if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data,status=200)   
-        else:
+      else:
          return JsonResponse(serializer.errors,status =400)        
          
 
