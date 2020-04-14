@@ -141,7 +141,7 @@ def get_rules(request):
 @csrf_exempt
 @api_view(['PUT','GET'])
 @permission_classes((IsAuthenticated, ))
-def bot_status(request,id):
+def manage_bot_status(request,id):
 	queryset = get_object_or_404(ServerUtils,guild_id = id)
    if request.method == 'GET':
    	serializer = StatusSerializer(queryset)
@@ -153,7 +153,7 @@ def bot_status(request,id):
    	if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data,status=200)   
-        else:
+      else:
          return JsonResponse(serializer.errors,status =400)	
          
 @csrf_exempt
