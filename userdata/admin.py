@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Members,Projects,Rules
+from .models import *
 
 # Register your models here.
 admin.site.register(Members)
