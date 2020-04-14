@@ -74,6 +74,7 @@ class ServerUtils(models.Model):
 	Tortoise-BOT = JSONField(null=True,default=default_json)
 	Tortoise-BOT2 = JSONField(null=True,default=default_json)
 	Website = JSONField(null=True,default=default_json)
+	Sockets = JSONField(null=True,default=default_json)
    
 
 
