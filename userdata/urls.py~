@@ -12,7 +12,7 @@ path('private/bot/',include(router.urls)),
 path('private/rules/',views.get_rules),
 path('private/members/',views.members),
 path('private/projects/',views.projects),
-path('private/services/',views.get_services)
+path('private/services/',views.get_services),
 path('private/bot/status/',views.bot_status),
 path('private/top-members/',views.get_top_members),
 path('private/auth/', include('rest_framework.urls')),
