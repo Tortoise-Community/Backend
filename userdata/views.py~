@@ -10,14 +10,6 @@ from rest_framework.decorators import permission_classes
 from rest_framework.decorators import api_view
 # Create your views here.
 
-
-
-@csrf_exempt
-@api_view(['GET'])
-def ping(request):
-	return JsonResponse(status=200,safe=False)
-
-
 @csrf_exempt
 @api_view(['GET','POST'])
 @permission_classes((IsAuthenticated, ))
@@ -133,7 +125,4 @@ def get_member_roles(request,id):
 def get_rules(request):
     queryset  = Rules.objects.all()
     serializer = RulesSerializer(queryset,many=True)
-    return JsonResponse(serializer.data,safe=False)   
-    
-    
-          
+    return JsonResponse(serializer.data,safe=False)         
