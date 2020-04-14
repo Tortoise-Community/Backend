@@ -136,7 +136,8 @@ def get_rules(request):
     serializer = RulesSerializer(queryset,many=True)
     return JsonResponse(serializer.data,safe=False)   
     
-'''    
+
+ 
 @csrf_exempt
 @api_view(['PUT','GET'])
 @permission_classes((IsAuthenticated, ))
@@ -173,8 +174,7 @@ def get_services(request,id):
         else:
          return JsonResponse(serializer.errors,status =400)        
          
-'''	
-	
+
 	
 	
 	    
