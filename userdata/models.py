@@ -15,7 +15,7 @@ def default_status():
 	return {}            
             
 def default_json():
-	return {"status":}
+	return {"status":"Offline","last_down_time":"","time_went_down":""}
 # Create your models here.
 
 
