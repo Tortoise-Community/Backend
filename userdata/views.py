@@ -140,7 +140,7 @@ def get_rules(request):
 @csrf_exempt
 @api_view(['PUT','GET'])
 @permission_classes((IsAuthenticated, ))
-def get_services(request,id):
+def manage_bot_status(request,id):
     queryset = get_object_or_404(ServerUtils,guild_id = id)
     if request.method == 'GET':
         serializer = StatusSerializer(queryset)
@@ -158,7 +158,7 @@ def get_services(request,id):
 @csrf_exempt
 @api_view(['PUT','GET'])
 @permission_classes((IsAuthenticated, ))
-def manage_bot_status(request,id):
+def get_services(request,id):
     queryset = get_object_or_404(ServerUtils,guild_id = id)
     if request.method == 'GET':
         serializer = ServiceSerializer(queryset)
