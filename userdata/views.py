@@ -101,12 +101,21 @@ def is_verified(request,id):
     return JsonResponse (serializer.data,safe=False)
     
 @csrf_exempt
-@api_view(['GET'])
+@api_view(['GET','POST'])
 @permission_classes((IsAuthenticated, ))
 def get_top_members(request):
+	if request.method == 'GET':
     queryset  = Members.objects.all().order_by('-perks')[:20]
     serializer = TopSerializer(queryset,many=True)
     return JsonResponse(serializer.data,safe=False)
+   elif request.method == 'POST':
+        json_parser = JSONParser()
+        data = json_parser.parse(request)
+        serializer = TopMemberSerializer(data = data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data,status=201,safe=False)    	
+   	 
         
 @csrf_exempt
 @api_view(['PUT'])
