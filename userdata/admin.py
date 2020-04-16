@@ -6,4 +6,4 @@ admin.site.register(Members)
 admin.site.register(Projects)
 admin.site.register(Rules)
 admin.site.register(ServerUtils)
-
+admin.site.register(TopMembers)
