@@ -51,4 +51,9 @@ class StatusSerializer(serializers.ModelSerializer):
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = ServerUtils
-        fields = ['Github_Microservice','Status_Microservice','Tortoise_BOT','Tortoise_BOT2','Website','Sockets']                
+        fields = ['Github_Microservice','Status_Microservice','Tortoise_BOT','Tortoise_BOT2','Website','Sockets']       
+        
+class TopMemberSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = TopMembers
+		fields = '__all__'                 
