@@ -115,7 +115,7 @@ def put_top_members(request,id):
 	     queryset = get_object_or_404(Members,user_id = id)
         json_parser = JSONParser()
         data = json_parser.parse(request)
-        serializer = MemberRoleSerializer(queryset,data = data)
+        serializer = TopMemberSerializer(queryset,data = data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data,status=200)   
