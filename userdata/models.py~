@@ -76,12 +76,12 @@ class ServerUtils(models.Model):
 	Sockets = JSONField(null=True,default=default_json)
    
 class TopMembers(models.Model):
-	 no =  models.IntegerField(primary_key=True)
     name = models.CharField(max_length=100,default=None,blank=True,null=True)
     tag = models.CharField(max_length=6,blank=True,null=True)
     perks = models.IntegerField(blank=True, null=True)
     status = models.CharField(max_length=100,default=None,blank=True,null=True)
     level = models.IntegerField(blank=True, null=True)
     role = models.CharField(max_length=15,default=None,blank=True,null=True)
+    no =  models.BigIntegerField(primary_key=True)
     
 
