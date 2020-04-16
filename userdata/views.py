@@ -104,16 +104,14 @@ def is_verified(request,id):
 @api_view(['GET'])
 @permission_classes((IsAuthenticated, ))
 def get_top_members(request):
-	if request.method == 'GET':
-    queryset  = Members.objects.all().order_by('-perks')[:20]
-    serializer = TopSerializer(queryset,many=True)
-    return JsonResponse(serializer.data,safe=False
+     queryset  = Members.objects.all().order_by('-perks')[:20]
+     serializer = TopSerializer(queryset,many=True)
+     return JsonResponse(serializer.data,safe=False
     
 @csrf_exempt
 @api_view(['PUT'])
 @permission_classes((IsAuthenticated, ))
 def put_top_members(request,id):
-    if request.method == 'PUT':
    	queryset = get_object_or_404(TopMembers,pk = id)
    	serializer = TopMemberSerializer(queryset,data = data)
       if serializer.is_valid():
