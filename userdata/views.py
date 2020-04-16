@@ -103,7 +103,7 @@ def is_verified(request,id):
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes((IsAuthenticated, ))
-def get_top_members(request):
+def top_members(request):
     queryset  = Members.objects.all().order_by('-perks')[:20]
     serializer = TopSerializer(queryset,many=True)
     return JsonResponse(serializer.data,safe=False)
