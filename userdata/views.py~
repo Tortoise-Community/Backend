@@ -199,7 +199,7 @@ def get_services(request,id):
 @api_view(['GET'])
 @permission_classes((IsAuthenticated, ))
 def top_members(request):
-    queryset  = TopMembers.objects.all()
+    queryset  = TopMember.objects.all()
     serializer = TopMemberSerializer(queryset,many=True)
     return JsonResponse(serializer.data,safe=False)            
 	

@@ -55,5 +55,5 @@ class ServiceSerializer(serializers.ModelSerializer):
         
 class TopMemberSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = TopMembers
+		model = TopMember
 		fields = '__all__'                 

@@ -75,7 +75,7 @@ class ServerUtils(models.Model):
 	Website = JSONField(null=True,default=default_json)
 	Sockets = JSONField(null=True,default=default_json)
    
-class TopMembers(models.Model):
+class TopMember(models.Model):
     name = models.CharField(max_length=100,default=None,blank=True,null=True)
     tag = models.CharField(max_length=6,blank=True,null=True)
     perks = models.IntegerField(blank=True, null=True)
