@@ -112,7 +112,6 @@ def get_top_members(request):
 @api_view(['PUT'])
 @permission_classes((IsAuthenticated, ))
 def put_top_members(request,id):
-    if request.method == 'PUT':
    	queryset = get_object_or_404(TopMembers,pk = id)
    	serializer = TopMemberSerializer(queryset,data = data)
       if serializer.is_valid():
