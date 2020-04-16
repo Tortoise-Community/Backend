@@ -104,7 +104,7 @@ def is_verified(request,id):
 @api_view(['GET','POST'])
 @permission_classes((IsAuthenticated, ))
 def get_top_members(request):
-	if request.method == 'GET':
+   if request.method == 'GET':
     queryset  = Members.objects.all().order_by('-perks')[:20]
     serializer = TopSerializer(queryset,many=True)
     return JsonResponse(serializer.data,safe=False)

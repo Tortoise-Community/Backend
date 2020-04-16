@@ -101,7 +101,7 @@ def is_verified(request,id):
     return JsonResponse (serializer.data,safe=False)
     
 @csrf_exempt
-@api_view(['GET'])
+@api_view(['GET','POST'])
 @permission_classes((IsAuthenticated, ))
 def get_top_members(request):
 	if request.method == 'GET':
