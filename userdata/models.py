@@ -34,7 +34,6 @@ class Members(models.Model):
     warnings = ArrayField(models.CharField(max_length=300),null=True,default=default_array,blank=True)
     roles = ArrayField(models.BigIntegerField(),null=True,default=default_array,blank=True)
     muted_until = models.DateTimeField(blank=True, null=True)
-    activity = models.CharField(max_length=100,default=None,blank=True,null=True)
     member = models.BooleanField(blank=True,null=True,default=False)
 
     class Meta:
