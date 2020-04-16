@@ -82,6 +82,6 @@ class TopMember(models.Model):
     status = models.CharField(max_length=100,default=None,blank=True,null=True)
     level = models.IntegerField(blank=True, null=True)
     role = models.CharField(max_length=15,default=None,blank=True,null=True)
-    no =  models.IntegerField(blank=True,null=True,default=None)
+    no =  models.IntegerField(blank=True,null=True)
     
 
