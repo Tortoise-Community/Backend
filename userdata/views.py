@@ -108,7 +108,19 @@ def get_top_members(request):
     serializer = TopSerializer(queryset,many=True)
     return JsonResponse(serializer.data,safe=False)
         
-
+@csrf_exempt
+@api_view(['PUT'])
+@permission_classes((IsAuthenticated, ))
+def put_top_members(request,id):
+	     queryset = get_object_or_404(Members,user_id = id)
+        json_parser = JSONParser()
+        data = json_parser.parse(request)
+        serializer = TopMemberSerializer(queryset,data = data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data,status=200)   
+        else:
+         return JsonResponse(serializer.errors,status =400)
 
 @csrf_exempt
 @api_view(['PUT','GET'])
