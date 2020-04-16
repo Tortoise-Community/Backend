@@ -31,7 +31,7 @@ class VerificationSerializer(serializers.ModelSerializer):
 class TopSerializer(serializers.ModelSerializer):
     class Meta:
         model = Members
-        fields = ['name','tag','perks']
+        fields = ['user_id','name','tag','perks']
 
 class MemberPostSerializer(serializers.ModelSerializer):
     class Meta:
