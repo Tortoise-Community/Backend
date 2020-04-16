@@ -104,7 +104,7 @@ def is_verified(request,id):
 @api_view(['GET','POST'])
 @permission_classes((IsAuthenticated, ))
 def get_top_members(request):
-	if request.method == 'GET':
+   if request.method == 'GET':
     queryset  = Members.objects.all().order_by('-perks')[:20]
     serializer = TopSerializer(queryset,many=True)
     return JsonResponse(serializer.data,safe=False)
@@ -193,6 +193,15 @@ def get_services(request,id):
             return JsonResponse(serializer.data,status=200)   
         else:
          return JsonResponse(serializer.errors,status =400)	
+         
+         
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
+def top_members(request):
+    queryset  = TopMembers.objects.all()
+    serializer = TopMemberSerializer(queryset,many=True)
+    return JsonResponse(serializer.data,safe=False)            
 	
 	    
     

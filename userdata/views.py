@@ -193,6 +193,15 @@ def get_services(request,id):
             return JsonResponse(serializer.data,status=200)   
         else:
          return JsonResponse(serializer.errors,status =400)	
+         
+         
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
+def top_members(request):
+    queryset  = TopMembers.objects.all()
+    serializer = TopMemberSerializer(queryset,many=True)
+    return JsonResponse(serializer.data,safe=False)            
 	
 	    
     
