@@ -110,12 +110,11 @@ def get_top_members(request):
     return JsonResponse(serializer.data,safe=False)
 	
    	 
-'''        
 @csrf_exempt
 @api_view(['PUT'])
 @permission_classes((IsAuthenticated, ))
 def put_top_developers(request,id):
-        queryset = get_object_or_404(Members,user_id = id)
+        queryset = get_object_or_404(Developers,no = id)
         json_parser = JSONParser()
         data = json_parser.parse(request)
         serializer = DeveloperSerializer(queryset,data = data)
@@ -123,7 +122,7 @@ def put_top_developers(request,id):
             serializer.save()
             return JsonResponse(serializer.data,status=200)   
         else:
-         return JsonResponse(serializer.errors,status =400)'''
+         return JsonResponse(serializer.errors,status =400)
 
 @csrf_exempt
 @api_view(['PUT','GET'])
