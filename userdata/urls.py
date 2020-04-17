@@ -21,6 +21,6 @@ path('private/members/edit/<int:id>/',views.members_edit),
 path('private/projects/edit/<int:pk>/',views.projects_edit),
 path('private/members/<int:id>/roles/',views.get_member_roles),
 path('private/verify-confirmation/<int:id>/',views.is_verified),
-#path('private/topmembers/',views.top_members)
+path('private/developers/',views.top_members)
 
 ]
