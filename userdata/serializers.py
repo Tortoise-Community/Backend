@@ -52,8 +52,8 @@ class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = ServerUtils
         fields = ['Github_Microservice','Status_Microservice','Tortoise_BOT','Tortoise_BOT2','Website','Sockets']       
-'''        
+      
 class DeveloperSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Developers
-		fields = '__all__'  '''               
+		fields = '__all__'               
