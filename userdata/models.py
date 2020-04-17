@@ -74,7 +74,7 @@ class ServerUtils(models.Model):
 	Tortoise_BOT2 = JSONField(null=True,default=default_json)
 	Website = JSONField(null=True,default=default_json)
 	Sockets = JSONField(null=True,default=default_json)
-   
+'''  
 class TopMember(models.Model):
     name = models.CharField(max_length=100,default=None,blank=True,null=True)
     tag = models.CharField(max_length=6,blank=True,null=True)
@@ -82,7 +82,7 @@ class TopMember(models.Model):
     status = models.CharField(max_length=100,default=None,blank=True,null=True)
     level = models.IntegerField(blank=True, null=True)
     role = models.CharField(max_length=15,default=None,blank=True,null=True)
-    no =  models.IntegerField(blank=True,null=True)
+    no =  models.IntegerField(blank=True,null=True)'''
     
 
 
