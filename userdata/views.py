@@ -101,30 +101,24 @@ def is_verified(request,id):
     return JsonResponse (serializer.data,safe=False)
     
 @csrf_exempt
-@api_view(['GET','POST'])
+@api_view(['GET'])
 @permission_classes((IsAuthenticated, ))
 def get_top_members(request):
    if request.method == 'GET':
     queryset  = Members.objects.all().order_by('-perks')[:20]
     serializer = TopSerializer(queryset,many=True)
     return JsonResponse(serializer.data,safe=False)
-    '''elif request.method == 'POST':
-        json_parser = JSONParser()
-        data = json_parser.parse(request)
-        serializer = TopMemberSerializer(data = data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data,status=201,safe=False)'''    	
+	
    	 
 '''        
 @csrf_exempt
 @api_view(['PUT'])
 @permission_classes((IsAuthenticated, ))
-def put_top_members(request,id):
+def put_top_developers(request,id):
         queryset = get_object_or_404(Members,user_id = id)
         json_parser = JSONParser()
         data = json_parser.parse(request)
-        serializer = TopMemberSerializer(queryset,data = data)
+        serializer = DeveloperSerializer(queryset,data = data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data,status=200)   
@@ -196,12 +190,20 @@ def get_services(request,id):
          
 '''        
 @csrf_exempt
-@api_view(['GET'])
+@api_view(['GET','POST'])
 @permission_classes((IsAuthenticated, ))
-def top_members(request):
-    queryset  = TopMember.objects.all()
-    serializer = TopMemberSerializer(queryset,many=True)
-    return JsonResponse(serializer.data,safe=False)            
+def developers(request):
+  if request.method == 'GET':
+     queryset  = Developers.objects.all()
+     serializer = DeveloperSerializer(queryset,many=True)
+     return JsonResponse(serializer.data,safe=False)  
+  elif request.method == 'POST':
+       json_parser = JSONParser()
+       data = json_parser.parse(request)
+       serializer = DeveloperSerializer(data = data)
+       if serializer.is_valid():
+          serializer.save()
+          return JsonResponse(serializer.data,status=201,safe=False)              
 '''	
 	    
     

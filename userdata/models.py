@@ -75,14 +75,15 @@ class ServerUtils(models.Model):
 	Website = JSONField(null=True,default=default_json)
 	Sockets = JSONField(null=True,default=default_json)
 '''  
-class TopMember(models.Model):
+class Developers(models.Model):
+    no =  models.IntegerField(primary_key=True)
     name = models.CharField(max_length=100,default=None,blank=True,null=True)
     tag = models.CharField(max_length=6,blank=True,null=True)
     perks = models.IntegerField(blank=True, null=True)
     status = models.CharField(max_length=100,default=None,blank=True,null=True)
     level = models.IntegerField(blank=True, null=True)
-    role = models.CharField(max_length=15,default=None,blank=True,null=True)
-    no =  models.IntegerField(blank=True,null=True)'''
+    role = models.CharField(max_length=15,default=None,blank=True,null=True)'''
+    
     
 
 

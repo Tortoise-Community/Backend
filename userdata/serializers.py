@@ -53,7 +53,7 @@ class ServiceSerializer(serializers.ModelSerializer):
         model = ServerUtils
         fields = ['Github_Microservice','Status_Microservice','Tortoise_BOT','Tortoise_BOT2','Website','Sockets']       
 '''        
-class TopMemberSerializer(serializers.ModelSerializer):
+class DeveloperSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = TopMember
+		model = Developers
 		fields = '__all__'  '''               
