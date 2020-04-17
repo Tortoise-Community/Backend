@@ -188,7 +188,7 @@ def get_services(request,id):
         else:
          return JsonResponse(serializer.errors,status =400)	
          
-'''        
+     
 @csrf_exempt
 @api_view(['GET','POST'])
 @permission_classes((IsAuthenticated, ))
@@ -204,7 +204,7 @@ def developers(request):
        if serializer.is_valid():
           serializer.save()
           return JsonResponse(serializer.data,status=201,safe=False)              
-'''	
+
 	    
     
           
