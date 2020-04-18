@@ -124,8 +124,8 @@
 									<td class="column1">{{M.name}}</td>
 									<td class="column2">#{{M.tag}}</td>
 									<td class="column3"><b>{{M.status}}</td>
-									<td class="column4">{{M.role}}</td>
-									<td class="column5">{{M.level}}</td>
+									<td class="column4">N/A</td>
+									<td class="column5">N/A</td>
 									<td class="column6">{{M.perks}} Px</td>
 								</tr>
 							{% endfor %}	
