@@ -25,7 +25,7 @@ class Members(models.Model):
     user_id = models.BigIntegerField(primary_key=True)
     guild_id = models.BigIntegerField()
     email = models.TextField(blank=True, null=True)
-    perks = models.IntegerField(blank=True, null=True)
+    perks = models.IntegerField(blank=True, null=True,default=0)
     join_date = models.DateTimeField(blank=True,null = True)
     leave_date = models.DateTimeField(blank=True, null=True)
     verified = models.BooleanField(blank=True, null= True,default=False)
