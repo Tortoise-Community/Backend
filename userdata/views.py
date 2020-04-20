@@ -146,7 +146,7 @@ def get_member_roles(request,id):
 @api_view(['GET'])
 @permission_classes((IsAuthenticated, ))
 def get_rules(request):
-    queryset  = Rules.objects.all()
+    queryset  = Rules.objects.all().order_by('number')
     serializer = RulesSerializer(queryset,many=True)
     return JsonResponse(serializer.data,safe=False)   
     
