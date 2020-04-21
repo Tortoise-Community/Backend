@@ -67,8 +67,8 @@ def verified(request):
         return render(request,"verification.html",{'Verified':Verified,'siteurls':SiteUrls})  
 
 def members(request):
-    Developers = Developers.objects.all().order_by('-perks')[:20]
-    return render(request,"members.html",{'Team':Team,'Members':Developers,'siteurls':SiteUrls})    
+    Developerx = Developers.objects.all().order_by('-perks')[:20]
+    return render(request,"members.html",{'Team':Team,'Members':Developerx,'siteurls':SiteUrls})    
 
 def credits(request):
     return render(request,"credits.html")    
