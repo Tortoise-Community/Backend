@@ -204,6 +204,29 @@ def developers(request):
           serializer.save()
           return JsonResponse(serializer.data,status=201,safe=False)              
 
+@csrf_exempt
+@api_view(['PUT','DELETE','GET'])
+@permission_classes((IsAuthenticated, ))
+def suggestions(request,id):
+    queryset = get_object_or_404(Suggestions,message_id = id)
+    if request.method == 'GET':
+        serializer = SuggestionGetSerializer(queryset)
+        return JsonResponse (serializer.data,safe=False)
+
+    elif request.method == 'PUT':
+        json_parser = JSONParser()
+        data = json_parser.parse(request)
+        serializer = SuggestionPutSerializer(queryset,data = data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data,status=200)   
+        else:
+         return JsonResponse(serializer.errors,status =400)
+
+    elif request.method == 'DELETE':
+        queryset.delete()
+        return HttpResponse(status=204)
+
 	    
     
           
