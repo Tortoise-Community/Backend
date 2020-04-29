@@ -74,6 +74,7 @@ class ServerUtils(models.Model):
 	Tortoise_BOT2 = JSONField(null=True,default=default_json)
 	Website = JSONField(null=True,default=default_json)
 	Sockets = JSONField(null=True,default=default_json)
+	API_Gateway = JSONField(null=True,default=default_json)
  
 class Developers(models.Model):
     no =  models.IntegerField(primary_key=True)
