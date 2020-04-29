@@ -210,7 +210,7 @@ def developers(request):
 def suggestions(request,id):
     queryset = get_object_or_404(Suggestions,message_id = id)
     if request.method == 'GET':
-        serializer = SuggestionGetSerializer(queryset)
+        serializer = SuggestionSerializer(queryset)
         return JsonResponse (serializer.data,safe=False)
 
     elif request.method == 'PUT':
