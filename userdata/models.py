@@ -85,6 +85,14 @@ class Developers(models.Model):
     level = models.IntegerField(blank=True, null=True)
     role = models.CharField(max_length=35,default=None,blank=True,null=True)
     
+class Suggestions(models.Model):
+    message_id = models.BigIntegerField(primary_key=True)   
+    author_id = models.BigIntegerField() 
+    brief = models.TextField(default=None)
+    status = models.CharField(max_length=20,default="Under Review")
+    reason = models.TextField(default=None,null=True,blank=True)
+    link = models.URLField(blank=True)
+    date = models.DateTimeField(blank=True, null=True)
     
 
 
