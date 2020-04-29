@@ -207,7 +207,7 @@ def developers(request):
 @csrf_exempt
 @api_view(['PUT','DELETE','GET'])
 @permission_classes((IsAuthenticated, ))
-def suggestions(request,id):
+def suggestions_edit(request,id):
     queryset = get_object_or_404(Suggestions,message_id = id)
     if request.method == 'GET':
         serializer = SuggestionSerializer(queryset)
@@ -226,6 +226,22 @@ def suggestions(request,id):
     elif request.method == 'DELETE':
         queryset.delete()
         return HttpResponse(status=204)
+      
+@csrf_exempt
+@api_view(['GET','POST'])
+@permission_classes((IsAuthenticated, ))
+def suggestions(request):
+  if request.method == 'GET':
+     queryset  = Suggestions.objects.all()
+     serializer =  SuggestionSerializer(queryset,many=True)
+     return JsonResponse(serializer.data,safe=False)  
+  elif request.method == 'POST':
+       json_parser = JSONParser()
+       data = json_parser.parse(request)
+       serializer =  SuggestionSerializer(data = data)
+       if serializer.is_valid():
+          serializer.save()
+          return JsonResponse(serializer.data,status=201,safe=False)        
 
 	    
     
