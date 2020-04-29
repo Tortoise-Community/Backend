@@ -60,10 +60,10 @@ class DeveloperSerializer(serializers.ModelSerializer):
 
 class SuggestionSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = Suggestion
+		model = Suggestions
 		fields = '__all__'   
 
 class SuggestionPutSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = Developers
+		model = Suggestions
 		fields = ['status','reason']   
