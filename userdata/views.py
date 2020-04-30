@@ -216,7 +216,7 @@ def suggestions_edit(request,id):
     elif request.method == 'PUT':
         json_parser = JSONParser()
         data = json_parser.parse(request)
-        serializer = SuggestionPutSerializer(queryset,data = data)
+        serializer = SuggestionSerializer(queryset,data = data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data,status=200)   
