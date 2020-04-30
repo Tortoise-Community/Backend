@@ -88,9 +88,11 @@ class Developers(models.Model):
 class Suggestions(models.Model):
     message_id = models.BigIntegerField(primary_key=True)   
     author_id = models.BigIntegerField() 
+    author_name =  models.CharField(max_length=50,default=None,blank=True,null=True)
     brief = models.TextField(default=None)
     status = models.CharField(max_length=20,default="Under Review")
     reason = models.TextField(default=None,null=True,blank=True)
+    avatar = models.URLField(blank=True)
     link = models.URLField(blank=True)
     date = models.DateTimeField(blank=True, null=True)
     
