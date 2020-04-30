@@ -92,7 +92,7 @@ class Suggestions(models.Model):
     brief = models.TextField(default=None)
     status = models.CharField(max_length=20,default="Under Review")
     reason = models.TextField(default=None,null=True,blank=True)
-    avatar = models.URLField(blank=True)
+    avatar = models.URLField(blank=True,null=True)
     link = models.URLField(blank=True)
     date = models.DateTimeField(blank=True, null=True)
     
