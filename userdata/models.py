@@ -67,6 +67,7 @@ class ServerUtils(models.Model):
 	event_submission = models.BooleanField(null=True,default=False)
 	bug_report = models.BooleanField(null=True,default=False)
 	mod_mail = models.BooleanField(null=True,default=False)
+    suggestion_msg_id = models.BigIntegerField(null=True,blank=True)    
 	bot_status = JSONField(null=True,default=default_status,blank=True) 
 	Github_Microservice = JSONField(null=True,default=default_json)
 	Status_Microservice = JSONField(null=True,default=default_json)
@@ -75,7 +76,7 @@ class ServerUtils(models.Model):
 	Website = JSONField(null=True,default=default_json)
 	Sockets = JSONField(null=True,default=default_json)
 	API_Gateway = JSONField(null=True,default=default_json)
-    suggestion_msg_id = models.BigIntegerField(null=True,blank=True)
+
  
 class Developers(models.Model):
     no =  models.IntegerField(primary_key=True)
