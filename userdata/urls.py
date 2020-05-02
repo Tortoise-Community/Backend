@@ -23,6 +23,7 @@ path('private/members/<int:id>/roles/',views.get_member_roles),
 path('private/verify-confirmation/<int:id>/',views.is_verified),
 path('private/developers/',views.developers),
 path('private/suggestions/',views.suggestions),
-path('private/suggestions/<int:id>/',views.suggestions_edit)
+path('private/suggestions/<int:id>/',views.suggestions_edit),
+path('private/server/meta/<int:id>/',views.server_meta)
 
 ]

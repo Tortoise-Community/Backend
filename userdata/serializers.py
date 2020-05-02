@@ -66,4 +66,9 @@ class SuggestionSerializer(serializers.ModelSerializer):
 class SuggestionPutSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Suggestions
-		fields = ['status','reason']   
+		fields = ['status','reason']
+class ServerMetaSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = ServerUtils
+		fields = ['event_submission','mod_mail','bug_report','suggestion_msg_id']		
+		   

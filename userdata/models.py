@@ -64,9 +64,9 @@ class Rules(models.Model):
     
 class ServerUtils(models.Model):
 	guild_id = models.BigIntegerField(primary_key=True)
-	event_status = models.BooleanField(default=False)
-	bug_report = models.BooleanField(default=False)
-	mod_mail = models.BooleanField(default=False)
+	event_submission = models.BooleanField(null=True,default=False)
+	bug_report = models.BooleanField(null=True,default=False)
+	mod_mail = models.BooleanField(null=True,default=False)
     suggestion_msg_id = models.BigIntegerField(null=True,blank=True)
 	bot_status = JSONField(null=True,default=default_status,blank=True) 
 	Github_Microservice = JSONField(null=True,default=default_json)

@@ -243,6 +243,23 @@ def suggestions(request):
           serializer.save()
           return JsonResponse(serializer.data,status=201,safe=False)        
 
+@csrf_exempt
+@api_view(['PUT','GET'])
+@permission_classes((IsAuthenticated, ))
+def server_meta(request,id):
+    queryset = get_object_or_404(ServerUtils,guild_id = id)
+    if request.method == 'GET':
+        serializer = ServerMetaSerializer(queryset)
+        return JsonResponse (serializer.data,safe=False)
+    elif request.method == 'PUT':
+        json_parser = JSONParser()
+        data = json_parser.parse(request)
+        serializer = ServerMetaSerializer(queryset,data = data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data,status=200)   
+        else:
+         return JsonResponse(serializer.errors,status =400)	
 	    
     
           
