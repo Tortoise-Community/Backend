@@ -75,7 +75,7 @@ class ServerUtils(models.Model):
 	Website = JSONField(null=True,default=default_json)
 	Sockets = JSONField(null=True,default=default_json)
 	API_Gateway = JSONField(null=True,default=default_json)
-    suggestion_msg_id = models.BigIntegerField(null=True,blank=True)
+
 
  
 class Developers(models.Model):
