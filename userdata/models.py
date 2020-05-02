@@ -67,6 +67,7 @@ class ServerUtils(models.Model):
 	event_status = models.BooleanField(default=False)
 	bug_report = models.BooleanField(default=False)
 	mod_mail = models.BooleanField(default=False)
+    suggestion_msg_id = models.BigIntegerField(null=True,blank=True)
 	bot_status = JSONField(null=True,default=default_status,blank=True) 
 	Github_Microservice = JSONField(null=True,default=default_json)
 	Status_Microservice = JSONField(null=True,default=default_json)
