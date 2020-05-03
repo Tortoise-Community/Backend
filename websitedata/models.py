@@ -4,12 +4,13 @@ from Tortoise import settings
 # Create your models here.
 
 class Slider(models.Model):
-    HeadCrumb1 = models.CharField(max_length=20)
+    HeadCrumb1 = models.CharField(max_length=20,blank=True)
     Span = models.CharField(max_length=20,blank=True)
     HeadCrumb2 = models.CharField(max_length=20,blank=True)
     Slideimageurl = models.URLField(blank=True)
     Subhead = models.CharField(max_length=50,blank=True)
     Note = models.TextField(blank=True)
+    button = models.BooleanField(blank=True,default=True)
     
 class News(models.Model):
     CHOICE = [
