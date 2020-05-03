@@ -264,7 +264,7 @@ def server_meta(request,id):
 @api_view(['PUT','GET'])
 @permission_classes((IsAuthenticated, ))
 def member_meta(request,id):
-    queryset = get_object_or_404(Members,client_id = id)
+    queryset = get_object_or_404(Members,user_id = id)
     if request.method == 'GET':
         serializer = MemberMetaSerializer(queryset)
         return JsonResponse (serializer.data,safe=False)
