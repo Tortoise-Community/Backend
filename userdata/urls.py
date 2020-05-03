@@ -24,6 +24,7 @@ path('private/verify-confirmation/<int:id>/',views.is_verified),
 path('private/developers/',views.developers),
 path('private/suggestions/',views.suggestions),
 path('private/suggestions/<int:id>/',views.suggestions_edit),
-path('private/server/meta/<int:id>/',views.server_meta)
+path('private/server/meta/<int:id>/',views.server_meta),
+path('private/member/meta/<int:id>/',views.member_meta)
 
 ]

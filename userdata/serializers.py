@@ -71,4 +71,9 @@ class ServerMetaSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = ServerUtils
 		fields = ['event_submission','mod_mail','bug_report','suggestions']		
+		
+class MemberMetaSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Members
+		fields = ['warnings','muted_until','strikes','mod_mail','perks']			
 		   
