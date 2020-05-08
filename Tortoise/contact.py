@@ -51,15 +51,17 @@ def get_message(name,subject):
     if subject == "Appeal-Infraction":
         content = "Your infraction appeal is received\nOur staff will go through it soon.\nWe'll notify you here within 3 days with the updates so make sure you check your mail frequently"
     elif subject == 'Partnership':
-        content = "Thank you for showing interest to partner up with our server.\nWe will look into the details and have one of our staff sent over. Hope you have read the partnering policies and terms.\nYou can always reveiew them here:"
+        content = "Thank you for showing interest to partner up with our server.\nWe will look into the details and have one of our staff sent over. Hope you have read the partnering policies and terms."
     elif subject == "Sponsorship":
         content = "Thank you for showing your interest in sponsoring us, We'll review the details and contact you here to discuss the sponsorship terms and policies withing 2-3 days." 
     elif subject == 'Report-User':
-        content = "Thank you for reporting the user.\nNote that we take all reports seriously,The user could even be banned from the community if the graveness of the act demands him/her to be.\nSo we won't be tolerating attempts to frame someone or fake reports.So please don't indulge in such activites or you could face consequences."           
+        content = "Thank you for reporting the user.\nNote that we take all reports seriously, The user could even be banned from the community if the graveness of the act demands him/her to be.\nSo we won't be tolerating attempts to frame someone or fake reports. Please don't indulge in such activites or you could face consequences."           
+    elif subject == 'Data-Deletion':
+        content="Greetings from the Tortoise Community. We are sorry to see you leave. Our staff will look in to your data deletion request.\nYou will receive a confirmation email before the data is deleted permanently from our database.\nIf you'd like to come back to the server, please use this link: https://discord.gg/6xsaVQN"
     elif subject == 'Issue-Report':
-        content = "Thank you for taking the time to report the issue.\nWe'll look into it soon and solve the matter."
+        content = "Thank you for taking the time to report the issue. Reports like yours makes the community better.\nWe'll look into it soon and resolve the issue."
     else :
-       content = "Thank you for contacting us.\nWe will review the details submitted below and reach you here.So make sure you check your emails frequently"  
+       content = "Thank you for contacting us.\nWe will review the details submitted below and reach you here. So make sure you check your emails frequently"  
 
-    message = "Hi "+name+"!\n\n"+content+"\n\nTortoise Community"
+    message = "Hi "+name+"!\n\n"+content+"\n\nTeam Tortoise"
     return message
