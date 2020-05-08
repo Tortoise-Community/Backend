@@ -57,7 +57,7 @@ def get_message(name,subject):
     elif subject == 'Report-User':
         content = "Thank you for reporting the user.\nNote that we take all reports seriously, The user could even be banned from the community if the graveness of the act demands him/her to be.\nSo we won't be tolerating attempts to frame someone or fake reports. Please don't indulge in such activites or you could face consequences."           
     elif subject == 'Data-Deletion':
-        content="Greetings from the Tortoise Community. We are sorry to see you leave. Our staff will look in to your data deletion request.\nYou will receive a confirmation email before the data is deleted permanently from our database.\nIf you'd like to come back to the server, please use this link: https://discord.gg/6xsaVQN"
+        content="Greetings from the Tortoise Community. We are sorry to see you leave. Our staff will look into your data deletion request.\nYou will receive a confirmation email before the data is deleted permanently from our database.\nIf you'd like to come back to the server, please use this link: https://discord.gg/6xsaVQN"
     elif subject == 'Issue-Report':
         content = "Thank you for taking the time to report the issue. Reports like yours makes the community better.\nWe'll look into it soon and resolve the issue."
     else :
