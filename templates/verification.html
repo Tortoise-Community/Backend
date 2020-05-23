@@ -125,7 +125,7 @@
 						{% if Verified %}
 						<div class="verified">
 							<fieldset>
-                           <h5 style="font-size: 20px; font-family: Helvetica;">You will be redirected to the server in a moment</h5>
+                           <h5 style="font-size: 20px; font-family: Helvetica;">Please wait while we close this tab for you.</h5>
                            <p>The data we collect will be stored in machine readable format and will not be disclosed to any third parties</p>
                            <p>For more infomation on why we collect this data and how we use it, click <a href="{% url 'privacy' %}">here</a></p>
 							</fieldset>
@@ -143,7 +143,7 @@
     {% if Verified %}
     <script>
     function redirect(){
-       window.location.href = "https://discord.gg/SpPNv45";
+       window.close();
     }
 
     setTimeout(redirect, 3000); 
