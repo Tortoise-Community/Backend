@@ -125,7 +125,7 @@
 						{% if Verified %}
 						<fieldset>
 						<div class="verified">
-                           <h5 style="font-size: 20px; font-family: Helvetica;">Please wait while we close this tab.</h5>
+                           <h5 style="font-size: 20px; font-family: Helvetica;">You will be redirected to the server in a moment</h5>
                            <p>The data we collect will be stored in machine readable format and will not be disclosed to any third parties</p>
                            <p>For more infomation on why we collect this data and how we use it, click <a href="{% url 'privacy' %}">here</a></p>
 						</div>
@@ -142,11 +142,11 @@
 
     {% if Verified %}
     <script>
-    function closeWindow(){
-    var win = window.open("about:blank", "_self");
-    win.close();
-      }
-     setTimeout(closeWindow,6000) ;  
+    function redirect(){
+       window.location.href = "https://discord.com/channels/577192344529404154/577192344533598472";
+    }
+
+    setTimeout(redirect, 3000); 
     </script>	
 	{% endif %}
 	<footer class="footer-section">
