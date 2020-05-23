@@ -143,7 +143,8 @@
     {% if Verified %}
     <script>
     function closeWindow(){
-     window.close();
+    var win = window.open("about:blank", "_self");
+    win.close();
       }
      setTimeout(closeWindow,6000) ;  
     </script>	
