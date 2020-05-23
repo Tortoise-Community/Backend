@@ -123,13 +123,13 @@
 						</div>
 						{% endif %}
 						{% if Verified %}
+						<fieldset>
 						<div class="verified">
-					
                            <h5 style="font-size: 20px; font-family: Helvetica;">Please wait while we close this tab.</h5>
                            <p>The data we collect will be stored in machine readable format and will not be disclosed to any third parties</p>
                            <p>For more infomation on why we collect this data and how we use it, click <a href="{% url 'privacy' %}">here</a></p>
-				
 						</div>
+						</fieldset>
 						<div class="loading">
 						<span class="loaderx" style="display: block !important;"><span class="loader-innerx"></span></span>
 						</div>
@@ -142,11 +142,10 @@
 
     {% if Verified %}
     <script>
-    function redirect(){
-       close();
-    }
-
-    setTimeout(redirect, 3000); 
+    function closeCurrentWindow() {
+     window.close();
+     }
+    setTimeout(closeCurrentWindow, 3000); 
     </script>	
 	{% endif %}
 	<footer class="footer-section">
