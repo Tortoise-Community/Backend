@@ -4,7 +4,7 @@ asyncio==3.4.3
 attrs==19.3.0
 certifi==2019.9.11
 chardet==3.0.4
-Django==2.2.5
+Django==2.2.13
 django-lineage==0.2.0
 djangorestframework==3.11.0
 django-hosts==4.0
