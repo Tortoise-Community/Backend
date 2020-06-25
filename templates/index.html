@@ -65,13 +65,13 @@
 
 	<section class="hero-section">
 		<div class="hero-slider owl-carousel">
-			{% for S in Slides %}
-			<div class="hs-item set-bg" data-setbg="{{S.Slideimageurl}}">
+			{% for s in slides %}
+			<div class="hs-item set-bg" data-setbg="{{s.Slideimageurl}}">
 				<div class="hs-text">
 					<div class="container">
-						<h2>{{S.HeadCrumb1}} <span>{{S.Span}}</span> {{S.HeadCrumb2}}</h2>
-						<p style="font-size: 25px; ">{{S.Subhead}}</p>
-						<p style="font-size:18px;">{{S.Note}}</p>
+						<h2>{{s.HeadCrumb1}} <span>{{s.Span}}</span> {{s.HeadCrumb2}}</h2>
+						<p style="font-size: 25px; ">{{s.Subhead}}</p>
+						<p style="font-size:18px;">{{s.Note}}</p>
 						{% if S.button %}
 						<a href="https://discord.gg/GQdZjmW" target="_blank" class="joinus">Join Us</a>
 						{% endif %}
@@ -83,18 +83,18 @@
 	</section>
 
 	<!-- Latest news section -->
-	{% if News %}
+	{% if news %}
 	<div class="latest-news-section">
 		<div class="ln-title">UPDATES</div>
 		<div class="news-ticker">
 			<div class="news-ticker-contant">
-				{% for N in News %}
-				{% if N.choice == 'Live' %}
-				 <a href="events"><div class="nt-item"><span class="red">Live</span>{{N.news}}</div></a>
-			    {% elif N.choice == 'News'  %}
-				<a href="events"><div class="nt-item"><span class="green">News</span>{{N.news}}</div></a>
+				{% for n in news %}
+				{% if n.choice == 'Live' %}
+				 <a href="events"><div class="nt-item"><span class="red">Live</span>{{n.news}}</div></a>
+			    {% elif n.choice == 'News'  %}
+				<a href="events"><div class="nt-item"><span class="green">News</span>{{n.news}}</div></a>
 				{% else %}
-				<a href="events"><div class="nt-item"><span class="purple">Announcement</span>{{N.news}}</div></a>
+				<a href="events"><div class="nt-item"><span class="purple">Announcement</span>{{n.news}}</div></a>
 				{% endif %}
 				{% endfor %}
 			</div>
@@ -105,7 +105,7 @@
 
 
 
-	{% if LiveEvents %}
+	{% if levents %}
 	<!-- Live events section  -->
 	<section class="recent-game-section spad set-bg" data-setbg="{{siteurls.live_event_img}}">
 		<div class="container">
@@ -113,14 +113,14 @@
 				<h2 >Live Events</h2>
 			</div>
 		<div class="row">
-				{% for L in LiveEvents %}
-				<div class="col-lg-3 col-md-6 p-0"><a href="events/{{L.pk}}">
-					<div class="feature-item set-bg" data-setbg="{{L.coverimage.url}}">
+				{% for l in levents %}
+				<div class="col-lg-3 col-md-6 p-0"><a href="events/{{l.pk}}">
+					<div class="feature-item set-bg" data-setbg="{{l.coverimage.url}}">
 						<span class="cata red">Live</span>{% if L.eventtype == 'CTF-Event' %}<span class="cata purple">CTF-Event</span>{% else %}<span class="cata green">Coding Challenge</span>{% endif %}
 						<div class="fi-content text-white">
-							<h5><a href="events/{{L.pk}}">{{L.name}}</a></h5>
-							<p>{{L.task}}</p>
-							<a href="events/{{L.pk}}" class="fi-comment">Prizes: {{L.prize}}</a>
+							<h5><a href="events/{{l.pk}}">{{l.name}}</a></h5>
+							<p>{{l.task}}</p>
+							<a href="events/{{l.pk}}" class="fi-comment">Prizes: {{l.prize}}</a>
 						</div>
 					</div></a>
 				</div>
@@ -132,26 +132,26 @@
 {% endif %}
 
 
-{% if Upcoming %}
+{% if upcoming %}
 <!-- Upcoming Events -->
 <section class="tournaments-section spad">
 	<div class="container">
 		<div class="tournament-title">Upcoming Events</div>
 		<div class="row">
-			{% for U in Upcoming %}
+			{% for u in upcoming %}
 			<div class="col-md-6">
 				<div class="tournament-item mb-4 mb-lg-0">
-					<div class="ti-notic">{{U.eventtype}}</div>
+					<div class="ti-notic">{{u.eventtype}}</div>
 					<div class="ti-content">
-						<div class="ti-thumb set-bg" data-setbg="{{U.coverimage.url}}"></div>
+						<div class="ti-thumb set-bg" data-setbg="{{u.coverimage.url}}"></div>
 						<div class="ti-text">
-							<h4>{{U.name}}</h4>
+							<h4>{{u.name}}</h4>
 							<ul>
-								<li><span>Event Begins: </span>{{U.duedate}}</li>
-								<li><span>Event Ends: </span>{{U.enddate}}</li>
-								<li><span>Event Host: </span>{{U.host}}</li>
+								<li><span>Event Begins: </span>{{u.duedate}}</li>
+								<li><span>Event Ends: </span>{{u.enddate}}</li>
+								<li><span>Event Host: </span>{{u.host}}</li>
 							</ul>
-							<p><span>Prizes:  </span><span style="color:pink;">{{U.prize}}</span></p>
+							<p><span>Prizes:  </span><span style="color:pink;">{{u.prize}}</span></p>
 						</div>
 					</div>
 				</div>
@@ -165,7 +165,7 @@
 
 
 
- {% if RecEvents %}
+ {% if revents %}
 	<!-- Recent events section  -->
 	<section class="recent-game-section spad set-bg" data-setbg="{{siteurls.recent_event_img}}">
 		<div class="container">
@@ -173,20 +173,20 @@
 				<h2 style="color: white;">Recent Events</h2>
 			</div>
 			<div class="row">
-				{% for R in RecEvents %}
-				<a href="pages/events/{{R.pk}}"><div class="col-lg-4 col-md-6">
+				{% for r in revents %}
+				<a href="pages/events/{{r.pk}}"><div class="col-lg-4 col-md-6">
 					<div class="recent-game-item">
-						<div class="rgi-thumb set-bg" data-setbg="{{R.coverimage.url}}">
+						<div class="rgi-thumb set-bg" data-setbg="{{r.coverimage.url}}">
 							{%if R.eventtype == 'CTF-Event' %}
-							<div class="cata purple">{{R.eventtype}}</div>
+							<div class="cata purple">{{r.eventtype}}</div>
 							{% else %}
-							<div class="cata green">{{R.eventtype}}</div>
+							<div class="cata green">{{r.eventtype}}</div>
 							{% endif %}
 						</div>
 						<div class="rgi-content">
-							<h5>{{R.name}}</h5>
-							<p>{{R.task}}</p>
-							<a href="#" class="comment"><span style="color:black;">Winner: </span>{{R.winner}}</a>
+							<h5>{{r.name}}</h5>
+							<p>{{r.task}}</p>
+							<a href="#" class="comment"><span style="color:black;">Winner: </span>{{r.winner}}</a>
 							<div class="rgi-extra">
 								<div class="rgi-star"><img src="{% static 'img/icons/star.png' %}" alt=""></div>
 								<div class="rgi-heart"><img src="{% static 'img/icons/heart.png' %}" alt=""></div>
@@ -202,7 +202,7 @@
 {% endif %}
 
 	<!-- Project section --><!---
-	{% if Projects %}
+	{% if projects %}
 	<section class="review-section spad set-bg" data-setbg="{% static 'img/review-bg-1.png' %}">
 		<div class="container">
 			<div class="section-title">
@@ -210,15 +210,15 @@
 				<h2>Recent Projects</h2>
 			</div>
 			<div class="row">
-				{% for P in Projects %} <a href="projects/{P.pk}"></a>
+				{% for p in Projects %} <a href="projects/{p.pk}"></a>
 				<div class="col-lg-3 col-md-6">
 					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="{{P.coverimage.url}}">
-							<div class="{{P.status}}">{{P.rating}}</div>
+						<div class="review-cover set-bg" data-setbg="{{p.coverimage.url}}">
+							<div class="{{p.status}}">{{p.rating}}</div>
 						</div>
 						<div class="review-text">
-							<h5>{{P.name}}</h5>
-							<p>{{P.label}}</p>
+							<h5>{{p.name}}</h5>
+							<p>{{p.label}}</p>
 						</div>
 					</div>
 				</div>
@@ -251,12 +251,12 @@
 					<div class="footer-widget">
 						<h4 class="fw-title">Team Tortoise</h4>
 						<div class="top-comment">
-							{% for T in Team %}
+							{% for t in team %}
 							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="{{T.profilepic.url}}"></div>
+								<div class="tc-thumb set-bg" data-setbg="{{t.profilepic.url}}"></div>
 								<div class="tc-content">
-									<p><a href="#">{{T.name}}</a><br><span>Designation: </span>{{T.designation}}</p>
-									<p><span>Nickname: </span> <a class="tc-date">{{T.nickname}}</a></p>
+									<p><a href="#">{{t.name}}</a><br><span>Designation: </span>{{t.designation}}</p>
+									<p><span>Nickname: </span> <a class="tc-date">{{t.nickname}}</a></p>
 								</div>
 							</div>
 							{% endfor %}

@@ -9,21 +9,54 @@ from django.views import View
 
 class UtilityMixin(object):
     context = {}
+    siteurls = SiteUrls # noqa
     news = News.objects.all()
     team = Team.objects.all()
+    slider = Slider.objects.all()
+    events = Events.objects.all()
     privacy = Privacy.objects.all()
-    siteurls = SiteUrls
     changes = Changes.objects.all()
     rules = Rules.objects.all().order_by('number')[1:]
 
+
+    def get_main_context(self):
+        self.context['slides'] = self.slider
+        self.get_common_context()
+        self.get_category_events()
+        return self.context
+
+    def get_events_context(self):
+        self.context['events'] = self.events.filter(status__in=['Live', 'Ended']).order_by('-id')
+        self.get_upcoming_context()
+        self.get_common_context()
+        return self.context
+
+    def get_upcoming_context(self):
+        self.context['upcoming'] = self.events.filter(status='Upcoming')[:2]
+        return self.context
+
+
+    def get_category_events(self):
+        self.context['levents'] = self.events.filter(status='Live')[:2] # noqa
+        self.context['revents'] = self.events.filter(status='Ended')[:3] # noqa
+        self.get_upcoming_context()
+        return self.context
+
     def get_common_context(self):
         self.context["team"] = self.team
-        self.context["siteurls"] = self.siteurls
+        self.context["siteurls"] = self.siteurls # noqa
         self.context["news"] = self.news
         return self.context
 
     def get_blog_context(self):
-        self.context["siteurls"] = self.siteurls
+        self.context["siteurls"] = self.siteurls  # noqa
+        return  self.context
+
+    def get_generic_context(self):
+        self.context["privacy"] = self.privacy
+        self.context['rules'] = self.rules
+        self.context['changes'] = self.changes
+        self.get_blog_context()
 
 
 
@@ -34,7 +67,7 @@ class ProjectView(UtilityMixin, View):
     def get(self, request, id=None):
 
         if id is not None:
-            self.context = get_blog_context()
+            self.context = self.get_blog_context()
             self.template_name = 'project.html'
             project = self.model.objects.get(pk=id)
             self.context['project'] = project
@@ -44,6 +77,7 @@ class ProjectView(UtilityMixin, View):
 
         return render(request, self.template_name, self.context)
 
+
 class EventView(UtilityMixin, View):
     model = Events
     template_name = 'events.html'
@@ -51,83 +85,63 @@ class EventView(UtilityMixin, View):
     def get(self, request, id=None):
 
         if id is not None:
-            self.context = get_blog_context()
+            self.context = self.get_blog_context()
             self.template_name = 'event.html'
             project = self.model.objects.get(pk=id)
             self.context['event'] = project
         else:
-            self.context = self.get_common_context()
-            self.context['events'] = self.model.objects.all().order_by('id')
+            self.get_events_context()
 
         return render(request, self.template_name, self.context)
 
 
+class IndexView(UtilityMixin, View):
+    template_name = 'index.html'
+    context = {}
+    def get(self, request):
+        self.get_main_context()
+        return render(request, self.template_name, self.context)
 
 
-def get_event(request, item_name):
-    E = Events.get(pk = item_name)
-    return render(request, 'event.html', {'E':E,'Team':Team,'siteurls':SiteUrls})
+class VerificationView(UtilityMixin, View):
+
+    verified = False
+    template_name = 'verification.html'
+    context = {"Oauth":Oauth}
+
+    def get(self, request):
+        code =  request.GET.get('code')
+        access_token = Oauth.get_access_token(code)
+        user_json = Oauth.get_user_json(access_token)
+        id = user_json.get('id')
+        email = user_json.get('email')
+        self.get_blog_context()
+        if email is not None:
+            print(email)
+            self.context['verified'] = True
+        if id is None:
+            self.context['emailerror'] = False # noqa
+            self.context['verified'] = False
+        elif email is None:
+            self.context['emailerror'] = True # noqa
+            self.context['verified'] = False
+        else:
+            self.context['emailerror'] = False # noqa
+            self.context['verified'] = False
+        return render(request, self.template_name, self.context)
 
 
-
-Slides = Slider.objects.all()
-News = News.objects.all()
-Team = Team.objects.all()
-Upcoming = Events.objects.filter(status='Upcoming')
-RecEvents = Events.objects.filter(status='Ended').order_by('enddate')[:3]
-LiveEvents = Events.objects.filter(status='Live')
-Events = Events.objects.filter(status__in=['Live', 'Ended'])
-Projects = Projects.objects.all().order_by('id')
-Privacy = Privacy.objects.all()
-Changes = Changes.objects.all()
-Rules = Rules.objects.all().order_by('number')[1:]
+class DeveloperView(UtilityMixin, View):
+    template_name = 'developers.html'
+    model = Developers
+    def get(self, request):
+        self.context['Members'] = self.model.objects.all().order_by('-perks')[:20]
+        self.get_blog_context()
+        return render(request, self.template_name, self.context)
 
 
-
-def index(request):
-    return render(request,"index.html",{'Slides':Slides,'News':News,'Team':Team,'Upcoming':Upcoming,'RecEvents':RecEvents,'Projects':Projects,'LiveEvents':LiveEvents,'siteurls':SiteUrls})
-
-def events(request):
-    return render(request,"events.html",{'Events':Events,'Team':Team,'Upcoming':Upcoming,'siteurls':SiteUrls})
-
-
-def verified(request):
-    code = request.GET.get("code")
-    access_token = Oauth.get_access_token(code)
-    user_json = Oauth.get_user_json(access_token)
-    id = user_json.get("id")
-    email = user_json.get("email")
-    if email:
-        Verified = True
-        try:
-           Members.objects.filter(user_id = id).update(email=email,verified=True)
-           package = {"endpoint":"verify","data":id}
-           SocketSend(package)
-        except:
-            pass
-    if code is None :
-        emailerror = False
-        return render(request,"verification.html",{'Oauth':Oauth,'emailerror':emailerror,'siteurls':SiteUrls})
-    elif email is None:
-        emailerror = True
-        return render(request,"verification.html",{'Oauth':Oauth,'emailerror':emailerror,'siteurls':SiteUrls})
-    else :
-        return render(request,"verification.html",{'Verified':Verified,'siteurls':SiteUrls})
-
-def members(request):
-    Developerx = Developers.objects.all().order_by('-perks')[:20]
-    return render(request,"members.html",{'Team':Team,'Members':Developerx,'siteurls':SiteUrls})
-
-def credits(request):
-    return render(request,"credits.html")
-
-def privacypolicy(request):
-    return render(request,"privacy.html",{'Privacy':Privacy,'Change':Changes,'Team':Team,'siteurls':SiteUrls})
-
-def rules(request):
-    return render(request,"rules.html",{'Rules':Rules,'Team':Team,'siteurls':SiteUrls})
-
-
-
-
-
+class TemplateView(UtilityMixin, View):
+    template_name = 'privacy.html'
+    def get(self, request):
+        self.get_generic_context()
+        return render(request, self.template_name, self.context)

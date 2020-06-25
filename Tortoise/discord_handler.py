@@ -24,4 +24,5 @@ def SocketSend(payload):
     print("Server response:", response)
     server.close()
 
-
+class BotSocket():
+    pass

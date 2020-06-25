@@ -62,24 +62,25 @@
 	<!-- Header section end -->
 
 	<!-- Latest news section -->
-	{% if News %}
+	{% if news %}
 	<div class="latest-news-section">
 		<div class="ln-title">UPDATES</div>
 		<div class="news-ticker">
 			<div class="news-ticker-contant">
-				{% for N in News %}
-				{% if N.choice == 'Live' %}
-				 <a href="events"><div class="nt-item"><span class="red">Live</span>{{N.news}}</div></a>
-			    {% elif N.choice == 'News'  %}
-				<a href="events"><div class="nt-item"><span class="green">News</span>{{N.news}}</div></a>
+				{% for n in news %}
+				{% if n.choice == 'Live' %}
+				 <a href="events"><div class="nt-item"><span class="red">Live</span>{{n.news}}</div></a>
+			    {% elif n.choice == 'News'  %}
+				<a href="events"><div class="nt-item"><span class="green">News</span>{{n.news}}</div></a>
 				{% else %}
-				<a href="events"><div class="nt-item"><span class="purple">Announcement</span>{{N.news}}</div></a>
+				<a href="events"><div class="nt-item"><span class="purple">Announcement</span>{{n.news}}</div></a>
 				{% endif %}
 				{% endfor %}
 			</div>
 		</div>
 	</div>
 	{% endif %}
+	<!-- Latest news section end -->
 
 
 	<!-- Page info section -->
@@ -107,12 +108,12 @@
 				<div class="row">
 					<div class="col-lg-8 privacyx">
 						<div class="row">	
-                        {% if Privacy %}
-                        {% for P in Privacy %}
-						<h2>{{P.header}}</h2>
+                        {% if privacy %}
+                        {% for p in privacy %}
+						<h2>{{p.header}}</h2>
 						<div class="privacypolicy" >
-						  <p style="color: black !important; font-size: 16px;">{{P.content}}</p>
-                          <p style="color: black !important; font-size: 16px;">{{P.extra}}</p>
+						  <p style="color: black !important; font-size: 16px;">{{p.content}}</p>
+                          <p style="color: black !important; font-size: 16px;">{{p.extra}}</p>
 						</div>
                         {% endfor %}
                         {% endif %}
@@ -125,9 +126,9 @@
 					<div class="widget-item">
 						<h3><u>Change log</u></h3>
 					</div>
-                    {% if Change %}
-                    {% for C in Change %}
-                    <h6><span>{{C.date}}</span> : {{C.content}}</h6> 
+                    {% if changes %}
+                    {% for c in changes %}
+                    <h6><span>{{c.date}}</span> : {{c.content}}</h6>
                     {% endfor %}
 					{% else %}
 					<h6>No changes untill now</h6>

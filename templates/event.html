@@ -5,7 +5,7 @@
 <head>
 	<title>Tortoise Community</title>
 	<meta charset="UTF-8">
-	<meta name="description" content="{{E.task}}">
+	<meta name="description" content="{{event.task}}">
 	<meta name="keywords" content="Python,Machine learning, community, Tortoise community , tortoise python,discord python , python discord community, discord python chat,developers, python ">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Favicon -->   
@@ -74,10 +74,10 @@
 				<div class="row">
 					<div class="col-xl-5 col-lg-6 text-white blurcard">
 						<h2  >{{E.name}}</h2>
-						<h4 ><span style="color:  #ffb101 ;">Prize: </span>{{E.prize}}</h4>
-						<h4 ><span style="color:  #ffb101 ;">Host: </span>{{E.host}}</h4>
-						<h6 ><span style="color:  #ffb101 ;">Begins: </span>{{E.duedate}}</h6>
-						<h6 ><span style="color:  #ffb101 ;">Ends: </span>{{E.enddate}}</h6>
+						<h4 ><span style="color:  #ffb101 ;">Prize: </span>{{event.prize}}</h4>
+						<h4 ><span style="color:  #ffb101 ;">Host: </span>{{event.host}}</h4>
+						<h6 ><span style="color:  #ffb101 ;">Begins: </span>{{event.duedate}}</h6>
+						<h6 ><span style="color:  #ffb101 ;">Ends: </span>{{event.enddate}}</h6>
 					</div>
 				</div>
 			</div>
@@ -90,9 +90,9 @@
 	<section class="page-section single-blog-page spad">
 		<div class="container">
 			<div class="row tint">
-				<div class="col-lg-12"><h3 class="eventbox">{{E.name}}</h3>
-					{% if E.eventimage %}
-					<div class="blog-thumb set-bg" data-setbg="{{E.eventimage.url}}">
+				<div class="col-lg-12"><h3 class="eventbox">{{event.name}}</h3>
+					{% if event.eventimage %}
+					<div class="blog-thumb set-bg" data-setbg="{{event.eventimage.url}}">
 						<div class="cata red">CODING CHALLENGE</div>
 						<div class="rgi-extra">
 							<div class="rgi-star"><img src="{% static 'img/icons/star.png' %}" alt=""></div>
@@ -101,9 +101,9 @@
 					</div>
 					{% endif %}
 					<div class="blog-content" >
-						<h4>{{E.task}}</h4>
+						<h4>{{event.task}}</h4>
 						<a href="" class="meta-comment"></a>
-						<pre style="font-family:Verdana, Geneva, Tahoma,bold, sans-serif;color:white;">{{E.desc}}</pre>
+						<pre style="font-family:Verdana, Geneva, Tahoma,bold, sans-serif;color:white;">{{event.desc}}</pre>
 					</div>		
 				</div>
 			</div>

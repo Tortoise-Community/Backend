@@ -62,18 +62,18 @@
 	<!-- Header section end -->
 
 	<!-- Latest news section -->
-	{% if News %}
+	{% if news %}
 	<div class="latest-news-section">
 		<div class="ln-title">UPDATES</div>
 		<div class="news-ticker">
 			<div class="news-ticker-contant">
-				{% for N in News %}
-				{% if N.choice == 'Live' %}
-				 <a href="events"><div class="nt-item"><span class="red">Live</span>{{N.news}}</div></a>
-			    {% elif N.choice == 'News'  %}
-				<a href="events"><div class="nt-item"><span class="green">News</span>{{N.news}}</div></a>
+				{% for n in news %}
+				{% if n.choice == 'Live' %}
+				 <a href="events"><div class="nt-item"><span class="red">Live</span>{{n.news}}</div></a>
+			    {% elif n.choice == 'News'  %}
+				<a href="events"><div class="nt-item"><span class="green">News</span>{{n.news}}</div></a>
 				{% else %}
-				<a href="events"><div class="nt-item"><span class="purple">Announcement</span>{{N.news}}</div></a>
+				<a href="events"><div class="nt-item"><span class="purple">Announcement</span>{{n.news}}</div></a>
 				{% endif %}
 				{% endfor %}
 			</div>
@@ -105,15 +105,15 @@
 					<h2>Our Projects</h2>
 				</div>
 				<div class="row text-white">	
-					{% for P in Projects %}
+					{% for p in projects %}
 					<div class="col-lg-3 col-md-6">
-						<a href="projects/{{P.pk}}"><div class="review-item">
-							<div class="review-cover set-bg" data-setbg="{{P.coverimage.url}}">
-								<div class="score pink">{{P.rating}}</div>
+						<a href="{{p.pk}}"><div class="review-item">
+							<div class="review-cover set-bg" data-setbg="{{p.coverimage.url}}">
+								<div class="score pink">{{p.rating}}</div>
 							</div>
 							<div class="review-text">
-								<h5>{{P.name}}</h5>
-								<p>{{P.label}}</p>
+								<h5>{{p.name}}</h5>
+								<p>{{p.label}}</p>
 							</div>
 						</div></a>
 					</div>
@@ -147,12 +147,12 @@
 					<div class="footer-widget">
 						<h4 class="fw-title">Team Tortoise</h4>
 						<div class="top-comment">
-							{% for T in Team %}
+							{% for t in team %}
 							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="{{T.profilepic.url}}"></div>
+								<div class="tc-thumb set-bg" data-setbg="{{t.profilepic.url}}"></div>
 								<div class="tc-content">
-									<p><a href="#">{{T.name}}</a><br><span>Designation: </span>{{T.designation}}</p>
-									<p><span>Nickname: </span> <a class="tc-date">{{T.nickname}}</a></p>
+									<p><a href="#">{{t.name}}</a><br><span>Designation: </span>{{t.designation}}</p>
+									<p><span>Nickname: </span> <a class="tc-date">{{t.nickname}}</a></p>
 								</div>
 							</div>
 							{% endfor %}

@@ -93,14 +93,14 @@
 					<div class="verification-wrapper">
 						<div class="verification-top">
 							<h3>Tortoise <span>Community</span></h3>
-							{% if not Verified %}
+							{% if not verified %}
 							<h5>Sign-in to verify</h5>
 							{% endif %}
-							{% if Verified %}
+							{% if verified %}
 							<h5>Verification Successfull!</h5>
 							{% endif %}
 						</div>
-						{% if not Verified %}
+						{% if not verified %}
 						<fieldset>
 							<legend visible="true" style="width:auto;"><h5>Permissions required</h5></legend>
 						<div class="verification-bottom">
@@ -122,7 +122,7 @@
 							<a href="{{Oauth.discord_login_url}}"><button class="verify" type="button">Sign in with Discord</button></a>
 						</div>
 						{% endif %}
-						{% if Verified %}
+						{% if verified %}
 						<fieldset>
 						<div class="verified">
                            <h5 style="font-size: 20px; font-family: Helvetica;">You will be redirected to the server in a moment</h5>
@@ -140,7 +140,7 @@
 	</section>
 	<!-- Page info section -->
 
-    {% if Verified %}
+    {% if verified %}
     <script>
     function redirect(){
        window.location.href = "https://discord.com/channels/577192344529404154/577192344533598472";
