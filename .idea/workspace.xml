@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f1a8ab6-c2f1-4915-b506-15a16244c25e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tortoise/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/oauth.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/oauth.py" afterDir="false" />
@@ -109,7 +108,7 @@
       <workItem from="1593053888648" duration="6174000" />
       <workItem from="1593069602901" duration="8327000" />
       <workItem from="1593103713636" duration="6667000" />
-      <workItem from="1593131222231" duration="8607000" />
+      <workItem from="1593131222231" duration="10089000" />
     </task>
     <servers />
   </component>

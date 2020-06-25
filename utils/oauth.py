@@ -1,11 +1,13 @@
 import requests
+from django.conf import settings
 
 class Oauth(object):
-    client_id = ""
-    client_secret = "xaaNctPhb2Lta_Fmw4pY9b4UUB0y8oYC"
+    client_id = settings.OAUTH_CLIENT_ID
+    client_secret = settings.OAUTH_CLIENT_SECRET
     scope  = "identify%20email"
     redirect_uri = "https://www.tortoisecommunity.ml/verification/"
-    discord_login_url = "https://discordapp.com/api/oauth2/authorize?client_id={}&redirect_uri={}&response_type=code&scope={}".format(client_id,redirect_uri,scope)
+    discord_login_url = "https://discordapp.com/api/oauth2/authorize?client_id={}&" \
+                        "redirect_uri={}&response_type=code&scope={}".format(client_id,redirect_uri,scope)
     discord_token_url = "https://discordapp.com/api/oauth2/token"
     discord_api_url = "https://discordapp.com/api"
 
