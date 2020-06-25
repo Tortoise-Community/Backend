@@ -20,22 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f1a8ab6-c2f1-4915-b506-15a16244c25e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Website.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tortoise/oauth.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/oauth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tortoise/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tortoise/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cert/ca_bundle.crt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cert/certificate.crt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cert/private.key" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/oauth.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/oauth.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +109,7 @@
       <workItem from="1593053888648" duration="6174000" />
       <workItem from="1593069602901" duration="8327000" />
       <workItem from="1593103713636" duration="6667000" />
-      <workItem from="1593131222231" duration="5813000" />
+      <workItem from="1593131222231" duration="8607000" />
     </task>
     <servers />
   </component>

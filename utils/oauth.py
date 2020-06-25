@@ -1,7 +1,7 @@
 import requests
 
 class Oauth(object):
-    client_id = "648949400311300096"
+    client_id = ""
     client_secret = "xaaNctPhb2Lta_Fmw4pY9b4UUB0y8oYC"
     scope  = "identify%20email"
     redirect_uri = "https://www.tortoisecommunity.ml/verification/"

@@ -13,18 +13,21 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os 
 import environ
 
+# casting env object
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
+# fetches .env file from two folders back (/a/b/ - 2 = /)
+env_path = environ.Path(__file__) - 2
+environ.Env.read_env(env_file=env_path('.env'))
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+SECRET_KEY = env('SECRET_KEY')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'dwi06wnak8r3##it7^f9-4z^nmnye=_n=a2^xx=#o8k=)dt1yf'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ["*"]
 
@@ -33,7 +36,7 @@ DATE_INPUT_FORMATS = ['%Y-%m-%d']
 # Application definition
 
 INSTALLED_APPS = [
-    'websitedata.apps.WebsitedataConfig',
+    'websitedata.apps.WebsitedataConfig', # noqa
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,8 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'userdata.apps.UserdataConfig',
-    'rest_framework.authtoken',
+    'userdata.apps.UserdataConfig', # noqa
+    'rest_framework.authtoken', # noqa
     'django_hosts',
 ]
 
@@ -59,7 +62,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Tortoise.urls'
-ROOT_HOSTCONF = 'Tortoise.hosts'
+ROOT_HOSTCONF = 'Tortoise.hosts' # noqa
 DEFAULT_HOST = 'www'
 
 TEMPLATES = [
@@ -79,20 +82,20 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Tortoise.wsgi.application'
-#SECURE_SSL_REDIRECT = 'True'
+# SECURE_SSL_REDIRECT = 'True'
+
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'tortoise_db',
-        'USER': 'tortoise_dev',
-        'PASSWORD': 'tortoise_db_577192344529404154',
-        'HOST': '144.172.71.124',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # noqa
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
         'PORT': '5432'
-        
     }
 }
 
@@ -114,6 +117,28 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+# Django rest framework Settings
+# https://www.django-rest-framework.org/
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES':(
+
+        'rest_framework.permissions.IsAuthenticated',
+
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+
+}
+
 
 
 # Internationalization
@@ -139,35 +164,24 @@ STATIC_ROOT = os.path.join(BASE_DIR,'assets')
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
 
-# Mail Transfer Module Handlers
 
-EMAIL_HOST = 'smtp.gmail.com'
+# Mail Transfer Module Handlers
+# https://docs.djangoproject.com/en/3.0/topics/email/
+
+EMAIL_HOST = 'smtp.gmail.com' # noqa
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'tortoisecommunity@gmail.com'
-EMAIL_HOST_PASSWORD = 'pnugtcacammowjse'
+EMAIL_HOST_PASSWORD = env('EMAIL_TOKEN')
 EMAIL_USE_TLS = True
-#Discord bot sync 
 
-BOT_TOKEN = 'test'
-#Encryption_key = "Ae2Y$7%h#@"
-#Github
-GITHUB_ACCESS_TOKEN = "fce61a82b96ce03aea3198292a05d6e1535e08ca"
 
-#JWT Authentication 
+# Discord end configuration for bot and verification
 
-REST_FRAMEWORK = {
+BOT_SOCKET_IP = env('BOT_SOCKET_IP')
+BOT_SOCKET_PORT = env('BOT_SOCKET_PORT')
+BOT_SOCKET_TOKEN = env('BOT_SOCKET_TOKEN')
 
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+OAUTH_CLIENT_ID = env('OAUTH_CLIENT_ID')
+OAUTH_CLIENT_SECRET = env('OAUTH_CLIENT_SECRET')
+GITHUB_ACCESS_TOKEN = env('GITHUB_ACCESS_TOKEN')
 
-        'rest_framework.authentication.TokenAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES':(
-        
-        'rest_framework.permissions.IsAuthenticated',
-        
-    ),
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    )    
-
-}
