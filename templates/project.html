@@ -5,10 +5,10 @@
 <head>
 	<title>Tortoise Community</title>
 	<meta charset="UTF-8">
-	<meta name="description" content="{{Project.label}}">
+	<meta name="description" content="{{project.label}}">
 	<meta name="keywords" content="Python,Machine learning, community, Tortoise community , tortoise python,discord python , python discord community, discord python chat,developers, python ">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Favicon -->   
+	<!-- Favicon -->
 	<link href="{% static 'img/real.ico' %}" rel="shortcut icon">
 
 	<!-- Google Fonts -->
@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="{% static 'css/style.css' %}"/>
 	<link rel="stylesheet" href="{% static 'css/animate.css' %}"/>
 	<!--Icons-->
-	
+
 	<script src="https://kit.fontawesome.com/5e4b131067.js" crossorigin="anonymous"></script>
 
 
@@ -46,7 +46,7 @@
 			<a class="site-logo" href="{% url 'home' %}">
 				<img src="{{siteurls.site_logo}}" alt="">
 			</a>
-			
+
 			<!-- responsive -->
 			<div class="nav-switch">
 				<i class="fa fa-bars"></i>
@@ -68,7 +68,7 @@
 
 
 
-    
+
 
 	<!-- Page info section -->
 	<section class="page-info-section set-bg" data-setbg="{{siteurls.img3}}">
@@ -76,7 +76,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-5 col-lg-6 text-white blurcard">
-						<h2  >{{Project.name}}</h2>
+						<h2  >{{project.name}}</h2>
 					</div>
 				</div>
 			</div>
@@ -91,29 +91,29 @@
 			<div class="row gittint">
 
 					<div style="align-items: left;padding:4px 4px;">
-						    <div class="fas fa-history git"><span class="change-font"> Commits {{Project.commits}}</span></div>	
-							<div class="fa fa-code-fork git"> <span class="change-font"> Forks {{Project.forks}}</span></div>
-							<div class="fas fa-star git"> <span class="change-font"> Stars {{Project.stars}}</span></div>
-							<div class="fas fa-user-friends git"><span class="change-font"> Contributors {{Project.contributors}}</span></div>
+						    <div class="fas fa-history git"><span class="change-font"> Commits {{project.commits}}</span></div>
+							<div class="fa fa-code-fork git"> <span class="change-font"> Forks {{project.forks}}</span></div>
+							<div class="fas fa-star git"> <span class="change-font"> Stars {{project.stars}}</span></div>
+							<div class="fas fa-user-friends git"><span class="change-font"> Contributors {{project.contributors}}</span></div>
 
 					</div>
-				<div class="col-lg-12"><h2 class="eventbox">{{Project.name}}</h2>
+				<div class="col-lg-12"><h2 class="eventbox">{{project.name}}</h2>
 					<div>
-						<div class="{{Project.status}}">{{Project.get_status_display}}</div>
+						<div class="{{project.status}}">{{project.get_status_display}}</div>
 					</div>
 
 					<div class="blog-content" >
-						<h4>{{Project.label}}</h4>
+						<h4>{{project.label}}</h4>
 						<a href="" class="meta-comment"></a>
-						<pre style="font-family:Verdana, Geneva, Tahoma,bold, sans-serif;color:white;">{{Project.brief}}</pre>
-					</div>	
+						<pre style="font-family:Verdana, Geneva, Tahoma,bold, sans-serif;color:white;">{{project.brief}}</pre>
+					</div>
 				</div>
 			</div>
 			<br>
 			<div class="row">
-			<a href="{{Project.github}}"><button class="githux fab fa-github"><span class="change-font" > View in Github</span></button></a>
-		    {% if Project.invite %}
-			<a href="{{Project.invite}}"><button class="invite fa fa-plus-square"><span class="change-font"> Invite to your server</span></button></a>
+			<a href="{{project.github}}"><button class="githux fab fa-github"><span class="change-font" > View in Github</span></button></a>
+		    {% if project.invite %}
+			<a href="{{project.invite}}"><button class="invite fa fa-plus-square"><span class="change-font"> Invite to your server</span></button></a>
 			{% endif %}
 			</div>
 		</div>
