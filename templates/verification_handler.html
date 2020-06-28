@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verification Handler</title>
+</head>
+<body>
+<script>
+    function setParam()
+    {
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var code = url.searchParams.get("code");
+        {#var param = (`https://www.tortoisecommunity.ml/verification/?code=${code}`);#}
+        var param = (`http://127.0.0.1:8000/verification/?code=${code}`);
+        window.opener.location.replace(param);
+        window.close();
+    }
+    setTimeout(setParam,0000);
+</script>
+</body>
+</html>

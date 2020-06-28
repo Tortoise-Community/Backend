@@ -110,14 +110,13 @@ class VerificationView(UtilityMixin, View):
     context = {"Oauth":Oauth}
 
     def get(self, request):
-        code =  request.GET.get('code')
+        code = request.GET.get('code')
         access_token = Oauth.get_access_token(code)
         user_json = Oauth.get_user_json(access_token)
         id = user_json.get('id')
         email = user_json.get('email')
         self.get_blog_context()
         if email is not None:
-            print(email)
             self.context['verified'] = True
         if id is None:
             self.context['emailerror'] = False # noqa
@@ -145,3 +144,7 @@ class TemplateView(UtilityMixin, View):
     def get(self, request):
         self.get_generic_context()
         return render(request, self.template_name, self.context)
+
+
+
+

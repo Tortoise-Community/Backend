@@ -66,18 +66,18 @@
 
 	
 	<!-- Latest news section -->
-	{% if News %}
+	{% if news %}
 	<div class="latest-news-section">
 		<div class="ln-title">UPDATES</div>
 		<div class="news-ticker">
 			<div class="news-ticker-contant">
-				{% for N in News %}
-				{% if N.choice == 'Live' %}
-				 <a href="events"><div class="nt-item"><span class="red">Live</span>{{N.news}}</div></a>
-			    {% elif N.choice == 'News'  %}
-				<a href="events"><div class="nt-item"><span class="green">News</span>{{N.news}}</div></a>
+				{% for n in news %}
+				{% if n.choice == 'Live' %}
+				 <a href="events"><div class="nt-item"><span class="red">Live</span>{{n.news}}</div></a>
+			    {% elif n.choice == 'News'  %}
+				<a href="events"><div class="nt-item"><span class="green">News</span>{{n.news}}</div></a>
 				{% else %}
-				<a href="events"><div class="nt-item"><span class="purple">Announcement</span>{{N.news}}</div></a>
+				<a href="events"><div class="nt-item"><span class="purple">Announcement</span>{{n.news}}</div></a>
 				{% endif %}
 				{% endfor %}
 			</div>
@@ -119,7 +119,7 @@
 							{% else %}
 							<p>Note: We use discord Oauth2 system for the verification</p>
 							{% endif %}
-							<a href="{{Oauth.discord_login_url}}"><button class="verify" type="button">Sign in with Discord</button></a>
+						<button onclick="popupCenter({url: '{{Oauth.discord_login_url}}', title: 'Discord', w: 500, h: 750});" class="verify" type="button">Sign in with Discord</button>
 						</div>
 						{% endif %}
 						{% if verified %}
@@ -135,7 +135,7 @@
 						</div>
 						{% endif %}
 
-					</div>
+					</div>s
 				</div>
 	</section>
 	<!-- Page info section -->
@@ -147,8 +147,34 @@
     }
 
     setTimeout(redirect, 3000); 
-    </script>	
-	{% endif %}
+    </script>
+    {% endif %}
+    <script>
+    const popupCenter = ({url, title, w, h}) => {
+    // Fixes dual-screen position                             Most browsers      Firefox
+    const dualScreenLeft = window.screenLeft !==  undefined ? window.screenLeft : window.screenX;
+    const dualScreenTop = window.screenTop !==  undefined   ? window.screenTop  : window.screenY;
+
+    const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+    const systemZoom = width / window.screen.availWidth;
+    const left = (width - w) / 2 / systemZoom + dualScreenLeft
+    const top = (height - h) / 2 / systemZoom + dualScreenTop
+    const newWindow = window.open(url, title,
+      `
+      scrollbars=yes,
+      width=${w / systemZoom},
+      height=${h / systemZoom},
+      top=${top},
+      left=${left}
+      `
+    )
+
+    if (window.focus) newWindow.focus();
+}
+    </script>
+
 	<footer class="footer-section">
 		<div class="container">
 			<ul class="footer-menu">

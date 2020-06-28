@@ -25,18 +25,23 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    url(r'^pages/members', views.DeveloperView.as_view(), name = 'members'),
-    path("",views.IndexView.as_view()),
+
     path('verification/',views.VerificationView.as_view()),
-    url(r'^home', views.IndexView.as_view() ,name='home'),
-    re_path(r'^pages/events/(?P<id>[0-9]{1,3})' , views.EventView.as_view()),
-    url(r'^pages/events/',views.EventView.as_view() , name = 'events'),
+    re_path(r'home', views.IndexView.as_view(), name='home'),
+    url(r'^pages/events/',views.EventView.as_view(), name='events'),
     url(r'^pages/contact', contact.contact,name='contact'),
-    re_path(r'^pages/projects/(?P<id>[0-9]{1,3})' , views.ProjectView.as_view()),
-    url(r'^pages/projects/', views.ProjectView.as_view(),name='projects'),
-    url(r'^pages/credits', views.TemplateView.as_view(template_name = 'credits.html'),name='credits'),
-    url(r'^pages/privacy', views.TemplateView.as_view(template_name = 'privacy.html'),name='privacy'),
-    url(r'^pages/rules', views.TemplateView.as_view(template_name = 'rules.html'),name='rules'),
+
+    re_path(r'^pages/projects/(?P<id>[0-9]{1,3})', views.ProjectView.as_view()),
+    re_path(r'^pages/events/(?P<id>[0-9]{1,3})', views.EventView.as_view()),
+
+    url(r'^pages/projects/', views.ProjectView.as_view(), name='projects'),
+    url(r'^pages/members', views.DeveloperView.as_view(), name='members'),
+    url(r'^pages/events/',views.EventView.as_view() , name='events'),
+
+    url(r'^pages/credits', views.TemplateView.as_view(template_name='credits.html'), name='credits'),
+    url(r'^pages/privacy', views.TemplateView.as_view(template_name='privacy.html'), name='privacy'),
+    url(r'^pages/rules', views.TemplateView.as_view(template_name='rules.html'), name='rules'),
+    url(r'^verification/handlers/', views.TemplateView.as_view(template_name='verification_handler.html')),
 
 ]
     
