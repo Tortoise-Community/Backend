@@ -20,13 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f1a8ab6-c2f1-4915-b506-15a16244c25e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/verification_handler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tortoise/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tortoise/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tortoise/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/verification.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/verification.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userdata/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/oauth.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/oauth.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,10 +53,11 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -112,7 +111,9 @@
       <workItem from="1593069602901" duration="8327000" />
       <workItem from="1593103713636" duration="6667000" />
       <workItem from="1593131222231" duration="26452000" />
-      <workItem from="1593354703724" duration="6020000" />
+      <workItem from="1593354703724" duration="9044000" />
+      <workItem from="1593408925164" duration="8250000" />
+      <workItem from="1593441131206" duration="513000" />
     </task>
     <servers />
   </component>
@@ -136,9 +137,17 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593022688530" />
-    <state x="461" y="164" key="SettingsEditor" timestamp="1593357110898">
+    <state x="461" y="164" key="SettingsEditor" timestamp="1593410235804">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593357110898" />
+    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593410235804" />
+    <state x="601" y="246" width="700" height="530" key="recent.locations.popup" timestamp="1593413801600">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="601" y="246" width="700" height="530" key="recent.locations.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593413801600" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1593414237879">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593414237879" />
   </component>
 </project>

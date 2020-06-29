@@ -2,9 +2,11 @@ from django.shortcuts import render
 from websitedata.models import *
 from utils.oauth import Oauth
 from userdata.models import *
-from .discord_handler import SocketSend
 from .models import SiteUrls
 from django.views import View
+from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
+from datetime import datetime, timezone
 
 
 class UtilityMixin(object):
@@ -17,7 +19,6 @@ class UtilityMixin(object):
     privacy = Privacy.objects.all()
     changes = Changes.objects.all()
     rules = Rules.objects.all().order_by('number')[1:]
-
 
     def get_main_context(self):
         self.context['slides'] = self.slider
@@ -35,7 +36,6 @@ class UtilityMixin(object):
         self.context['upcoming'] = self.events.filter(status='Upcoming')[:2]
         return self.context
 
-
     def get_category_events(self):
         self.context['levents'] = self.events.filter(status='Live')[:2] # noqa
         self.context['revents'] = self.events.filter(status='Ended')[:3] # noqa
@@ -50,7 +50,7 @@ class UtilityMixin(object):
 
     def get_blog_context(self):
         self.context["siteurls"] = self.siteurls  # noqa
-        return  self.context
+        return self.context
 
     def get_generic_context(self):
         self.context["privacy"] = self.privacy
@@ -59,17 +59,16 @@ class UtilityMixin(object):
         self.get_blog_context()
 
 
-
 class ProjectView(UtilityMixin, View):
     model = Projects
     template_name = 'projects.html'
     context = {}
-    def get(self, request, id=None):
 
-        if id is not None:
+    def get(self, request, item_no=None):
+        if item_no is not None:
             self.context = self.get_blog_context()
             self.template_name = 'project.html'
-            project = self.model.objects.get(pk=id)
+            project = self.model.objects.get(pk=item_no)
             self.context['project'] = project
         else:
             self.context = self.get_common_context()
@@ -82,12 +81,12 @@ class EventView(UtilityMixin, View):
     model = Events
     template_name = 'events.html'
     context = {}
-    def get(self, request, id=None):
+    def get(self, request, item_no=None):
 
-        if id is not None:
+        if item_no is not None:
             self.context = self.get_blog_context()
             self.template_name = 'event.html'
-            project = self.model.objects.get(pk=id)
+            project = self.model.objects.get(pk=item_no)
             self.context['event'] = project
         else:
             self.get_events_context()
@@ -98,6 +97,7 @@ class EventView(UtilityMixin, View):
 class IndexView(UtilityMixin, View):
     template_name = 'index.html'
     context = {}
+
     def get(self, request):
         self.get_main_context()
         return render(request, self.template_name, self.context)
@@ -107,32 +107,53 @@ class VerificationView(UtilityMixin, View):
 
     verified = False
     template_name = 'verification.html'
-    context = {"Oauth":Oauth}
+    context = {"Oauth": Oauth}
 
     def get(self, request):
         code = request.GET.get('code')
         access_token = Oauth.get_access_token(code)
         user_json = Oauth.get_user_json(access_token)
-        id = user_json.get('id')
+        user_id = user_json.get('id')
         email = user_json.get('email')
+        print(user_json)
         self.get_blog_context()
-        if email is not None:
-            self.context['verified'] = True
-        if id is None:
+        if code is None:
             self.context['emailerror'] = False # noqa
-            self.context['verified'] = False
-        elif email is None:
-            self.context['emailerror'] = True # noqa
-            self.context['verified'] = False
+            self.context['verified'] = False # noqa
+        elif email is not None:
+            self.context['verified'] = True # noqa
+            self.context['emailerror'] = False # noqa
+            try:
+                Members.objects.filter(user_id=user_id).update(email=email, verified=True)
+                self.context['joined'] = True # noqa
+            except ObjectDoesNotExist:
+                name = user_json.get('username')
+                tag = user_json.get('discriminator')
+                data = Members(user_id=user_id,
+                               guild_id=settings.SERVER_ID,
+                               email=email,
+                               join_date=datetime.now(timezone.utc).isoformat(),
+                               verified=True,
+                               name=name,
+                               tag=tag
+                               )
+                try:
+                    data.save()
+                    print("Member data inserted")
+                    self.context['error'] = False # noqa
+                except Exception as e:
+                    pass  # TODO
         else:
-            self.context['emailerror'] = False # noqa
-            self.context['verified'] = False
+            self.context['verified'] = False # noqa
+            self.context['emailerror'] = True # noqa
+
         return render(request, self.template_name, self.context)
 
 
 class DeveloperView(UtilityMixin, View):
     template_name = 'developers.html'
     model = Developers
+
     def get(self, request):
         self.context['Members'] = self.model.objects.all().order_by('-perks')[:20]
         self.get_blog_context()
@@ -141,10 +162,7 @@ class DeveloperView(UtilityMixin, View):
 
 class TemplateView(UtilityMixin, View):
     template_name = 'privacy.html'
+
     def get(self, request):
         self.get_generic_context()
         return render(request, self.template_name, self.context)
-
-
-
-

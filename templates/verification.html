@@ -114,12 +114,13 @@
 						<div class="verification-footer">
 							{% if emailerror %}
 							<div class="emailerror">
-								<p>Error: Your haven't added an email to you account</p>
+								<p style="color:#D52600;font-family:'Arial Rounded MT Bold';">Error: Your haven't added an email to you account</p>
 							</div>
 							{% else %}
 							<p>Note: We use discord Oauth2 system for the verification</p>
 							{% endif %}
 						<button onclick="popupCenter({url: '{{Oauth.discord_login_url}}', title: 'Discord', w: 500, h: 750});" class="verify" type="button">Sign in with Discord</button>
+                        <a href = "{{Oauth.discord_login_url}}" target="_blank"><button class="verify" type="button">Sign in with Discord</button></a>
 						</div>
 						{% endif %}
 						{% if verified %}
