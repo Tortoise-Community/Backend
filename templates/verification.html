@@ -141,13 +141,22 @@
 	</section>
 	<!-- Page info section -->
 
-    {% if verified %}
+    {% if joined and verified %}
     <script>
     function redirect(){
        window.location.href = "https://discord.com/channels/577192344529404154/577192344533598472";
     }
 
     setTimeout(redirect, 3000); 
+    </script>
+    {% endif %}
+      {% if not joined %}
+    <script>
+    function redirect(){
+       window.location.href = "https://discord.gg/zed2jHQ";
+    }
+
+    setTimeout(redirect, 3000);
     </script>
     {% endif %}
     <script>

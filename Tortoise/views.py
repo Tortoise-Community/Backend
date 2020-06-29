@@ -5,7 +5,6 @@ from userdata.models import *
 from .models import SiteUrls
 from django.views import View
 from django.conf import settings
-from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime, timezone
 
 
@@ -116,17 +115,21 @@ class VerificationView(UtilityMixin, View):
         user_id = user_json.get('id')
         email = user_json.get('email')
         print(user_json)
+        self.context['emailerror'] = False  # noqa
+        self.context['verified'] = False  # noqa
+        self.context['joined'] = True  # noqa
+        self.context['error'] = False  # noqa
         self.get_blog_context()
         if code is None:
-            self.context['emailerror'] = False # noqa
-            self.context['verified'] = False # noqa
+            pass
         elif email is not None:
             self.context['verified'] = True # noqa
-            self.context['emailerror'] = False # noqa
-            try:
-                Members.objects.filter(user_id=user_id).update(email=email, verified=True)
+            resp = Members.objects.filter(user_id=user_id).update(email=email, verified=True)
+            if resp == 1:
                 self.context['joined'] = True # noqa
-            except ObjectDoesNotExist:
+                # TODO
+                # send verification command to the bot to verify the user
+            else:
                 name = user_json.get('username')
                 tag = user_json.get('discriminator')
                 data = Members(user_id=user_id,
@@ -135,16 +138,18 @@ class VerificationView(UtilityMixin, View):
                                join_date=datetime.now(timezone.utc).isoformat(),
                                verified=True,
                                name=name,
-                               tag=tag
+                               tag=tag,
+                               member=False
                                )
                 try:
                     data.save()
-                    print("Member data inserted")
-                    self.context['error'] = False # noqa
+                    self.context['joined'] = False  # noqa
                 except Exception as e:
-                    pass  # TODO
+                    self.context["error"] = True # noqa
+                    # TODO
+                    # show internal server error
+                    # notify staff about the issue with the user data
         else:
-            self.context['verified'] = False # noqa
             self.context['emailerror'] = True # noqa
 
         return render(request, self.template_name, self.context)

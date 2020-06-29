@@ -11,7 +11,7 @@ PORT = 15555
 def SocketSend(payload):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.connect((SERVER, PORT))
-    auth = {"auth":SERVER_TOKEN}
+    auth = {"auth": SERVER_TOKEN}
     auth = json.dumps(auth)
     server.send(auth.encode('utf-8'))
     payload = json.dumps(payload)

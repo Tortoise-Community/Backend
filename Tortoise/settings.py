@@ -68,7 +68,7 @@ DEFAULT_HOST = 'www'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,7 +128,7 @@ REST_FRAMEWORK = {
 
         'rest_framework.authentication.TokenAuthentication',
     ),
-    'DEFAULT_PERMISSION_CLASSES':(
+    'DEFAULT_PERMISSION_CLASSES': (
 
         'rest_framework.permissions.IsAuthenticated',
 
@@ -138,7 +138,6 @@ REST_FRAMEWORK = {
     )
 
 }
-
 
 
 # Internationalization
@@ -159,9 +158,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
-STATIC_ROOT = os.path.join(BASE_DIR,'assets')
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
@@ -179,8 +178,7 @@ EMAIL_USE_TLS = True
 BOT_SOCKET_IP = env('BOT_SOCKET_IP')
 BOT_SOCKET_PORT = env('BOT_SOCKET_PORT')
 BOT_SOCKET_TOKEN = env('BOT_SOCKET_TOKEN')
-SERVER_ID = 577192344529404154
 OAUTH_CLIENT_ID = env('OAUTH_CLIENT_ID')
 OAUTH_CLIENT_SECRET = env('OAUTH_CLIENT_SECRET')
 GITHUB_ACCESS_TOKEN = env('GITHUB_ACCESS_TOKEN')
-
+SERVER_ID = 577192344529404154

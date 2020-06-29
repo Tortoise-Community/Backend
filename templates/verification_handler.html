@@ -8,15 +8,15 @@
 <script>
     function setParam()
     {
-        var url_string = window.location.href;
-        var url = new URL(url_string);
-        var code = url.searchParams.get("code");
+        let url_string = window.location.href;
+        let url = new URL(url_string);
+        let code = url.searchParams.get("code");
         {#var param = (`https://www.tortoisecommunity.ml/verification/?code=${code}`);#}
-        var param = (`http://127.0.0.1:8000/verification/?code=${code}`);
+        let param = (`http://127.0.0.1:8000/verification/?code=${code}`);
         window.opener.location.replace(param);
         window.close();
     }
-    setTimeout(setParam,0000);
+    setTimeout(setParam,0);
 </script>
 </body>
 </html>

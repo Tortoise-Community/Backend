@@ -20,11 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f1a8ab6-c2f1-4915-b506-15a16244c25e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tortoise/discord_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/discord_handler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tortoise/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tortoise/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/verification.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/verification.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/verification_handler.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/verification_handler.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +114,7 @@
       <workItem from="1593131222231" duration="26452000" />
       <workItem from="1593354703724" duration="9044000" />
       <workItem from="1593408925164" duration="8250000" />
-      <workItem from="1593441131206" duration="513000" />
+      <workItem from="1593441131206" duration="9260000" />
     </task>
     <servers />
   </component>
