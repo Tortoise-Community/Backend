@@ -6,6 +6,12 @@ from .models import SiteUrls
 from django.views import View
 from django.conf import settings
 from datetime import datetime, timezone
+from utils.handlers import SocketHandler
+
+
+botsocket = SocketHandler(settings.BOT_SOCKET_IP,
+                          int(settings.BOT_SOCKET_PORT),
+                          settings.BOT_SOCKET_TOKEN)
 
 
 class UtilityMixin(object):
@@ -129,6 +135,7 @@ class VerificationView(UtilityMixin, View):
                 self.context['joined'] = True # noqa
                 # TODO
                 # send verification command to the bot to verify the user
+                botsocket.verify(user_id)
             else:
                 name = user_json.get('username')
                 tag = user_json.get('discriminator')

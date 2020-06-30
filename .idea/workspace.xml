@@ -21,11 +21,12 @@
   <component name="ChangeListManager">
     <list default="true" id="5f1a8ab6-c2f1-4915-b506-15a16244c25e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tortoise/discord_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/discord_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tortoise/contact.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/contact.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tortoise/discord_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/handlers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tortoise/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tortoise/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/verification.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/verification.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/verification_handler.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/verification_handler.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/credits.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/credits.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/event.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/event.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,24 +57,48 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/test.py" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Vaishnav\Tortoise-Community\Website\utils" />
       <recent name="C:\Users\Ryuga\Tortoise-Community\Website\Refactor\Website\utils" />
       <recent name="C:\Users\Ryuga\Tortoise-Community\Website\Refactor\Website" />
       <recent name="C:\Users\Ryuga\Tortoise-Community\Website\Refactor\Website\Tortoise" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.test">
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Website" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Website" type="Python.DjangoServer" factoryName="Django server">
       <module name="Website" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="Tortoise.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -91,6 +116,11 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.test" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -114,7 +144,8 @@
       <workItem from="1593131222231" duration="26452000" />
       <workItem from="1593354703724" duration="9044000" />
       <workItem from="1593408925164" duration="8250000" />
-      <workItem from="1593441131206" duration="9260000" />
+      <workItem from="1593441131206" duration="12249000" />
+      <workItem from="1593490036189" duration="19681000" />
     </task>
     <servers />
   </component>
@@ -134,10 +165,30 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1593022688530">
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1593454776347">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593022688530" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593454776347" />
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1593514485843">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593514485843" />
+    <state width="1877" height="275" key="GridCell.Tab.0.bottom" timestamp="1593514676460">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="275" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593514676460" />
+    <state width="1877" height="275" key="GridCell.Tab.0.center" timestamp="1593514676460">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="275" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593514676460" />
+    <state width="1877" height="275" key="GridCell.Tab.0.left" timestamp="1593514676460">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="275" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593514676460" />
+    <state width="1877" height="275" key="GridCell.Tab.0.right" timestamp="1593514676460">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="275" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593514676460" />
     <state x="461" y="164" key="SettingsEditor" timestamp="1593410235804">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -150,5 +201,8 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593414237879" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Website$test.coverage" NAME="test Coverage Results" MODIFIED="1593514553074" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$" />
   </component>
 </project>
