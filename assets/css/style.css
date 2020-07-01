@@ -1670,7 +1670,7 @@ ol {
 	background-color: rgb(0,0,0); /* Fallback color */
 	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
-  
+
   /* poppup Content */
   .poppup-content {
 	background-color:#7289da;
@@ -1694,7 +1694,7 @@ ol {
 	font-size: 30px;
 	font-weight: bold;
   }
-  
+
   .close:hover,
   .close:focus {
 	color: #000;
@@ -1769,7 +1769,7 @@ ol {
 	font-family: Lilita One;
 }
 .blurcard{
-	background-color: rgba(255, 255, 255, .10);  
+	background-color: rgba(255, 255, 255, .10);
 	backdrop-filter: blur(15px);
 }
 .centerpiece
@@ -1780,18 +1780,18 @@ ol {
 }
 
 .verification{
-	position: relative; 
+	position: relative;
 	top: 25%;
 	margin-left: auto;
 	margin-right: auto;
 	min-width: 300px;
-	width: 23%; 
-	height: 60%; 
+	width: 23%;
+	height: 60%;
 	background: #1a1a1a;
 	border-radius: 20px;
 	box-shadow: 0 0 30px 0 #333;
 	max-height: 400px;
-} 
+}
 .verification-wrapper{
 	padding: 2px 5px;
 }
@@ -1839,7 +1839,7 @@ ol {
 	padding: 5px 5px;
 }
 .emailerror{
-	background-color:  rgba(255, 255, 255, .15);  
+	background-color:  rgba(255, 255, 255, .15);
 	backdrop-filter: blur(5px);
 	color: #131313;
 	text-align: center;
@@ -1859,7 +1859,7 @@ ol {
 	background-color: #f0f3f4;
 	padding: 20px 30px;
 	font-weight: bold;
-	
+
 }
 
 .change-log
@@ -1875,6 +1875,6 @@ ol {
 	background-color:  #eaeaea;
 	padding: 20px 30px;
 	font-family: 'Roboto', sans-serif !important;
-	
-	
+
+
 }

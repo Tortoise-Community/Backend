@@ -14,9 +14,7 @@
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Chewy|Lilita+One|Oxanium&display=swap" rel="stylesheet">
-		
-	
-	
+
 		<!-- Stylesheets -->
 		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
 		<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
@@ -116,12 +114,20 @@
 							<div class="emailerror">
 								<p style="color:#D52600;font-family:'Arial Rounded MT Bold';">Error: Your haven't added an email to you account</p>
 							</div>
+							{% elif error %}
+							<div class="emailerror">
+								<p style="color:#D52600;font-family:'Arial Rounded MT Bold';">Internal Server Error :( <br>We have notified staffs they'll get in touch with you.</p>
+							</div>
 							{% else %}
 							<p>Note: We use discord Oauth2 system for the verification</p>
 							{% endif %}
-						<button onclick="popupCenter({url: '{{Oauth.discord_login_url}}', title: 'Discord', w: 500, h: 750});" class="verify" type="button">Sign in with Discord</button>
-                        <a href = "{{Oauth.discord_login_url}}" target="_blank"><button class="verify" type="button">Sign in with Discord</button></a>
-						</div>
+                          <div class="signin1">
+						    <button class="signinbutton1 verify" onclick="popupCenter({url: '{{Oauth.discord_login_url}}', title: 'Discord', w: 500, h: 750});" class="" type="button">Sign in with Discord</button>
+                          </div>
+                          <div class="signin2" style="display: none;">
+                            <a class="signinbutton2" href = "{{Oauth.discord_login_url}}" target="_blank"><button class="verify" type="button">Sign in with Discord</button></a>
+                          </div>
+                        </div>
 						{% endif %}
 						{% if verified %}
 						<fieldset>
@@ -150,7 +156,8 @@
     setTimeout(redirect, 3000); 
     </script>
     {% endif %}
-      {% if not joined %}
+
+    {% if not joined %}
     <script>
     function redirect(){
        window.location.href = "https://discord.gg/zed2jHQ";
@@ -182,7 +189,7 @@
     )
 
     if (window.focus) newWindow.focus();
-}
+     }
     </script>
 
 	<footer class="footer-section">

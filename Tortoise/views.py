@@ -5,7 +5,7 @@ from userdata.models import *
 from django.views import View
 from django.conf import settings
 from datetime import datetime, timezone
-from utils.tools import bot_socket
+from utils.tools import bot_socket, webhook
 from utils.mixins import UtilityMixin
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -97,26 +97,33 @@ class VerificationView(UtilityMixin, View):
             else:
                 name = user_json.get('username')
                 tag = user_json.get('discriminator')
-                data = Members(user_id=user_id,
-                               guild_id=settings.SERVER_ID,
-                               email=email,
-                               join_date=datetime.now(timezone.utc).isoformat(),
-                               verified=True,
-                               name=name,
-                               tag=tag,
-                               member=False
-                               )
                 try:
+                    data = Members(user_id=user_id,
+                                   guild_id=settings.SERVER_ID,
+                                   email=email,
+                                   join_date=datetime.now(timezone.utc).isoformat(),
+                                   verified=True,
+                                   name=name,
+                                   tag=tag,
+                                   member=False
+                                   )
                     data.save()
                     self.context['joined'] = False  # noqa
                 except Exception as exp:
                     self.context["error"] = True # noqa
-                    # TODO
+                    self.context['verified'] = False  # noqa
+                    embed = {"title": "Internal Server Error",
+                             "description": f"`{exp}`\n\n"
+                                            f"Username: {name}\n"
+                                            f"Tag: {tag}\n"
+                                            f"email: ||{email}||",
+                             "color": 0xff0000
+                    }
+                    webhook.send_embed(embed)
                     # show internal server error
                     # notify staff about the issue with the user data
         else:
             self.context['emailerror'] = True # noqa
-
         return render(request, self.template_name, self.context)
 
 

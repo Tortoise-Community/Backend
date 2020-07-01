@@ -19,6 +19,7 @@ class WebhookHandler:
         self.url = "https://discordapp.com/api/webhooks/{}/{}".format(self.webhook_id, self.secret)
 
     def _send_to_webhook(self, payload):
+        print(payload)
         payload = json.dumps(payload)
         try:
             self.resp = requests.post(url=self.url, headers=self.headers, data=payload)
@@ -26,12 +27,12 @@ class WebhookHandler:
             log_error(exp, payload)
             pass
 
-    def send_embed(self, **kwargs):
-        payload = json.dumps({'embeds': [kwargs]})
+    def send_embed(self, payload: dict):
+        payload = {"embeds": [payload]}
         self._send_to_webhook(payload)
 
-    def send_message(self, message):
-        payload = json.dumps({'content': message})
+    def send_message(self, message: str):
+        payload = {'content': message}
         self._send_to_webhook(payload)
 
 
