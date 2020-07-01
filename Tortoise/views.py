@@ -2,66 +2,12 @@ from django.shortcuts import render
 from websitedata.models import *
 from utils.oauth import Oauth
 from userdata.models import *
-from .models import SiteUrls
 from django.views import View
 from django.conf import settings
 from datetime import datetime, timezone
-from utils.handlers import SocketHandler
-
-
-botsocket = SocketHandler(settings.BOT_SOCKET_IP,
-                          int(settings.BOT_SOCKET_PORT),
-                          settings.BOT_SOCKET_TOKEN)
-
-
-class UtilityMixin(object):
-    context = {}
-    siteurls = SiteUrls # noqa
-    news = News.objects.all()
-    team = Team.objects.all()
-    slider = Slider.objects.all()
-    events = Events.objects.all()
-    privacy = Privacy.objects.all()
-    changes = Changes.objects.all()
-    rules = Rules.objects.all().order_by('number')[1:]
-
-    def get_main_context(self):
-        self.context['slides'] = self.slider
-        self.get_common_context()
-        self.get_category_events()
-        return self.context
-
-    def get_events_context(self):
-        self.context['events'] = self.events.filter(status__in=['Live', 'Ended']).order_by('-id')
-        self.get_upcoming_context()
-        self.get_common_context()
-        return self.context
-
-    def get_upcoming_context(self):
-        self.context['upcoming'] = self.events.filter(status='Upcoming')[:2]
-        return self.context
-
-    def get_category_events(self):
-        self.context['levents'] = self.events.filter(status='Live')[:2] # noqa
-        self.context['revents'] = self.events.filter(status='Ended')[:3] # noqa
-        self.get_upcoming_context()
-        return self.context
-
-    def get_common_context(self):
-        self.context["team"] = self.team
-        self.context["siteurls"] = self.siteurls # noqa
-        self.context["news"] = self.news
-        return self.context
-
-    def get_blog_context(self):
-        self.context["siteurls"] = self.siteurls  # noqa
-        return self.context
-
-    def get_generic_context(self):
-        self.context["privacy"] = self.privacy
-        self.context['rules'] = self.rules
-        self.context['changes'] = self.changes
-        self.get_blog_context()
+from utils.tools import bot_socket
+from utils.mixins import UtilityMixin
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class ProjectView(UtilityMixin, View):
@@ -130,12 +76,24 @@ class VerificationView(UtilityMixin, View):
             pass
         elif email is not None:
             self.context['verified'] = True # noqa
-            resp = Members.objects.filter(user_id=user_id).update(email=email, verified=True)
-            if resp == 1:
-                self.context['joined'] = True # noqa
-                # TODO
-                # send verification command to the bot to verify the user
-                botsocket.verify(user_id)
+            try:
+                member_obj = Members.objects.get(user_id=user_id)
+            except ObjectDoesNotExist:
+                member_obj = None
+            # checks if member oject exits (joined the server)
+            if member_obj:
+                # check if the member is already verified
+                if getattr(member_obj, "verified") is True:
+                    message = ("You are already vefified.\nIf you still can't send messages to the server, please " 
+                               "reply to this message with 'M' and choose Mod mail (contact staff) option by reacting "  
+                               "to the corresponding button.\n\nThank you!")
+                    bot_socket.dm_user(int(user_id), message=message)
+                # if member is not verified, do verification
+                else:
+                    member_obj.update(email=email, verified=True)
+                    self.context['joined'] = True  # noqa
+                    bot_socket.verify(user_id)
+            # member object does not exist, so adding member
             else:
                 name = user_json.get('username')
                 tag = user_json.get('discriminator')
@@ -151,7 +109,7 @@ class VerificationView(UtilityMixin, View):
                 try:
                     data.save()
                     self.context['joined'] = False  # noqa
-                except Exception as e:
+                except Exception as exp:
                     self.context["error"] = True # noqa
                     # TODO
                     # show internal server error

@@ -1,5 +1,12 @@
 import socket
 import json
+import requests
+
+
+def log_error(a, b):
+    print(a, b)
+    pass
+
 
 class WebhookHandler:
 
@@ -17,6 +24,7 @@ class WebhookHandler:
             self.resp = requests.post(url=self.url, headers=self.headers, data=payload)
         except Exception as exp:
             log_error(exp, payload)
+            pass
 
     def send_embed(self, **kwargs):
         payload = json.dumps({'embeds': [kwargs]})
@@ -28,7 +36,6 @@ class WebhookHandler:
 
 
 class SocketHandler:
-
     def __init__(self, socket_ip: str, port: int, token=None):
         self.socket_ip = socket_ip
         self.port = port
@@ -41,8 +48,7 @@ class SocketHandler:
         try:
             self.server.connect((self.socket_ip, self.port))
         except socket.error as error:
-            # log_error(error, self.server)
-            print(error)
+            log_error(error, self.server)
             pass
 
     def _send_to_server(self, payload: dict):
@@ -52,24 +58,22 @@ class SocketHandler:
             self.response = self.server.recv(2000).decode('unicode_escape')
             print("Sent", payload)
         except socket.error as error:
-            # log_error(error, self.server)
-            print(error)
+            log_error(error, self.server)
             pass
         return self.response
-
-    def _auth(self):
-        data = {"auth": self.token}
-        self._send_to_server(data)
 
     def _kill(self):
         try:
             self.server.close()
         except socket.error as error:
-            # log_error(error, self.server)
-            print(error)
+            log_error(error, self.server)
             pass
 
-    def _safe_packet_transfer(self, packet):
+    def _auth(self):
+        data = {"auth": self.token}
+        self._send_to_server(data)
+
+    def _safe_packet_transfer(self, packet: dict):
         self._connect()
         self._auth()
         status_resp = json.loads(self._send_to_server(packet))
@@ -81,10 +85,28 @@ class SocketHandler:
         resp = self._safe_packet_transfer(payload)
         print(resp["status"]["code"])
 
-    def dm_user(self, member_id, message):
+    def signal(self, sock_endpoint: str):
+        payload = {"endpoint": "signal", "data": sock_endpoint}
+        self._safe_packet_transfer(payload)
+
+    def dm_user(self, member_id: int, message: str):
         payload = {"endpoint": "send",
                    "data": {"user_id": member_id,
                             "message": message
                             }
                    }
+        self._safe_packet_transfer(payload)
 
+    def send_to_channel(self, channel_id: int, message: str):
+        payload = {"endpoint": "send",
+                   "data": {"user_id": channel_id,
+                            "message": message
+                            }
+                   }
+        self._safe_packet_transfer(payload)
+
+    def send_contact_data(self, data: dict):
+        payload = {"endpoint": "contact",
+                   "data": data
+                   }
+        self._safe_packet_transfer(payload)

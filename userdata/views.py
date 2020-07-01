@@ -277,6 +277,3 @@ def member_meta(request,id):
             return JsonResponse(serializer.data,status=200)   
         else:
          return JsonResponse(serializer.errors,status =400)         	
-	    
-    
-          
