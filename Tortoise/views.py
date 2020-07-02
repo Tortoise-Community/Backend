@@ -1,13 +1,16 @@
-from django.shortcuts import render
-from websitedata.models import *
-from utils.oauth import Oauth
-from userdata.models import *
+from datetime import datetime, timezone
+
 from django.views import View
 from django.conf import settings
-from datetime import datetime, timezone
-from utils.tools import bot_socket, webhook
-from utils.mixins import UtilityMixin
+from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
+
+from utils.oauth import Oauth
+from utils.mixins import UtilityMixin
+from utils.tools import bot_socket, webhook
+
+from websitedata.models import Events
+from userdata.models import Developers, Projects, Members
 
 
 class ProjectView(UtilityMixin, View):
@@ -97,6 +100,7 @@ class VerificationView(UtilityMixin, View):
             else:
                 name = user_json.get('username')
                 tag = user_json.get('discriminator')
+                # trys to add member to the database
                 try:
                     data = Members(user_id=user_id,
                                    guild_id=settings.SERVER_ID,
@@ -109,6 +113,7 @@ class VerificationView(UtilityMixin, View):
                                    )
                     data.save()
                     self.context['joined'] = False  # noqa
+                # if exception occurs, shows internal server error
                 except Exception as exp:
                     self.context["error"] = True # noqa
                     self.context['verified'] = False  # noqa
@@ -118,10 +123,9 @@ class VerificationView(UtilityMixin, View):
                                             f"Tag: {tag}\n"
                                             f"email: ||{email}||",
                              "color": 0xff0000
-                    }
+                             }
+                    # alerts staff using websockets
                     webhook.send_embed(embed)
-                    # show internal server error
-                    # notify staff about the issue with the user data
         else:
             self.context['emailerror'] = True # noqa
         return render(request, self.template_name, self.context)

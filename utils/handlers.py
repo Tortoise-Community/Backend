@@ -19,7 +19,6 @@ class WebhookHandler:
         self.url = "https://discordapp.com/api/webhooks/{}/{}".format(self.webhook_id, self.secret)
 
     def _send_to_webhook(self, payload):
-        print(payload)
         payload = json.dumps(payload)
         try:
             self.resp = requests.post(url=self.url, headers=self.headers, data=payload)
