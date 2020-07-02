@@ -62,14 +62,20 @@ class VerificationView(UtilityMixin, View):
     verified = False
     template_name = 'verification.html'
     context = {"Oauth": Oauth}
+    user_json = None
+    access_token = None
+    user_id = None
+    email = None
 
     def get(self, request):
         code = request.GET.get('code')
-        access_token = Oauth.get_access_token(code)
-        user_json = Oauth.get_user_json(access_token)
-        user_id = user_json.get('id')
-        email = user_json.get('email')
-        print(user_json)
+        self.email = None
+        if code is not None:
+            self.access_token = Oauth.get_access_token(code)
+            self.user_json = Oauth.get_user_json(self.access_token)
+            self.user_id = self.user_json.get('id')
+            self.email = self.user_json.get('email')
+        # print(self.user_json)
         self.context['emailerror'] = False  # noqa
         self.context['verified'] = False  # noqa
         self.context['joined'] = True  # noqa
@@ -77,10 +83,10 @@ class VerificationView(UtilityMixin, View):
         self.get_blog_context()
         if code is None:
             pass
-        elif email is not None:
+        elif self.email is not None:
             self.context['verified'] = True # noqa
             try:
-                member_obj = Members.objects.get(user_id=user_id)
+                member_obj = Members.objects.get(user_id=self.user_id)
             except ObjectDoesNotExist:
                 member_obj = None
             # checks if member oject exits (joined the server)
@@ -90,21 +96,21 @@ class VerificationView(UtilityMixin, View):
                     message = ("You are already vefified.\nIf you still can't send messages to the server, please " 
                                "reply to this message with 'M' and choose Mod mail (contact staff) option by reacting "  
                                "to the corresponding button.\n\nThank you!")
-                    bot_socket.dm_user(int(user_id), message=message)
+                    bot_socket.dm_user(int(self.user_id), message=message)
                 # if member is not verified, do verification
                 else:
-                    member_obj.update(email=email, verified=True)
+                    Members.objects.filter(user_id=self.user_id).update(email=self.email, verified=True)
                     self.context['joined'] = True  # noqa
-                    bot_socket.verify(user_id)
+                    bot_socket.verify(self.user_id)
             # member object does not exist, so adding member
             else:
-                name = user_json.get('username')
-                tag = user_json.get('discriminator')
+                name = self.user_json.get('username')
+                tag = self.user_json.get('discriminator')
                 # trys to add member to the database
                 try:
-                    data = Members(user_id=user_id,
+                    data = Members(user_id=self.user_id,
                                    guild_id=settings.SERVER_ID,
-                                   email=email,
+                                   email=self.email,
                                    join_date=datetime.now(timezone.utc).isoformat(),
                                    verified=True,
                                    name=name,
@@ -121,7 +127,7 @@ class VerificationView(UtilityMixin, View):
                              "description": f"`{exp}`\n\n"
                                             f"Username: {name}\n"
                                             f"Tag: {tag}\n"
-                                            f"email: ||{email}||",
+                                            f"email: ||{self.email}||",
                              "color": 0xff0000
                              }
                     # alerts staff using websockets

@@ -23,6 +23,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tortoise/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tools.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +147,8 @@
       <workItem from="1593544040030" duration="4860000" />
       <workItem from="1593590212620" duration="24672000" />
       <workItem from="1593630926187" duration="3130000" />
-      <workItem from="1593660558601" duration="2776000" />
+      <workItem from="1593660558601" duration="4381000" />
+      <workItem from="1593694817248" duration="9167000" />
     </task>
     <servers />
   </component>

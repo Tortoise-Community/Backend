@@ -1,11 +1,21 @@
 import socket
+import logging
+
 import json
 import requests
 
+from django.conf import settings
 
-def log_error(a, b):
-    print(a, b)
-    pass
+logger = logging.getLogger("Generic Logger")
+logger.setLevel(level=logging.DEBUG)
+formatter = logging.Formatter('%(levelname)s:%(asctime)s:%(message)s')
+fileHandler = logging.FileHandler(filename="error.log")
+fileHandler.setFormatter(formatter)
+logger.addHandler(fileHandler)
+
+
+def log_error(exp, msg):
+    logger.debug(f"{exp} raised on activity {msg}")
 
 
 class WebhookHandler:
@@ -24,15 +34,18 @@ class WebhookHandler:
             self.resp = requests.post(url=self.url, headers=self.headers, data=payload)
         except Exception as exp:
             log_error(exp, payload)
-            pass
 
     def send_embed(self, payload: dict):
         payload = {"embeds": [payload]}
         self._send_to_webhook(payload)
 
     def send_message(self, message: str):
-        payload = {'content': message}
+        payload = {"content": message}
         self._send_to_webhook(payload)
+
+
+sock_hook = WebhookHandler(settings.WEBHOOK_ID,
+                           settings.WEBHOOK_SECRET)
 
 
 class SocketHandler:
@@ -49,17 +62,17 @@ class SocketHandler:
             self.server.connect((self.socket_ip, self.port))
         except socket.error as error:
             log_error(error, self.server)
-            pass
 
     def _send_to_server(self, payload: dict):
         payload = json.dumps(payload)
         try:
             self.server.send(payload.encode('utf-8'))
             self.response = self.server.recv(2000).decode('unicode_escape')
-            print("Sent", payload)
-        except socket.error as error:
-            log_error(error, self.server)
-            pass
+        except Exception as exp:
+            data = {"title": "Socket Error", "description": f"Error: {exp}\n"
+                                                            f"Payload: {payload}"}
+            sock_hook.send_embed(data)
+            log_error(exp, self.server)
         return self.response
 
     def _kill(self):
@@ -67,7 +80,6 @@ class SocketHandler:
             self.server.close()
         except socket.error as error:
             log_error(error, self.server)
-            pass
 
     def _auth(self):
         data = {"auth": self.token}
