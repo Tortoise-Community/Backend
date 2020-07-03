@@ -38,12 +38,12 @@ class UtilityMixin(object):
 
     def get_common_context(self):
         self.context["team"] = self.team
-        self.context["siteurls"] = self.siteurls # noqa
+        self.context["siteurls"] = self.siteurls
         self.context["news"] = self.news
         return self.context
 
     def get_blog_context(self):
-        self.context["siteurls"] = self.siteurls  # noqa
+        self.context["siteurls"] = self.siteurls
         return self.context
 
     def get_generic_context(self):

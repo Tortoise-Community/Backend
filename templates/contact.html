@@ -327,12 +327,12 @@
 						<div class="footer-widget">
 							<h4 class="fw-title">Team Tortoise</h4>
 							<div class="top-comment">
-								{% for T in Team %}
+								{% for t in team %}
 								<div class="tc-item">
-									<div class="tc-thumb set-bg" data-setbg="{{T.profilepic.url}}"></div>
+									<div class="tc-thumb set-bg" data-setbg="{{t.profilepic.url}}"></div>
 									<div class="tc-content">
-										<p><a href="#">{{T.name}}</a><br><span>Designation: </span>{{T.designation}}</p>
-										<p><span>Nickname: </span> <a class="tc-date">{{T.nickname}}</a></p>
+										<p><a href="#">{{t.name}}</a><br><span>Designation: </span>{{t.designation}}</p>
+										<p><span>Nickname: </span> <a class="tc-date">{{t.nickname}}</a></p>
 									</div>
 								</div>
 								{% endfor %}

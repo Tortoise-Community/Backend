@@ -8,6 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from utils.oauth import Oauth
 from utils.mixins import UtilityMixin
 from utils.tools import bot_socket, webhook
+from utils.handlers import EmailHandler
 
 from websitedata.models import Events
 from userdata.models import Developers, Projects, Members
@@ -59,8 +60,8 @@ class IndexView(UtilityMixin, View):
 
 class VerificationView(UtilityMixin, View):
 
-    verified = False
     template_name = 'verification.html'
+    verified = False
     context = {"Oauth": Oauth}
     user_json = None
     access_token = None
@@ -75,7 +76,6 @@ class VerificationView(UtilityMixin, View):
             self.user_json = Oauth.get_user_json(self.access_token)
             self.user_id = self.user_json.get('id')
             self.email = self.user_json.get('email')
-        # print(self.user_json)
         self.context['emailerror'] = False  # noqa
         self.context['verified'] = False  # noqa
         self.context['joined'] = True  # noqa
@@ -138,8 +138,8 @@ class VerificationView(UtilityMixin, View):
 
 
 class DeveloperView(UtilityMixin, View):
-    template_name = 'developers.html'
     model = Developers
+    template_name = 'developers.html'
 
     def get(self, request):
         self.context['Members'] = self.model.objects.all().order_by('-perks')[:20]
@@ -152,4 +152,28 @@ class TemplateView(UtilityMixin, View):
 
     def get(self, request):
         self.get_generic_context()
+        return render(request, self.template_name, self.context)
+
+
+class ContactView(UtilityMixin, View):
+    params = ['name', 'email', 'subject', 'othersub', 'username', 'tag',
+              'infraction-type', 'date', 'reason', 'sponsor-type', 'issue',
+              'server-name', 'server-topic', 'server-invite', 'message']
+    template_name = "contact.html"
+
+    def get(self, request):
+        self.get_common_context()
+        return render(request, self.template_name, self.context)
+
+    def post(self, request):
+        data = {}
+        self.get_common_context()
+        for param in self.params:
+            try:
+                value = request.POST[param]
+                if value != '':
+                    data[param] = value
+            except None:
+                pass
+        EmailHandler(recipient=data['email'], name=data['name'], subject=data['subject'], pre=True)
         return render(request, self.template_name, self.context)

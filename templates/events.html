@@ -139,20 +139,20 @@
 						<h4>Upcoming</h4>
 					</div>
 		
-					{% if Upcoming %}
+					{% if upcoming %}
 					<!-- widget --> 
-					{% for U in Upcoming %}
+					{% for u in upcoming %}
 					<div class="widget-item">
-						<div class="feature-item set-bg" data-setbg="{{U.coverimage.url}}">
-							{% if U.eventtype == 'CTF-Event' %}
+						<div class="feature-item set-bg" data-setbg="{{u.coverimage.url}}">
+							{% if u.eventtype == 'CTF-Event' %}
 							<span class="cata blue">CTF-Event</span>
 							{% else %}
 							<span class="cata green">CODING-CHALLENGE</span>
 							{% endif %}
 							<div class="fi-content text-white">
-								<h5><a href="#">{{U.name}}</a></h5>
-								<p>{{U.task}} </p>
-								<a href="#" class="fi-comment"><b>Host: <b>{{U.host}}</a>
+								<h5><a href="#">{{u.name}}</a></h5>
+								<p>{{u.task}} </p>
+								<a href="#" class="fi-comment"><b>Host: <b>{{u.host}}</a>
 							</div>
 						</div>
 					</div> 
