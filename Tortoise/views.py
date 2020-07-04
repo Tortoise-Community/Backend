@@ -36,13 +36,13 @@ class EventView(UtilityMixin, View):
     model = Events
     template_name = 'events.html'
     context = {}
-    def get(self, request, item_no=None):
 
+    def get(self, request, item_no=None):
         if item_no is not None:
             self.context = self.get_blog_context()
             self.template_name = 'event.html'
-            project = self.model.objects.get(pk=item_no)
-            self.context['event'] = project
+            event = self.model.objects.get(pk=item_no)
+            self.context['event'] = event
         else:
             self.get_events_context()
 

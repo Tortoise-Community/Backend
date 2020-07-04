@@ -23,18 +23,16 @@ from django.conf.urls.static import static
 
 urlpatterns = [
 
-    path('verification/', views.VerificationView.as_view()),
     path('', views.IndexView.as_view(), name='home'),
+    path('verification/', views.VerificationView.as_view()),
 
-    url(r'^pages/events/', views.EventView.as_view(), name='events'),
-    url(r'^pages/contact', views.ContactView.as_view(), name='contact'),
-
-    re_path(r'^pages/projects/(?P<id>[0-9]{1,3})', views.ProjectView.as_view()),
-    re_path(r'^pages/events/(?P<id>[0-9]{1,3})', views.EventView.as_view()),
+    re_path(r'^pages/projects/(?P<item_no>[0-9]{1,3})', views.ProjectView.as_view()),
+    re_path(r'^pages/events/(?P<item_no>[0-9]{1,3})', views.EventView.as_view()),
 
     url(r'^pages/projects/', views.ProjectView.as_view(), name='projects'),
     url(r'^pages/members', views.DeveloperView.as_view(), name='members'),
     url(r'^pages/events/', views.EventView.as_view(), name='events'),
+    url(r'^pages/contact', views.ContactView.as_view(), name='contact'),
 
     url(r'^pages/credits', views.TemplateView.as_view(template_name='credits.html'), name='credits'),
     url(r'^pages/privacy', views.TemplateView.as_view(template_name='privacy.html'), name='privacy'),

@@ -23,10 +23,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tortoise/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tortoise/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/contact.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/events.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/events.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/handlers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/mixins.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mixins.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/event.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/event.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +150,8 @@
       <workItem from="1593660558601" duration="4381000" />
       <workItem from="1593694817248" duration="9167000" />
       <workItem from="1593760412349" duration="1284000" />
-      <workItem from="1593786681044" duration="14820000" />
+      <workItem from="1593786681044" duration="16587000" />
+      <workItem from="1593849396907" duration="1368000" />
     </task>
     <servers />
   </component>
