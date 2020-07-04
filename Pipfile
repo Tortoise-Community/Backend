@@ -16,6 +16,7 @@ sockets = "*"
 pillow = "*"
 gunicorn = "*"
 flake8 = "*"
+markdown = "*"
 
 [requires]
 python_version = "3.8"

@@ -1,3 +1,179 @@
-from django.shortcuts import render
+from datetime import datetime, timezone
 
-# Create your views here.
+from django.views import View
+from django.conf import settings
+from django.shortcuts import render
+from django.core.exceptions import ObjectDoesNotExist
+
+from utils.oauth import Oauth
+from utils.mixins import UtilityMixin
+from utils.tools import bot_socket, webhook
+from utils.handlers import EmailHandler
+
+from websitedata.models import Events
+from userdata.models import Developers, Projects, Members
+
+
+class ProjectView(UtilityMixin, View):
+    model = Projects
+    template_name = 'projects.html'
+    context = {}
+
+    def get(self, request, item_no=None):
+        if item_no is not None:
+            self.context = self.get_blog_context()
+            self.template_name = 'project.html'
+            project = self.model.objects.get(pk=item_no)
+            self.context['project'] = project
+        else:
+            self.context = self.get_common_context()
+            self.context['projects'] = self.model.objects.all().order_by('id')
+
+        return render(request, self.template_name, self.context)
+
+
+class EventView(UtilityMixin, View):
+    model = Events
+    template_name = 'events.html'
+    context = {}
+
+    def get(self, request, item_no=None):
+        if item_no is not None:
+            self.context = self.get_blog_context()
+            self.template_name = 'event.html'
+            event = self.model.objects.get(pk=item_no)
+            self.context['event'] = event
+        else:
+            self.get_events_context()
+
+        return render(request, self.template_name, self.context)
+
+
+class IndexView(UtilityMixin, View):
+    template_name = 'index.html'
+    context = {}
+
+    def get(self, request):
+        self.get_main_context()
+        return render(request, self.template_name, self.context)
+
+
+class VerificationView(UtilityMixin, View):
+
+    template_name = 'verification.html'
+    verified = False
+    context = {"Oauth": Oauth}
+    user_json = None
+    access_token = None
+    user_id = None
+    email = None
+
+    def get(self, request):
+        code = request.GET.get('code')
+        self.email = None
+        if code is not None:
+            self.access_token = Oauth.get_access_token(code)
+            self.user_json = Oauth.get_user_json(self.access_token)
+            self.user_id = self.user_json.get('id')
+            self.email = self.user_json.get('email')
+        self.context['emailerror'] = False  # noqa
+        self.context['verified'] = False  # noqa
+        self.context['joined'] = True  # noqa
+        self.context['error'] = False  # noqa
+        self.get_blog_context()
+        if code is None:
+            pass
+        elif self.email is not None:
+            self.context['verified'] = True # noqa
+            try:
+                member_obj = Members.objects.get(user_id=self.user_id)
+            except ObjectDoesNotExist:
+                member_obj = None
+            # checks if member oject exits (joined the server)
+            if member_obj:
+                # check if the member is already verified
+                if getattr(member_obj, "verified") is True:
+                    message = ("You are already vefified.\nIf you still can't send messages to the server, please " 
+                               "reply to this message with 'M' and choose Mod mail (contact staff) option by reacting "  
+                               "to the corresponding button.\n\nThank you!")
+                    bot_socket.dm_user(int(self.user_id), message=message)
+                # if member is not verified, do verification
+                else:
+                    Members.objects.filter(user_id=self.user_id).update(email=self.email, verified=True)
+                    self.context['joined'] = True  # noqa
+                    bot_socket.verify(self.user_id)
+            # member object does not exist, so adding member
+            else:
+                name = self.user_json.get('username')
+                tag = self.user_json.get('discriminator')
+                # trys to add member to the database
+                try:
+                    data = Members(user_id=self.user_id,
+                                   guild_id=settings.SERVER_ID,
+                                   email=self.email,
+                                   join_date=datetime.now(timezone.utc).isoformat(),
+                                   verified=True,
+                                   name=name,
+                                   tag=tag,
+                                   member=False
+                                   )
+                    data.save()
+                    self.context['joined'] = False  # noqa
+                # if exception occurs, shows internal server error
+                except Exception as exp:
+                    self.context["error"] = True # noqa
+                    self.context['verified'] = False  # noqa
+                    embed = {"title": "Internal Server Error",
+                             "description": f"`{exp}`\n\n"
+                                            f"Username: {name}\n"
+                                            f"Tag: {tag}\n"
+                                            f"email: ||{self.email}||",
+                             "color": 0xff0000
+                             }
+                    # alerts staff using websockets
+                    webhook.send_embed(embed)
+        else:
+            self.context['emailerror'] = True # noqa
+        return render(request, self.template_name, self.context)
+
+
+class DeveloperView(UtilityMixin, View):
+    model = Developers
+    template_name = 'developers.html'
+
+    def get(self, request):
+        self.context['Members'] = self.model.objects.all().order_by('-perks')[:20]
+        self.get_blog_context()
+        return render(request, self.template_name, self.context)
+
+
+class TemplateView(UtilityMixin, View):
+    template_name = 'privacy.html'
+
+    def get(self, request):
+        self.get_generic_context()
+        return render(request, self.template_name, self.context)
+
+
+class ContactView(UtilityMixin, View):
+    params = ['name', 'email', 'subject', 'othersub', 'username', 'tag',
+              'infraction-type', 'date', 'reason', 'sponsor-type', 'issue',
+              'server-name', 'server-topic', 'server-invite', 'message']
+    template_name = "contact.html"
+
+    def get(self, request):
+        self.get_common_context()
+        return render(request, self.template_name, self.context)
+
+    def post(self, request):
+        data = {}
+        self.get_common_context()
+        for param in self.params:
+            try:
+                value = request.POST[param]
+                if value != '':
+                    data[param] = value
+            except None:
+                pass
+        EmailHandler(recipient=data['email'], name=data['name'], subject=data['subject'], pre=True)
+        return render(request, self.template_name, self.context)
