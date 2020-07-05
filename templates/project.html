@@ -68,27 +68,10 @@
 
 
 
-
-
-	<!-- Page info section -->
-	<section class="page-info-section set-bg" data-setbg="{{siteurls.img3}}">
-		<div class="pi-content">
-			<div class="container">
-				<div class="row">
-					<div class="col-xl-5 col-lg-6 text-white blurcard">
-						<h2  >{{project.name}}</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Page info section -->
-
-
 	<!-- Page section -->
-	<section class="page-section single-blog-page spad">
+	<section class="page-section single-blog-page spad outertint">
 		<div class="container">
-			<div class="row gittint">
+			<div class="row innertint">
 
 					<div style="align-items: left;padding:4px 4px;">
 						    <div class="fas fa-history git"><span class="change-font"> Commits {{project.commits}}</span></div>
@@ -103,9 +86,10 @@
 					</div>
 
 					<div class="blog-content" >
-						<h4>{{project.label}}</h4>
 						<a href="" class="meta-comment"></a>
-						<pre style="font-family:Verdana, Geneva, Tahoma,bold, sans-serif;color:white;">{{project.brief}}</pre>
+						{% load markdown_extras %}
+
+                        {{ project.brief | markdown | safe }}
 					</div>
 				</div>
 			</div>

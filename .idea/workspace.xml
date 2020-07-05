@@ -20,7 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f1a8ab6-c2f1-4915-b506-15a16244c25e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/websitedata/templatetags/markdown_extras.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tortoise/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tortoise/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/contact.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/event.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/event.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/project.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/project.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/verification.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/verification.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/websitedata/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/websitedata/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +157,7 @@
       <workItem from="1593760412349" duration="1284000" />
       <workItem from="1593786681044" duration="16587000" />
       <workItem from="1593849396907" duration="3259000" />
-      <workItem from="1593930736805" duration="3375000" />
+      <workItem from="1593930736805" duration="25904000" />
     </task>
     <servers />
   </component>

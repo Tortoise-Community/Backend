@@ -103,11 +103,12 @@
 							<legend visible="true" style="width:auto;"><h5>Permissions required</h5></legend>
 						<div class="verification-bottom">
 							<ul>
-								<li>Access your email</li>
-								<li>Access username</li>
-								<li>Access avatar</li>
+								<li>Store your username</li>
+								<li>Store your discord avatar</li>
+								<li>Store your email address</li>
 							</ul>
 						</div>
+
 						</fieldset>
 						<div class="verification-footer">
 							{% if emailerror %}
@@ -119,13 +120,10 @@
 								<p style="color:#D52600;font-family:'Arial Rounded MT Bold';">Internal Server Error :( <br>We have notified staffs they'll get in touch with you.</p>
 							</div>
 							{% else %}
-							<p>Note: We use discord Oauth2 system for the verification</p>
+							<p>Read our <a href="{% url 'privacy' %}">Privacy </a>&<a href="{% url 'rules' %}"> Rules</a> to see why this is necessary</p>
 							{% endif %}
                           <div class="signin1">
 						    <button class="signinbutton1 verify" onclick="popupCenter({url: '{{Oauth.discord_login_url}}', title: 'Discord', w: 500, h: 750});" class="" type="button">Sign in with Discord</button>
-                          </div>
-                          <div class="signin2" style="display: none;">
-                            <a class="signinbutton2" href = "{{Oauth.discord_login_url}}" target="_blank"><button class="verify" type="button">Sign in with Discord</button></a>
                           </div>
                         </div>
 						{% endif %}

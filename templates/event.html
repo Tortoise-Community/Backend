@@ -12,6 +12,7 @@
 	<link href="{% static 'img/real.ico' %}" rel="shortcut icon">
 
 
+
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Chewy|Lilita+One&display=swap" rel="stylesheet">
@@ -22,6 +23,13 @@
 	<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}"/>
 	<link rel="stylesheet" href="{% static 'css/style.css' %}"/>
 	<link rel="stylesheet" href="{% static 'css/animate.css' %}"/>
+{#    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/atom-one-dark.min.css">#}
+{#    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/dracula.min.css">#}
+{#<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/atom-one-dark-reasonable.min.css">#}
+{#<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/night-owl.min.css">#}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/{{style}}">
+
+
 
 
 	<!--[if lt IE 9]>
@@ -64,9 +72,6 @@
 	<!-- Header section end -->
 
 
-
-
-
 	<!-- Page info section -->
 	<section class="page-info-section set-bg" data-setbg="{{siteurls.img1}}">
 		<div class="pi-content">
@@ -89,7 +94,7 @@
 	<!-- Page section -->
 	<section class="page-section single-blog-page spad">
 		<div class="container">
-			<div class="row tint">
+			<div class="row eventtint">
 				<div class="col-lg-12"><h3 class="eventbox">{{event.name}}</h3>
 					{% if event.eventimage %}
 					<div class="blog-thumb set-bg" data-setbg="{{event.eventimage.url}}">
@@ -100,10 +105,12 @@
 						</div>
 					</div>
 					{% endif %}
-					<div class="blog-content" >
+					<div class="blog-content eventblog" >
 						<h4>{{event.task}}</h4>
 						<a href="" class="meta-comment"></a>
-						<pre style="font-family:Verdana, Geneva, Tahoma,bold, sans-serif;color:white;">{{event.desc}}</pre>
+						{% load markdown_extras %}
+
+                        {{ event.desc | markdown | safe }}
 					</div>
 				</div>
 			</div>
@@ -132,5 +139,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Torto
 	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
 	<script src="{% static 'js/jquery.marquee.min.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

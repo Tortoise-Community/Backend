@@ -1122,13 +1122,13 @@ ol {
 	background: #ff205f;
 }
 
-.single-blog-page .blog-content h4 {
+.single-blog-page  h4 {
 	margin-bottom: 10px;
-	text-align: center;
+	text-align: left;
 	color: #ffa60b;
 }
 
-.single-blog-page .blog-content .meta-comment {
+.single-blog-page .meta-comment {
 	display: block;
 	font-size: 15px;
 	color: black;
@@ -1136,7 +1136,7 @@ ol {
 
 }
 
-.single-blog-page .blog-content pre {
+.single-blog-page  pre {
 	margin-bottom: 25px;
 }
 
@@ -1876,6 +1876,63 @@ ol {
 	background-color:  #eaeaea;
 	padding: 20px 30px;
 	font-family: 'Roboto', sans-serif !important;
-	
-	
+
+}
+
+
+/*##################*/
+/* MARKDOWN CONTENT */
+/*##################*/
+
+.blog-content p{
+	color: black !important;
+}
+.outertint{
+	background-color: #fbfbff;
+}
+.innertint{
+	background-color: #040F16;
+}
+
+.blog-content h1{
+	color: #01BAEF !important;
+	font-size: 45px !important;
+}
+.blog-content h2{
+	color: #0090C1;
+	font-size: 35px !important;
+}
+.blog-content h3{
+	color: white !important;
+	font-size: 30px !important;
+	text-align: left !important;
+}
+.blog-content h4{
+	color: white !important;
+	font-size: 25px !important;
+}
+.blog-content p,pre,li{
+	color: grey !important;
+	font-size: 16px !important;
+}
+.blog-content ul, ol{
+	padding: 4px 15px !important;
+}
+.eventblog p,pre,li{
+	font-size: 19px !important;
+}
+
+.eventblog h1,h2,h3,h4,h5,h6{
+color: #0f0f0f!important;
+}
+
+code{
+  min-width:400px !imporant;
+  display:inline-block !imporant;
+  border-radius:6px;
+  padding:0px 8px 8px 8px;
+  font-size:16px !important;
+}
+.eventtint{
+	background-color: #f8f8ff !important;
 }

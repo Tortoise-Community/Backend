@@ -43,6 +43,7 @@ class EventView(UtilityMixin, View):
             self.template_name = 'event.html'
             event = self.model.objects.get(pk=item_no)
             self.context['event'] = event
+            self.context['style'] = "dracula.min.css"
         else:
             self.get_events_context()
 
