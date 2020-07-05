@@ -20,5 +20,4 @@ urlpatterns = [
 
     # path('', include('websitedata.urls'))
 
-
 ]

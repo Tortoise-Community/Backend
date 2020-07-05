@@ -5,7 +5,7 @@ class Slider(models.Model):
     HeadCrumb1 = models.CharField(max_length=20, blank=True)
     Span = models.CharField(max_length=20, blank=True)
     HeadCrumb2 = models.CharField(max_length=20, blank=True)
-    Slideimageurl = models.URLField(blank=True) # noqa
+    Slideimageurl = models.URLField(blank=True)
     Subhead = models.CharField(max_length=50, blank=True)
     Note = models.TextField(blank=True)
     button = models.BooleanField(blank=True, default=True)
@@ -21,7 +21,7 @@ class News(models.Model):
 
 class Team(models.Model):
     name = models.CharField(max_length=15)
-    profilepic = models.ImageField(upload_to='img/team') # noqa
+    profilepic = models.ImageField(upload_to='img/team')
     nickname = models.CharField(max_length=15)
     designation = models.CharField(max_length=12)
 
@@ -34,11 +34,11 @@ class Events(models.Model):
         ("Upcoming", "Upcoming"), ("Live", "Live"), ("Ended", "Ended")
     ]
     name = models.CharField(max_length=15)
-    eventimage = models.ImageField(upload_to='img/eventimgs', blank=True) # noqa
-    coverimage = models.ImageField(upload_to='img/bgimgs') # noqa
-    eventtype = models.CharField(max_length=17, choices=CHOICE, default='CTF-Event') # noqa
-    duedate = models.DateField() # noqa
-    enddate = models.DateField() # noqa
+    eventimage = models.ImageField(upload_to='img/eventimgs', blank=True)
+    coverimage = models.ImageField(upload_to='img/bgimgs')
+    eventtype = models.CharField(max_length=17, choices=CHOICE, default='CTF-Event')
+    duedate = models.DateField()
+    enddate = models.DateField()
     winner = models.CharField(max_length=100, blank=True)
     prize = models.CharField(max_length=100)
     status = models.CharField(max_length=17, choices=STATUS, default='Ended')

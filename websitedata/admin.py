@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import *
-# Register your models here.
+from .models import (Slider, News, Team,
+                     Events, Changes, Privacy)
+
+
 admin.site.register(Slider)
 admin.site.register(News)
 admin.site.register(Team)
