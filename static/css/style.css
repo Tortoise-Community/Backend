@@ -402,6 +402,9 @@ ol {
 .hero-slider .hs-text h2 span {
 	color: #ffb320;
 }
+.hero-slider h2{
+	color: white !important;
+}
 
 .hero-slider .hs-text p {
 	color: #fff;
@@ -973,6 +976,7 @@ ol {
 	font-size: 60px;
 	margin-bottom: 25px;
 	font-weight: 400;
+	color: white !important;
 }
 
 .site-pagination {
