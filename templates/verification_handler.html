@@ -11,8 +11,7 @@
         let url_string = window.location.href;
         let url = new URL(url_string);
         let code = url.searchParams.get("code");
-        {#var param = (`https://www.tortoisecommunity.ml/verification/?code=${code}`);#}
-        let param = (`http://127.0.0.1:8000/verification/?code=${code}`);
+        let param = (`https://www.tortoisecommunity.com/verification/?code=${code}`);
         window.opener.location.replace(param);
         window.close();
     }
