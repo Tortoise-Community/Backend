@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5f1a8ab6-c2f1-4915-b506-15a16244c25e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/verification_handler.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/verification_handler.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/handlers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +154,7 @@
       <workItem from="1594013104324" duration="3505000" />
       <workItem from="1594061299790" duration="4441000" />
       <workItem from="1594069684623" duration="16000" />
-      <workItem from="1594070480254" duration="1415000" />
+      <workItem from="1594070480254" duration="3582000" />
     </task>
     <servers />
   </component>

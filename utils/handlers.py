@@ -47,7 +47,7 @@ class WebhookHandler:
 
 
 alert_hook = WebhookHandler(settings.WEBHOOK_ID,
-                           settings.WEBHOOK_SECRET)
+                            settings.WEBHOOK_SECRET)
 
 
 class SocketHandler:
@@ -55,10 +55,10 @@ class SocketHandler:
         self.socket_ip = socket_ip
         self.port = port
         self.token = token
-        self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.response = None
 
     def _connect(self):
+        self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.settimeout(8)
         try:
             self.server.connect((self.socket_ip, self.port))
@@ -98,8 +98,7 @@ class SocketHandler:
 
     def verify(self, member_id: int):
         payload = {"endpoint": "verify", "data": member_id}
-        resp = self._safe_packet_transfer(payload)
-        print(resp["status"]["code"])
+        self._safe_packet_transfer(payload)
 
     def signal(self, sock_endpoint: str):
         payload = {"endpoint": "signal", "data": sock_endpoint}
