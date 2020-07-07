@@ -3,7 +3,7 @@ from userdata.models import Rules
 from Tortoise.models import SiteUrls
 
 
-class UtilityMixin(object):
+class ModelDataMixin(object):
     context = {}
     siteurls = SiteUrls # noqa
     news = News.objects.all()

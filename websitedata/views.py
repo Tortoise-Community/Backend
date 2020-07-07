@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
 
 from utils.oauth import Oauth
-from utils.mixins import UtilityMixin
+from utils.mixins import ModelDataMixin
 from utils.tools import bot_socket, webhook
 from utils.handlers import EmailHandler
 
@@ -14,7 +14,7 @@ from websitedata.models import Events
 from userdata.models import Developers, Projects, Members
 
 
-class ProjectView(UtilityMixin, View):
+class ProjectView(ModelDataMixin, View):
     model = Projects
     template_name = 'projects.html'
     context = {}
@@ -32,7 +32,7 @@ class ProjectView(UtilityMixin, View):
         return render(request, self.template_name, self.context)
 
 
-class EventView(UtilityMixin, View):
+class EventView(ModelDataMixin, View):
     model = Events
     template_name = 'events.html'
     context = {}
@@ -50,7 +50,7 @@ class EventView(UtilityMixin, View):
         return render(request, self.template_name, self.context)
 
 
-class IndexView(UtilityMixin, View):
+class IndexView(ModelDataMixin, View):
     template_name = 'index.html'
     context = {}
 
@@ -59,7 +59,7 @@ class IndexView(UtilityMixin, View):
         return render(request, self.template_name, self.context)
 
 
-class VerificationView(UtilityMixin, View):
+class VerificationView(ModelDataMixin, View):
 
     template_name = 'verification.html'
     verified = False
@@ -138,7 +138,7 @@ class VerificationView(UtilityMixin, View):
         return render(request, self.template_name, self.context)
 
 
-class DeveloperView(UtilityMixin, View):
+class DeveloperView(ModelDataMixin, View):
     model = Developers
     template_name = 'developers.html'
 
@@ -148,7 +148,7 @@ class DeveloperView(UtilityMixin, View):
         return render(request, self.template_name, self.context)
 
 
-class TemplateView(UtilityMixin, View):
+class TemplateView(ModelDataMixin, View):
     template_name = 'privacy.html'
 
     def get(self, request):
@@ -156,10 +156,10 @@ class TemplateView(UtilityMixin, View):
         return render(request, self.template_name, self.context)
 
 
-class ContactView(UtilityMixin, View):
-    params = ['name', 'email', 'subject', 'othersub', 'username', 'tag',
+class ContactView(ModelDataMixin, View):
+    params = ('name', 'email', 'subject', 'othersub', 'username', 'tag',
               'infraction-type', 'date', 'reason', 'sponsor-type', 'issue',
-              'server-name', 'server-topic', 'server-invite', 'message']
+              'server-name', 'server-topic', 'server-invite', 'message')
     template_name = "contact.html"
 
     def get(self, request):
@@ -174,7 +174,8 @@ class ContactView(UtilityMixin, View):
                 value = request.POST[param]
                 if value != '':
                     data[param] = value
-            except None:
+            except Exception as e:
+
                 pass
         EmailHandler(recipient=data['email'], name=data['name'], subject=data['subject'], pre=True)
         return render(request, self.template_name, self.context)
