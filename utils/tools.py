@@ -17,7 +17,7 @@ def reload_rules(sender, **kwargs):
 
 
 def reload_serverutils(sender, **kwargs):
-    bot_socket.signal("serverutils")
+    bot_socket.signal("server_meta")
 
 
 post_save.connect(reload_rules, sender=News, dispatch_uid="news")

@@ -101,7 +101,7 @@ class SocketHandler:
         self._safe_packet_transfer(payload)
 
     def signal(self, sock_endpoint: str):
-        payload = {"endpoint": "signal", "data": sock_endpoint}
+        payload = {"endpoint": "signal_update", "data": sock_endpoint}
         self._safe_packet_transfer(payload)
 
     def dm_user(self, member_id: int, message: str):

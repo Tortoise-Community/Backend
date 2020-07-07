@@ -70,7 +70,7 @@ class SuggestionPutSerializer(serializers.ModelSerializer):
 class ServerMetaSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = ServerUtils
-		fields = ['event_submission','mod_mail','bug_report','suggestions']		
+		fields = ['event_submission','mod_mail','bug_report','suggestions','suggestion_message_id']
 		
 class MemberMetaSerializer(serializers.ModelSerializer):
 	class Meta:
