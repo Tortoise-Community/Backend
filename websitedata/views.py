@@ -175,7 +175,7 @@ class ContactView(ModelDataMixin, View):
                 if value != '':
                     data[param] = value
             except Exception as e:
-
                 pass
         EmailHandler(recipient=data['email'], name=data['name'], subject=data['subject'], pre=True)
+        bot_socket.send_contact_data(data)
         return render(request, self.template_name, self.context)
