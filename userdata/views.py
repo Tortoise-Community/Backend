@@ -1,279 +1,206 @@
-from django.shortcuts import render,get_object_or_404
-from rest_framework import viewsets
-from .models import *
+from django.shortcuts import get_object_or_404
 from .serializers import *
-from django.http import JsonResponse,HttpResponse
-from rest_framework.parsers import JSONParser
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import permission_classes
-from rest_framework.decorators import api_view
-# Create your views here.
+from django.http import JsonResponse
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from utils.mixins import ResponseMixin
+from .models import (Members, Projects, Rules, ServerUtils, Developers)
 
 
+class MembedDataView(APIView, ResponseMixin):
+    model = Members
+    serializers = MemberDataSerializer
 
-@csrf_exempt
-@api_view(['GET'])
-@permission_classes([])
-def ping(request):
-	return JsonResponse({"status":200},status=200,safe=False)
-   
-
-@csrf_exempt
-@api_view(['GET','POST'])
-@permission_classes((IsAuthenticated, ))
-def members(request):
-    if request.method == 'POST':
-        json_parser = JSONParser()
-        data = json_parser.parse(request)
-        serializer = MemberPostSerializer(data = data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data,status=201,safe=False)   
+    def get(self, request, item_id=None):
+        if item_id is not None:
+            queryset = get_object_or_404(self.model, user_id=item_id)
+            serializer = self.serializers(queryset)
+            return Response(serializer.data, status=200)
         else:
-         return JsonResponse('{"response":500}')
-    elif request.method == 'GET':
-        queryset = Members.objects.all()
-        serializer = AllSerializer(queryset,many=True)
+            queryset = self.model.objects.all()
+            serializer = self.serializers(queryset, many=True)
+            return JsonResponse(serializer.data, safe=False, status=200)
+
+    def post(self, request, item_id=None):
+        if item_id is not None:
+            return self.json_response_405()
+        else:
+            serializer = self.serializers(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=201)
+            else:
+                return self.json_response_500()
+
+    def put(self, request, item_id=None):
+        if item_id is not None:
+            queryset = get_object_or_404(self.model, user_id=item_id)
+            serializer = self.serializers(queryset, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=201)
+            else:
+                return self.json_response_500()
+        else:
+            return self.json_response_405()
+
+    def delete(self, request, item_id=None):
+        if item_id is not None:
+            queryset = get_object_or_404(self.model, user_id=item_id)
+            queryset.delete()
+            return self.json_response_204()
+        else:
+            return self.json_response_405()
+
+
+class DynamicMemberView(APIView, ResponseMixin):  # GET POST
+    model = Members
+    serializers = None
+
+    def get(self, request, item_id=None):
+        if item_id is not None:
+            queryset = get_object_or_404(self.model, user_id=item_id)
+            serializer = self.serializers(queryset)
+            return Response(serializer.data, status=200)
+        else:
+            queryset = self.model.objects.filter(member=True).order_by('-perks')[:20]
+            serializer = TopMemberSerializer(queryset, many=True)
+            return JsonResponse(serializer.data, safe=False, status=200)
+
+    def put(self, request, item_id=None):
+        if item_id is not None:
+            queryset = get_object_or_404(self.model, user_id=item_id)
+            serializer = self.serializers(queryset, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=201)
+            else:
+                return self.json_response_500()
+
+
+class SuggestionDataView(APIView, ResponseMixin):  # GET POST PUT DELETE
+    model = Suggestions
+    serializers = SuggestionSerializer
+    
+    def get(self, request, item_id=None):
+        if item_id is not None:
+            queryset = get_object_or_404(self.model, message_id=item_id)
+            serializer = self.serializers(queryset)
+            return Response(serializer.data, status=200)
+        else:
+            queryset = self.model.objects.filter(status="Under Review")
+            serializer = self.serializers(queryset, many=True)
+            return JsonResponse(serializer.data, safe=False, status=200)
+
+    def post(self, request, item_id=None):
+        if item_id is not None:
+            return self.json_response_405()
+        else:
+            serializer = self.serializers(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=201)
+            return self.json_response_500()
+
+    def put(self, request, item_id=None):
+        if item_id is not None:
+            queryset = get_object_or_404(self.model, message_id=item_id)
+            serializer = SuggestionPutSerializer(queryset, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=201)
+            return self.json_response_500()
+        else:
+            return self.json_response_405()
+
+    def delete(self, request, item_id=None):
+        if item_id is not None:
+            queryset = get_object_or_404(self.model, message_id=item_id)
+            if queryset:
+                queryset.delete()
+                return self.json_response_204()
+            return self.json_response_400()
+        else:
+            return self.json_response_405()
+
+
+class ProjectStatsView(APIView, ResponseMixin):
+    model = Projects
+    serializers = ProjectStatsSerializer
+
+    def get(self, request, item_id=None):
+        if item_id is not None:
+            queryset = get_object_or_404(self.model, pk=item_id)
+            serializer = self.serializers(queryset)
+            return Response(serializer.data, status=200)
+        else:
+            queryset = self.model.objects.all()
+            serializer = self.serializers(queryset, many=True)
+            return JsonResponse(serializer.data, safe=False, status=200)
+
+    def put(self, request, item_id=None):
+        if item_id is not None:
+            queryset = get_object_or_404(self.model, pk=item_id)
+            serializer = self.serializers(queryset, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=200)
+            else:
+                return self.json_response_500()
+        else:
+            return self.json_response_405()
+
+
+class RulesDataView(APIView, ResponseMixin):
+    model = Rules
+    serializers = RulesSerializer
+
+    def get(self, request):
+        queryset = self.model.objects.all().order_by('number')
+        serializer = self.serializers(queryset, many=True)
         return JsonResponse(serializer.data, safe=False)
 
-@csrf_exempt
-@api_view(['PUT','DELETE','GET'])
-@permission_classes((IsAuthenticated, ))
-def members_edit(request,id):
-    queryset = get_object_or_404(Members,user_id = id)
 
-    if request.method == 'GET':
-        serializer = AllSerializer(queryset)
-        return JsonResponse (serializer.data,safe=False)
+class DeveloperDataView(APIView, ResponseMixin):
+    model = Developers
+    serializers = DeveloperSerializer
 
-    elif request.method == 'PUT':
-        json_parser = JSONParser()
-        data = json_parser.parse(request)
-        serializer = AllSerializer(queryset,data = data)
+    def get(self, request, item_id=None):
+        if item_id is not None:
+            queryset = get_object_or_404(self.model, no=item_id)
+            serializer = self.serializers(queryset)
+            return Response(serializer.data, status=200)
+        else:
+            queryset = self.model.objects.all()
+            serializer = self.serializers(queryset, many=True)
+            return JsonResponse(serializer.data, safe=False, status=200)
+
+    def put(self, request, item_id=None):
+        if item_id is not None:
+            queryset = get_object_or_404(self.model, no=item_id)
+            serializer = self.serializers(queryset, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=200)
+            else:
+                return self.json_response_500()
+        else:
+            return self.json_response_405()
+
+
+class ServerMetaView(APIView, ResponseMixin):
+    model = ServerUtils
+    serializers = ServerMetaSerializer
+
+    def get(self, request, item_id):
+        queryset = get_object_or_404(self.model, guild_id=item_id)
+        serializer = self.serializers(queryset)
+        return Response(serializer.data, status=200)
+
+    def put(self, request, item_id):
+        queryset = get_object_or_404(self.model, guild_id=item_id)
+        serializer = self.serializers(queryset, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data,status=200)   
-        else:
-         return JsonResponse(serializer.errors,status =400)
-
-    elif request.method == 'DELETE':
-        queryset.delete()
-        return HttpResponse(status=204)     
-
-@csrf_exempt
-@api_view(['GET','POST'])
-@permission_classes((IsAuthenticated, ))
-def projects(request):
-    if request.method == 'POST':
-         return JsonResponse(serializer.error,status=405)
-    elif request.method == 'GET':
-        queryset = Projects.objects.all()
-        serializer = GithubSerializer(queryset,many=True)
-        return JsonResponse(serializer.data, safe=False)
-
-
-@csrf_exempt
-@api_view(['PUT','GET'])
-@permission_classes((IsAuthenticated, ))
-def projects_edit(request,pk):
-    queryset = get_object_or_404(Projects,pk = pk)
-    if request.method == "GET":
-        serializer = ProjectSerializer(queryset)
-        return JsonResponse (serializer.data,safe=False)
-    elif request.method == "PUT":
-        json_parser = JSONParser()
-        data = json_parser.parse(request)
-        serializer = ProjectSerializer(queryset,data = data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data,status=200)   
-        else:
-         return JsonResponse(serializer.errors,status =400)
-
-
-@csrf_exempt
-@api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
-def is_verified(request,id):
-    queryset = get_object_or_404(Members,user_id = id)
-    serializer = VerificationSerializer(queryset)
-    return JsonResponse (serializer.data,safe=False)
-    
-@csrf_exempt
-@api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
-def get_top_members(request):
-   if request.method == 'GET':
-    queryset  = Members.objects.all().order_by('-perks')[:20]
-    serializer = TopSerializer(queryset,many=True)
-    return JsonResponse(serializer.data,safe=False)
-	
-   	 
-@csrf_exempt
-@api_view(['PUT'])
-@permission_classes((IsAuthenticated, ))
-def put_top_developers(request,id):
-        queryset = get_object_or_404(Developers,no = id)
-        json_parser = JSONParser()
-        data = json_parser.parse(request)
-        serializer = DeveloperSerializer(queryset,data = data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data,status=200)   
-        else:
-         return JsonResponse(serializer.errors,status =400)
-
-@csrf_exempt
-@api_view(['PUT','GET'])
-@permission_classes((IsAuthenticated, ))
-def get_member_roles(request,id):
-    queryset = get_object_or_404(Members,user_id = id)
-    if request.method == 'GET':
-        serializer = MemberRoleSerializer(queryset)
-        return JsonResponse (serializer.data,safe=False)
-    elif request.method == 'PUT':
-        json_parser = JSONParser()
-        data = json_parser.parse(request)
-        serializer = MemberRoleSerializer(queryset,data = data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data,status=200)   
-        else:
-         return JsonResponse(serializer.errors,status =400)
-
-@csrf_exempt
-@api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
-def get_rules(request):
-    queryset  = Rules.objects.all().order_by('number')
-    serializer = RulesSerializer(queryset,many=True)
-    return JsonResponse(serializer.data,safe=False)   
-    
-
-@csrf_exempt
-@api_view(['PUT','GET'])
-@permission_classes((IsAuthenticated, ))
-def manage_bot_status(request,id):
-    queryset = get_object_or_404(ServerUtils,guild_id = id)
-    if request.method == 'GET':
-        serializer = StatusSerializer(queryset)
-        return JsonResponse (serializer.data,safe=False)
-    elif request.method == 'PUT':
-        json_parser = JSONParser()
-        data = json_parser.parse(request)
-        serializer = StatusSerializer(queryset,data = data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data,status=200)   
-        else:
-         return JsonResponse(serializer.errors,status =400) 
-
-@csrf_exempt
-@api_view(['PUT','GET'])
-@permission_classes((IsAuthenticated, ))
-def get_services(request,id):
-    queryset = get_object_or_404(ServerUtils,guild_id = id)
-    if request.method == 'GET':
-        serializer = ServiceSerializer(queryset)
-        return JsonResponse (serializer.data,safe=False)
-    elif request.method == 'PUT':
-        json_parser = JSONParser()
-        data = json_parser.parse(request)
-        serializer = ServiceSerializer(queryset,data = data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data,status=200)   
-        else:
-         return JsonResponse(serializer.errors,status =400)	
-         
-     
-@csrf_exempt
-@api_view(['GET','POST'])
-@permission_classes((IsAuthenticated, ))
-def developers(request):
-  if request.method == 'GET':
-     queryset  = Developers.objects.all()
-     serializer = DeveloperSerializer(queryset,many=True)
-     return JsonResponse(serializer.data,safe=False)  
-  elif request.method == 'POST':
-       json_parser = JSONParser()
-       data = json_parser.parse(request)
-       serializer = DeveloperSerializer(data = data)
-       if serializer.is_valid():
-          serializer.save()
-          return JsonResponse(serializer.data,status=201,safe=False)              
-
-@csrf_exempt
-@api_view(['PUT','DELETE','GET'])
-@permission_classes((IsAuthenticated, ))
-def suggestions_edit(request,id):
-    queryset = get_object_or_404(Suggestions,message_id = id)
-    if request.method == 'GET':
-        serializer = SuggestionSerializer(queryset)
-        return JsonResponse (serializer.data,safe=False)
-
-    elif request.method == 'PUT':
-        json_parser = JSONParser()
-        data = json_parser.parse(request)
-        serializer = SuggestionPutSerializer(queryset,data = data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data,status=200)   
-        else:
-         return JsonResponse(serializer.errors,status =400)
-
-    elif request.method == 'DELETE':
-        queryset.delete()
-        return HttpResponse(status=204)
-      
-@csrf_exempt
-@api_view(['GET','POST'])
-@permission_classes((IsAuthenticated, ))
-def suggestions(request):
-  if request.method == 'GET':
-     queryset  = Suggestions.objects.all()
-     serializer =  SuggestionSerializer(queryset,many=True)
-     return JsonResponse(serializer.data,safe=False)  
-  elif request.method == 'POST':
-       json_parser = JSONParser()
-       data = json_parser.parse(request)
-       serializer =  SuggestionSerializer(data = data)
-       if serializer.is_valid():
-          serializer.save()
-          return JsonResponse(serializer.data,status=201,safe=False)        
-
-@csrf_exempt
-@api_view(['PUT','GET'])
-@permission_classes((IsAuthenticated, ))
-def server_meta(request,id):
-    queryset = get_object_or_404(ServerUtils,guild_id = id)
-    if request.method == 'GET':
-        serializer = ServerMetaSerializer(queryset)
-        return JsonResponse (serializer.data,safe=False)
-    elif request.method == 'PUT':
-        json_parser = JSONParser()
-        data = json_parser.parse(request)
-        serializer = ServerMetaSerializer(queryset,data = data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data,status=200)   
-        else:
-         return JsonResponse(serializer.errors,status =400)
-@csrf_exempt
-@api_view(['PUT','GET'])
-@permission_classes((IsAuthenticated, ))
-def member_meta(request,id):
-    queryset = get_object_or_404(Members,user_id = id)
-    if request.method == 'GET':
-        serializer = MemberMetaSerializer(queryset)
-        return JsonResponse (serializer.data,safe=False)
-    elif request.method == 'PUT':
-        json_parser = JSONParser()
-        data = json_parser.parse(request)
-        serializer = MemberMetaSerializer(queryset,data = data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data,status=200)   
-        else:
-         return JsonResponse(serializer.errors,status =400)         	
+            return Response(serializer.data, status=200)
+        return self.json_response_500()

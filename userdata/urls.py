@@ -1,30 +1,39 @@
 from django.urls import path,include,re_path
 from . import views
 from rest_framework import routers
+from .serializers import *
+from . views import DynamicMemberView, SuggestionDataView
 
 router = routers.DefaultRouter()
-#router.register('members',views.MemberView)
+# router.register('members',views.MemberView)
+
 
 urlpatterns = [
-#path('',views.api),
-path('private/ping/',views.ping),
-path('private/bot/',include(router.urls)),
-path('private/rules/',views.get_rules),
-path('private/members/',views.members),
-path('private/projects/',views.projects),
-path('private/services/<int:id>/',views.get_services),
-path('private/bot/status/<int:id>/',views.manage_bot_status),
-path('private/top-members/',views.get_top_members),
-path('private/developers/edit/<int:id>/',views.put_top_developers),
-path('private/auth/', include('rest_framework.urls')),
-path('private/members/edit/<int:id>/',views.members_edit),
-path('private/projects/edit/<int:pk>/',views.projects_edit),
-path('private/members/<int:id>/roles/',views.get_member_roles),
-path('private/verify-confirmation/<int:id>/',views.is_verified),
-path('private/developers/',views.developers),
-path('private/suggestions/',views.suggestions),
-path('private/suggestions/<int:id>/',views.suggestions_edit),
-path('private/server/meta/<int:id>/',views.server_meta),
-path('private/member/meta/<int:id>/',views.member_meta)
+    # path('', views.api),
+    # path('private/ping/', views.ping),
+    # path('private/bot/', include(router.urls)),
+    path('private/auth/', include('rest_framework.urls')),
 
+    # Suggestion System
+    path('private/suggestions/', SuggestionDataView.as_view()),
+    path('private/suggestions/<int:item_id>/', SuggestionDataView.as_view()),
+
+    # Server Meta
+    path('private/rules/', views.RulesDataView.as_view()),
+    path('private/server/meta/<int:id>/', views.ServerMetaView.as_view()),
+
+    # Perks System
+    path('private/developers/', views.DeveloperDataView.as_view()),
+    path('private/developers/<int:id>/', views.DeveloperDataView.as_view()),
+
+    # Project Stats
+    path('private/projects/', views.ProjectStatsView.as_view()),
+    path('private/projects/<int:item_id>/', views.ProjectStatsView.as_view()),
+
+    # Member Data
+    path('private/members/', views.MembedDataView.as_view()),
+    path('private/members/<int:item_id>/', views.MembedDataView.as_view()),
+    path('private/members/top/', views.DynamicMemberView.as_view(serializers=TopMemberSerializer)),
+    path('private/members/meta/<int:item_id>/', DynamicMemberView.as_view(serializers=MemberMetaSerializer)),
+    path('private/members/moderation/<int:item_id>/', DynamicMemberView.as_view(serializers=MemberModSerializer)),
 ]

@@ -90,7 +90,7 @@ class VerificationView(ModelDataMixin, View):
                 member_obj = Members.objects.get(user_id=self.user_id)
             except ObjectDoesNotExist:
                 member_obj = None
-            # checks if member oject exits (joined the server)
+            # checks if member object exits (joined the server)
             if member_obj:
                 # check if the member is already verified
                 if getattr(member_obj, "verified") is True:

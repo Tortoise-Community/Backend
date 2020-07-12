@@ -1,6 +1,7 @@
 from websitedata.models import (News, Team, Slider, Events, Privacy, Changes)
 from userdata.models import Rules
 from Tortoise.models import SiteUrls
+from django.http import JsonResponse
 
 
 class ModelDataMixin(object):
@@ -51,3 +52,37 @@ class ModelDataMixin(object):
         self.context['rules'] = self.rules
         self.context['changes'] = self.changes
         self.get_blog_context()
+
+
+class ResponseMixin(object):
+
+
+    def json_response_204(self):
+        return JsonResponse({"response": "Not Content"}, status=204)
+
+    def json_response_400(self):
+        return JsonResponse({"response": "Bad Request"}, status=400)
+
+    def json_response_401(self):
+        return JsonResponse({"response": "Unauthorized"}, status=401)
+
+    def json_response_404(self):
+        return JsonResponse({"response": "Not Found"}, status=404)
+
+    def json_response_405(self):
+        return JsonResponse({"response": "Method Not Allowed"}, status=405)
+
+    def json_response_500(self):
+        return JsonResponse({"response": "Internal Server Error"}, status=500)
+
+    def json_response_501(self):
+        return JsonResponse({"response": "Not Implemented"}, status=501)
+
+    def json_response_502(self):
+        return JsonResponse({"response": "Bad Gateway"}, status=502)
+
+    def json_response_503(self):
+        return JsonResponse({"response": "Internal Server Error"}, status=503)
+
+    def json_response_504(self):
+        return JsonResponse({"response": "Gateway Timeout"}, status=504)
