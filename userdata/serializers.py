@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Members, ServerUtils, Suggestions, Rules, Projects
+from .models import Members, ServerUtils, Suggestions, Rules, Projects, Developers
 
 # REST API GENERIC MODEL SERIALIZERS
 
@@ -61,5 +61,5 @@ class ProjectStatsSerializer(serializers.ModelSerializer):
 
 class DeveloperSerializer(serializers.ModelSerializer):
     class Meta:
-        model = None
-        fields = '__all__'
+        model = Developers
+        exclude = ('no',)

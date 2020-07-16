@@ -1826,24 +1826,25 @@ ol {
 	border:1px white solid;
 	width: 80%;
 	height: 70%;
-	margin-top: 30px;
+	margin-top: 20px;
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
-	border-radius: 10px 20px 20px 20px;
+	border-radius: 10px 10px 10px 10px;
 	font-size: 18px;
-	color: white;
+	border-color: grey !important;
+	padding-bottom: 10px;
 }
 .verification-bottom{
-	text-align: left;
-	margin-left: 35px;
-	margin-right: auto;
+	text-align: center;
+	margin-left: auto;
+	margin-right: 5px;
 	position: relative;
 }
 .verification-footer{
 	margin-left: 45px;
 	margin-right: 45px;
-	margin-top: 55px;
+	margin-top: 20px;
 }
 
 .verified{
@@ -1945,3 +1946,8 @@ code{
 .eventtint{
 	background-color: #f8f8ff !important;
 }
+.iconcenter {
+	text-align: center;
+	width: 100%;
+	color: #ffb101;
+	}

@@ -1,0 +1,9 @@
+DEBUG:2020-07-14 19:10:28,294:[WinError 10061] No connection could be made because the target machine actively refused it raised on activity <socket.socket fd=1308, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('0.0.0.0', 64333)>
+DEBUG:2020-07-14 19:10:37,811:timed out raised on activity <socket.socket fd=1308, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('0.0.0.0', 64333)>
+DEBUG:2020-07-14 19:10:48,031:timed out raised on activity <socket.socket fd=1308, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('0.0.0.0', 64333)>
+DEBUG:2020-07-14 19:11:27,315:[WinError 10061] No connection could be made because the target machine actively refused it raised on activity <socket.socket fd=1424, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('0.0.0.0', 64341)>
+DEBUG:2020-07-14 19:11:37,326:timed out raised on activity <socket.socket fd=1424, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('0.0.0.0', 64341)>
+DEBUG:2020-07-14 19:11:42,115:[WinError 10061] No connection could be made because the target machine actively refused it raised on activity <socket.socket fd=1716, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('0.0.0.0', 64348)>
+DEBUG:2020-07-14 19:11:46,615:timed out raised on activity <socket.socket fd=1716, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('0.0.0.0', 64348)>
+DEBUG:2020-07-14 19:11:51,152:timed out raised on activity <socket.socket fd=1716, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('0.0.0.0', 64348)>
+DEBUG:2020-07-14 19:12:00,361:timed out raised on activity <socket.socket fd=1716, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('0.0.0.0', 64348)>

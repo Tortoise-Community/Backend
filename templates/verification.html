@@ -86,7 +86,7 @@
 
 
 	<!-- Page info section -->
-	<section class="page-info-section1 set-bg" data-setbg="{{siteurls.verificationimg}}">
+	<section class="page-info-section1 set-bg" data-setbg="{{ssiteurls.verificationimg}}">
 				<div class="verification">
 					<div class="verification-wrapper">
 						<div class="verification-top">
@@ -100,13 +100,11 @@
 						</div>
 						{% if not verified %}
 						<fieldset>
-							<legend visible="true" style="width:auto;"><h5>Permissions required</h5></legend>
+							<legend visible="true" style="width:auto;"><h5>Oauth2 Verification™</h5></legend>
 						<div class="verification-bottom">
-							<ul>
-								<li>Access your username</li>
-								<li>Access your discord avatar</li>
-								<li>Access your email address</li>
-							</ul>
+                            <script src="https://kit.fontawesome.com/85b9627602.js" crossorigin="anonymous"></script>
+                            <i class="fas fa-lock fa-5x iconcenter"></i>
+                            <p>One time verification, Access all our servers</p>
 						</div>
 
 						</fieldset>
@@ -139,8 +137,7 @@
 						<span class="loaderx" style="display: block !important;"><span class="loader-innerx"></span></span>
 						</div>
 						{% endif %}
-
-					</div>s
+					</div>
 				</div>
 	</section>
 	<!-- Page info section -->

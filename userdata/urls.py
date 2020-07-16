@@ -24,7 +24,7 @@ urlpatterns = [
 
     # Perks System
     path('private/developers/', views.DeveloperDataView.as_view()),
-    path('private/developers/<int:id>/', views.DeveloperDataView.as_view()),
+    path('private/developers/<int:item_id>/', views.DeveloperDataView.as_view()),
 
     # Project Stats
     path('private/projects/', views.ProjectStatsView.as_view()),
