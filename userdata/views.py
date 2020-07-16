@@ -7,7 +7,7 @@ from utils.mixins import ResponseMixin
 from .models import (Members, Projects, Rules, ServerUtils, Developers)
 
 
-class MembedDataView(APIView, ResponseMixin):
+class MemberDataView(APIView, ResponseMixin):
     model = Members
     serializers = MemberDataSerializer
 
