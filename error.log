@@ -1,0 +1,2 @@
+DEBUG:2020-07-17 22:53:12,781:[WinError 10038] An operation was attempted on something that is not a socket raised on activity <socket.socket [closed] fd=-1, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0>
+DEBUG:2020-07-17 22:53:13,539:[WinError 10038] An operation was attempted on something that is not a socket raised on activity <socket.socket [closed] fd=-1, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0>

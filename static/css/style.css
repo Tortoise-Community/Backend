@@ -1604,6 +1604,9 @@ ol {
 		border-radius: 8px;
 	    box-shadow: 0 5px #2C2F33;
 	}
+	.verification-statement{
+		display: none;
+	}
 
 }
 
@@ -1661,6 +1664,9 @@ ol {
 		font-size: 15px;
 		border-radius: 8px;
 	    box-shadow: 0 5px #2C2F33;
+	}
+	.verification-statement{
+		display: none;
 	}
 }
 }
@@ -1802,6 +1808,8 @@ ol {
 	border-radius: 20px;
 	box-shadow: 0 0 30px 0 #333;
 	max-height: 400px;
+	padding-bottom: 3px;
+
 } 
 .verification-wrapper{
 	padding: 2px 5px;
