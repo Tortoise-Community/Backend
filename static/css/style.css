@@ -1959,6 +1959,9 @@ code{
 	color: #ffb101;
 	}
 
+.verification-handler-container{
+
+}
 .verification-handler-content{
 	margin-top: 100px;
 	max-width: 1000px;
@@ -1966,5 +1969,4 @@ code{
 	margin-right: auto;
 	color: #00ad5f;
 	text-align: center;
-
 }
