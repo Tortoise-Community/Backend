@@ -1804,12 +1804,11 @@ ol {
 	min-width: 300px;
 	width: 23%; 
 	height: 60%; 
-	background: #1a1a1a;
+	background: #101010;
 	border-radius: 20px;
 	box-shadow: 0 0 30px 0 #333;
 	max-height: 400px;
 	padding-bottom: 3px;
-
 } 
 .verification-wrapper{
 	padding: 2px 5px;
@@ -1841,7 +1840,7 @@ ol {
 	border-radius: 10px 10px 10px 10px;
 	font-size: 18px;
 	border-color: grey !important;
-	padding-bottom: 10px;
+	padding-bottom: 6px;
 }
 .verification-bottom{
 	text-align: center;
@@ -1959,3 +1958,13 @@ code{
 	width: 100%;
 	color: #ffb101;
 	}
+
+.verification-handler-content{
+	margin-top: 100px;
+	max-width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	color: #00ad5f;
+	text-align: center;
+
+}

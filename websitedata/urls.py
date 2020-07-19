@@ -17,7 +17,7 @@ Including another URLconf
 from django.urls import path, re_path
 from django.conf.urls import url
 from .views import (IndexView, VerificationView, ProjectView, EventView,
-                    DeveloperView, ContactView, TemplateView)
+                    DeveloperView, ContactView, TemplateView, VerificationHandlerView)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -38,7 +38,7 @@ urlpatterns = [
     url(r'^pages/credits', TemplateView.as_view(template_name='credits.html'), name='credits'),
     url(r'^pages/privacy', TemplateView.as_view(template_name='privacy.html'), name='privacy'),
     url(r'^pages/rules', TemplateView.as_view(template_name='rules.html'), name='rules'),
-    url(r'^verification/handlers/', TemplateView.as_view(template_name='verification_handler.html')),
+    url(r'^verification/handlers/', VerificationHandlerView.as_view()),
 
 ]
 

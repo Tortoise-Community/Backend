@@ -59,9 +59,9 @@ class IndexView(ModelDataMixin, View):
         return render(request, self.template_name, self.context)
 
 
-class VerificationView(ModelDataMixin, View):
+class VerificationHandlerView(ModelDataMixin, View):
 
-    template_name = 'verification.html'
+    template_name = 'verification_handler.html'
     verified = False
     context = {"Oauth": Oauth}
     user_json = None
@@ -135,6 +135,20 @@ class VerificationView(ModelDataMixin, View):
                     webhook.send_embed(embed)
         else:
             self.context['emailerror'] = True # noqa
+        return render(request, self.template_name, self.context)
+
+
+class VerificationView(ModelDataMixin, View):
+    template_name = 'verification.html'
+    context = {"Oauth": Oauth}
+
+    def get(self, request):
+        self.context['emailerror'] = False  # noqa
+        self.context['verified'] = False  # noqa
+        self.context['joined'] = True  # noqa
+        self.context['error'] = False  # noqa
+        status = request.GET.get('status')
+        self.get_blog_context()
         return render(request, self.template_name, self.context)
 
 
