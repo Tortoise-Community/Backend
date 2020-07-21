@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from utils.mixins import ResponseMixin
-from .models import (Members, Projects, Rules, ServerUtils, Developers)
+from .models import Members, Projects, Rules, ServerUtils, Developers
 
 
 class MemberDataView(APIView, ResponseMixin):
@@ -53,7 +53,7 @@ class MemberDataView(APIView, ResponseMixin):
             return self.json_response_405()
 
 
-class DynamicMemberView(APIView, ResponseMixin):  # GET POST
+class DynamicMemberView(APIView, ResponseMixin):
     model = Members
     serializers = None
 
@@ -78,7 +78,7 @@ class DynamicMemberView(APIView, ResponseMixin):  # GET POST
                 return self.json_response_500()
 
 
-class SuggestionDataView(APIView, ResponseMixin):  # GET POST PUT DELETE
+class SuggestionDataView(APIView, ResponseMixin):
     model = Suggestions
     serializers = SuggestionSerializer
     
