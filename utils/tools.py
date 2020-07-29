@@ -11,11 +11,11 @@ bot_socket = SocketHandler(settings.BOT_SOCKET_IP,
                            settings.BOT_SOCKET_TOKEN)
 
 
-def reload_rules(sender, **kwargs):
+def reload_rules(sender, **kwargs): # noqa
     bot_socket.signal("rules")
 
 
-def reload_serverutils(sender, **kwargs):
+def reload_serverutils(sender, **kwargs): # noqa
     bot_socket.signal("server_meta")
 
 

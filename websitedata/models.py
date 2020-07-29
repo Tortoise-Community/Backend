@@ -1,4 +1,5 @@
 from django.db import models
+from utils.misc import code_hljs_styles, news_update_type, event_status, event_type
 
 
 class Slider(models.Model):
@@ -12,11 +13,8 @@ class Slider(models.Model):
 
 
 class News(models.Model):
-    CHOICE = [
-        ("Live", "Live"), ("Announcements", "Announcements"), ("News", "News")
-    ]
     news = models.TextField()
-    choice = models.CharField(max_length=15, choices=CHOICE, default='Live')
+    choice = models.CharField(max_length=15, choices=news_update_type, default='Live')
 
 
 class Team(models.Model):
@@ -27,21 +25,16 @@ class Team(models.Model):
 
 
 class Events(models.Model):
-    CHOICE = [
-        ("Coding-Challenge", "Coding-Challenge"), ("CTF-Event", "CTF-Event")
-    ]
-    STATUS = [
-        ("Upcoming", "Upcoming"), ("Live", "Live"), ("Ended", "Ended")
-    ]
     name = models.CharField(max_length=15)
     eventimage = models.ImageField(upload_to='img/eventimgs', blank=True)
     coverimage = models.ImageField(upload_to='img/bgimgs')
-    eventtype = models.CharField(max_length=17, choices=CHOICE, default='CTF-Event')
+    eventtype = models.CharField(max_length=17, choices=event_type, default='CTF-Event')
     duedate = models.DateField()
     enddate = models.DateField()
     winner = models.CharField(max_length=100, blank=True)
     prize = models.CharField(max_length=100)
-    status = models.CharField(max_length=17, choices=STATUS, default='Ended')
+    status = models.CharField(max_length=17, choices=event_status, default='Ended')
+    style = models.CharField(max_length=17, choices=code_hljs_styles, default='default.min.css')
     host = models.CharField(max_length=15)
     task = models.CharField(max_length=50)
     desc = models.TextField(default=None)

@@ -43,7 +43,6 @@ class EventView(ModelDataMixin, View):
             self.template_name = 'event.html'
             event = self.model.objects.get(pk=item_no)
             self.context['event'] = event
-            self.context['style'] = "dracula.min.css"
         else:
             self.get_events_context()
 
@@ -143,11 +142,17 @@ class VerificationView(ModelDataMixin, View):
     context = {"Oauth": Oauth}
 
     def get(self, request):
+        # status = request.GET.get('status')
+        # self.context['emailerror'] = False  # noqa
+        # self.context['verified'] = False  # noqa
+        # self.context['notjoined'] = False  # noqa
+        # self.context['error'] = False  # noqa
+        # if status is not None:
+        #     self.context[status] = True
         self.context['emailerror'] = False  # noqa
         self.context['verified'] = False  # noqa
         self.context['joined'] = True  # noqa
         self.context['error'] = False  # noqa
-        status = request.GET.get('status')
         self.get_blog_context()
         return render(request, self.template_name, self.context)
 

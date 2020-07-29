@@ -1,29 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField, JSONField
-
-
-def default_array():
-    return []
-
-
-def default_strikes():
-    return {"AD": 0,
-            "Racial": 0,
-            "Homo": 0,
-            "Common": 0
-            } 
-
-
-def default_status():
-    return {}
-
-
-def default_json():
-    return {"status": "Offline",
-            "last_down_time": "",
-            "time_went_down": "",
-            "time_back_online": ""
-            }
+from utils.misc import status_css_class, empty_dict, empty_array, default_strikes
 
 
 class Members(models.Model):
@@ -38,8 +15,8 @@ class Members(models.Model):
     verified = models.BooleanField(blank=True, null=True, default=False)
     strikes = JSONField(null=True, default=default_strikes)
     mod_mail = models.BooleanField(blank=True, null=True, default=False)
-    warnings = ArrayField(models.CharField(max_length=300), null=True, default=default_array, blank=True)
-    roles = ArrayField(models.BigIntegerField(), null=True, default=default_array, blank=True)
+    warnings = ArrayField(models.CharField(max_length=300), null=True, default=empty_array, blank=True)
+    roles = ArrayField(models.BigIntegerField(), null=True, default=empty_array, blank=True)
     muted_until = models.DateTimeField(blank=True, null=True)
     member = models.BooleanField(blank=True, null=True, default=False)
 
@@ -48,15 +25,13 @@ class Members(models.Model):
 
 
 class Projects(models.Model):
-    STATUS = [
-        ("cata yellow","Completed"),("cata purple","Refactoring"),('cata red','Started'),('cata green','Upcoming') # noqa
-    ]
+
     name = models.CharField(max_length=15)
     coverimage = models.ImageField(upload_to='img/bgimgs') # noqa
     rating = models.FloatField(default=None, blank=True)
     label = models.CharField(max_length=100, default=None)
     brief = models.TextField(default=None)
-    status = models.CharField(max_length=16, choices=STATUS, default='Upcoming')
+    status = models.CharField(max_length=16, choices=status_css_class, default='Upcoming')
     github = models.URLField(blank=True)
     invite = models.URLField(blank=True)
     commits = models.IntegerField(blank=True, null=True)
@@ -68,7 +43,7 @@ class Projects(models.Model):
 class Rules(models.Model):
     number = models.IntegerField(blank=True, null=True)
     statement = models.TextField(blank=True, null=True)
-    alias = ArrayField(models.CharField(max_length=20), null=True, default=default_array, blank=True)
+    alias = ArrayField(models.CharField(max_length=20), null=True, default=empty_array, blank=True)
 
 
 class ServerUtils(models.Model):
@@ -78,14 +53,7 @@ class ServerUtils(models.Model):
     mod_mail = models.BooleanField(null=True, default=False)
     suggestions = models.BooleanField(null=True, default=False)
     suggestion_message_id = models.BigIntegerField(null=True, blank=True)
-    bot_status = JSONField(null=True, default=default_status, blank=True)
-    Github_Microservice = JSONField(null=True, default=default_json)
-    Status_Microservice = JSONField(null=True, default=default_json)
-    Tortoise_BOT = JSONField(null=True, default=default_json)
-    Tortoise_BOT2 = JSONField(null=True, default=default_json)
-    Website = JSONField(null=True, default=default_json)
-    Sockets = JSONField(null=True, default=default_json)
-    API_Gateway = JSONField(null=True, default=default_json)
+    bot_status = JSONField(null=True, default=empty_dict, blank=True)
 
 
 class Developers(models.Model):
