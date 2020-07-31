@@ -25,17 +25,17 @@ status_css_class = [
 ]
 
 code_hljs_styles = (
-    ("Dark", "dark.min.css"),
-    ("Dracula", "dracula.min.css"),
-    ("Tomorrow", "tomorrow.min.css"),
-    ("Night Owl", "night-owl.min.css"),
-    ("Codepen", "codepen-embed.min.css"),
-    ("Github Gist", "github-gist.min.css"),
-    ("Atom Dark", "atom-one-dark.min.css"),
-    ("Solarized Dark", "solarized-dark.min.css"),
-    ("Atelier Cave", "atelier-cave-dark.min.css"),
-    ("Tomorrow Night Blue", "tomorrow-night-blue.css"),
-    ("Atom Dark Reasonable", "atom-one-dark-reasonable.min.css"),
+    ("dark.min.css", "Dark"),
+    ("dracula.min.css", "Dracula"),
+    ("tomorrow.min.css", "Tomorrow"),
+    ("night-owl.min.css", "Night Owl"),
+    ("codepen-embed.min.css", "Codepen"),
+    ("github-gist.min.css", "Github Gist"),
+    ("atom-one-dark.min.css", "Atom Dark"),
+    ("solarized-dark.min.css", "Solarized Dark"),
+    ("atelier-cave-dark.min.css", "Atelier Cave"),
+    ("tomorrow-night-blue.css", "Tomorrow Night Blue",),
+    ("atom-one-dark-reasonable.min.css", "Atom Dark Reasonable"),
 )
 
 
