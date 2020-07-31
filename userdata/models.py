@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField, JSONField
-from utils.misc import status_css_class, empty_dict, empty_array, default_strikes
+from utils.misc import status_css_class, empty_dict, empty_array, default_strikes, default_service_status
 
 
 class Members(models.Model):

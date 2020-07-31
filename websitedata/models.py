@@ -14,7 +14,7 @@ class Slider(models.Model):
 
 class News(models.Model):
     news = models.TextField()
-    choice = models.CharField(max_length=15, choices=news_update_type, default='Live')
+    choice = models.CharField(max_length=15, choices=news_update_types, default='Live')
 
 
 class Team(models.Model):
@@ -28,7 +28,7 @@ class Events(models.Model):
     name = models.CharField(max_length=15)
     eventimage = models.ImageField(upload_to='img/eventimgs', blank=True)
     coverimage = models.ImageField(upload_to='img/bgimgs')
-    eventtype = models.CharField(max_length=17, choices=event_type, default='CTF-Event')
+    eventtype = models.CharField(max_length=17, choices=event_types, default='CTF-Event')
     duedate = models.DateField()
     enddate = models.DateField()
     winner = models.CharField(max_length=100, blank=True)
