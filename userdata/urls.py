@@ -1,16 +1,15 @@
 from django.urls import path, include
 from rest_framework import routers
 from .serializers import TopMemberSerializer, MemberMetaSerializer, MemberModSerializer
-from .views import (DynamicMemberView, SuggestionDataView, MemberDataView, ServerMetaView,
-                    DeveloperDataView, ProjectStatsView, RulesDataView)
+from .views import (
+    DynamicMemberView, SuggestionDataView, MemberDataView, ServerMetaView,
+    DeveloperDataView, ProjectStatsView, RulesDataView
+)
 
 router = routers.DefaultRouter()
-# router.register('members',views.MemberView)
 
 
 urlpatterns = [
-    # path('', views.api),
-    # path('private/ping/', views.ping),
     path('private/bot/', include(router.urls)),
     path('private/auth/', include('rest_framework.urls')),
 
