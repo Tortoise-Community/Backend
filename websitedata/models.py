@@ -1,5 +1,5 @@
 from django.db import models
-from utils.misc import code_hljs_styles, news_update_type, event_status, event_type
+from utils.misc import code_hljs_styles, news_update_types, event_status, event_types
 
 
 class Slider(models.Model):

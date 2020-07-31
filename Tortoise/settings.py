@@ -13,12 +13,12 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os 
 import environ
 
-# casting env object
+# Casting env object
 env = environ.Env(
     DEBUG=(bool, False)
 )
 
-# fetches .env file from two folders back (/a/b/ - 2 = /)
+# Fetches .env file from two folders back (/a/b/ - 2 = /)
 env_path = environ.Path(__file__) - 2
 environ.Env.read_env(env_file=env_path('.env'))
 
@@ -29,14 +29,14 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['.tortoisecommunity.com']
 
 DATE_INPUT_FORMATS = ['%Y-%m-%d']
 
 # Application definition
 
 INSTALLED_APPS = [
-    'websitedata.apps.WebsitedataConfig', # noqa
+    'websitedata.apps.WebsitedataConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'userdata.apps.UserdataConfig', # noqa
-    'rest_framework.authtoken', # noqa
+    'userdata.apps.UserdataConfig',
+    'rest_framework.authtoken',
     'django_hosts',
 ]
 
@@ -62,7 +62,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Tortoise.urls'
-ROOT_HOSTCONF = 'Tortoise.hosts' # noqa
+ROOT_HOSTCONF = 'Tortoise.hosts'
 DEFAULT_HOST = 'www'
 
 TEMPLATES = [
@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'Tortoise.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # noqa
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': env('DB_NAME'),
         'USER': env('DB_USER'),
         'PASSWORD': env('DB_PASSWORD'),
@@ -167,7 +167,7 @@ MEDIA_URL = '/media/'
 # Mail Transfer Module Handlers
 # https://docs.djangoproject.com/en/3.0/topics/email/
 
-EMAIL_HOST = 'smtp.gmail.com' # noqa
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'tortoisecommunity@gmail.com'
 EMAIL_HOST_PASSWORD = env('EMAIL_TOKEN')
@@ -182,5 +182,5 @@ OAUTH_CLIENT_ID = env('OAUTH_CLIENT_ID')
 OAUTH_CLIENT_SECRET = env('OAUTH_CLIENT_SECRET')
 GITHUB_ACCESS_TOKEN = env('GITHUB_ACCESS_TOKEN')
 SERVER_ID = env('SERVER_ID')
-WEBHOOK_ID = env('WEBHOOK_ID') # noqa
-WEBHOOK_SECRET = env('WEBHOOK_SECRET') # noqa
+WEBHOOK_ID = env('WEBHOOK_ID')
+WEBHOOK_SECRET = env('WEBHOOK_SECRET')

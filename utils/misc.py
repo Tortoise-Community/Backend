@@ -4,13 +4,13 @@ event_status = [
     ("Upcoming", "Upcoming"),
 ]
 
-news_update_type = (
+news_update_types = (
     ("News", "News"),
     ("Live", "Live"),
     ("Announcements", "Announcements")
 )
 
-event_type = (
+event_types = (
     ("Other Event", "Other"),
     ("CTF Event", "CTF-Event"),
     ("Team Challenge", "Team-Challenge"),
