@@ -3,10 +3,10 @@ from django.conf import settings
 
 
 class Oauth(object):
-    client_id = 648949400311300096#settings.OAUTH_CLIENT_ID
+    client_id = settings.OAUTH_CLIENT_ID
     client_secret = settings.OAUTH_CLIENT_SECRET
     scope = "identify%20email"
-    redirect_uri = "http://127.0.0.1:8000/verification/handlers/" #"https://www.tortoisecommunity.com/verification/handlers/"
+    redirect_uri = "https://www.tortoisecommunity.com/verification/handlers/"
     discord_login_url = "https://discord.com/api/oauth2/authorize?client_id={}&" \
                         "redirect_uri={}&response_type=code&scope={}".format(client_id, redirect_uri, scope)
     discord_token_url = "https://discord.com/api/oauth2/token"
