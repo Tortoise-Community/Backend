@@ -22,11 +22,11 @@ class Oauth(object):
             'redirect_uri': Oauth.redirect_uri,
             'scope': Oauth.scope
         }
-            
+
         headers = {
          'Content-Type': 'application/x-www-form-urlencoded'
         }
-        
+
         access_token = requests.post(url=Oauth.discord_token_url, data=payload, headers=headers)
         json = access_token.json()
         return json.get("access_token")

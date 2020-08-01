@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField, JSONField
-from utils.misc import status_css_class, empty_dict, empty_array, default_strikes, default_service_status
+from utils.misc import status_css_class, empty_dict, empty_array, default_strikes
 
 
 class Members(models.Model):
@@ -67,8 +67,8 @@ class Developers(models.Model):
 
 
 class Suggestions(models.Model):
-    message_id = models.BigIntegerField(primary_key=True)   
-    author_id = models.BigIntegerField() 
+    message_id = models.BigIntegerField(primary_key=True)
+    author_id = models.BigIntegerField()
     author_name = models.CharField(max_length=50, default=None, blank=True, null=True)
     brief = models.TextField(default=None)
     status = models.CharField(max_length=20, default="Under Review")

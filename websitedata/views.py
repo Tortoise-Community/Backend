@@ -8,7 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from utils.oauth import Oauth
 from utils.mixins import ModelDataMixin
 from utils.tools import bot_socket, webhook
-from utils.handlers import EmailHandler
+from utils.handlers import EmailHandler, log_error
 
 from websitedata.models import Events
 from userdata.models import Developers, Projects, Members
@@ -93,8 +93,8 @@ class VerificationHandlerView(ModelDataMixin, View):
             if member_obj:
                 # check if the member is already verified
                 if getattr(member_obj, "verified") is True:
-                    message = ("You are already vefified.\nIf you still can't send messages to the server, please " 
-                               "reply to this message with 'M' and choose Mod mail (contact staff) option by reacting "  
+                    message = ("You are already vefified.\nIf you still can't send messages to the server, please "
+                               "reply to this message with 'M' and choose Mod mail (contact staff) option by reacting "
                                "to the corresponding button.\n\nThank you!")
                     bot_socket.dm_user(int(self.user_id), message=message)
                 # if member is not verified, do verification
@@ -193,8 +193,8 @@ class ContactView(ModelDataMixin, View):
                 value = request.POST[param]
                 if value != '':
                     data[param] = value
-            except Exception as e:
-                pass
+            except Exception as exp:
+                log_error(exp, "Item unavailable, Ignoring...")
         EmailHandler(recipient=data['email'], name=data['name'], subject=data['subject'], pre=True)
         bot_socket.send_contact_data(data)
         return render(request, self.template_name, self.context)

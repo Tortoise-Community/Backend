@@ -145,8 +145,8 @@ class EmailHandler:
             content = "Thank you for showing interest to partner up with our server.\nWe will look into the details" \
                       " and have one of our staff sent over. Hope you have read the partnering policies and terms."
         elif self.subject == "Sponsorship":
-            content = "Thank you for showing your interest in sponsoring us, We'll review the details and contact you" \
-                      " here to discuss the sponsorship terms and policies withing 2-3 days."
+            content = "Thank you for showing your interest in sponsoring us, We'll review the details and contact " \
+                      "you here to discuss the sponsorship terms and policies withing 2-3 days."
         elif self.subject == 'Report-User':
             content = "Thank you for reporting the user.\nNote that we take all reports seriously, The user could" \
                       " even be banned from the community if the graveness of the act demands him/her to be.\n" \
