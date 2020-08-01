@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'userdata.apps.UserdataConfig',
     'rest_framework.authtoken',
     'django_hosts',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -184,3 +185,15 @@ GITHUB_ACCESS_TOKEN = env('GITHUB_ACCESS_TOKEN')
 SERVER_ID = env('SERVER_ID')
 WEBHOOK_ID = env('WEBHOOK_ID')
 WEBHOOK_SECRET = env('WEBHOOK_SECRET')
+
+# Celery Shared server configuration
+# https://docs.celeryproject.org/en/stable/django/first-steps-with-django.html
+
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'default'
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',
+    }
+}

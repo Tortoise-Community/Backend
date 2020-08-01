@@ -34,7 +34,7 @@ class Events(models.Model):
     winner = models.CharField(max_length=100, blank=True)
     prize = models.CharField(max_length=100)
     status = models.CharField(max_length=17, choices=event_status, default='Ended')
-    style = models.CharField(max_length=25, choices=code_hljs_styles, default='default.min.css')
+    style = models.CharField(max_length=50, choices=code_hljs_styles, default='default.min.css')
     host = models.CharField(max_length=15)
     task = models.CharField(max_length=50)
     desc = models.TextField(default=None)

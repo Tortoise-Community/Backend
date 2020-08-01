@@ -17,6 +17,8 @@ pillow = "*"
 gunicorn = "*"
 flake8 = "*"
 markdown = "*"
+celery = "*"
+django-celery-results = "*"
 
 [requires]
 python_version = "3.8"
