@@ -1,10 +1,11 @@
 from django.shortcuts import get_object_or_404
-from .serializers import *
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from utils.mixins import ResponseMixin
-from .models import Members, Projects, Rules, ServerUtils, Developers
+from .models import Members, Projects, Rules, ServerUtils, Developers, Suggestions
+from .serializers import (MemberDataSerializer, DeveloperSerializer, SuggestionSerializer, TopMemberSerializer,
+                          SuggestionPutSerializer, ProjectStatsSerializer, RulesSerializer, ServerMetaSerializer)
 
 
 class MemberDataView(APIView, ResponseMixin):
@@ -81,7 +82,7 @@ class DynamicMemberView(APIView, ResponseMixin):
 class SuggestionDataView(APIView, ResponseMixin):
     model = Suggestions
     serializers = SuggestionSerializer
-    
+
     def get(self, request, item_id=None):
         if item_id is not None:
             queryset = get_object_or_404(self.model, message_id=item_id)
