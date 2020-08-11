@@ -56,33 +56,42 @@ class ModelDataMixin(object):
 
 class ResponseMixin(object):
 
-
-    def json_response_204(self):
+    @staticmethod
+    def json_response_204():
         return JsonResponse({"response": "Not Content"}, status=204)
 
-    def json_response_400(self):
+    @staticmethod
+    def json_response_400():
         return JsonResponse({"response": "Bad Request"}, status=400)
 
-    def json_response_401(self):
+    @staticmethod
+    def json_response_401():
         return JsonResponse({"response": "Unauthorized"}, status=401)
 
-    def json_response_404(self):
+    @staticmethod
+    def json_response_404():
         return JsonResponse({"response": "Not Found"}, status=404)
 
-    def json_response_405(self):
+    @staticmethod
+    def json_response_405():
         return JsonResponse({"response": "Method Not Allowed"}, status=405)
 
-    def json_response_500(self):
+    @staticmethod
+    def json_response_500():
         return JsonResponse({"response": "Internal Server Error"}, status=500)
 
-    def json_response_501(self):
+    @staticmethod
+    def json_response_501():
         return JsonResponse({"response": "Not Implemented"}, status=501)
 
-    def json_response_502(self):
+    @staticmethod
+    def json_response_502():
         return JsonResponse({"response": "Bad Gateway"}, status=502)
 
-    def json_response_503(self):
+    @staticmethod
+    def json_response_503():
         return JsonResponse({"response": "Internal Server Error"}, status=503)
 
-    def json_response_504(self):
+    @staticmethod
+    def json_response_504():
         return JsonResponse({"response": "Gateway Timeout"}, status=504)

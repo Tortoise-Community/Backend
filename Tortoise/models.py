@@ -2,7 +2,8 @@
 
 class SiteUrls:
     # Page top
-    verificationimg = "https://cdn.discordapp.com/attachments/692851221223964822/729310496741916722/wallpaperflare.com_wallpaper_1.jpg" # "https://cdn.discordapp.com/attachments/649868379372388352/698159203696640041/verification.jpg"
+    verificationimg = "https://cdn.discordapp.com/attachments/692851221223964822/729310496741916722/" \
+                      "wallpaperflare.com_wallpaper_1.jpg"
     site_logo = "https://cdn.discordapp.com/attachments/649868379372388352/698236524872859748/logo.png"
 
     # Index
