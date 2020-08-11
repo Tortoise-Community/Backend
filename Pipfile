@@ -4,6 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+flake8 = "*"
 
 [packages]
 django = "==3.0.7"
@@ -15,7 +16,6 @@ django-hosts = "*"
 sockets = "*"
 pillow = "*"
 gunicorn = "*"
-flake8 = "*"
 markdown = "*"
 celery = "*"
 django-celery-results = "*"
