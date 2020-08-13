@@ -29,7 +29,7 @@ To ease out this process follow the project setup instruction for developers.
 
 **Python 3.8 reqiuired**
 ```git
-# Begin by forking the repo to your github account (make managing conflicts easier)
+# Begin by forking the repo to your github account (makes managing conflicts easier)
 
 # Your global Python installation needs to have pipenv
 pip install pipenv
@@ -48,7 +48,49 @@ pipenv shell
 
 # The site should now be setup, You won't be able to run the test server because of the missing credentials.
 
+```
+### Sample .env file layout
+```.env
+
+# Bot socket credentials 
+BOT_SOCKET_PORT = put_something_here
+BOT_SOCKET_IP = put_something_here
+BOT_SOCKET_TOKEN = put_something_here
+
+# Database Credentials (Postgres)
+DB_NAME = put_something_here
+DB_USER = put_something_here
+DB_HOST = put_something_here
+DB_PASSWORD = put_something_here
+
+# Discord Oauth2 credentials
+OAUTH_CLIENT_ID = put_something_here
+OAUTH_CLIENT_SECRET = put_something_here
+
+# Other application credentials 
+EMAIL_TOKEN = put_something_here
+GITHUB_ACCESS_TOKEN = put_something_here
+
+# Django credentials
+DEBUG = False
+SECRET_KEY = put_something_here
+
+# Discord server webhook credentials
+SERVER_ID = put_something_here
+WEBHOOK_ID = put_something_here
+WEBHOOK_SECRET = put_something_here
 
 ```
-[1]: https://tortoisecommunity.com
 
+#### After setup 
+
+Run development server 
+
+`pipenv run server` (windows)
+
+`pipenv run server-l` (linux)
+
+## License
+MIT - see [LICENSE](https://github.com/Tortoise-Community/Website/blob/dev/LICENSE) file for details.
+
+[1]: https://tortoisecommunity.com
