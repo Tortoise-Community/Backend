@@ -17,7 +17,6 @@ sockets = "*"
 pillow = "*"
 gunicorn = "*"
 markdown = "*"
-celery = "*"
 django-celery-results = "*"
 
 [requires]
