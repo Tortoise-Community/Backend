@@ -5,7 +5,7 @@
 ![Django-Rest-Framwork-Version](https://img.shields.io/badge/django%20rest%20framework-3.11.0-darkred)
 [![Status](https://img.shields.io/website?url=https%3A%2F%2Ftortoisecommunity.com)][1]
 
-### Website powered by Django for the Tortoise Community Discord Server
+### Website build with Django for the Tortoise Community Discord Server
 
 This is the code for our website coded in python with the Django Framework. 
 Code here serves for educational purposes and for transparency of data collection, handling and security.
@@ -16,7 +16,7 @@ Code here serves for educational purposes and for transparency of data collectio
 * Real time Top member ranking based on perk system.
 * Markdown compatible pages for hosting events and showcasing projects.
 * Rest API Backend for the bot to interact with the database.
-* Admin dashboard for easily managing the bot from withing the Website.
+* Admin dashboard for easily managing the bot from within the Website.
 
 ### Contributing
 
