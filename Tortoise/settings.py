@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'userdata.apps.UserdataConfig',
     'rest_framework.authtoken',
     'django_hosts',
-    'django_celery_results',
 ]
 
 MIDDLEWARE = [
