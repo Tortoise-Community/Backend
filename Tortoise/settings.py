@@ -29,7 +29,10 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['.tortoisecommunity.com']
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = ['.tortoisecommunity.com']
 
 DATE_INPUT_FORMATS = ['%Y-%m-%d']
 
