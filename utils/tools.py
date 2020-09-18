@@ -20,5 +20,5 @@ def reload_serverutils(sender, **kwargs): # noqa
 
 
 post_save.connect(reload_rules, sender=Rules, dispatch_uid="rules")
-post_delete.connect(reload_rules, sender=Rules, dispatch_uid="rules")
+post_delete.connect(reload_rules, sender=Rules, dispatch_uid="rule")
 post_save.connect(reload_serverutils, sender=ServerUtils, dispatch_uid="server")

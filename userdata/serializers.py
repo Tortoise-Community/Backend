@@ -13,7 +13,7 @@ class MemberDataSerializer(serializers.ModelSerializer):
 class RulesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rules
-        fields = ('number', 'alias', 'statement')
+        fields = ('number', 'name', 'alias', 'statement')
 
 
 class SuggestionSerializer(serializers.ModelSerializer):
