@@ -3,13 +3,13 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from utils.mixins import ResponseMixin
-from .models import Members, Projects, Rules, ServerUtils, Developers, Suggestions
-from .serializers import (MemberDataSerializer, DeveloperSerializer, SuggestionSerializer, TopMemberSerializer,
-                          SuggestionPutSerializer, ProjectStatsSerializer, RulesSerializer, ServerMetaSerializer)
+from .models import Member, Projects, Rules, Guild, Suggestions
+from .serializers import (MemberDataSerializer, SuggestionSerializer, TopMemberSerializer,
+                          SuggestionPutSerializer, ProjectStatsSerializer, RulesSerializer, GuildDataSerializer)
 
 
 class MemberDataView(APIView, ResponseMixin):
-    model = Members
+    model = Member
     serializers = MemberDataSerializer
 
     def get(self, request, item_id=None):
@@ -55,7 +55,7 @@ class MemberDataView(APIView, ResponseMixin):
 
 
 class DynamicMemberView(APIView, ResponseMixin):
-    model = Members
+    model = Member
     serializers = None
 
     def get(self, request, item_id=None):
@@ -156,42 +156,16 @@ class RulesDataView(APIView, ResponseMixin):
     model = Rules
     serializers = RulesSerializer
 
-    def get(self, request):
+    def get(self, request, item_id):
+        # TODO
         queryset = self.model.objects.all().order_by('number')
         serializer = self.serializers(queryset, many=True)
         return JsonResponse(serializer.data, safe=False)
 
 
-class DeveloperDataView(APIView, ResponseMixin):
-    model = Developers
-    serializers = DeveloperSerializer
-
-    def get(self, request, item_id=None):
-        if item_id is not None:
-            queryset = get_object_or_404(self.model, no=item_id)
-            serializer = self.serializers(queryset)
-            return Response(serializer.data, status=200)
-        else:
-            queryset = self.model.objects.all()
-            serializer = self.serializers(queryset, many=True)
-            return JsonResponse(serializer.data, safe=False, status=200)
-
-    def put(self, request, item_id=None):
-        if item_id is not None:
-            queryset = get_object_or_404(self.model, no=item_id)
-            serializer = self.serializers(queryset, data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=200)
-            else:
-                return self.json_response_500()
-        else:
-            return self.json_response_405()
-
-
-class ServerMetaView(APIView, ResponseMixin):
-    model = ServerUtils
-    serializers = ServerMetaSerializer
+class GuildDataView(APIView, ResponseMixin):
+    model = Guild
+    serializers = GuildDataSerializer
 
     def get(self, request, item_id):
         queryset = get_object_or_404(self.model, guild_id=item_id)

@@ -2,8 +2,8 @@ from django.urls import path, include
 from rest_framework import routers
 from .serializers import TopMemberSerializer, MemberMetaSerializer, MemberModSerializer
 from .views import (
-    DynamicMemberView, SuggestionDataView, MemberDataView, ServerMetaView,
-    DeveloperDataView, ProjectStatsView, RulesDataView
+    DynamicMemberView, SuggestionDataView, MemberDataView, GuildDataView,
+    ProjectStatsView, RulesDataView
 )
 
 router = routers.DefaultRouter()
@@ -16,11 +16,8 @@ urlpatterns = [
     path('private/suggestions/', SuggestionDataView.as_view()),
     path('private/suggestions/<int:item_id>/', SuggestionDataView.as_view()),
 
-    path('private/rules/', RulesDataView.as_view()),
-    path('private/server/meta/<int:item_id>/', ServerMetaView.as_view()),
-
-    path('private/developers/', DeveloperDataView.as_view()),
-    path('private/developers/<int:item_id>/', DeveloperDataView.as_view()),
+    path('private/rules/<int:item_id>/', RulesDataView.as_view()),
+    path('private/guild/<int:item_id>/', GuildDataView.as_view()),
 
     path('private/projects/', ProjectStatsView.as_view()),
     path('private/projects/<int:item_id>/', ProjectStatsView.as_view()),
