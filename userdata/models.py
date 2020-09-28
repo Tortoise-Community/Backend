@@ -18,15 +18,20 @@ class User(models.Model):
 
 class Guild(models.Model):
     id = models.BigIntegerField(primary_key=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, null=True)
     event_submission = models.BooleanField(default=False)
     bug_report = models.BooleanField(default=False)
     mod_mail = models.BooleanField(default=False)
     suggestions = models.BooleanField(default=False)
-    suggestion_message_id = models.BigIntegerField(default=0)
-
-    class Meta:
-        unique_together = (('id', 'suggestion_message_id'),)
+    suggestion_message_id = models.BigIntegerField(default=0, null=True, blank=True)
+    suggestion_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
+    verification_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
+    rules_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
+    roles_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
+    bot_log_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
+    member_log_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
+    update_log_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
+    deterrence_log_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
 
 
 class Role(models.Model):
