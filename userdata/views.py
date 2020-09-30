@@ -4,10 +4,12 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from utils.mixins import ResponseMixin
 from django.conf import settings
-from .models import Member, Projects, Rules, Guild, Suggestions, User
-from .serializers import (MemberDataSerializer, SuggestionSerializer, TopMemberSerializer, MemberSerializer,
+from .models import Member, Projects, Rules, Guild, Suggestions, User, Role, Infractions, MemberWarning, Strike
+from .serializers import (MemberDataSerializer, SuggestionSerializer,
                           SuggestionPutSerializer, ProjectStatsSerializer, RuleSerializer, GuildDataSerializer,
-                          GuildMetaSerializer, UserDataSerializer)
+                          GuildMetaSerializer, UserDataSerializer, RoleSerializer, InfractionSerializer,
+                          StrikeSerializer, WarningSerializer, UserPutSerializer)
+from utils.handlers import log_error
 
 
 class MemberDataView(APIView, ResponseMixin):
@@ -15,27 +17,31 @@ class MemberDataView(APIView, ResponseMixin):
     serializers = MemberDataSerializer
 
     def get(self, request, user_id=None, guild_id=None):
-        print(guild_id)
-        if guild_id is not None:
+        if guild_id and user_id is not None:
             queryset = get_object_or_404(self.model, user__id=user_id, guild__id=guild_id)
             serializer = self.serializers(queryset)
             return Response(serializer.data, status=200)
+        elif guild_id is not None:
+            queryset = self.model.objects.filter(guild__id=guild_id)
+            serializer = self.serializers(queryset, many=True)
+            return JsonResponse(serializer.data, safe=False, status=200)
         else:
             queryset = self.model.objects.all()
             serializer = self.serializers(queryset, many=True)
             return JsonResponse(serializer.data, safe=False, status=200)
 
-    def post(self, request, user_id=None):
-        # BUG: post does work
-        if user_id is not None:
+    def post(self, request, guild_id=None, user_id=None):
+        if guild_id or user_id is not None:
             return self.json_response_405()
         else:
-            serializer = MemberSerializer(data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=201)
-            else:
-                return self.json_response_400()
+            try:
+                user, created = User.objects.get_or_create(**request.data.pop("user"))
+                guild = Guild.objects.get(id=request.data.get("guild_id"))
+                Member.objects.create(user=user, guild=guild)
+            except Exception as e:
+                log_error(Exception, e)
+                return self.json_response_500()
+            return Response(status=201)
 
     def put(self, request, user_id=None, guild_id=None):
         if user_id is not None:
@@ -106,13 +112,15 @@ class SuggestionDataView(APIView, ResponseMixin):
             queryset = get_object_or_404(self.model, message_id=item_id)
             serializer = self.serializers(queryset)
             return Response(serializer.data, status=200)
-        else:
-            queryset = self.model.objects.filter(guild__id=guild_id, status="Under Review")
+        elif guild_id is not None:
+            queryset = self.model.objects.filter(guild__id=guild_id, status="R")
             serializer = self.serializers(queryset, many=True)
             return JsonResponse(serializer.data, safe=False, status=200)
+        else:
+            return self.json_response_405()
 
-    def post(self, request, item_id=None):
-        if item_id is not None:
+    def post(self, request, item_id=None, guild_id=None):
+        if item_id or guild_id is not None:
             return self.json_response_405()
         else:
             serializer = self.serializers(data=request.data)
@@ -121,7 +129,9 @@ class SuggestionDataView(APIView, ResponseMixin):
                 return Response(serializer.data, status=201)
             return self.json_response_400()
 
-    def put(self, request, item_id=None):
+    def put(self, request, item_id=None, guild_id=None):
+        if guild_id is not None:
+            self.json_response_405()
         if item_id is not None:
             queryset = get_object_or_404(self.model, message_id=item_id)
             serializer = SuggestionPutSerializer(queryset, data=request.data)
@@ -132,7 +142,9 @@ class SuggestionDataView(APIView, ResponseMixin):
         else:
             return self.json_response_405()
 
-    def delete(self, request, item_id=None):
+    def delete(self, request, item_id=None, guild_id=None):
+        if guild_id is not None:
+            self.json_response_405()
         if item_id is not None:
             queryset = get_object_or_404(self.model, message_id=item_id)
             if queryset:
@@ -167,7 +179,9 @@ class GuildDataView(APIView, ResponseMixin):
                 return Response(serializer.data, status=200)
             return self.json_response_400()
 
-    def put(self, request, guild_id):
+    def put(self, request, guild_id=None):
+        if guild_id is None:
+            return self.json_response_405()
         queryset = get_object_or_404(self.model, id=guild_id)
         serializer = GuildMetaSerializer(queryset, data=request.data)
         if serializer.is_valid():
@@ -186,8 +200,8 @@ class UserDataView(APIView, ResponseMixin):
             serializer = self.serializers(queryset)
             return Response(serializer.data, status=200)
         else:
-            queryset = self.model.objects.filter(member=True).order_by('-perks')[:20]
-            serializer = TopMemberSerializer(queryset, many=True)
+            queryset = self.model.objects.filter(verified=True).order_by('-perks')[:20]
+            serializer = self.serializers(queryset, many=True)
             return JsonResponse(serializer.data, safe=False, status=200)
 
     def post(self, request, user_id=None):
@@ -203,12 +217,13 @@ class UserDataView(APIView, ResponseMixin):
     def put(self, request, user_id=None):
         if user_id is not None:
             queryset = get_object_or_404(self.model, id=user_id)
-            serializer = self.serializers(queryset, data=request.data)
+            serializer = UserPutSerializer(queryset, data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=201)
             else:
                 return self.json_response_500()
+        return self.json_response_405()
 
     def delete(self, request, user_id=None):
         if user_id is not None:
@@ -222,5 +237,110 @@ class UserDataView(APIView, ResponseMixin):
             return self.json_response_405()
 
 
+class RolesDataView(APIView, ResponseMixin):
+    model = Role
+    serializers = RoleSerializer
+
+    def get(self, request, guild_id=None):
+        if guild_id is not None:
+            queryset = self.model.objects.filter(guild__id=guild_id).order_by("number")
+            serializer = self.serializers(queryset, many=True)
+            return JsonResponse(serializer.data, safe=False)
+        else:
+            queryset = self.model.objects.all()
+            serializer = self.serializers(queryset, many=True)
+            return JsonResponse(serializer.data, safe=False)
 
 
+class InfractionDataView(APIView, ResponseMixin):
+    model = Infractions
+    serializers = InfractionSerializer
+
+    def get(self, request, guild_id=None, user_id=None):
+        if user_id and guild_id is not None:
+            queryset = self.model.objects.filter(member__guild__id=guild_id,
+                                                 member__user_id=user_id)
+            serializer = self.serializers(queryset, many=True)
+            return Response(serializer.data, status=200)
+        elif guild_id is not None:
+            queryset = self.model.objects.filter(member__guild__id=guild_id)
+            serializer = self.serializers(queryset, many=True)
+            return Response(serializer.data, status=200)
+        else:
+            queryset = self.model.objects.all()
+            serializer = self.serializers(queryset, many=True)
+            return Response(serializer.data, status=200)
+
+    def post(self, request, guild_id=None, user_id=None):
+        if user_id is not None:
+            return self.json_response_405()
+        if guild_id is not None:
+            try:
+                member_id = request.data.pop("member_id")
+                mod_id = request.data.pop("moderator_id")
+                reason = request.data.pop("reason")
+            except Exception as e:
+                log_error(Exception, e)
+                return self.json_response_400()
+            try:
+                member = Member.get_instance(member_id, guild_id)
+                mod = Member.get_instance(mod_id, guild_id)
+                warning = MemberWarning.objects.create(member=member, moderator=mod, reason=reason)
+                self.model.objects.create(warning=warning, member=member, **request.data)
+            except Exception as e:
+                log_error(Exception, e)
+                return self.json_response_500()
+            return Response(status=201)
+        return self.json_response_405()
+
+
+class MemberWarningView(APIView, ResponseMixin):
+    model = MemberWarning
+    serializer = WarningSerializer
+
+    def get(self, request, guild_id=None, user_id=None):
+        if user_id and guild_id is not None:
+            queryset = self.model.objects.filter(member__guild__id=guild_id, member__user_id=user_id)
+            serialzier = self.serializer(queryset, many=True)
+            return Response(serialzier.data, status=200)
+        elif guild_id is not None:
+            queryset = self.model.objects.filter(member__guild__id=guild_id)
+            serialzier = self.serializer(queryset, many=True)
+            return Response(serialzier.data, status=200)
+        else:
+            return self.json_response_405()
+
+    def post(self, request, guild_id=None):
+        try:
+            member_id = request.data.pop("member_id")
+            mod_id = request.data.pop("moderator_id")
+        except Exception as e:
+            log_error(Exception, e)
+            return self.json_response_400()
+        try:
+            member = Member.get_instance(member_id, guild_id)
+            mod = Member.get_instance(mod_id, guild_id)
+            self.model.objects.create(member=member, moderator=mod, reason=request.data.get("reason"))
+            return Response(status=200)
+        except Exception as e:
+            log_error(Exception, e)
+            return self.json_response_500()
+
+
+class StrikeDataView(APIView, ResponseMixin):
+    model = Strike
+    serializer = StrikeSerializer
+
+    def get(self, request, user_id=None):
+        queryset = get_object_or_404(self.model, user__id=user_id)
+        serializer = self.serializer(queryset)
+        return Response(serializer.data, status=200)
+
+    def put(self, request, user_id=None):
+        if user_id is not None:
+            return self.json_response_405()
+        serializer = self.serializer(instance=None, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return self.json_response_400()

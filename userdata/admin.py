@@ -1,11 +1,14 @@
 from django.contrib import admin
-from .models import Member, Projects, Rules, Suggestions, User, Guild, Role
+from userdata import models
 
 # Register your models here.
-admin.site.register(Member)
-admin.site.register(Projects)
-admin.site.register(Rules)
-admin.site.register(Suggestions)
-admin.site.register(User)
-admin.site.register(Guild)
-admin.site.register(Role)
+admin.site.register(models.Member)
+admin.site.register(models.Projects)
+admin.site.register(models.Rules)
+admin.site.register(models.Suggestions)
+admin.site.register(models.User)
+admin.site.register(models.Guild)
+admin.site.register(models.Role)
+admin.site.register(models.Infractions)
+admin.site.register(models.MemberWarning)
+admin.site.register(models.Strike)

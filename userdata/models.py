@@ -1,6 +1,7 @@
 from django.db import models
 from utils.misc import status_css_class, empty_array
 from django.contrib.postgres.fields import ArrayField
+from django.shortcuts import get_object_or_404
 
 
 class User(models.Model):
@@ -36,11 +37,12 @@ class Guild(models.Model):
 
 class Role(models.Model):
     id = models.BigIntegerField(primary_key=True)
+    number = models.IntegerField(blank=True, null=True)
     emoji_id = models.BigIntegerField(default=0)
     guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="roles")
 
     class Meta:
-        unique_together = (('id', 'guild'), ('id', 'emoji_id'))
+        unique_together = (('id', 'guild'), ('id', 'emoji_id'), ('number', 'guild'))
 
 
 class Member(models.Model):
@@ -56,15 +58,22 @@ class Member(models.Model):
     class Meta:
         unique_together = (('user', 'guild'),)
 
+    @classmethod
+    def get_instance(cls, member_id: int, guild_id: int):
+        return get_object_or_404(cls, user__id=member_id, guild_id=guild_id)
+
 
 class Strike(models.Model):
     ads = models.IntegerField(default=0)
     spam = models.IntegerField(default=0)
     bad_words = models.IntegerField(default=0)
-    member: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="strikes")
+    user: User = models.ForeignKey(User, on_delete=models.CASCADE, related_name="strikes")
 
 
 class MemberWarning(models.Model):
+    """
+    :format: {"member"}
+    """
     reason = models.CharField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
     moderator: Member = models.ForeignKey(Member, null=True, on_delete=models.SET_NULL, related_name="issued_warnings")
@@ -72,6 +81,9 @@ class MemberWarning(models.Model):
 
 
 class Infractions(models.Model):
+    """"
+    {"warning_data": {"member":123123, "moderator":12312312, "reason":"text warning"}}
+    """
     INFRACTIONS = (("Short Mute", "SM"),
                    ("Long Temporary Mute", "LM"),
                    ("Kick", "SK"),
@@ -107,6 +119,9 @@ class Rules(models.Model):
     statement = models.TextField(blank=True, null=True)
     alias = ArrayField(models.CharField(max_length=20), default=empty_array)
 
+    class Meta:
+        unique_together = (('number', 'guild'),)
+
 
 class Suggestions(models.Model):
     STATUS = (("Under Review", "R"),
@@ -114,7 +129,7 @@ class Suggestions(models.Model):
               ("Denied", "D")
               )
     message_id = models.BigIntegerField(primary_key=True)
-    author: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='suggestion_author')
+    author: User = models.ForeignKey(User, on_delete=models.CASCADE, related_name='suggestion_author')
     guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="suggestion_guild")
     brief = models.CharField(max_length=2000)
     status = models.CharField(max_length=20, choices=STATUS, default="R")
