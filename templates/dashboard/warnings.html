@@ -1,0 +1,93 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Page Blank {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">Server Warnings</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="javascript:">Server</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:">Warnings</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                    <!-- [ Hover-table ] start -->
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Warnings Data</h5>
+                            </div>
+                            <div class="card-block table-border-style">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>User id</th>
+                                                <th>Username</th>
+                                                <th>Reason</th>
+                                                <th>Moderator</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">123456790121212</th>
+                                                <td>Mark #4323</td>
+                                                <td>Advertisement</td>
+                                                <td>cappe #1234</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">123456790121212</th>
+                                                <td>Mark #4323</td>
+                                                <td>Advertisement</td>
+                                                <td>cappe #1234</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">123456790121212</th>
+                                                <td>Mark #4323</td>
+                                                <td>Advertisement</td>
+                                                <td>cappe #1234</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">123456790121212</th>
+                                                <td>Mark #4323</td>
+                                                <td>Advertisement</td>
+                                                <td>cappe #1234</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Hover-table ] end -->
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
