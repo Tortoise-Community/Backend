@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 
 from .handlers import SocketHandler, WebhookHandler
 from userdata.models import ServerUtils, Rules
@@ -19,5 +19,6 @@ def reload_serverutils(sender, **kwargs): # noqa
     bot_socket.signal("server_meta")
 
 
-post_save.connect(reload_rules, sender=Rules, dispatch_uid="news")
+post_save.connect(reload_rules, sender=Rules, dispatch_uid="rules")
+post_delete.connect(reload_rules, sender=Rules, dispatch_uid="rule")
 post_save.connect(reload_serverutils, sender=ServerUtils, dispatch_uid="server")

@@ -42,6 +42,7 @@ class Projects(models.Model):
 
 class Rules(models.Model):
     number = models.IntegerField(blank=True, null=True)
+    name = models.CharField(max_length=20, null=True, default="Rule name")
     statement = models.TextField(blank=True, null=True)
     alias = ArrayField(models.CharField(max_length=20), null=True, default=empty_array, blank=True)
 
