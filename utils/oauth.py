@@ -12,10 +12,10 @@ class Oauth(object):
 
     def __init__(self, redirect_uri="https://www.tortoisecommunity.com/verification/handlers/"):
         self.redirect_uri = redirect_uri
-        self.discord_login_url = "https://discord.com/api/oauth2/authorize?client_id={}&" \
-                        "redirect_uri={}&response_type=code&scope={}".format(self.client_id,
-                                                                             self.redirect_uri,
-                                                                             self.scope)
+        self.discord_login_url = "https://discord.com/api/oauth2/authorize?client_id={}" \
+                                 "&redirect_uri={}&response_type=code&scope={}".format(self.client_id,
+                                                                                       self.redirect_uri,
+                                                                                       self.scope)
 
     def get_access_token(self, code):
         payload = {

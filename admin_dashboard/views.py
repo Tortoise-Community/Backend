@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login, authenticate
 from .forms import LoginForm
 from utils.oauth import Oauth
-
+# from userdata.models import Admins
 oauth = Oauth(redirect_uri="http://dashboard.tortoisecommunity.co:8000/login/")
 
 
@@ -25,7 +25,7 @@ class LoginView(View):
             self.user_json = oauth.get_user_json(self.access_token)
             self.user_id = self.user_json.get('id')
             self.email = self.user_json.get('email')
-            print(self.email)
+
         return render(request, self.template_name, {"Oauth": oauth})
 
     def post(self, request):
