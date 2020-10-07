@@ -18,11 +18,14 @@ from django.urls import path, re_path
 from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import LoginView, PanelView, ServerView, BotView
-
+from .views import LoginView, GuildPanelView, ServerView, BotView, logout_request, RegisterView
+from django.contrib.auth.views import LogoutView
 urlpatterns = [
-    path('', LoginView.as_view(), name='login'),
-    url(r'^panel/', PanelView.as_view(), name='panel'),
+    # path('', LoginView.as_view(), name='login'),
+    url(r'^login/', LoginView.as_view(), name='login'),
+    url(r'^register/', RegisterView.as_view(), name='register'),
+    url(r'^guild/<int:guild_id>/', GuildPanelView.as_view(), name='panel'),
+    url(r'^logout/', LogoutView.as_view(), name='logout'),
     path('server/<str:template_name>', ServerView.as_view(), name='server'),
     path('bot/<str:template_name>', BotView.as_view(), name='server'),
 ]

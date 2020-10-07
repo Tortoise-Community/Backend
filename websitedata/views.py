@@ -13,6 +13,8 @@ from utils.handlers import EmailHandler, log_error
 from websitedata.models import Events
 from userdata.models import Developers, Projects, Members
 
+oauth = Oauth()
+
 
 class ProjectView(ModelDataMixin, View):
     model = Projects
@@ -62,7 +64,7 @@ class VerificationHandlerView(ModelDataMixin, View):
 
     template_name = 'verification_handler.html'
     verified = False
-    context = {"Oauth": Oauth}
+    context = {"Oauth": oauth}
     user_json = None
     access_token = None
     user_id = None
@@ -72,8 +74,8 @@ class VerificationHandlerView(ModelDataMixin, View):
         code = request.GET.get('code')
         self.email = None
         if code is not None:
-            self.access_token = Oauth.get_access_token(code)
-            self.user_json = Oauth.get_user_json(self.access_token)
+            self.access_token = oauth.get_access_token(code)
+            self.user_json = oauth.get_user_json(self.access_token)
             self.user_id = self.user_json.get('id')
             self.email = self.user_json.get('email')
         self.context['emailerror'] = False  # noqa
@@ -139,7 +141,7 @@ class VerificationHandlerView(ModelDataMixin, View):
 
 class VerificationView(ModelDataMixin, View):
     template_name = 'verification.html'
-    context = {"Oauth": Oauth}
+    context = {"Oauth": oauth}
 
     def get(self, request):
         # status = request.GET.get('status')

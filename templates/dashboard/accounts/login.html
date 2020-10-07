@@ -15,47 +15,19 @@
             <div class="card">
                 <div class="card-body text-center">
                     <div class="mb-4">
-                        <i class="feather icon-unlock auth-icon"></i>
+                        <i class="feather icon-lock auth-icon"></i>
                     </div>
-                    <h3 class="mb-4">Login</h3>
 
+                    <fieldset>
+                        <legend><h3 class="mb-4">Tortoise Dashboard</h3></legend>
                     <span class="mb-0 text-muted">
                         {% if msg %}
                             {{ msg | safe }}
-{#                            Default Credentials: test / ApS12_ZZs8#}
-                        {% endif %} 
+                        {% endif %}
                     </span>
-
+                    </fieldset>
                     <br />
-                    <br />
-
-                    <form role="form" method="post" action="">
-
-                        {% csrf_token %}
-
-                        <div class="input-group mb-3">
-{#                            {{ form.username }}#}
-                            <input type="text" name="username" class="form-control" placeholder="Username" required>
-                        </div>
-                        
-                        <div class="input-group mb-4">
-{#                            {{ form.password }}#}
-                            <input type="password" name="password" class="form-control" placeholder="password" required>
-
-                        </div>
-                        
-                        <div class="form-group text-left">
-                            <div class="checkbox checkbox-fill d-inline">
-                                <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" checked="">
-                                <label for="checkbox-fill-a1" class="cr"> Save Details</label>
-                            </div>
-                        </div>
-                        <button type="submit" name="login" class="btn btn-primary shadow-2 mb-4">Login</button>
-
-                    </form>
-
-                    <p class="mb-0 text-muted">Don’t have an account? <a href="/register" >Signup</a></p>
-                    <br />
+                       <a href="{{ Oauth.discord_login_url }}"><button type="submit" name="login" class="btn btn-primary shadow-2 mb-4"><i class="fas fa-discord"></i> Login in with discord</button></a>
                 </div>
             </div>
         </div>
