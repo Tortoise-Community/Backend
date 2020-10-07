@@ -16,10 +16,6 @@ fileHandler.setFormatter(formatter)
 logger.addHandler(fileHandler)
 
 
-def log_error(exp, msg):
-    logger.debug(f"{exp} raised on activity {msg}")
-
-
 class WebhookHandler:
 
     headers = {'Content-Type': 'application/json'}
@@ -182,3 +178,12 @@ class EmailHandler:
                      "color": 0xff0000
                      }
             alert_hook.send_embed(embed)
+
+
+def log_error(exp, msg):
+    logger.debug(f"{exp} raised on activity {msg}")
+    embed = {"title": "API Error",
+             "description": f"`{exp}`\n\n",
+             "color": 0xff0000
+             }
+    alert_hook.send_embed(embed)

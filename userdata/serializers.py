@@ -1,56 +1,34 @@
 from rest_framework import serializers
-from .models import Members, ServerUtils, Suggestions, Rules, Projects, Developers
+from .models import User, Member, Guild, Suggestions, Rules, Projects, Role, MemberWarning, Strike, Infractions
+from django.contrib.auth.validators import UnicodeUsernameValidator
 
-# REST API GENERIC MODEL SERIALIZERS
 
-
-class MemberDataSerializer(serializers.ModelSerializer):
+class UserDataSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Members
-        exclude = ('email',)
+        model = User
+        exclude = ("email",)
+        extra_kwargs = {
+            'id': {
+                'validators': [UnicodeUsernameValidator()],
+            }
+        }
 
 
-class RulesSerializer(serializers.ModelSerializer):
+class GuildDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Guild
+        fields = "__all__"
+        extra_kwargs = {
+            'id': {
+                'validators': [UnicodeUsernameValidator()],
+            }
+        }
+
+
+class RuleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rules
         fields = ('number', 'name', 'alias', 'statement')
-
-
-class SuggestionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Suggestions
-        fields = '__all__'
-
-
-class SuggestionPutSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Suggestions
-        fields = ('status', 'reason')
-
-
-class ServerMetaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ServerUtils
-        fields = ('event_submission', 'mod_mail', 'bug_report',
-                  'suggestions', 'suggestion_message_id', 'bot_status')
-
-
-class MemberMetaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Members
-        fields = ('join_date', 'leave_date', 'mod_mail', 'verified', 'member', 'roles')
-
-
-class MemberModSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Members
-        fields = ('warnings', 'muted_until', 'strikes', 'perks')
-
-
-class TopMemberSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Members
-        fields = ('user_id', 'name', 'tag', 'perks')
 
 
 class ProjectStatsSerializer(serializers.ModelSerializer):
@@ -59,7 +37,61 @@ class ProjectStatsSerializer(serializers.ModelSerializer):
         fields = ('pk', 'stars', 'forks', 'commits', 'contributors', 'github')
 
 
-class DeveloperSerializer(serializers.ModelSerializer):
+class SuggestionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Developers
-        exclude = ('no',)
+        model = Suggestions
+        fields = '__all__'
+
+
+class GuildMetaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Guild
+        exclude = ("id", "name")
+
+
+class MemberDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Member
+        exclude = ("user", "guild")
+
+
+class SuggestionPutSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Suggestions
+        fields = ('status', 'reason')
+
+
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Role
+        fields = "__all__"
+
+
+class WarningSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MemberWarning
+        exclude = ("id", "date")
+
+
+class StrikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Strike
+        exclude = ("id",)
+
+    def update(self, instance, validated_data):
+        instance = Strike.objects.update_or_create(**validated_data)
+        return instance
+
+
+class InfractionSerializer(serializers.ModelSerializer):
+    warning = WarningSerializer()
+
+    class Meta:
+        model = Infractions
+        exclude = ("member",)
+
+
+class UserPutSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        exclude = ("name", "email", "tag", "id")
