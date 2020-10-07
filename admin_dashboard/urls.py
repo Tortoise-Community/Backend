@@ -18,9 +18,11 @@ from django.urls import path, re_path
 from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import LoginView, PanelView
+from .views import LoginView, PanelView, ServerView, BotView
 
 urlpatterns = [
     path('', LoginView.as_view(), name='login'),
     url(r'^panel/', PanelView.as_view(), name='panel'),
+    path('server/<str:template_name>', ServerView.as_view(), name='server'),
+    path('bot/<str:template_name>', BotView.as_view(), name='server'),
 ]

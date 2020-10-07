@@ -17,3 +17,17 @@ class PanelView(View):
 
     def get(self, request):
         return render(request, self.template_name)
+
+
+class ServerView(View):
+    context = {}
+
+    def get(self, request, template_name):
+        return render(request, f"dashboard/{template_name}.html")
+
+
+class BotView(View):
+    context = {}
+
+    def get(self, request, template_name):
+        return render(request, f"dashboard/bot-{template_name}.html")
