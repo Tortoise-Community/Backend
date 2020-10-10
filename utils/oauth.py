@@ -5,13 +5,14 @@ from django.conf import settings
 class Oauth(object):
     client_id = settings.OAUTH_CLIENT_ID
     client_secret = settings.OAUTH_CLIENT_SECRET
-    scope = "identify%20email"
     redirect_uri = "https://www.tortoisecommunity.com/verification/handlers/"
     discord_token_url = "https://discord.com/api/oauth2/token"
     discord_api_url = "https://discord.com/api"
 
-    def __init__(self, redirect_uri="https://www.tortoisecommunity.com/verification/handlers/"):
+    def __init__(self, redirect_uri="https://www.tortoisecommunity.com/verification/handlers/",
+                 scope="identify%20email"):
         self.redirect_uri = redirect_uri
+        self.scope = scope
         self.discord_login_url = "https://discord.com/api/oauth2/authorize?client_id={}" \
                                  "&redirect_uri={}&response_type=code&scope={}".format(self.client_id,
                                                                                        self.redirect_uri,

@@ -5,8 +5,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login, authenticate
 from .forms import LoginForm
 from utils.oauth import Oauth
-# from userdata.models import Admins
-oauth = Oauth(redirect_uri="http://dashboard.tortoisecommunity.co:8000/login/")
+from utils.encryption import Encryption
+from userdata.models import Admins
+oauth = Oauth(redirect_uri="http://dashboard.tortoisecommunity.co:8000/login/", scope="guilds%20identify%20email")
+encryption = Encryption()
 
 
 class LoginView(View):
@@ -22,10 +24,14 @@ class LoginView(View):
         self.email = None
         if code is not None:
             self.access_token = oauth.get_access_token(code)
+            print(self.access_token)
             self.user_json = oauth.get_user_json(self.access_token)
             self.user_id = self.user_json.get('id')
             self.email = self.user_json.get('email')
-
+            print(self.user_json)
+        if self.user_id and self.email is not None:
+            user = Admins.objects.filter(user__id=self.user_id)
+            password = encryption.encrypted_user_pass(self.email, self.user_id)
         return render(request, self.template_name, {"Oauth": oauth})
 
     def post(self, request):
