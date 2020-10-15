@@ -2,8 +2,8 @@ from django.db import models
 from utils.misc import status_css_class, empty_array
 from django.contrib.postgres.fields import ArrayField
 from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import User as AuthUser
-
+# from django.contrib.auth.models import User as AuthUser
+from django.contrib.auth import settings
 
 class User(models.Model):
     id = models.BigIntegerField(primary_key=True)
@@ -34,6 +34,10 @@ class Guild(models.Model):
     member_log_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
     update_log_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
     deterrence_log_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
+
+    @classmethod
+    def get_id_list(cls):
+        return [obj.id for obj in cls.objects.all()]
 
 
 class Role(models.Model):
@@ -140,6 +144,6 @@ class Suggestions(models.Model):
 
 
 class Admins(models.Model):
-    authuser = models.OneToOneField(AuthUser, on_delete=models.CASCADE)
+    authuser = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="auth")
     user: User = models.ForeignKey(User, on_delete=models.CASCADE)
     guild: Guild = models.ManyToManyField(Guild)

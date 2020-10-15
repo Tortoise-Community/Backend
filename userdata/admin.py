@@ -1,7 +1,6 @@
 from django.contrib import admin
 from userdata import models
 
-# Register your models here.
 admin.site.register(models.Member)
 admin.site.register(models.Projects)
 admin.site.register(models.Rules)

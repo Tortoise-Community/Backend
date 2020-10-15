@@ -36,12 +36,19 @@ class Oauth(object):
         json = access_token.json()
         return json.get("access_token")
 
-    def get_user_json(self, access_token):
-        url = self.discord_api_url + '/users/@me'
+    @staticmethod
+    def get(access_token, endpoint):
 
         headers = {
             "Authorization": "Bearer {}".format(access_token)
         }
-        user_object = requests.get(url=url, headers=headers)
-        user_json = user_object.json()
-        return user_json
+        response_object = requests.get(url=endpoint, headers=headers)
+        return response_object.json()
+
+    def get_user_json(self, access_token):
+        url = self.discord_api_url + '/users/@me'
+        return self.get(access_token, endpoint=url)
+
+    def get_guild_info_json(self, access_token):
+        url = self.discord_api_url + '/users/@me/guilds'
+        return self.get(access_token, endpoint=url)

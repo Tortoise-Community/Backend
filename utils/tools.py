@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db.models.signals import post_save, post_delete
 
 from .handlers import SocketHandler, WebhookHandler
-from userdata.models import ServerUtils, Rules
+from userdata.models import Rules
 
 webhook = WebhookHandler(settings.WEBHOOK_ID,
                          settings.WEBHOOK_SECRET)
@@ -21,4 +21,4 @@ def reload_serverutils(sender, **kwargs): # noqa
 
 post_save.connect(reload_rules, sender=Rules, dispatch_uid="rules")
 post_delete.connect(reload_rules, sender=Rules, dispatch_uid="rule")
-post_save.connect(reload_serverutils, sender=ServerUtils, dispatch_uid="server")
+# post_save.connect(reload_serverutils, sender=ServerUtils, dispatch_uid="server")
