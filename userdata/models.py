@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 # from django.contrib.auth.models import User as AuthUser
 from django.contrib.auth import settings
 
+
 class User(models.Model):
     id = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=32)

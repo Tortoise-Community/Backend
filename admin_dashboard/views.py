@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login, authenticate
 from utils.oauth import Oauth
 from utils.encryption import Encryption
-from userdata.models import Guild, Admins
+from userdata.models import Admins
 from utils.operations import create_admin, update_guilds, get_admin_guild_list
 oauth = Oauth(redirect_uri="http://dashboard.tortoisecommunity.co:8000/login/", scope="guilds%20identify%20email")
 encryption = Encryption()
@@ -51,29 +51,7 @@ class GuildPanelView(View):
         return render(request, self.template_name)
 
 
-class ServerView(View):
-    context = {}
-
-    def get(self, request, template_name):
-        return render(request, f"dashboard/{template_name}.html")
-
-
-class BotView(View):
-    context = {}
-
-    def get(self, request, template_name):
-        return render(request, f"dashboard/bot-{template_name}.html")
-
-
 @login_required
 def logout_request(request):
     logout(request)
     return redirect('login')
-
-
-class RegisterView(View):
-    template_name = "dashboard/accounts/register.html"
-    context = {}
-
-    def get(self, request):
-        return render(request, self.template_name)
