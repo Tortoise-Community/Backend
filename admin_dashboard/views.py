@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
-# from django.http import HttpResponse
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login, authenticate
-from .forms import LoginForm
 from utils.oauth import Oauth
-# from userdata.models import Admins
-oauth = Oauth(redirect_uri="http://dashboard.tortoisecommunity.co:8000/login/")
+from utils.encryption import Encryption
+from userdata.models import Admins
+from utils.operations import create_admin, update_guilds, get_admin_guild_list
+oauth = Oauth(redirect_uri="http://dashboard.tortoisecommunity.co:8000/login/", scope="guilds%20identify%20email")
+encryption = Encryption()
 
 
 class LoginView(View):
@@ -25,18 +26,21 @@ class LoginView(View):
             self.user_json = oauth.get_user_json(self.access_token)
             self.user_id = self.user_json.get('id')
             self.email = self.user_json.get('email')
-
-        return render(request, self.template_name, {"Oauth": oauth})
-
-    def post(self, request):
-        form = LoginForm(request.POST or None)
-        if form.is_valid():
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
-            user = authenticate(username=username, password=password)
+        if self.user_id and self.email is not None:
+            password = encryption.encrypted_user_pass(self.user_id, self.email)
+            guilds = oauth.get_guild_info_json(self.access_token)
+            admin_guilds = get_admin_guild_list(guilds)
+            if len(admin_guilds) == 0:
+                return  # TODO: DELETE EXISTING CREDENTIALS AND SEND MESSAGE
+            user = authenticate(username=self.user_id, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("/panel")
+                admin_user = Admins.objects.get(user_id=self.user_id)
+                update_guilds(admin_user, admin_guilds)
+            else:
+                create_admin(user_json=self.user_json, admin_guilds=admin_guilds, password=password)
+        # TODO: IMPLEMENT AUTHENTICATION
+        return render(request, self.template_name, {"Oauth": oauth})
 
 
 class GuildPanelView(View):
@@ -47,29 +51,7 @@ class GuildPanelView(View):
         return render(request, self.template_name)
 
 
-class ServerView(View):
-    context = {}
-
-    def get(self, request, template_name):
-        return render(request, f"dashboard/{template_name}.html")
-
-
-class BotView(View):
-    context = {}
-
-    def get(self, request, template_name):
-        return render(request, f"dashboard/bot-{template_name}.html")
-
-
 @login_required
 def logout_request(request):
     logout(request)
     return redirect('login')
-
-
-class RegisterView(View):
-    template_name = "dashboard/accounts/register.html"
-    context = {}
-
-    def get(self, request):
-        return render(request, self.template_name)
