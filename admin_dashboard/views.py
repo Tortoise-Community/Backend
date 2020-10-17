@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from utils.oauth import Oauth
 from utils.encryption import Encryption
-from userdata.models import Admins, Guild, MemberWarning
+from userdata.models import Admins, Guild, MemberWarning, Infractions
 from utils.operations import create_admin, update_guilds, get_admin_guild_list
 oauth = Oauth(redirect_uri="http://dashboard.tortoisecommunity.co:8000/", scope="guilds%20identify%20email")
 encryption = Encryption()
@@ -74,19 +74,19 @@ class GuildRolesView(View, LoginRequiredMixin):
 
 class GuildInfractionView(View, LoginRequiredMixin):
     template_name = "dashboard/infractions.html"
-    context = {}
+    model = Infractions
 
     def get(self, request, guild_id):
-        # guild = Guild.objects.get(id=guild_id)
-        return render(request, self.template_name)
+        infractions = self.model.objects.filter(member__guild__id=guild_id)
+        return render(request, self.template_name, {"infractions": infractions})
 
 
 class GuildWarningsView(View, LoginRequiredMixin):
     template_name = "dashboard/warnings.html"
-    context = {}
+    model = MemberWarning
 
     def get(self, request, guild_id):
-        warnings = MemberWarning.objects.filter(member__guild__id=guild_id)
+        warnings = self.model.objects.filter(member__guild__id=guild_id)
         return render(request, self.template_name, {"warnings": warnings})
 
 

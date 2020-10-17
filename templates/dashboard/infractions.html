@@ -50,57 +50,25 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            {% for infraction in infractions %}
                                                 <tr class="unread">
                                                     <td>
-                                                        <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="/static/dashboard/images/user/avatar-3.jpg" alt="activity-user">Silje Larsen</h6>
+                                                        <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="{{ infraction.member.user.avatar }}" alt="activity-user">{{ infraction.member.user.name }} #{{ infraction.member.user.tag }}</h6>
                                                     </td>
                                                     <td>
-                                                        <h6 class="m-0 text-c-purple"><i class="fas fa-circle text-c-red f-10 m-r-15"></i>Ban</h6>
+                                                        <h6 class="m-0 text-c-purple"><i class="fas fa-circle text-c-red f-10 m-r-15"></i>{{ infraction.type }}</h6>
                                                     </td>
                                                     <td>
-                                                        <h6 class="mb-1">Self Advertisment</h6>
-                                                        <p class="m-0">[mod] cappe #1234</p>
+                                                        <h6 class="mb-1">{{ infraction.warning.reason }}</h6>
+                                                        <p class="m-0">[mod] {{ infraction.warning.moderator.user.name }} #{{ infraction.warning.moderator.user.tag }}</p>
                                                     </td>
 
                                                     <td>
-                                                        <h6 class="text-muted">11 MAY 12:56</h6>
+                                                        <h6 class="text-muted">{{ infraction.warning.date }}</h6>
                                                     </td>
-                                                    <td><a href="#!" class="label theme-bg2 text-white f-12">Revoke</a></td>
+                                                    <td><a href="#" class="label theme-bg2 text-white f-12">Revoke</a></td>
                                                 </tr>
-                                                <tr class="unread">
-                                                    <td>
-                                                        <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="/static/dashboard/images/user/avatar-3.jpg" alt="activity-user">Silje Larsen</h6>
-                                                    </td>
-                                                    <td>
-                                                        <h6 class="m-0 text-c-purple"><i class="fas fa-circle text-c-blue f-10 m-r-15"></i>Kick</h6>
-                                                    </td>
-                                                    <td>
-                                                        <h6 class="mb-1">Self Advertisment</h6>
-                                                        <p class="m-0">[mod] cappe #1234</p>
-                                                    </td>
-
-                                                    <td>
-                                                        <h6 class="text-muted">11 MAY 12:56</h6>
-                                                    </td>
-                                                    <td><a href="#!" class="label theme-bg2 text-white f-12">Revoke</a></td>
-                                                </tr>
-                                                <tr class="unread">
-                                                    <td>
-                                                        <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="/static/dashboard/images/user/avatar-3.jpg" alt="activity-user">Silje Larsen</h6>
-                                                    </td>
-                                                    <td>
-                                                        <h6 class="m-0 text-c-purple"><i class="fas fa-circle text-c-red f-10 m-r-15"></i>Ban</h6>
-                                                    </td>
-                                                    <td>
-                                                        <h6 class="mb-1">Self Advertisment</h6>
-                                                        <p class="m-0">[mod] cappe #1234</p>
-                                                    </td>
-
-                                                    <td>
-                                                        <h6 class="text-muted">11 MAY 12:56</h6>
-                                                    </td>
-                                                    <td><a href="#!" class="label theme-bg2 text-white f-12">Revoke</a></td>
-                                                </tr>
+                                            {% endfor %}
                                             </tbody>
                                         </table>
                                     </div>
