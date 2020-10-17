@@ -2,11 +2,13 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login, authenticate
+from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
 from utils.oauth import Oauth
 from utils.encryption import Encryption
-from userdata.models import Admins
+from userdata.models import Admins, Guild, MemberWarning
 from utils.operations import create_admin, update_guilds, get_admin_guild_list
-oauth = Oauth(redirect_uri="http://dashboard.tortoisecommunity.co:8000/login/", scope="guilds%20identify%20email")
+oauth = Oauth(redirect_uri="http://dashboard.tortoisecommunity.co:8000/", scope="guilds%20identify%20email")
 encryption = Encryption()
 
 
@@ -30,29 +32,69 @@ class LoginView(View):
             password = encryption.encrypted_user_pass(self.user_id, self.email)
             guilds = oauth.get_guild_info_json(self.access_token)
             admin_guilds = get_admin_guild_list(guilds)
-            print(admin_guilds)
             if len(admin_guilds) == 0:
                 return  # TODO: DELETE EXISTING CREDENTIALS AND SEND MESSAGE
             user = authenticate(username=self.user_id, password=password)
             if user is not None:
-                login(request, user)
                 admin_user = Admins.objects.get(user_id=self.user_id)
                 update_guilds(admin_user, admin_guilds)
             else:
-                create_admin(user_json=self.user_json, admin_guilds=admin_guilds, password=password)
-        # TODO: IMPLEMENT AUTHENTICATION
+                user = create_admin(user_json=self.user_json, admin_guilds=admin_guilds, password=password)
+            login(request, user)
+            return redirect("/guild/{}/".format(admin_guilds[0]))
         return render(request, self.template_name, {"Oauth": oauth})
 
 
-class GuildPanelView(View):
+class GuildPanelView(View, LoginRequiredMixin):
     template_name = "dashboard/index.html"
     context = {}
 
-    def get(self, request):
+    def get(self, request, guild_id):
+        # guild = Guild.objects.get(id=guild_id)
         return render(request, self.template_name)
+
+
+class GuildRulesView(View, LoginRequiredMixin):
+    template_name = "dashboard/rules.html"
+    context = {}
+
+    def get(self, request, guild_id):
+        # guild = Guild.objects.get(id=guild_id)
+        return render(request, self.template_name)
+
+
+class GuildRolesView(View, LoginRequiredMixin):
+    template_name = "dashboard/roles.html"
+    context = {}
+
+    def get(self, request, guild_id):
+        # guild = Guild.objects.get(id=guild_id)
+        return render(request, self.template_name)
+
+
+class GuildInfractionView(View, LoginRequiredMixin):
+    template_name = "dashboard/infractions.html"
+    context = {}
+
+    def get(self, request, guild_id):
+        # guild = Guild.objects.get(id=guild_id)
+        return render(request, self.template_name)
+
+
+class GuildWarningsView(View, LoginRequiredMixin):
+    template_name = "dashboard/warnings.html"
+    context = {}
+
+    def get(self, request, guild_id):
+        warnings = MemberWarning.objects.filter(member__guild__id=guild_id)
+        return render(request, self.template_name, {"warnings": warnings})
 
 
 @login_required
 def logout_request(request):
     logout(request)
     return redirect('login')
+
+
+def responce_404(request):
+    return render(request, "dashboard/page-404.html")

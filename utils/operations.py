@@ -25,3 +25,4 @@ def create_admin(user_json: dict, admin_guilds: list, password: str):
                                              )
     admin_user = Admins.objects.create(authuser=auth_user, user_id=user_json["id"])
     update_guilds(admin_user, admin_guilds)
+    return auth_user

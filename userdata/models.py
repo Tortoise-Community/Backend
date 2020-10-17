@@ -97,7 +97,7 @@ class Infractions(models.Model):
                    ("Permanent Ban", "PB")
                    )
     member: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="infractions")
-    warning: MemberWarning = models.ForeignKey(MemberWarning, on_delete=models.CASCADE)
+    warning: MemberWarning = models.ForeignKey(MemberWarning, on_delete=models.CASCADE, related_name="infraction")
     type = models.CharField(max_length=30, choices=INFRACTIONS, default="SM")
     revoke_date = models.DateTimeField(null=True)
 
@@ -119,9 +119,9 @@ class Projects(models.Model):
 
 class Rules(models.Model):
     guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="guild_rule")
-    number = models.IntegerField(blank=True, null=True)
-    name = models.CharField(max_length=20, null=True, default="Rule name")
-    statement = models.TextField(blank=True, null=True)
+    number = models.IntegerField(blank=True)
+    name = models.CharField(max_length=20, default="Rule name")
+    statement = models.TextField(blank=True)
     alias = ArrayField(models.CharField(max_length=20), default=empty_array)
 
     class Meta:
