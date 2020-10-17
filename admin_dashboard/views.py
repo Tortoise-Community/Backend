@@ -30,6 +30,7 @@ class LoginView(View):
             password = encryption.encrypted_user_pass(self.user_id, self.email)
             guilds = oauth.get_guild_info_json(self.access_token)
             admin_guilds = get_admin_guild_list(guilds)
+            print(admin_guilds)
             if len(admin_guilds) == 0:
                 return  # TODO: DELETE EXISTING CREDENTIALS AND SEND MESSAGE
             user = authenticate(username=self.user_id, password=password)

@@ -4,19 +4,15 @@ from userdata.models import Admins, Guild
 
 def get_admin_guild_list(guilds):
     tortoise_guilds = Guild.get_id_list()
-    admin_guilds = []
-    for guild in guilds:
-        if int(guild["id"]) in tortoise_guilds:
-            if int(guild["permissions"]) & 8:
-                admin_guilds.append(guild["id"])
-    return admin_guilds
+    return [
+        guild["id"] for guild in guilds if int(guild["permissions"]) & 8 and int(guild["id"]) in tortoise_guilds
+    ]
 
 
 def update_guilds(instance: Admins, guild_list: list):
     if instance.guild is not None:
         instance.guild.clear()
-    for guild in guild_list:
-        instance.guild.add(guild)
+    instance.guild.add(*guild_list)
     instance.save()
 
 
