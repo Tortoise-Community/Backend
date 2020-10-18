@@ -1,8 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login, authenticate
-from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from utils.oauth import Oauth
 from utils.encryption import Encryption
@@ -75,10 +74,28 @@ class GuildRolesView(View, LoginRequiredMixin):
 class GuildInfractionView(View, LoginRequiredMixin):
     template_name = "dashboard/infractions.html"
     model = Infractions
+    context = {}
 
     def get(self, request, guild_id):
         infractions = self.model.objects.filter(member__guild__id=guild_id)
         return render(request, self.template_name, {"infractions": infractions})
+
+    def post(self, request, guild_id):
+        msg = None
+        if request.user.is_authenticated:
+            warning_id = request.POST.get("warning_id")
+            try:
+                warning = MemberWarning.objects.get(id=warning_id)
+                if warning.member.guild in request.user.admins.guild.all():
+                    warning.delete()
+                    msg = "Data deleted successfully!"
+                else:
+                    msg = "You don't have the necessary permission for this operation"
+            except MemberWarning.DoesNotExist:
+                msg = "Something went wrong!. Please try again later"
+
+        infractions = self.model.objects.filter(member__guild__id=guild_id)
+        return render(request, self.template_name, {"infractions": infractions, "msg": msg})
 
 
 class GuildWarningsView(View, LoginRequiredMixin):

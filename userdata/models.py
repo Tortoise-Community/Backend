@@ -82,7 +82,7 @@ class MemberWarning(models.Model):
     reason = models.CharField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
     moderator: Member = models.ForeignKey(Member, null=True, on_delete=models.SET_NULL, related_name="issued_warnings")
-    member: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="warnings")
+    member: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="warned_member")
 
 
 class Infractions(models.Model):
@@ -144,6 +144,6 @@ class Suggestions(models.Model):
 
 
 class Admins(models.Model):
-    authuser = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="auth")
+    authuser = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     user: User = models.ForeignKey(User, on_delete=models.CASCADE)
     guild: Guild = models.ManyToManyField(Guild)

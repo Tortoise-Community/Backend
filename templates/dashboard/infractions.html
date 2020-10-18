@@ -3,7 +3,14 @@
 {% block title %} Page Blank {% endblock %} 
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+    <style>
+    button:focus, button:active
+        {
+            outline: none;
+        }
+    </style>
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -36,6 +43,7 @@
                             <div class="card Recent-Users">
                                 <div class="card-header">
                                     <h5>Infraction log</h5>
+                                    <h6>{% if msg %}{{ msg }}{% endif %}</h6>
                                 </div>
                                 <div class="card-block px-0 py-3">
                                     <div class="table-responsive">
@@ -66,7 +74,12 @@
                                                     <td>
                                                         <h6 class="text-muted">{{ infraction.warning.date }}</h6>
                                                     </td>
-                                                    <td><a href="#" class="label theme-bg2 text-white f-12">Revoke</a></td>
+                                                    <td>
+                                                        <form method="post">
+                                                            {% csrf_token %}
+                                                        <button value="{{ infraction.warning.id }}" name="warning_id" class="label theme-bg2 text-white f-12 default">Revoke</button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                             {% endfor %}
                                             </tbody>
