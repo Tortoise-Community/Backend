@@ -22,6 +22,7 @@ class LoginView(View):
     def get(self, request):
         code = request.GET.get('code', None)
         self.email = None
+        msg = None
         if code is not None:
             self.access_token = oauth.get_access_token(code)
             self.user_json = oauth.get_user_json(self.access_token)
@@ -31,17 +32,18 @@ class LoginView(View):
             password = encryption.encrypted_user_pass(self.user_id, self.email)
             guilds = oauth.get_guild_info_json(self.access_token)
             admin_guilds = get_admin_guild_list(guilds)
-            if len(admin_guilds) == 0:
-                return  # TODO: DELETE EXISTING CREDENTIALS AND SEND MESSAGE
-            user = authenticate(username=self.user_id, password=password)
-            if user is not None:
-                admin_user = Admins.objects.get(user_id=self.user_id)
-                update_guilds(admin_user, admin_guilds)
+            if not len(admin_guilds) == 0:
+                user = authenticate(username=self.user_id, password=password)
+                if user is not None:
+                    admin_user = Admins.objects.get(user_id=self.user_id)
+                    update_guilds(admin_user, admin_guilds)
+                else:
+                    user = create_admin(user_json=self.user_json, admin_guilds=admin_guilds, password=password)
+                login(request, user)
+                return redirect("/guild/{}/".format(admin_guilds[0]))
             else:
-                user = create_admin(user_json=self.user_json, admin_guilds=admin_guilds, password=password)
-            login(request, user)
-            return redirect("/guild/{}/".format(admin_guilds[0]))
-        return render(request, self.template_name, {"Oauth": oauth})
+                msg = "You don't have the permissions to acces the dashboard"
+        return render(request, self.template_name, {"Oauth": oauth, "msg": msg})
 
 
 class GuildPanelView(View, LoginRequiredMixin):
