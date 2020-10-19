@@ -32,54 +32,47 @@
                     <!-- [ Main Content ] start -->
                     <div class="row">
                     <!-- [ Hover-table ] start -->
-                    <div class="col-xl-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Warnings Data</h5>
-                            </div>
-                            <div class="card-block table-border-style">
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>User id</th>
-                                                <th>Username</th>
-                                                <th>Reason</th>
-                                                <th>Moderator</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">123456790121212</th>
-                                                <td>Mark #4323</td>
-                                                <td>Advertisement</td>
-                                                <td>cappe #1234</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">123456790121212</th>
-                                                <td>Mark #4323</td>
-                                                <td>Advertisement</td>
-                                                <td>cappe #1234</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">123456790121212</th>
-                                                <td>Mark #4323</td>
-                                                <td>Advertisement</td>
-                                                <td>cappe #1234</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">123456790121212</th>
-                                                <td>Mark #4323</td>
-                                                <td>Advertisement</td>
-                                                <td>cappe #1234</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                        <div class="col-xl-12">
+                            <div class="card Recent-Users">
+                                <div class="card-header">
+                                    <h5>Warning log</h5>
+                                </div>
+                                <div class="card-block px-0 py-3">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Member</th>
+                                                    <th>Moderator</th>
+                                                    <th>Reason</th>
+                                                    <th>Issue Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for warning in warnings %}
+                                                <tr class="unread">
+                                                    <td>
+                                                        <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="{{ warning.member.user.avatar }}" alt="activity-user">{{ warning.member.user.name }} #{{ warning.member.user.tag}}</h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="m-0 text-c-purple"><i class="fas fa-circle text-c-yellow f-10 m-r-15"></i>{{ warning.moderator.user.name }}</h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="mb-1">{{ warning.reason }}</h6>
+{#                                                        <p class="m-0">[mod] cappe #1234</p>#}
+                                                    </td>
+
+                                                    <td>
+                                                        <h6 class="text-muted">{{ warning.date }}</h6>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- [ Hover-table ] end -->
                     </div>
                     <!-- [ Main Content ] end -->
                 </div>

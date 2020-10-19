@@ -1,31 +1,27 @@
-"""Tortoise URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-
-# from django.urls import path
+from django.urls import path
 from django.conf.urls import url
 # from django.conf import settings
 # from django.conf.urls.static import static
-from .views import LoginView, GuildPanelView
-from django.contrib.auth.views import LogoutView
+from .views import (
+    LoginView, GuildPanelView,
+    logout_request, GuildRulesView,
+    GuildRolesView, GuildInfractionView,
+    GuildWarningsView, BotSecurityView, BotMusicView,
+    BotLoggingView, BotUtilityView, BotFunView, BotOtherView)
+
+
 urlpatterns = [
-    # path('', LoginView.as_view(), name='login'),
-    url(r'^login/', LoginView.as_view(), name='login'),
-    # url(r'^register/', RegisterView.as_view(), name='register'),
-    url(r'^guild/<int:guild_id>/', GuildPanelView.as_view(), name='panel'),
-    url(r'^logout/', LogoutView.as_view(), name='logout'),
-    # path('server/<str:template_name>', ServerView.as_view(), name='server'),
-    # path('bot/<str:template_name>', BotView.as_view(), name='server'),
+    path('', LoginView.as_view(), name='login'),
+    url(r'^guild/(?P<guild_id>[0-9]{18})/rules', GuildRulesView.as_view(), name='guild_rules'),
+    url(r'^guild/(?P<guild_id>[0-9]{18})/roles', GuildRolesView.as_view(), name='guild_roles'),
+    url(r'^guild/(?P<guild_id>[0-9]{18})/infractions', GuildInfractionView.as_view(), name='guild_infractions'),
+    url(r'^guild/(?P<guild_id>[0-9]{18})/warnings', GuildWarningsView.as_view(), name='guild_warnings'),
+    url(r'^guild/(?P<guild_id>[0-9]{18})/bot-security', BotSecurityView.as_view(), name='bot_security'),
+    url(r'^guild/(?P<guild_id>[0-9]{18})/bot-logging', BotLoggingView.as_view(), name='bot_logging'),
+    url(r'^guild/(?P<guild_id>[0-9]{18})/bot-utility', BotUtilityView.as_view(), name='bot_utility'),
+    url(r'^guild/(?P<guild_id>[0-9]{18})/bot-music', BotMusicView.as_view(), name='bot_music'),
+    url(r'^guild/(?P<guild_id>[0-9]{18})/bot-other', BotOtherView.as_view(), name='bot_other'),
+    url(r'^guild/(?P<guild_id>[0-9]{18})/bot-fun', BotFunView.as_view(), name='bot_fun'),
+    url(r'^guild/(?P<guild_id>[0-9]{18})/', GuildPanelView.as_view(), name='guild'),
+    url(r'^logout/', logout_request, name='logout'),
 ]

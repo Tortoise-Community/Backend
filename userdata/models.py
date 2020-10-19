@@ -2,7 +2,6 @@ from django.db import models
 from utils.misc import status_css_class, empty_array
 from django.contrib.postgres.fields import ArrayField
 from django.shortcuts import get_object_or_404
-# from django.contrib.auth.models import User as AuthUser
 from django.contrib.auth import settings
 
 
@@ -83,7 +82,7 @@ class MemberWarning(models.Model):
     reason = models.CharField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
     moderator: Member = models.ForeignKey(Member, null=True, on_delete=models.SET_NULL, related_name="issued_warnings")
-    member: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="warnings")
+    member: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="warned_member")
 
 
 class Infractions(models.Model):
@@ -98,7 +97,7 @@ class Infractions(models.Model):
                    ("Permanent Ban", "PB")
                    )
     member: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="infractions")
-    warning: MemberWarning = models.ForeignKey(MemberWarning, on_delete=models.CASCADE)
+    warning: MemberWarning = models.ForeignKey(MemberWarning, on_delete=models.CASCADE, related_name="infraction")
     type = models.CharField(max_length=30, choices=INFRACTIONS, default="SM")
     revoke_date = models.DateTimeField(null=True)
 
@@ -120,9 +119,9 @@ class Projects(models.Model):
 
 class Rules(models.Model):
     guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="guild_rule")
-    number = models.IntegerField(blank=True, null=True)
-    name = models.CharField(max_length=20, null=True, default="Rule name")
-    statement = models.TextField(blank=True, null=True)
+    number = models.IntegerField(blank=True)
+    name = models.CharField(max_length=20, default="Rule name")
+    statement = models.TextField(blank=True)
     alias = ArrayField(models.CharField(max_length=20), default=empty_array)
 
     class Meta:
@@ -145,6 +144,6 @@ class Suggestions(models.Model):
 
 
 class Admins(models.Model):
-    authuser = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="auth")
+    authuser = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     user: User = models.ForeignKey(User, on_delete=models.CASCADE)
     guild: Guild = models.ManyToManyField(Guild)
