@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login, authenticate
@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from utils.oauth import Oauth
 from utils.decorators import permission_required
 from utils.encryption import Encryption
-from userdata.models import Admins, Guild, MemberWarning, Infractions
+from userdata.models import Admins, MemberWarning, Infractions
 from utils.operations import create_admin, update_guilds, get_admin_guild_list
 oauth = Oauth(redirect_uri="http://dashboard.tortoisecommunity.co:8000/", scope="guilds%20identify%20email")
 encryption = Encryption()

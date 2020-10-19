@@ -1,5 +1,5 @@
 from websitedata.models import (News, Team, Slider, Events, Privacy, Changes)
-from userdata.models import Rules, Guild
+from userdata.models import Rules
 from Tortoise.models import SiteUrls
 from django.http import JsonResponse
 from django.shortcuts import render
