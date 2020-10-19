@@ -5,24 +5,12 @@ from django.contrib.auth import logout, login, authenticate
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from utils.oauth import Oauth
+from utils.decorators import permission_required
 from utils.encryption import Encryption
 from userdata.models import Admins, Guild, MemberWarning, Infractions
 from utils.operations import create_admin, update_guilds, get_admin_guild_list
 oauth = Oauth(redirect_uri="http://dashboard.tortoisecommunity.co:8000/", scope="guilds%20identify%20email")
 encryption = Encryption()
-
-def permission_required(func):
-    def wrapper(request, guild_id):
-        try:
-            guild = Guild.objects.get(id=guild_id)
-        except Guild.DoesNotExist:
-
-        if guild in request.user.admins.guild.all():
-            return func(request, guild_id)
-        else:
-            return HttpResponse("Don't have perms")
-
-    return wrapper
 
 
 class LoginView(View):
@@ -56,10 +44,11 @@ class LoginView(View):
                 login(request, user)
                 return redirect("/guild/{}/".format(admin_guilds[0]))
             else:
-                msg = "You don't have the permissions to acces the dashboard"
+                msg = "You don't have the permissions to access the dashboard"
         return render(request, self.template_name, {"Oauth": oauth, "msg": msg})
 
 
+@method_decorator(permission_required, name="dispatch")
 class GuildPanelView(View, LoginRequiredMixin):
     template_name = "dashboard/index.html"
     context = {}
@@ -69,6 +58,7 @@ class GuildPanelView(View, LoginRequiredMixin):
         return render(request, self.template_name)
 
 
+@method_decorator(permission_required, name="dispatch")
 class GuildRulesView(View, LoginRequiredMixin):
     template_name = "dashboard/rules.html"
     context = {}
@@ -78,6 +68,7 @@ class GuildRulesView(View, LoginRequiredMixin):
         return render(request, self.template_name)
 
 
+@method_decorator(permission_required, name="dispatch")
 class GuildRolesView(View, LoginRequiredMixin):
     template_name = "dashboard/roles.html"
     context = {}
@@ -87,6 +78,7 @@ class GuildRolesView(View, LoginRequiredMixin):
         return render(request, self.template_name)
 
 
+@method_decorator(permission_required, name="dispatch")
 class GuildInfractionView(View, LoginRequiredMixin):
     template_name = "dashboard/infractions.html"
     model = Infractions
@@ -124,11 +116,55 @@ class GuildWarningsView(View, LoginRequiredMixin):
         return render(request, self.template_name, {"warnings": warnings})
 
 
+@method_decorator(permission_required, name="dispatch")
+class BotSecurityView(View, LoginRequiredMixin):
+    template_name = "dashboard/bot-security.html"
+
+    def get(self, request, guild_id):
+        return render(request, self.template_name)
+
+
+@method_decorator(permission_required, name="dispatch")
+class BotLoggingView(View, LoginRequiredMixin):
+    template_name = "dashboard/bot-logging.html"
+
+    def get(self, request, guild_id):
+        return render(request, self.template_name)
+
+
+@method_decorator(permission_required, name="dispatch")
+class BotUtilityView(View, LoginRequiredMixin):
+    template_name = "dashboard/bot-utility.html"
+
+    def get(self, request, guild_id):
+        return render(request, self.template_name)
+
+
+@method_decorator(permission_required, name="dispatch")
+class BotMusicView(View, LoginRequiredMixin):
+    template_name = "dashboard/bot-music.html"
+
+    def get(self, request, guild_id):
+        return render(request, self.template_name)
+
+
+@method_decorator(permission_required, name="dispatch")
+class BotFunView(View, LoginRequiredMixin):
+    template_name = "dashboard/bot-fun.html"
+
+    def get(self, request, guild_id):
+        return render(request, self.template_name)
+
+
+@method_decorator(permission_required, name="dispatch")
+class BotOtherView(View, LoginRequiredMixin):
+    template_name = "dashboard/bot-other.html"
+
+    def get(self, request, guild_id):
+        return render(request, self.template_name)
+
+
 @login_required
 def logout_request(request):
     logout(request)
     return redirect('login')
-
-
-def responce_404(request):
-    return render(request, "dashboard/page-404.html")

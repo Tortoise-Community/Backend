@@ -1,7 +1,8 @@
 from websitedata.models import (News, Team, Slider, Events, Privacy, Changes)
-from userdata.models import Rules
+from userdata.models import Rules, Guild
 from Tortoise.models import SiteUrls
 from django.http import JsonResponse
+from django.shortcuts import render
 
 
 class ModelDataMixin(object):
@@ -95,3 +96,7 @@ class ResponseMixin(object):
     @staticmethod
     def json_response_504():
         return JsonResponse({"response": "Gateway Timeout"}, status=504)
+
+    @staticmethod
+    def http_responce_404(request):
+        return render(request, "dashboard/page-404.html")
