@@ -1,7 +1,7 @@
 from websitedata.models import (News, Team, Slider, Events, Privacy, Changes)
 from userdata.models import Rules
 from Tortoise.models import SiteUrls
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 
 
 class ModelDataMixin(object):
@@ -95,3 +95,24 @@ class ResponseMixin(object):
     @staticmethod
     def json_response_504():
         return JsonResponse({"response": "Gateway Timeout"}, status=504)
+
+    @staticmethod
+    def http_responce_400():
+        return HttpResponse("Bad Request (403)", status=400)
+
+    @staticmethod
+    def http_responce_401():
+        return HttpResponse("Unauthorized (403)", status=401)
+
+    @staticmethod
+    def http_responce_403():
+        return HttpResponse("Forbidden (403)", status=403)
+
+    @staticmethod
+    def http_responce_404():
+        return HttpResponse("Page not found (404)", status=404)
+
+    @staticmethod
+    def http_responce_405():
+        return HttpResponse("Method Not Allowed (405)", status=405)
+

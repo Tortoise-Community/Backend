@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
 
 from utils.oauth import Oauth
-from utils.mixins import ModelDataMixin
+from utils.mixins import ModelDataMixin, ResponseMixin
 from utils.tools import bot_socket, webhook
 from utils.handlers import EmailHandler, log_error
 
@@ -14,7 +14,7 @@ from websitedata.models import Events
 from userdata.models import Developers, Projects, Members
 
 
-class ProjectView(ModelDataMixin, View):
+class ProjectView(ModelDataMixin, View, ResponseMixin):
     model = Projects
     template_name = 'projects.html'
     context = {}
@@ -23,8 +23,11 @@ class ProjectView(ModelDataMixin, View):
         if item_no is not None:
             self.context = self.get_blog_context()
             self.template_name = 'project.html'
-            project = self.model.objects.get(pk=item_no)
-            self.context['project'] = project
+            try:
+                project = self.model.objects.get(pk=item_no)
+                self.context['project'] = project
+            except self.model.DoesNotExist:
+                return self.http_responce_404()
         else:
             self.context = self.get_common_context()
             self.context['projects'] = self.model.objects.all().order_by('id')
@@ -32,7 +35,7 @@ class ProjectView(ModelDataMixin, View):
         return render(request, self.template_name, self.context)
 
 
-class EventView(ModelDataMixin, View):
+class EventView(ModelDataMixin, ResponseMixin, View):
     model = Events
     template_name = 'events.html'
     context = {}
@@ -41,11 +44,16 @@ class EventView(ModelDataMixin, View):
         if item_no is not None:
             self.context = self.get_blog_context()
             self.template_name = 'event.html'
-            event = self.model.objects.get(pk=item_no)
-            self.context['event'] = event
+            try:
+                event = self.model.objects.get(pk=item_no)
+                if event.status is not "Upcoming":
+                    self.context['event'] = event
+                else:
+                    self.http_responce_401()
+            except self.model.DoesNotExist:
+                return self.http_responce_404()
         else:
             self.get_events_context()
-
         return render(request, self.template_name, self.context)
 
 
