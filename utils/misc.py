@@ -38,6 +38,14 @@ code_hljs_styles = (
     ("atom-one-dark-reasonable.min.css", "Atom Dark Reasonable"),
 )
 
+page_theme_choices = (
+    ("event-light-theme", "Light Theme"),
+    ("event-dark-theme", "Dark Theme"),
+    ("event-ares-theme", "Ares Theme"),
+    ("event-nemesis-theme", "Nemesis Theme"),
+    ("event-grass-hopper-theme.css", "Grasshopper Theme"),
+)
+
 
 def empty_array():
     return []

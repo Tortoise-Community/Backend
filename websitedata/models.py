@@ -1,5 +1,6 @@
 from django.db import models
-from utils.misc import code_hljs_styles, news_update_types, event_status, event_types
+from utils.misc import code_hljs_styles, news_update_types, event_status, event_types, page_theme_choices, empty_array
+from django.contrib.postgres.fields import ArrayField
 
 
 class Slider(models.Model):
@@ -28,14 +29,16 @@ class Events(models.Model):
     name = models.CharField(max_length=15)
     eventimage = models.ImageField(upload_to='img/eventimgs', blank=True)
     coverimage = models.ImageField(upload_to='img/bgimgs')
+    page_theme = models.CharField(max_length=35, choices=page_theme_choices, default='event-light-theme')
     eventtype = models.CharField(max_length=17, choices=event_types, default='CTF-Event')
     duedate = models.DateField()
     enddate = models.DateField()
+    sponsors = ArrayField(models.CharField(max_length=20), null=True, default=empty_array, blank=True)
     winner = models.CharField(max_length=100, blank=True)
     prize = models.CharField(max_length=100)
     status = models.CharField(max_length=17, choices=event_status, default='Ended')
     style = models.CharField(max_length=50, choices=code_hljs_styles, default='default.min.css')
-    host = models.CharField(max_length=15)
+    host = models.CharField(max_length=100)
     task = models.CharField(max_length=50)
     desc = models.TextField(default=None)
 

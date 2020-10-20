@@ -3,7 +3,6 @@ from datetime import datetime, timezone
 from django.views import View
 from django.conf import settings
 from django.shortcuts import render
-from django.core.exceptions import ObjectDoesNotExist
 
 from utils.oauth import Oauth
 from utils.mixins import ModelDataMixin, ResponseMixin
@@ -46,10 +45,9 @@ class EventView(ModelDataMixin, ResponseMixin, View):
             self.template_name = 'event.html'
             try:
                 event = self.model.objects.get(pk=item_no)
-                if event.status is not "Upcoming":
-                    self.context['event'] = event
-                else:
-                    self.http_responce_401()
+                if event.status == "Upcoming":
+                    return self.http_responce_401()
+                self.context['event'] = event
             except self.model.DoesNotExist:
                 return self.http_responce_404()
         else:
@@ -95,7 +93,7 @@ class VerificationHandlerView(ModelDataMixin, View):
             self.context['verified'] = True # noqa
             try:
                 member_obj = Members.objects.get(user_id=self.user_id)
-            except ObjectDoesNotExist:
+            except Members.DoesNotExist:
                 member_obj = None
             # checks if member object exits (joined the server)
             if member_obj:

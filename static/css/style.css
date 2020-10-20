@@ -1914,7 +1914,7 @@ ol {
 	font-size: 35px !important;
 }
 .blog-content h3{
-	color: white !important;
+	color: white;
 	font-size: 30px !important;
 	text-align: left !important;
 }
@@ -1944,9 +1944,14 @@ code{
   padding:0px 8px 8px 8px;
   font-size:16px !important;
 }
-.eventtint{
+.event-light-theme{
 	background-color: #f8f8ff !important;
 }
+.event-light-theme h1,h2,h3,h4,h5,h6{
+	color: #0f0f0f !important;
+}
+
+
 .iconcenter {
 	text-align: center;
 	width: 100%;
@@ -1964,3 +1969,12 @@ code{
 	color: #00ad5f;
 	text-align: center;
 }
+
+.eventoverride{
+	padding: 20px 10px;
+}
+.eventoverride ul {
+    margin-left: 0;
+    padding-left: 20px;
+}
+
