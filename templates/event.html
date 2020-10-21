@@ -94,13 +94,13 @@
 					<div class="blog-thumb set-bg" data-setbg="{{event.eventimage.url}}">
 						<div class="cata red">CODING CHALLENGE</div>
                         {% if event.status == "Live" %}
-                           <div><a href="https://discord.gg/GQdZjmW"><button class="register-btn"><span class="change-font"> Register!</span></button></a></div>
+                            <br><br>
+                        <a href="https://discord.gg/GQdZjmW"><button class="register-btn"><span class="change-font"> Participate!</span></button></a>
                         {% endif %}
 						<div class="rgi-extra">
 							<div class="rgi-star"><img src="{% static 'img/icons/star.png' %}" alt=""></div>
 							<div class="rgi-heart"><img src="{% static 'img/icons/heart.png' %}" alt=""></div>
 						</div>
-                        </div>
 					</div>
 					{% endif %}
 					<div class="eventblog">
@@ -121,9 +121,9 @@
             </div>
             <br>
             <div class="row">
-            {% for sponsor in event.sponsors %}
+            {% for sponsor, link in event.sponsors.items %}
                 <div class="col-sm-3">
-                <img src="{{ sponsor }}" width="100" height="100">
+                <a href="{{ link }}"><img src="{{ sponsor }}" width="100" height="100"></a>
                 </div>
             {% endfor %}
             </div>
