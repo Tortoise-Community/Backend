@@ -1,6 +1,6 @@
 from django.db import models
-from utils.misc import code_hljs_styles, news_update_types, event_status, event_types, page_theme_choices, empty_array
-from django.contrib.postgres.fields import ArrayField
+from utils.misc import code_hljs_styles, news_update_types, event_status, event_types, page_theme_choices, empty_dict
+from django.contrib.postgres.fields import JSONField
 
 
 class Slider(models.Model):
@@ -33,7 +33,7 @@ class Events(models.Model):
     eventtype = models.CharField(max_length=17, choices=event_types, default='CTF-Event')
     duedate = models.DateField()
     enddate = models.DateField()
-    sponsors = ArrayField(models.CharField(max_length=50), null=True, default=empty_array, blank=True)
+    sponsors = JSONField(null=True, default=empty_dict, blank=True)
     winner = models.CharField(max_length=100, blank=True)
     prize = models.CharField(max_length=100)
     status = models.CharField(max_length=17, choices=event_status, default='Ended')
