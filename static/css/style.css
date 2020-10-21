@@ -1978,3 +1978,24 @@ code{
     padding-left: 20px;
 }
 
+.register-btn
+  {
+	  color: #333;
+	  background: #f5f5f5;
+	  border:none;
+	  padding: 5px 10px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	  margin: 4px 2px;
+	  -webkit-transition-duration: 0.4s; /* Safari */
+	  transition-duration: 0.4s;
+	  cursor: pointer;
+	  border: 2px solid #333;
+	  border-radius: 12px;
+  }
+.register-btn:hover{
+	  color:white;
+	  background: #02020A;
+}

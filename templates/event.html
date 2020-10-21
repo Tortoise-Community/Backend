@@ -93,10 +93,14 @@
 					{% if event.eventimage %}
 					<div class="blog-thumb set-bg" data-setbg="{{event.eventimage.url}}">
 						<div class="cata red">CODING CHALLENGE</div>
+                        {% if event.status == "Live" %}
+                           <div><a href="https://discord.gg/GQdZjmW"><button class="register-btn"><span class="change-font"> Register!</span></button></a></div>
+                        {% endif %}
 						<div class="rgi-extra">
 							<div class="rgi-star"><img src="{% static 'img/icons/star.png' %}" alt=""></div>
 							<div class="rgi-heart"><img src="{% static 'img/icons/heart.png' %}" alt=""></div>
 						</div>
+                        </div>
 					</div>
 					{% endif %}
 					<div class="eventblog">
@@ -109,12 +113,6 @@
                         </div>
 					</div>
 				</div>
-            </div>
-            <br>
-			<div class="row">
-		    {% if event.status == "Live" %}
-			<a href="https://discord.gg/GQdZjmW"><button class="invite"><span class="change-font"> Participate!</span></button></a>
-			{% endif %}
             </div>
             <br>
             {% if event.sponsors %}
