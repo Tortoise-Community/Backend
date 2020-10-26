@@ -43,7 +43,7 @@ page_theme_choices = (
     ("event-dark-theme", "Dark Theme"),
     ("event-ares-theme", "Ares Theme"),
     ("event-nemesis-theme", "Nemesis Theme"),
-    ("event-grass-hopper-theme.css", "Grasshopper Theme"),
+    ("event-grass-hopper-theme", "Grasshopper Theme"),
 )
 
 
