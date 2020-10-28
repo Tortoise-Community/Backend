@@ -14,9 +14,7 @@ import os
 import environ
 
 # Casting env object
-env = environ.Env(
-    DEBUG=(bool, False)
-)
+env = environ.Env(DEBUG=(bool, False))
 
 # Fetches .env file from two folders back (/a/b/ - 2 = /)
 env_path = environ.Path(__file__) - 2
@@ -176,16 +174,19 @@ EMAIL_HOST_USER = 'tortoisecommunity@gmail.com'
 EMAIL_HOST_PASSWORD = env('EMAIL_TOKEN')
 EMAIL_USE_TLS = True
 
-ENCRYPTION_SALT = env("ENCRYPTION_SALT")
-ENCRYPTION_ITERATION = env("ENCRYPTION_ITERATION")
+ENCRYPTION_SALT = env('ENCRYPTION_SALT')
+ENCRYPTION_ITERATION = env('ENCRYPTION_ITERATION')
+
+
 # Discord end configuration for bot and verification
-DELETION_CONFIRMATION_KEY = env('DELETION_CONFIRMATION_KEY')
+
+SERVER_ID = env('SERVER_ID')
+WEBHOOK_ID = env('WEBHOOK_ID')
+WEBHOOK_SECRET = env('WEBHOOK_SECRET')
 BOT_SOCKET_IP = env('BOT_SOCKET_IP')
 BOT_SOCKET_PORT = env('BOT_SOCKET_PORT')
 BOT_SOCKET_TOKEN = env('BOT_SOCKET_TOKEN')
 OAUTH_CLIENT_ID = env('OAUTH_CLIENT_ID')
 OAUTH_CLIENT_SECRET = env('OAUTH_CLIENT_SECRET')
 GITHUB_ACCESS_TOKEN = env('GITHUB_ACCESS_TOKEN')
-SERVER_ID = env('SERVER_ID')
-WEBHOOK_ID = env('WEBHOOK_ID')
-WEBHOOK_SECRET = env('WEBHOOK_SECRET')
+DELETION_CONFIRMATION_KEY = env('DELETION_CONFIRMATION_KEY')
