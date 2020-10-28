@@ -103,7 +103,7 @@ class Projects(models.Model):
     coverimage = models.ImageField(upload_to='img/bgimgs') # noqa
     rating = models.FloatField(default=0.0, blank=True)
     label = models.CharField(max_length=100)
-    brief = models.TextField(default="")
+    brief = models.TextField()
     status = models.CharField(max_length=16, choices=status_css_class, default='Upcoming')
     github = models.URLField(blank=True)
     invite = models.URLField(blank=True)
