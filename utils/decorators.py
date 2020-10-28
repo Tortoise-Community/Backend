@@ -1,4 +1,4 @@
-from userdata.models import Guild
+from tortoise_api.models import Guild
 from .mixins import ResponseMixin as Res
 
 

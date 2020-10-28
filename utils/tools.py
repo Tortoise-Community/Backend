@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db.models.signals import post_save, post_delete
 
 from .handlers import SocketHandler, WebhookHandler
-from userdata.models import Rules
+from tortoise_api.models import Rules
 
 webhook = WebhookHandler(settings.WEBHOOK_ID,
                          settings.WEBHOOK_SECRET)

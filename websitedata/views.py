@@ -10,7 +10,7 @@ from utils.tools import bot_socket, webhook
 from utils.handlers import EmailHandler, log_error
 
 from websitedata.models import Events
-from userdata.models import Projects, User
+from tortoise_api.models import Projects, User
 
 oauth = Oauth()
 

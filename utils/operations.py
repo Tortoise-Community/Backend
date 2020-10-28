@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User as AuthUser
-from userdata.models import Admins, Guild
+from tortoise_api.models import Admins, Guild
 
 
 def get_admin_guild_list(guilds):
