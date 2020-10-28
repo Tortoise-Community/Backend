@@ -5,6 +5,7 @@ from django.contrib.auth import logout, login, authenticate
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from utils.oauth import Oauth
+from utils.mixins import ResponseMixin
 from utils.decorators import permission_required
 from utils.encryption import Encryption
 from userdata.models import Admins, MemberWarning, Infractions
@@ -49,13 +50,16 @@ class LoginView(View):
 
 
 @method_decorator(permission_required, name="dispatch")
-class GuildPanelView(View, LoginRequiredMixin):
+class GuildPanelView(View, LoginRequiredMixin, ResponseMixin):
     template_name = "dashboard/index.html"
     context = {}
+    model = Admins
 
     def get(self, request, guild_id):
-
-        return render(request, self.template_name)
+        admin_guilds = request.user.admins.get_admin_guild_names()
+        if int(guild_id) in admin_guilds:
+            self.context["guilds"] = admin_guilds
+            return render(request, self.template_name, self.context)
 
 
 @method_decorator(permission_required, name="dispatch")
@@ -74,7 +78,6 @@ class GuildRolesView(View, LoginRequiredMixin):
     context = {}
 
     def get(self, request, guild_id):
-        # guild = Guild.objects.get(id=guild_id)
         return render(request, self.template_name)
 
 
