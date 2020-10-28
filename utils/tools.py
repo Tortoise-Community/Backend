@@ -5,21 +5,22 @@ from tortoise_api.models import Rules
 from .handlers import SocketHandler, WebhookHandler
 
 
-webhook = WebhookHandler(settings.WEBHOOK_ID,
-                         settings.WEBHOOK_SECRET)
-bot_socket = SocketHandler(settings.BOT_SOCKET_IP,
-                           int(settings.BOT_SOCKET_PORT),
-                           settings.BOT_SOCKET_TOKEN)
+webhook = WebhookHandler(settings.WEBHOOK_ID, settings.WEBHOOK_SECRET)
+bot_socket = SocketHandler(
+    settings.BOT_SOCKET_IP,
+    int(settings.BOT_SOCKET_PORT),
+    settings.BOT_SOCKET_TOKEN
+)
 
 
-def reload_rules(sender, **kwargs): # noqa
+def reload_rules(_sender, **_kwargs):
     bot_socket.signal("rules")
 
 
-def reload_serverutils(sender, **kwargs): # noqa
+def reload_server_utils(_sender, **_kwargs):
     bot_socket.signal("server_meta")
 
 
 post_save.connect(reload_rules, sender=Rules, dispatch_uid="rules")
 post_delete.connect(reload_rules, sender=Rules, dispatch_uid="rule")
-# post_save.connect(reload_serverutils, sender=ServerUtils, dispatch_uid="server")
+# post_save.connect(reload_server_utils, sender=ServerUtils, dispatch_uid="server")

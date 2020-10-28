@@ -28,7 +28,7 @@ class ProjectView(ModelDataMixin, View, ResponseMixin):
                 project = self.model.objects.get(pk=item_no)
                 self.context['project'] = project
             except self.model.DoesNotExist:
-                return self.html_responce_404(request)
+                return self.html_response_404(request)
         else:
             self.context = self.get_common_context()
             self.context['projects'] = self.model.objects.all().order_by('id')
@@ -48,10 +48,10 @@ class EventView(ModelDataMixin, ResponseMixin, View):
             try:
                 event = self.model.objects.get(pk=item_no)
                 if event.status == "Upcoming":
-                    return self.http_responce_401()
+                    return self.http_response_401()
                 self.context['event'] = event
             except self.model.DoesNotExist:
-                return self.html_responce_404(request)
+                return self.html_response_404(request)
         else:
             self.get_events_context()
         return render(request, self.template_name, self.context)

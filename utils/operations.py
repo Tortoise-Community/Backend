@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User as AuthUser
+
 from tortoise_api.models import Admins, Guild
 
 
@@ -17,12 +18,13 @@ def update_guilds(instance: Admins, guild_list: list):
 
 
 def create_admin(user_json: dict, admin_guilds: list, password: str):
-    auth_user = AuthUser.objects.create_user(username=user_json["id"],
-                                             password=password,
-                                             is_staff=True,
-                                             first_name=user_json["username"],
-                                             email=user_json["email"]
-                                             )
+    auth_user = AuthUser.objects.create_user(
+        username=user_json["id"],
+        password=password,
+        is_staff=True,
+        first_name=user_json["username"],
+        email=user_json["email"]
+    )
     admin_user = Admins.objects.create(authuser=auth_user, user_id=user_json["id"])
     update_guilds(admin_user, admin_guilds)
     return auth_user

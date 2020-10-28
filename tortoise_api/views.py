@@ -305,12 +305,12 @@ class MemberWarningView(APIView, ResponseMixin):
     def get(self, request, guild_id=None, user_id=None):
         if user_id and guild_id is not None:
             queryset = self.model.objects.filter(member__guild__id=guild_id, member__user_id=user_id)
-            serialzier = self.serializer(queryset, many=True)
-            return Response(serialzier.data, status=200)
+            serializer = self.serializer(queryset, many=True)
+            return Response(serializer.data, status=200)
         elif guild_id is not None:
             queryset = self.model.objects.filter(member__guild__id=guild_id)
-            serialzier = self.serializer(queryset, many=True)
-            return Response(serialzier.data, status=200)
+            serializer = self.serializer(queryset, many=True)
+            return Response(serializer.data, status=200)
         else:
             return self.json_response_405()
 
