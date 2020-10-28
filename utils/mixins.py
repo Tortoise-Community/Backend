@@ -1,12 +1,8 @@
 from websitedata.models import (News, Team, Slider, Events, Privacy, Changes)
 from userdata.models import Rules
 from Tortoise.models import SiteUrls
-<<<<<<< HEAD
-from django.http import JsonResponse
 from django.shortcuts import render
-=======
 from django.http import JsonResponse, HttpResponse
->>>>>>> event-patch
 
 
 class ModelDataMixin(object):
