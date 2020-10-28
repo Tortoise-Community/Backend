@@ -64,8 +64,8 @@ MIDDLEWARE = [
     'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
-ROOT_URLCONF = 'Tortoise.urls'
-ROOT_HOSTCONF = 'Tortoise.hosts'
+ROOT_URLCONF = 'tortoise.urls'
+ROOT_HOSTCONF = 'tortoise.hosts'
 DEFAULT_HOST = 'www'
 
 TEMPLATES = [
@@ -84,7 +84,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Tortoise.wsgi.application'
+WSGI_APPLICATION = 'tortoise.wsgi.application'
 # SECURE_SSL_REDIRECT = 'True'
 
 
