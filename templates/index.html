@@ -114,13 +114,13 @@
 			</div>
 		<div class="row">
 				{% for l in levents %}
-				<div class="col-lg-3 col-md-6 p-0"><a href="events/{{l.pk}}">
+				<div class="col-lg-3 col-md-6 p-0"><a href="pages/events/{{l.pk}}">
 					<div class="feature-item set-bg" data-setbg="{{l.coverimage.url}}">
 						<span class="cata red">Live</span>{% if L.eventtype == 'CTF-Event' %}<span class="cata purple">CTF-Event</span>{% else %}<span class="cata green">Coding Challenge</span>{% endif %}
 						<div class="fi-content text-white">
-							<h5><a href="events/{{l.pk}}">{{l.name}}</a></h5>
+							<h5><a href="pages/events/{{l.pk}}">{{l.name}}</a></h5>
 							<p>{{l.task}}</p>
-							<a href="events/{{l.pk}}" class="fi-comment">Prizes: {{l.prize}}</a>
+							<a href="pages/events/{{l.pk}}" class="fi-comment">Prizes: {{l.prize}}</a>
 						</div>
 					</div></a>
 				</div>

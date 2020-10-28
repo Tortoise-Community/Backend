@@ -3,10 +3,9 @@ from datetime import datetime, timezone
 from django.views import View
 from django.conf import settings
 from django.shortcuts import render
-from django.core.exceptions import ObjectDoesNotExist
 
 from utils.oauth import Oauth
-from utils.mixins import ModelDataMixin
+from utils.mixins import ModelDataMixin, ResponseMixin
 from utils.tools import bot_socket, webhook
 from utils.handlers import EmailHandler, log_error
 
@@ -16,7 +15,7 @@ from userdata.models import Developers, Projects, Members
 oauth = Oauth()
 
 
-class ProjectView(ModelDataMixin, View):
+class ProjectView(ModelDataMixin, View, ResponseMixin):
     model = Projects
     template_name = 'projects.html'
     context = {}
@@ -25,8 +24,11 @@ class ProjectView(ModelDataMixin, View):
         if item_no is not None:
             self.context = self.get_blog_context()
             self.template_name = 'project.html'
-            project = self.model.objects.get(pk=item_no)
-            self.context['project'] = project
+            try:
+                project = self.model.objects.get(pk=item_no)
+                self.context['project'] = project
+            except self.model.DoesNotExist:
+                return self.http_responce_404()
         else:
             self.context = self.get_common_context()
             self.context['projects'] = self.model.objects.all().order_by('id')
@@ -34,7 +36,7 @@ class ProjectView(ModelDataMixin, View):
         return render(request, self.template_name, self.context)
 
 
-class EventView(ModelDataMixin, View):
+class EventView(ModelDataMixin, ResponseMixin, View):
     model = Events
     template_name = 'events.html'
     context = {}
@@ -43,11 +45,15 @@ class EventView(ModelDataMixin, View):
         if item_no is not None:
             self.context = self.get_blog_context()
             self.template_name = 'event.html'
-            event = self.model.objects.get(pk=item_no)
-            self.context['event'] = event
+            try:
+                event = self.model.objects.get(pk=item_no)
+                if event.status == "Upcoming":
+                    return self.http_responce_401()
+                self.context['event'] = event
+            except self.model.DoesNotExist:
+                return self.http_responce_404()
         else:
             self.get_events_context()
-
         return render(request, self.template_name, self.context)
 
 
@@ -89,7 +95,7 @@ class VerificationHandlerView(ModelDataMixin, View):
             self.context['verified'] = True # noqa
             try:
                 member_obj = Members.objects.get(user_id=self.user_id)
-            except ObjectDoesNotExist:
+            except Members.DoesNotExist:
                 member_obj = None
             # checks if member object exits (joined the server)
             if member_obj:
