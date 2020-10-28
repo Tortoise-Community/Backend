@@ -7,10 +7,10 @@ from django.contrib.auth import settings
 
 class User(models.Model):
     id = models.BigIntegerField(primary_key=True)
-    name = models.CharField(max_length=32)
-    avatar = models.URLField(blank=True, default=None)
-    tag = models.CharField(max_length=6)
-    email = models.CharField(max_length=50, default=None, blank=True)
+    name = models.CharField(max_length=32, default="")
+    avatar = models.URLField(blank=True, default="https://cdn.discordapp.com/embed/avatars/4.png")
+    tag = models.CharField(max_length=6, default=0)
+    email = models.CharField(max_length=50, default="", blank=True)
     verified = models.BooleanField(default=False)
     perks = models.IntegerField(default=0)
 
@@ -101,9 +101,9 @@ class Infractions(models.Model):
 class Projects(models.Model):
     name = models.CharField(max_length=15)
     coverimage = models.ImageField(upload_to='img/bgimgs') # noqa
-    rating = models.FloatField(default=None, blank=True)
+    rating = models.FloatField(default=0.0, blank=True)
     label = models.CharField(max_length=100)
-    brief = models.TextField(default=None)
+    brief = models.TextField(default="")
     status = models.CharField(max_length=16, choices=status_css_class, default='Upcoming')
     github = models.URLField(blank=True)
     invite = models.URLField(blank=True)

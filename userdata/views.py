@@ -44,7 +44,7 @@ class MemberDataView(APIView, ResponseMixin):
             return Response(status=201)
 
     def put(self, request, user_id=None, guild_id=None):
-        if user_id is not None:
+        if user_id and guild_id is not None:
             queryset = get_object_or_404(self.model, user__id=user_id, guild__id=guild_id)
             serializer = self.serializers(queryset, data=request.data)
             if serializer.is_valid():
@@ -56,7 +56,7 @@ class MemberDataView(APIView, ResponseMixin):
             return self.json_response_405()
 
     def delete(self, request, user_id=None, guild_id=None):
-        if user_id is not None:
+        if user_id and guild_id is not None:
             queryset = get_object_or_404(self.model, user__id=user_id, guild__id=guild_id)
             queryset.delete()
             return self.json_response_204()
@@ -217,6 +217,8 @@ class UserDataView(APIView, ResponseMixin):
     def put(self, request, user_id=None):
         if user_id is not None:
             queryset = get_object_or_404(self.model, id=user_id)
+            # data = request.data.copy()
+            # data["id"] = int(user_id)
             serializer = UserPutSerializer(queryset, data=request.data)
             if serializer.is_valid():
                 serializer.save()
