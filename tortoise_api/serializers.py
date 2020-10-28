@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from .models import User, Member, Guild, Suggestions, Rules, Projects, Role, MemberWarning, Strike, Infractions
 from django.contrib.auth.validators import UnicodeUsernameValidator
+
+from .models import User, Member, Guild, Suggestions, Rules, Projects, Role, MemberWarning, Strike, Infractions
 
 
 class UserDataSerializer(serializers.ModelSerializer):

@@ -1,15 +1,17 @@
-from django.shortcuts import get_object_or_404
+from django.conf import settings
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from utils.mixins import ResponseMixin
-from django.conf import settings
-from .models import Member, Projects, Rules, Guild, Suggestions, User, Role, Infractions, MemberWarning, Strike
-from .serializers import (MemberDataSerializer, SuggestionSerializer,
-                          SuggestionPutSerializer, ProjectStatsSerializer, RuleSerializer, GuildDataSerializer,
-                          GuildMetaSerializer, UserDataSerializer, RoleSerializer, InfractionSerializer,
-                          StrikeSerializer, WarningSerializer, UserPutSerializer)
+from django.shortcuts import get_object_or_404
+
 from utils.handlers import log_error
+from utils.mixins import ResponseMixin
+from .models import Member, Projects, Rules, Guild, Suggestions, User, Role, Infractions, MemberWarning, Strike
+from .serializers import (
+    MemberDataSerializer, SuggestionSerializer, SuggestionPutSerializer, ProjectStatsSerializer,
+    RuleSerializer, GuildDataSerializer, GuildMetaSerializer, UserDataSerializer, RoleSerializer,
+    InfractionSerializer, StrikeSerializer, WarningSerializer, UserPutSerializer
+)
 
 
 class MemberDataView(APIView, ResponseMixin):

@@ -1,12 +1,13 @@
-from django.urls import path, include
 from rest_framework import routers
+from django.urls import path, include
+
 from .views import (
     UserDataView, SuggestionDataView, MemberDataView, GuildDataView,
     ProjectStatsView, RulesDataView, RolesDataView, InfractionDataView,
     MemberWarningView, StrikeDataView
 )
 
-# REFACTOR REQUIRED
+# TODO REFACTOR REQUIRED
 
 router = routers.DefaultRouter()
 

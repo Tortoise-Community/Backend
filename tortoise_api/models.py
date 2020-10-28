@@ -1,8 +1,9 @@
 from django.db import models
-from utils.misc import status_css_class, empty_array
-from django.contrib.postgres.fields import ArrayField
-from django.shortcuts import get_object_or_404
 from django.contrib.auth import settings
+from django.shortcuts import get_object_or_404
+from django.contrib.postgres.fields import ArrayField
+
+from utils.misc import status_css_class, empty_array
 
 
 class User(models.Model):
