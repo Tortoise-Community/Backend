@@ -18,8 +18,9 @@
                     <li data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe" class="nav-item pcoded-hasmenu">
                         <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
                         <ul class="pcoded-submenu">
-                            <li class=""><a href="/index" class="">Tortoise Server</a></li>
-                            <li class=""><a href="/index" class="">Flutter Server</a></li>
+                            {% for id, name in guilds.items %}
+                            <li class=""><a href="guild/{{ id }}" class="">{{ name }}</a></li>
+                            {% endfor %}
                         </ul>
                     </li>
                     <li class="nav-item pcoded-menu-caption">

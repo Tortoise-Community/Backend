@@ -8,9 +8,9 @@ from django.contrib.auth import settings
 class User(models.Model):
     id = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=32)
-    avatar = models.URLField(blank=True, null=True)
+    avatar = models.URLField(blank=True, default=None)
     tag = models.CharField(max_length=6)
-    email = models.CharField(max_length=50, null=True, blank=True)
+    email = models.CharField(max_length=50, default=None, blank=True)
     verified = models.BooleanField(default=False)
     perks = models.IntegerField(default=0)
 
@@ -20,20 +20,20 @@ class User(models.Model):
 
 class Guild(models.Model):
     id = models.BigIntegerField(primary_key=True)
-    name = models.CharField(max_length=100, null=True)
+    name = models.CharField(max_length=100)
     event_submission = models.BooleanField(default=False)
     bug_report = models.BooleanField(default=False)
     mod_mail = models.BooleanField(default=False)
     suggestions = models.BooleanField(default=False)
-    suggestion_message_id = models.BigIntegerField(default=0, null=True, blank=True)
-    suggestion_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
-    verification_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
-    rules_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
-    roles_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
-    bot_log_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
-    member_log_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
-    update_log_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
-    deterrence_log_channel_id = models.BigIntegerField(default=0, null=True, blank=True)
+    suggestion_message_id = models.BigIntegerField(default=0, blank=True)
+    suggestion_channel_id = models.BigIntegerField(default=0, blank=True)
+    verification_channel_id = models.BigIntegerField(default=0, blank=True)
+    rules_channel_id = models.BigIntegerField(default=0, blank=True)
+    roles_channel_id = models.BigIntegerField(default=0, blank=True)
+    bot_log_channel_id = models.BigIntegerField(default=0, blank=True)
+    member_log_channel_id = models.BigIntegerField(default=0, blank=True)
+    update_log_channel_id = models.BigIntegerField(default=0, blank=True)
+    deterrence_log_channel_id = models.BigIntegerField(default=0, blank=True)
 
     @classmethod
     def get_id_list(cls):
@@ -42,7 +42,7 @@ class Guild(models.Model):
 
 class Role(models.Model):
     id = models.BigIntegerField(primary_key=True)
-    number = models.IntegerField(blank=True, null=True)
+    number = models.IntegerField()
     emoji_id = models.BigIntegerField(default=0)
     guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="roles")
 
@@ -56,9 +56,8 @@ class Member(models.Model):
     roles = models.ManyToManyField(Role, blank=True)
     mod_mail = models.BooleanField(default=False)
     member = models.BooleanField(default=False)
-    muted_until = models.DateTimeField(blank=True, null=True)
     join_date = models.DateTimeField(auto_now_add=True)
-    leave_date = models.DateTimeField(blank=True, null=True)
+    leave_date = models.DateTimeField(blank=True, default=None)
 
     class Meta:
         unique_together = (('user', 'guild'),)
@@ -76,9 +75,6 @@ class Strike(models.Model):
 
 
 class MemberWarning(models.Model):
-    """
-    :format: {"member"}
-    """
     reason = models.CharField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
     moderator: Member = models.ForeignKey(Member, null=True, on_delete=models.SET_NULL, related_name="issued_warnings")
@@ -99,7 +95,7 @@ class Infractions(models.Model):
     member: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="infractions")
     warning: MemberWarning = models.ForeignKey(MemberWarning, on_delete=models.CASCADE, related_name="infraction")
     type = models.CharField(max_length=30, choices=INFRACTIONS, default="SM")
-    revoke_date = models.DateTimeField(null=True)
+    revoke_date = models.DateTimeField(default=None)
 
 
 class Projects(models.Model):
@@ -111,10 +107,10 @@ class Projects(models.Model):
     status = models.CharField(max_length=16, choices=status_css_class, default='Upcoming')
     github = models.URLField(blank=True)
     invite = models.URLField(blank=True)
-    commits = models.IntegerField(blank=True, null=True)
-    stars = models.IntegerField(blank=True, null=True)
-    forks = models.IntegerField(blank=True, null=True)
-    contributors = models.IntegerField(blank=True, null=True)
+    commits = models.IntegerField(blank=True, default=0)
+    stars = models.IntegerField(blank=True, default=0)
+    forks = models.IntegerField(blank=True, default=0)
+    contributors = models.IntegerField(blank=True, default=0)
 
 
 class Rules(models.Model):
@@ -147,3 +143,9 @@ class Admins(models.Model):
     authuser = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     user: User = models.ForeignKey(User, on_delete=models.CASCADE)
     guild: Guild = models.ManyToManyField(Guild)
+
+    def get_admin_guilds(self):
+        return [guild.id for guild in self.guild.all()]
+
+    def get_admin_guild_names(self):
+        return {guild.id: guild.name for guild in self.guild.all()}

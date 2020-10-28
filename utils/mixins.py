@@ -98,11 +98,11 @@ class ResponseMixin(object):
         return JsonResponse({"response": "Gateway Timeout"}, status=504)
 
     @staticmethod
-    def http_responce_404(request):
+    def html_responce_404(request):
         return render(request, "dashboard/page-404.html", status=404)
 
     @staticmethod
-    def http_responce_403(request):
+    def html_responce_403(request):
         return render(request, "dashboard/page-403.html", status=403)
 
     @staticmethod

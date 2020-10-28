@@ -10,7 +10,7 @@ from utils.tools import bot_socket, webhook
 from utils.handlers import EmailHandler, log_error
 
 from websitedata.models import Events
-from userdata.models import Developers, Projects, Members
+from userdata.models import Projects, User
 
 oauth = Oauth()
 
@@ -28,7 +28,7 @@ class ProjectView(ModelDataMixin, View, ResponseMixin):
                 project = self.model.objects.get(pk=item_no)
                 self.context['project'] = project
             except self.model.DoesNotExist:
-                return self.http_responce_404()
+                return self.html_responce_404(request)
         else:
             self.context = self.get_common_context()
             self.context['projects'] = self.model.objects.all().order_by('id')
@@ -51,7 +51,7 @@ class EventView(ModelDataMixin, ResponseMixin, View):
                     return self.http_responce_401()
                 self.context['event'] = event
             except self.model.DoesNotExist:
-                return self.http_responce_404()
+                return self.html_responce_404(request)
         else:
             self.get_events_context()
         return render(request, self.template_name, self.context)
@@ -94,8 +94,8 @@ class VerificationHandlerView(ModelDataMixin, View):
         elif self.email is not None:
             self.context['verified'] = True # noqa
             try:
-                member_obj = Members.objects.get(user_id=self.user_id)
-            except Members.DoesNotExist:
+                member_obj = User.objects.get(id=self.user_id)
+            except User.DoesNotExist:
                 member_obj = None
             # checks if member object exits (joined the server)
             if member_obj:
@@ -107,7 +107,7 @@ class VerificationHandlerView(ModelDataMixin, View):
                     bot_socket.dm_user(int(self.user_id), message=message)
                 # if member is not verified, do verification
                 else:
-                    Members.objects.filter(user_id=self.user_id).update(email=self.email, verified=True)
+                    User.objects.filter(id=self.user_id).update(email=self.email, verified=True)
                     self.context['joined'] = True  # noqa
                     bot_socket.verify(self.user_id)
             # member object does not exist, so adding member
@@ -116,15 +116,16 @@ class VerificationHandlerView(ModelDataMixin, View):
                 tag = self.user_json.get('discriminator')
                 # trys to add member to the database
                 try:
-                    data = Members(user_id=self.user_id,
-                                   guild_id=settings.SERVER_ID,
-                                   email=self.email,
-                                   join_date=datetime.now(timezone.utc).isoformat(),
-                                   verified=True,
-                                   name=name,
-                                   tag=tag,
-                                   member=False
-                                   )
+                    # BUG: adding member
+                    data = User(id=self.user_id,
+                                guild_id=settings.SERVER_ID,
+                                email=self.email,
+                                join_date=datetime.now(timezone.utc).isoformat(),
+                                verified=True,
+                                name=name,
+                                tag=tag,
+                                member=False
+                                )
                     data.save()
                     self.context['joined'] = False  # noqa
                 # if exception occurs, shows internal server error
@@ -166,7 +167,7 @@ class VerificationView(ModelDataMixin, View):
 
 
 class DeveloperView(ModelDataMixin, View):
-    model = Developers
+    model = User
     template_name = 'developers.html'
 
     def get(self, request):
