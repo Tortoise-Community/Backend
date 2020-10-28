@@ -3,7 +3,7 @@ from django.contrib.auth import settings
 from django.shortcuts import get_object_or_404
 from django.contrib.postgres.fields import ArrayField
 
-from utils.misc import status_css_class, empty_array
+from utils.misc import empty_array
 
 
 class User(models.Model):
@@ -83,29 +83,33 @@ class MemberWarning(models.Model):
 
 
 class Infractions(models.Model):
-    """"
-    {"warning_data": {"member":123123, "moderator":12312312, "reason":"text warning"}}
-    """
-    INFRACTIONS = (("Short Mute", "SM"),
-                   ("Long Temporary Mute", "LM"),
-                   ("Kick", "SK"),
-                   ("Short Temporary Ban", "SB"),
-                   ("Long Temporary Ban", "LB"),
-                   ("Permanent Ban", "PB")
-                   )
+    class InfractionsChoice(models.TextChoices):
+        SHORT_MUTE = "SM", "Short Mute"
+        LONG_TEMPORARY_MUTE = "LM", "Long Temporary Mute"
+        KICK = "SK", "Kick"
+        SHORT_TEMPORARY_BAN = "SB", "Short Temporary Ban"
+        LONG_TEMPORARY_BAN = "LB", "Long Temporary Ban"
+        PERMANENT_BAN = "PB", "Permanent Ban"
+
     member: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="infractions")
     warning: MemberWarning = models.ForeignKey(MemberWarning, on_delete=models.CASCADE, related_name="infraction")
-    type = models.CharField(max_length=30, choices=INFRACTIONS, default="SM")
+    type = models.CharField(max_length=30, choices=InfractionsChoice.choices, default=InfractionsChoice.SHORT_MUTE)
     revoke_date = models.DateTimeField(default=None)
 
 
 class Projects(models.Model):
+    class StatusCSS(models.TextChoices):
+        CATA_RED = "cata red", "Started"
+        CATA_GREEN = "cata green", "Upcoming"
+        CATA_YELLOW = "cata yellow", "Completed"
+        CATA_PURPLE = "cata purple", "Refactoring"
+
     name = models.CharField(max_length=15)
     coverimage = models.ImageField(upload_to='img/bgimgs') # noqa
     rating = models.FloatField(default=0.0, blank=True)
     label = models.CharField(max_length=100)
     brief = models.TextField()
-    status = models.CharField(max_length=16, choices=status_css_class, default='Upcoming')
+    status = models.CharField(max_length=16, choices=StatusCSS.choices, default=StatusCSS.CATA_PURPLE)
     github = models.URLField(blank=True)
     invite = models.URLField(blank=True)
     commits = models.IntegerField(blank=True, default=0)
@@ -126,15 +130,16 @@ class Rules(models.Model):
 
 
 class Suggestions(models.Model):
-    STATUS = (("Under Review", "R"),
-              ("Approved", "A"),
-              ("Denied", "D")
-              )
+    class SuggestionStatus(models.TextChoices):
+        UNDER_REVIEW = "R", "Under Review"
+        APPROVED = "A", "Approved"
+        DENIED = "D", "Denied"
+
     message_id = models.BigIntegerField(primary_key=True)
     author: User = models.ForeignKey(User, on_delete=models.CASCADE, related_name='suggestion_author')
     guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="suggestion_guild")
     brief = models.CharField(max_length=2000)
-    status = models.CharField(max_length=20, choices=STATUS, default="R")
+    status = models.CharField(max_length=20, choices=SuggestionStatus.choices, default=SuggestionStatus.UNDER_REVIEW)
     reason = models.CharField(max_length=2000, default="", blank=True)
     link = models.URLField()
     date = models.DateTimeField(auto_now_add=True)
