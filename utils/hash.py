@@ -5,10 +5,10 @@ import binascii
 from django.contrib.auth import settings
 
 
-class Encryption(object):
+class Hashing(object):
     def __init__(self, method="sha256",
-                 salt=settings.ENCRYPTION_SALT,
-                 iterations=int(settings.ENCRYPTION_ITERATION)):
+                 salt=settings.HASH_SALT,
+                 iterations=int(settings.HASH_ITERATION)):
         self.method = method
         self.salt = bytes(salt, 'utf-8')
         self.iterations = iterations
@@ -26,12 +26,12 @@ class Encryption(object):
     def get_sha1(text_hash):
         return hashlib.sha1(text_hash.encode()).hexdigest()
 
-    def get_encrypted_pass(self, text):
+    def get_hashed_pass(self, text):
         hash_obj = hashlib.pbkdf2_hmac(self.method,
                                        bytes(text, 'utf-8'), self.salt, self.iterations)
         return str(binascii.hexlify(hash_obj))
 
-    def encrypted_user_pass(self, email, user_id):
+    def hashed_user_pass(self, email, user_id):
         text_hash = self.encrypted_hash_gen(email, user_id)
-        sha256_hash = self.get_encrypted_pass(text_hash)
+        sha256_hash = self.get_hashed_pass(text_hash)
         return self.get_sha1(sha256_hash)

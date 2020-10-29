@@ -7,11 +7,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from utils.oauth import Oauth
 from utils.mixins import ResponseMixin
 from utils.decorators import permission_required
-from utils.encryption import Encryption
+from utils.hash import Hashing
 from tortoise_api.models import Admins, MemberWarning, Infractions
 from utils.operations import create_admin, update_guilds, get_admin_guild_list
 oauth = Oauth(redirect_uri="http://dashboard.tortoisecommunity.co:8000/", scope="guilds%20identify%20email")
-encryption = Encryption()
+encryption = Hashing()
 
 
 class LoginView(View):
@@ -32,7 +32,7 @@ class LoginView(View):
             self.user_id = self.user_json.get('id')
             self.email = self.user_json.get('email')
         if self.user_id and self.email is not None:
-            password = encryption.encrypted_user_pass(self.user_id, self.email)
+            password = encryption.hashed_user_pass(self.user_id, self.email)
             guilds = oauth.get_guild_info_json(self.access_token)
             admin_guilds = get_admin_guild_list(guilds)
             if not len(admin_guilds) == 0:
