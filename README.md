@@ -92,8 +92,6 @@ Run development server
 
 `pipenv run server` (windows)
 
-`pipenv run server-l` (linux)
-
 ## License
 MIT - see [LICENSE](https://github.com/Tortoise-Community/Website/blob/dev/LICENSE) file for details.
 
