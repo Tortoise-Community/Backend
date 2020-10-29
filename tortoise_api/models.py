@@ -140,7 +140,7 @@ class Suggestions(models.Model):
 
     message_id = DiscordIDField(primary_key=True)
     author: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="suggestions")
-    guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="suggestions")
+    guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="suggestion")
     brief = models.CharField(max_length=2000)
     status = models.CharField(max_length=20, choices=SuggestionStatus.choices, default=SuggestionStatus.UNDER_REVIEW)
     reason = models.CharField(max_length=2000, default="No reason specified.", blank=True)
