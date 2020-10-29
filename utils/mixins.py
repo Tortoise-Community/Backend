@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse
 
 from tortoise.models import SiteUrls
 from tortoise_api.models import Rules
-from websitedata.models import News, Team, Slider, Events, Privacy, Changes
+from tortoise_web.models import News, Team, Slider, Events, Privacy, Changes
 
 
 class ModelDataMixin(object):

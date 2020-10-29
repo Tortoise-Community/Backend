@@ -5,7 +5,7 @@ from django.conf import settings
 from django.shortcuts import render
 
 from utils.oauth import Oauth
-from websitedata.models import Events
+from tortoise_web.models import Events
 from utils.tools import bot_socket, webhook
 from tortoise_api.models import Projects, User
 from utils.handlers import EmailHandler, log_error

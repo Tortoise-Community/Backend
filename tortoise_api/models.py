@@ -98,7 +98,7 @@ class Infractions(models.Model):
 
 
 class Projects(models.Model):
-    # TODO move this to websitedata
+    # TODO move this to tortoise_web
     class StatusCSS(models.TextChoices):
         CATA_RED = "cata red", "Started"
         CATA_GREEN = "cata green", "Upcoming"
@@ -121,10 +121,8 @@ class Projects(models.Model):
 
 class Rules(models.Model):
     guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="rules")
-    number = models.IntegerField(blank=True)  # TODO why not auto increment
+    number = models.IntegerField(blank=True)
     name = models.CharField(max_length=20)
-    # TODO why not char-field as then we can specify max length which is enforced
-    # TODO this shouldn't be that big anyway
     statement = models.TextField()
     alias = ArrayField(models.CharField(max_length=20), default=empty_array)
 

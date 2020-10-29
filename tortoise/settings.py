@@ -37,7 +37,7 @@ DATE_INPUT_FORMATS = ['%Y-%m-%d']
 # Application definition
 
 INSTALLED_APPS = [
-    'websitedata.apps.WebsitedataConfig',
+    'tortoise_web.apps.TortoiseWebConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
