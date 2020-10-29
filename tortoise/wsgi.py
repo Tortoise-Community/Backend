@@ -1,5 +1,5 @@
 """
-WSGI config for Tortoise project.
+WSGI config for tortoise project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

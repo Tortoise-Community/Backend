@@ -154,7 +154,7 @@ class EmailHandler:
                       "So we won't be tolerating attempts to frame someone or fake reports." \
                       " Please don't indulge in such activites or you could face consequences."
         elif self.subject == 'Data-Deletion':
-            content = "Greetings from the Tortoise Community. We are sorry to see you leave. Our staff will look" \
+            content = "Greetings from the tortoise Community. We are sorry to see you leave. Our staff will look" \
                       " into your data deletion request.\nYou will receive a confirmation email before the data" \
                       " is deleted permanently from our database.\nIf you'd like to come back to the server," \
                       " please use this link: https://discord.gg/6xsaVQN"
@@ -165,7 +165,7 @@ class EmailHandler:
             content = "Thank you for contacting us.\nWe will review the details submitted below and reach you here." \
                       " So make sure you check your emails frequently"
 
-        formatted_msg = f"Hi {self.name}!\n\n{content}\n\nTeam Tortoise"
+        formatted_msg = f"Hi {self.name}!\n\n{content}\n\nTeam tortoise"
 
         return formatted_msg
 
@@ -176,7 +176,7 @@ class EmailHandler:
             send_mail(
                 subject=self.subject,
                 message=self.msg,
-                from_email='Tortoise Community <tortoisecommunity@gmail.com>',
+                from_email='tortoise Community <tortoisecommunity@gmail.com>',
                 recipient_list=['{}'.format(self.recipient)]
             )
         except Exception as exp:
