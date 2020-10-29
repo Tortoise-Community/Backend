@@ -174,8 +174,8 @@ EMAIL_HOST_USER = 'tortoisecommunity@gmail.com'
 EMAIL_HOST_PASSWORD = env('EMAIL_TOKEN')
 EMAIL_USE_TLS = True
 
-ENCRYPTION_SALT = env('ENCRYPTION_SALT')
-ENCRYPTION_ITERATION = env('ENCRYPTION_ITERATION')
+HASH_SALT = env('HASH_SALT')
+HASH_ITERATION = env('HASH_ITERATION')
 
 
 # Discord end configuration for bot and verification

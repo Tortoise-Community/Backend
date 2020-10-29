@@ -23,8 +23,5 @@ django-celery-results = "*"
 python_version = "3.8"
 
 [scripts]
-makemigrations = 'python manage.py makemigrations'
-fakemigrations = 'python manage.py migrate --fake'
-migrate = 'python manage.py migrate'
 server = 'python manage.py runserver'
 lint = 'python -m flake8'
