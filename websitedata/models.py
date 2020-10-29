@@ -5,13 +5,14 @@ from utils.misc import empty_dict
 
 
 class Slider(models.Model):
-    head_crumb_1 = models.CharField(max_length=20, blank=True)
-    head_crumb_2 = models.CharField(max_length=20, blank=True)
-    span = models.CharField(max_length=20, blank=True)
+    # TODO is this model even used?
+    head_crumb_1 = models.CharField(max_length=20, default="", blank=True)
+    head_crumb_2 = models.CharField(max_length=20, default="", blank=True)
+    span = models.CharField(max_length=20, default="", blank=True)
     slide_image_url = models.URLField(blank=True)
-    sub_head = models.CharField(max_length=50, blank=True)
-    note = models.TextField(blank=True)
-    button = models.BooleanField(blank=True, default=True)
+    sub_head = models.CharField(max_length=50, default="", blank=True)
+    note = models.TextField(default="", blank=True)
+    button = models.BooleanField(default=True)
 
 
 class News(models.Model):
@@ -26,9 +27,9 @@ class News(models.Model):
 
 class Team(models.Model):
     name = models.CharField(max_length=15)
-    profile_img = models.ImageField(upload_to='img/team')
     nickname = models.CharField(max_length=15)
-    designation = models.CharField(max_length=12)
+    profile_img = models.ImageField(upload_to="img/team")
+    designation = models.CharField(max_length=12, help_text="Complete this, what is it?")  # TODO
 
 
 class Events(models.Model):
@@ -65,28 +66,28 @@ class Events(models.Model):
         ATOM_DARK_REASONABLE = "atom-one-dark-reasonable.min.css", "Atom Dark Reasonable"
 
     name = models.CharField(max_length=15)
-    event_image = models.ImageField(upload_to='img/eventimgs', blank=True)
-    cover_image = models.ImageField(upload_to='img/bgimgs')
-    page_theme = models.CharField(max_length=35, choices=EventPageThemes.choices, default=EventPageThemes.LIGHT_THEME)
-    event_type = models.CharField(max_length=17, choices=EventTypes.choices, default=EventTypes.CTF)
-    due_date = models.DateField()
-    end_date = models.DateField()
-    sponsors = JSONField(null=True, default=empty_dict, blank=True)
-    winner = models.CharField(max_length=100, blank=True)
     prize = models.CharField(max_length=100)
-    status = models.CharField(max_length=17, choices=EventStatus.choices, default=EventStatus.ENDED)
-    style = models.CharField(max_length=50, choices=EventPageCodeStyles.choices, default=EventPageCodeStyles.DEFAULT)
     host = models.CharField(max_length=100)
     task = models.CharField(max_length=50)
-    desc = models.TextField(default=None)
+    desc = models.TextField()
+    cover_image = models.ImageField(upload_to="img/bgimgs")
+    event_image = models.ImageField(upload_to="img/eventimgs", blank=True)
+    status = models.CharField(max_length=17, choices=EventStatus.choices, default=EventStatus.ENDED)
+    event_type = models.CharField(max_length=17, choices=EventTypes.choices, default=EventTypes.CTF)
+    style = models.CharField(max_length=50, choices=EventPageCodeStyles.choices, default=EventPageCodeStyles.DEFAULT)
+    page_theme = models.CharField(max_length=35, choices=EventPageThemes.choices, default=EventPageThemes.LIGHT_THEME)
+    due_date = models.DateField()
+    end_date = models.DateField()
+    sponsors = JSONField(default=empty_dict, blank=True)
+    winner = models.CharField(max_length=100, blank=True)
 
 
 class Privacy(models.Model):
     header = models.CharField(max_length=150, blank=True)
-    content = models.TextField(default=None, blank=True)
-    extra = models.TextField(default=None, blank=True, null=True)
+    content = models.TextField(blank=True)
+    extra = models.TextField(blank=True)
 
 
 class Changes(models.Model):
     date = models.DateField()
-    content = models.TextField(default=None)
+    content = models.TextField(default="")

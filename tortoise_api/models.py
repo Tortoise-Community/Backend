@@ -98,6 +98,7 @@ class Infractions(models.Model):
 
 
 class Projects(models.Model):
+    # TODO move this to websitedata
     class StatusCSS(models.TextChoices):
         CATA_RED = "cata red", "Started"
         CATA_GREEN = "cata green", "Upcoming"
