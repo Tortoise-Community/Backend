@@ -109,7 +109,7 @@
 						<div class="col-md-6">
 							<a href="{{e.pk}}">
 							<div class="recent-game-item">
-								<div class="rgi-thumb set-bg" data-setbg="{{e.coverimage.url}}">
+								<div class="rgi-thumb set-bg" data-setbg="{{e.cover_image.url}}">
 									<div class="{{e.status}}">{{e.status}}</div>
 								</div>
 								<div class="rgi-content">
@@ -143,7 +143,7 @@
 					<!-- widget --> 
 					{% for u in upcoming %}
 					<div class="widget-item">
-						<div class="feature-item set-bg" data-setbg="{{u.coverimage.url}}">
+						<div class="feature-item set-bg" data-setbg="{{u.cover_image.url}}">
 							{% if u.eventtype == 'CTF-Event' %}
 							<span class="cata blue">CTF-Event</span>
 							{% else %}

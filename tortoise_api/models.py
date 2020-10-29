@@ -3,48 +3,49 @@ from django.contrib.auth import settings
 from django.shortcuts import get_object_or_404
 from django.contrib.postgres.fields import ArrayField
 
-from utils.misc import empty_array
+from utils.misc import empty_array, DiscordIDField
 
 
 class User(models.Model):
-    id = models.BigIntegerField(primary_key=True)
-    name = models.CharField(max_length=32, default="")
-    avatar = models.URLField(blank=True, default="https://cdn.discordapp.com/embed/avatars/4.png")
-    tag = models.CharField(max_length=6, default=0)
-    email = models.CharField(max_length=50, default="", blank=True)
+    id = DiscordIDField(primary_key=True)
+    name = models.CharField(max_length=32)
+    tag = models.CharField(max_length=6)
+    avatar = models.URLField(max_length=150, blank=True, default="https://cdn.discordapp.com/embed/avatars/4.png")
+    email = models.CharField(max_length=50, default="", blank=True)  # TODO maybe email validator
     verified = models.BooleanField(default=False)
-    perks = models.IntegerField(default=0)
+    perks = models.PositiveIntegerField(default=0)
 
     class Meta:
         unique_together = (('name', 'tag'),)
 
 
 class Guild(models.Model):
-    id = models.BigIntegerField(primary_key=True)
+    id = DiscordIDField(primary_key=True)
     name = models.CharField(max_length=100)
     event_submission = models.BooleanField(default=False)
     bug_report = models.BooleanField(default=False)
     mod_mail = models.BooleanField(default=False)
     suggestions = models.BooleanField(default=False)
-    suggestion_message_id = models.BigIntegerField(default=0, blank=True)
-    suggestion_channel_id = models.BigIntegerField(default=0, blank=True)
-    verification_channel_id = models.BigIntegerField(default=0, blank=True)
-    rules_channel_id = models.BigIntegerField(default=0, blank=True)
-    roles_channel_id = models.BigIntegerField(default=0, blank=True)
-    bot_log_channel_id = models.BigIntegerField(default=0, blank=True)
-    member_log_channel_id = models.BigIntegerField(default=0, blank=True)
-    update_log_channel_id = models.BigIntegerField(default=0, blank=True)
-    deterrence_log_channel_id = models.BigIntegerField(default=0, blank=True)
+    suggestion_message_id = DiscordIDField()
+    suggestion_channel_id = DiscordIDField()
+    verification_channel_id = DiscordIDField()
+    rules_channel_id = DiscordIDField()
+    roles_channel_id = DiscordIDField()
+    bot_log_channel_id = DiscordIDField()
+    member_log_channel_id = DiscordIDField()
+    update_log_channel_id = DiscordIDField()
+    deterrence_log_channel_id = DiscordIDField()
 
     @classmethod
     def get_id_list(cls):
+        # TODO unneeded
         return [obj.id for obj in cls.objects.all()]
 
 
 class Role(models.Model):
-    id = models.BigIntegerField(primary_key=True)
-    number = models.IntegerField()
-    emoji_id = models.BigIntegerField(default=0)
+    id = DiscordIDField(primary_key=True)
+    number = models.IntegerField(help_text="Please describe this ffs I keep forgetting what it is.")  # TODO
+    emoji_id = DiscordIDField()
     guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="roles")
 
     class Meta:
@@ -52,13 +53,13 @@ class Role(models.Model):
 
 
 class Member(models.Model):
-    user: User = models.ForeignKey(User, on_delete=models.CASCADE)
-    guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE)
+    user: User = models.OneToOneField(User, on_delete=models.CASCADE)
+    guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="members")
     roles = models.ManyToManyField(Role, blank=True)
     mod_mail = models.BooleanField(default=False)
     member = models.BooleanField(default=False)
     join_date = models.DateTimeField(auto_now_add=True)
-    leave_date = models.DateTimeField(blank=True, default=None)
+    leave_date = models.DateTimeField(null=True, blank=True, default=None)
 
     class Meta:
         unique_together = (('user', 'guild'),)
@@ -69,9 +70,9 @@ class Member(models.Model):
 
 
 class Strike(models.Model):
-    ads = models.IntegerField(default=0)
-    spam = models.IntegerField(default=0)
-    bad_words = models.IntegerField(default=0)
+    ads = models.PositiveSmallIntegerField(default=0)
+    spam = models.PositiveSmallIntegerField(default=0)
+    bad_words = models.PositiveSmallIntegerField(default=0)
     user: User = models.ForeignKey(User, on_delete=models.CASCADE, related_name="strikes")
 
 
@@ -79,7 +80,7 @@ class MemberWarning(models.Model):
     reason = models.CharField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
     moderator: Member = models.ForeignKey(Member, null=True, on_delete=models.SET_NULL, related_name="issued_warnings")
-    member: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="warned_member")
+    member: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="warnings")
 
 
 class Infractions(models.Model):
@@ -92,9 +93,8 @@ class Infractions(models.Model):
         PERMANENT_BAN = "PB", "Permanent Ban"
 
     member: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="infractions")
-    warning: MemberWarning = models.ForeignKey(MemberWarning, on_delete=models.CASCADE, related_name="infraction")
     type = models.CharField(max_length=30, choices=InfractionsChoice.choices, default=InfractionsChoice.SHORT_MUTE)
-    revoke_date = models.DateTimeField(default=None)
+    revoke_date = models.DateTimeField(null=True, blank=True, default=None)
 
 
 class Projects(models.Model):
@@ -105,24 +105,26 @@ class Projects(models.Model):
         CATA_PURPLE = "cata purple", "Refactoring"
 
     name = models.CharField(max_length=15)
-    coverimage = models.ImageField(upload_to='img/bgimgs') # noqa
+    cover_image = models.ImageField(upload_to='img/bgimgs')
     rating = models.FloatField(default=0.0, blank=True)
     label = models.CharField(max_length=100)
     brief = models.TextField()
     status = models.CharField(max_length=16, choices=StatusCSS.choices, default=StatusCSS.CATA_PURPLE)
     github = models.URLField(blank=True)
     invite = models.URLField(blank=True)
-    commits = models.IntegerField(blank=True, default=0)
-    stars = models.IntegerField(blank=True, default=0)
-    forks = models.IntegerField(blank=True, default=0)
-    contributors = models.IntegerField(blank=True, default=0)
+    commits = models.PositiveSmallIntegerField(blank=True, default=0)
+    stars = models.PositiveSmallIntegerField(blank=True, default=0)
+    forks = models.PositiveSmallIntegerField(blank=True, default=0)
+    contributors = models.PositiveSmallIntegerField(blank=True, default=0)
 
 
 class Rules(models.Model):
-    guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="guild_rule")
-    number = models.IntegerField(blank=True)
-    name = models.CharField(max_length=20, default="Rule name")
-    statement = models.TextField(blank=True)
+    guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="rules")
+    number = models.IntegerField(blank=True)  # TODO why not auto increment
+    name = models.CharField(max_length=20)
+    # TODO why not char-field as then we can specify max length which is enforced
+    # TODO this shouldn't be that big anyway
+    statement = models.TextField()
     alias = ArrayField(models.CharField(max_length=20), default=empty_array)
 
     class Meta:
@@ -135,23 +137,26 @@ class Suggestions(models.Model):
         APPROVED = "A", "Approved"
         DENIED = "D", "Denied"
 
-    message_id = models.BigIntegerField(primary_key=True)
-    author: User = models.ForeignKey(User, on_delete=models.CASCADE, related_name='suggestion_author')
-    guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="suggestion_guild")
+    message_id = DiscordIDField(primary_key=True)
+    author: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="suggestions")
+    guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="suggestions")
     brief = models.CharField(max_length=2000)
     status = models.CharField(max_length=20, choices=SuggestionStatus.choices, default=SuggestionStatus.UNDER_REVIEW)
-    reason = models.CharField(max_length=2000, default="", blank=True)
+    reason = models.CharField(max_length=2000, default="No reason specified.", blank=True)
     link = models.URLField()
     date = models.DateTimeField(auto_now_add=True)
 
 
 class Admins(models.Model):
-    authuser = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    user: User = models.ForeignKey(User, on_delete=models.CASCADE)
+    auth_user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user: User = models.OneToOneField(User, on_delete=models.CASCADE)
     guild: Guild = models.ManyToManyField(Guild)
 
     def get_admin_guilds(self):
+        # TODO why are guilds even important? If it's needed then remove user and guild and just have
+        #  foreign key pointing to member
         return [guild.id for guild in self.guild.all()]
 
     def get_admin_guild_names(self):
+        # TODO read above todo
         return {guild.id: guild.name for guild in self.guild.all()}
