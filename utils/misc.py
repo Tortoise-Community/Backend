@@ -9,6 +9,8 @@ class DiscordIDField(models.BigIntegerField):
         if kwargs.get("primary_key") is not None:
             super().__init__(**kwargs)
         else:
+            kwargs.pop("null", None)
+            kwargs.pop("blank", None)
             super().__init__(null=True, blank=True, **kwargs)
 
     def formfield(self, **kwargs):
