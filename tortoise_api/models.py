@@ -8,15 +8,12 @@ from utils.misc import empty_array, DiscordIDField
 
 class User(models.Model):
     id = DiscordIDField(primary_key=True)
-    name = models.CharField(max_length=32)
-    tag = models.CharField(max_length=6)
+    name = models.CharField(max_length=32, default="")
+    tag = models.CharField(max_length=6, default="")
     avatar = models.URLField(max_length=150, blank=True, default="https://cdn.discordapp.com/embed/avatars/4.png")
-    email = models.CharField(max_length=50, default="", blank=True)  # TODO maybe email validator
+    email = models.CharField(max_length=50, default="", blank=True)
     verified = models.BooleanField(default=False)
     perks = models.PositiveIntegerField(default=0)
-
-    class Meta:
-        unique_together = (('name', 'tag'),)
 
 
 class Guild(models.Model):

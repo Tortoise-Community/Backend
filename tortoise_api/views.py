@@ -219,9 +219,9 @@ class UserDataView(APIView, ResponseMixin):
     def put(self, request, user_id=None):
         if user_id is not None:
             queryset = get_object_or_404(self.model, id=user_id)
-            # data = request.data.copy()
-            # data["id"] = int(user_id)
-            serializer = UserPutSerializer(queryset, data=request.data)
+            data = request.data.copy()
+            data["id"] = int(user_id)
+            serializer = self.serializers(queryset, data=data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=201)
