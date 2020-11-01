@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from django.contrib.auth.validators import UnicodeUsernameValidator
 
-from .models import User, Member, Guild, Suggestions, Rules, Projects, Role, MemberWarning, Strike, Infractions
+from tortoise_web.models import Projects
+from .models import User, Member, Guild, Suggestions, Rules, Role, MemberWarning, Strike, Infractions
 
 
 class UserDataSerializer(serializers.ModelSerializer):

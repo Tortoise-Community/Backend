@@ -94,28 +94,6 @@ class Infractions(models.Model):
     revoke_date = models.DateTimeField(null=True, blank=True, default=None)
 
 
-class Projects(models.Model):
-    # TODO move this to tortoise_web
-    class StatusCSS(models.TextChoices):
-        CATA_RED = "cata red", "Started"
-        CATA_GREEN = "cata green", "Upcoming"
-        CATA_YELLOW = "cata yellow", "Completed"
-        CATA_PURPLE = "cata purple", "Refactoring"
-
-    name = models.CharField(max_length=15)
-    cover_image = models.ImageField(upload_to='img/bgimgs')
-    rating = models.FloatField(default=0.0, blank=True)
-    label = models.CharField(max_length=100)
-    brief = models.TextField()
-    status = models.CharField(max_length=16, choices=StatusCSS.choices, default=StatusCSS.CATA_PURPLE)
-    github = models.URLField(blank=True)
-    invite = models.URLField(blank=True)
-    commits = models.PositiveSmallIntegerField(blank=True, default=0)
-    stars = models.PositiveSmallIntegerField(blank=True, default=0)
-    forks = models.PositiveSmallIntegerField(blank=True, default=0)
-    contributors = models.PositiveSmallIntegerField(blank=True, default=0)
-
-
 class Rules(models.Model):
     guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="rules")
     number = models.IntegerField(blank=True)

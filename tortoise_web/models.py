@@ -82,6 +82,27 @@ class Events(models.Model):
     winner = models.CharField(max_length=100, blank=True)
 
 
+class Projects(models.Model):
+    class StatusCSS(models.TextChoices):
+        CATA_RED = "cata red", "Started"
+        CATA_GREEN = "cata green", "Upcoming"
+        CATA_YELLOW = "cata yellow", "Completed"
+        CATA_PURPLE = "cata purple", "Refactoring"
+
+    name = models.CharField(max_length=15)
+    cover_image = models.ImageField(upload_to='img/bgimgs')
+    rating = models.FloatField(default=0.0, blank=True)
+    label = models.CharField(max_length=100)
+    brief = models.TextField()
+    status = models.CharField(max_length=16, choices=StatusCSS.choices, default=StatusCSS.CATA_PURPLE)
+    github = models.URLField(blank=True)
+    invite = models.URLField(blank=True)
+    commits = models.PositiveSmallIntegerField(blank=True, default=0)
+    stars = models.PositiveSmallIntegerField(blank=True, default=0)
+    forks = models.PositiveSmallIntegerField(blank=True, default=0)
+    contributors = models.PositiveSmallIntegerField(blank=True, default=0)
+
+
 class Privacy(models.Model):
     header = models.CharField(max_length=150, blank=True)
     content = models.TextField(blank=True)
