@@ -8,10 +8,10 @@ from utils.misc import empty_array, DiscordIDField
 
 class User(models.Model):
     id = DiscordIDField(primary_key=True)
-    name = models.CharField(max_length=32, default="")
-    tag = models.CharField(max_length=6, default="")
+    name = models.CharField(max_length=32)
+    tag = models.CharField(max_length=6)
     avatar = models.URLField(max_length=150, blank=True, default="https://cdn.discordapp.com/embed/avatars/4.png")
-    email = models.CharField(max_length=50, default="", blank=True)
+    email = models.CharField(max_length=50, default="", blank=True)  # TODO email validator
     verified = models.BooleanField(default=False)
     perks = models.PositiveIntegerField(default=0)
 
