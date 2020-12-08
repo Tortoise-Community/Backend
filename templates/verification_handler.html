@@ -19,6 +19,13 @@
 </head>
 <body>
 <div class="verification-handler-container">
+    {% if alt-error %}
+        <div class="verification-handler-content">
+        <h2><i style="color:firebrick;" class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i></h2>
+       <h2> Verification Failed ;(</h2><br>
+       <h5>Alt accounts are not allowed inside the server.</h5>
+        </div>
+    {% endif %}
     {% if verified %}
     <div class="verification-handler-content">
          <h2><i style="color:#00cc00;" class="fa fa-check-circle-o fa-2x" aria-hidden="true"></i></h2>

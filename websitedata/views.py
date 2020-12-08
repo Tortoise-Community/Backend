@@ -90,6 +90,13 @@ class VerificationHandlerView(ModelDataMixin, View):
         if code is None:
             pass
         elif self.email is not None:
+            try:
+                member = Members.objects.get(email=self.email)
+                self.context["alt-error"] = True  # noqa
+                if member.user_id != int(self.user_id):
+                    return render(request, self.template_name, self.context)
+            except Members.DoesNotExist:
+                pass
             self.context['verified'] = True # noqa
             try:
                 member_obj = Members.objects.get(user_id=self.user_id)
