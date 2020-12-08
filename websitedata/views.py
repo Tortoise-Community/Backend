@@ -92,7 +92,7 @@ class VerificationHandlerView(ModelDataMixin, View):
         elif self.email is not None:
             try:
                 member = Members.objects.get(email=self.email)
-                self.context["alt-error"] = True  # noqa
+                self.context["alterror"] = True  # noqa
                 if member.user_id != int(self.user_id):
                     return render(request, self.template_name, self.context)
             except Members.DoesNotExist:
