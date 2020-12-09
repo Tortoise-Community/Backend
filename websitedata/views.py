@@ -86,6 +86,7 @@ class VerificationHandlerView(ModelDataMixin, View):
         self.context['verified'] = False  # noqa
         self.context['joined'] = True  # noqa
         self.context['error'] = False  # noqa
+        self.context['alterror'] = False  # noqa
         self.get_blog_context()
         if code is None:
             pass
