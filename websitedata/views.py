@@ -87,9 +87,12 @@ class VerificationHandlerView(ModelDataMixin, View):
         self.context['joined'] = True  # noqa
         self.context['error'] = False  # noqa
         self.context['alterror'] = False  # noqa
+        self.context['unverifiederror'] = False  # noqa
         self.get_blog_context()
         if code is None:
             pass
+        elif not self.user_json.get("verified"):
+            self.context["unverifiederror"] = True  # noqa
         elif self.email is not None:
             try:
                 member = Members.objects.get(email=self.email)
