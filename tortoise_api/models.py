@@ -56,10 +56,6 @@ class Member(models.Model):
     class Meta:
         unique_together = (('user', 'guild'),)
 
-    @classmethod
-    def get_instance(cls, member_id: int, guild_id: int):
-        return get_object_or_404(cls, user__id=member_id, guild_id=guild_id)
-
 
 class Strike(models.Model):
     ads = models.PositiveSmallIntegerField(default=0)

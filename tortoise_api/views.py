@@ -289,8 +289,8 @@ class InfractionDataView(APIView, ResponseMixin):
                 log_error(Exception, e)
                 return self.json_response_400()
             try:
-                member = Member.get_instance(member_id, guild_id)
-                mod = Member.get_instance(mod_id, guild_id)
+                member = get_object_or_404(Member, user__id=member_id, guild_id=guild_id)
+                mod = get_object_or_404(Member, user__id=mod_id, guild_id=guild_id)
                 warning = MemberWarning.objects.create(member=member, moderator=mod, reason=reason)
                 self.model.objects.create(warning=warning, member=member, **request.data)
             except Exception as e:
@@ -324,8 +324,8 @@ class MemberWarningView(APIView, ResponseMixin):
             log_error(Exception, e)
             return self.json_response_400()
         try:
-            member = Member.get_instance(member_id, guild_id)
-            mod = Member.get_instance(mod_id, guild_id)
+            member = get_object_or_404(Member, user__id=member_id, guild_id=guild_id)
+            mod = get_object_or_404(Member, user__id=mod_id, guild_id=guild_id)
             self.model.objects.create(member=member, moderator=mod, reason=request.data.get("reason"))
             return Response(status=200)
         except Exception as e:
