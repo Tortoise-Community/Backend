@@ -8,7 +8,7 @@ from utils.oauth import Oauth
 from utils.mixins import ResponseMixin
 from utils.decorators import permission_required
 from utils.hash import Hashing
-from tortoise_api.models import Admins, MemberWarning, Infractions
+from tortoise_api.models import Admin, MemberWarning, Infraction
 from utils.operations import create_admin, update_guilds, get_admin_guild_list
 oauth = Oauth(redirect_uri="http://dashboard.tortoisecommunity.co:8000/", scope="guilds%20identify%20email")
 hasing = Hashing()
@@ -38,7 +38,7 @@ class LoginView(View):
             if not len(admin_guilds) == 0:
                 user = authenticate(username=self.user_id, password=password)
                 if user is not None:
-                    admin_user = Admins.objects.get(user_id=self.user_id)
+                    admin_user = Admin.objects.get(user_id=self.user_id)
                     update_guilds(admin_user, admin_guilds)
                 else:
                     user = create_admin(user_json=self.user_json, admin_guilds=admin_guilds, password=password)
@@ -53,7 +53,7 @@ class LoginView(View):
 class GuildPanelView(View, LoginRequiredMixin, ResponseMixin):
     template_name = "dashboard/index.html"
     context = {}
-    model = Admins
+    model = Admin
 
     def get(self, request, guild_id):
         admin_guilds = request.user.admins.get_admin_guild_names()
@@ -84,7 +84,7 @@ class GuildRolesView(View, LoginRequiredMixin):
 @method_decorator(permission_required, name="dispatch")
 class GuildInfractionView(View, LoginRequiredMixin):
     template_name = "dashboard/infractions.html"
-    model = Infractions
+    model = Infraction
     context = {}
 
     def get(self, request, guild_id):

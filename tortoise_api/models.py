@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth import settings
-from django.shortcuts import get_object_or_404
 from django.contrib.postgres.fields import ArrayField
 
 from utils.misc import empty_array, DiscordIDField
@@ -36,12 +35,30 @@ class Guild(models.Model):
 
 class Role(models.Model):
     id = DiscordIDField(primary_key=True)
-    number = models.IntegerField(help_text="Please describe this ffs I keep forgetting what it is.")  # TODO
-    emoji_id = DiscordIDField()
     guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="roles")
 
     class Meta:
-        unique_together = (('id', 'guild'), ('id', 'emoji_id'), ('number', 'guild'))
+        unique_together = (('id', 'guild'),)
+
+
+class SelfAssignableCategory(models.Model):
+    name = models.CharField(max_length=32)
+    guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="self_assignable_categories")
+
+    class Meta:
+        unique_together = (('name', 'guild'),)
+
+
+class SelfAssignableRole(models.Model):
+    role: Role = models.OneToOneField(Role, on_delete=models.CASCADE)
+    emoji_id = DiscordIDField()
+    order = models.PositiveIntegerField()
+    category: SelfAssignableCategory = models.ForeignKey(
+        SelfAssignableCategory, on_delete=models.CASCADE, related_name="self_assignable_roles"
+    )
+
+    class Meta:
+        unique_together = (('role__guild', 'category'), ('order', 'category'), ('role__id', 'emoji_id'))
 
 
 class Member(models.Model):
@@ -71,7 +88,7 @@ class MemberWarning(models.Model):
     member: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="warnings")
 
 
-class Infractions(models.Model):
+class Infraction(models.Model):
     class InfractionsChoice(models.TextChoices):
         SHORT_MUTE = "SM", "Short Mute"
         LONG_TEMPORARY_MUTE = "LM", "Long Temporary Mute"
@@ -85,7 +102,7 @@ class Infractions(models.Model):
     revoke_date = models.DateTimeField(null=True, blank=True, default=None)
 
 
-class Rules(models.Model):
+class Rule(models.Model):
     guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="rules")
     number = models.IntegerField(blank=True)
     name = models.CharField(max_length=20)
@@ -96,7 +113,7 @@ class Rules(models.Model):
         unique_together = (('number', 'guild'),)
 
 
-class Suggestions(models.Model):
+class Suggestion(models.Model):
     class SuggestionStatus(models.TextChoices):
         UNDER_REVIEW = "R", "Under Review"
         APPROVED = "A", "Approved"
@@ -104,7 +121,7 @@ class Suggestions(models.Model):
 
     message_id = DiscordIDField(primary_key=True)
     author: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="suggestions")
-    guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="suggestion")
+    guild: Guild = models.ForeignKey(Guild, on_delete=models.CASCADE, related_name="suggestions")
     brief = models.CharField(max_length=2000)
     status = models.CharField(max_length=20, choices=SuggestionStatus.choices, default=SuggestionStatus.UNDER_REVIEW)
     reason = models.CharField(max_length=2000, default="No reason specified.", blank=True)
@@ -112,9 +129,9 @@ class Suggestions(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
 
-class Admins(models.Model):
+class Admin(models.Model):
     auth_user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    user: User = models.OneToOneField(User, on_delete=models.CASCADE)
+    user: User = models.OneToOneField(User, on_delete=models.CASCADE, related_name="admins")
     guilds: Guild = models.ManyToManyField(Guild)
 
     def get_admin_guild_names(self):

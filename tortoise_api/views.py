@@ -7,11 +7,11 @@ from django.shortcuts import get_object_or_404
 from utils.handlers import log_error
 from utils.mixins import ResponseMixin
 from tortoise_web.models import Projects
-from .models import Member, Rules, Guild, Suggestions, User, Role, Infractions, MemberWarning, Strike
+from .models import Member, Rule, Guild, Suggestion, User, Role, Infraction, MemberWarning, Strike
 from .serializers import (
     MemberDataSerializer, SuggestionSerializer, SuggestionPutSerializer, ProjectStatsSerializer,
     RuleSerializer, GuildDataSerializer, GuildMetaSerializer, UserDataSerializer, RoleSerializer,
-    InfractionSerializer, StrikeSerializer, WarningSerializer, UserPutSerializer
+    InfractionSerializer, StrikeSerializer, WarningSerializer
 )
 
 
@@ -96,7 +96,7 @@ class ProjectStatsView(APIView, ResponseMixin):
 
 
 class RulesDataView(APIView, ResponseMixin):
-    model = Rules
+    model = Rule
     serializers = RuleSerializer
 
     def get(self, request, guild_id):
@@ -108,7 +108,7 @@ class RulesDataView(APIView, ResponseMixin):
 
 
 class SuggestionDataView(APIView, ResponseMixin):
-    model = Suggestions
+    model = Suggestion
     serializers = SuggestionSerializer
 
     def get(self, request, item_id=None, guild_id=None):
@@ -259,7 +259,7 @@ class RolesDataView(APIView, ResponseMixin):
 
 
 class InfractionDataView(APIView, ResponseMixin):
-    model = Infractions
+    model = Infraction
     serializers = InfractionSerializer
 
     def get(self, request, guild_id=None, user_id=None):

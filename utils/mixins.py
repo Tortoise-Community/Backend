@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 
 from tortoise.models import SiteUrls
-from tortoise_api.models import Rules
+from tortoise_api.models import Rule
 from tortoise_web.models import News, Team, Slider, Events, Privacy, Changes
 
 
@@ -15,7 +15,7 @@ class ModelDataMixin(object):
     events = Events.objects.all()
     privacy = Privacy.objects.all()
     changes = Changes.objects.all()
-    rules = Rules.objects.all().order_by('number')[1:]
+    rules = Rule.objects.all().order_by('number')[1:]
 
     def get_main_context(self):
         self.context['slides'] = self.slider

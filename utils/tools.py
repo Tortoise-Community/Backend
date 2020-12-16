@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db.models.signals import post_save, post_delete
 
-from tortoise_api.models import Rules
+from tortoise_api.models import Rule
 from .handlers import SocketHandler, WebhookHandler
 
 
@@ -21,6 +21,6 @@ def reload_server_utils(_sender, **_kwargs):
     bot_socket.signal("server_meta")
 
 
-post_save.connect(reload_rules, sender=Rules, dispatch_uid="rules")
-post_delete.connect(reload_rules, sender=Rules, dispatch_uid="rule")
+post_save.connect(reload_rules, sender=Rule, dispatch_uid="rules")
+post_delete.connect(reload_rules, sender=Rule, dispatch_uid="rule")
 # post_save.connect(reload_server_utils, sender=ServerUtils, dispatch_uid="server")

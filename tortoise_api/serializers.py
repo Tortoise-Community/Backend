@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.validators import UnicodeUsernameValidator
 
 from tortoise_web.models import Projects
-from .models import User, Member, Guild, Suggestions, Rules, Role, MemberWarning, Strike, Infractions
+from .models import User, Member, Guild, Suggestion, Rule, Role, MemberWarning, Strike, Infraction
 
 
 class UserDataSerializer(serializers.ModelSerializer):
@@ -29,7 +29,7 @@ class GuildDataSerializer(serializers.ModelSerializer):
 
 class RuleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Rules
+        model = Rule
         fields = ('number', 'name', 'alias', 'statement')
 
 
@@ -41,7 +41,7 @@ class ProjectStatsSerializer(serializers.ModelSerializer):
 
 class SuggestionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Suggestions
+        model = Suggestion
         fields = '__all__'
 
 
@@ -59,7 +59,7 @@ class MemberDataSerializer(serializers.ModelSerializer):
 
 class SuggestionPutSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Suggestions
+        model = Suggestion
         fields = ('status', 'reason')
 
 
@@ -89,7 +89,7 @@ class InfractionSerializer(serializers.ModelSerializer):
     warning = WarningSerializer()
 
     class Meta:
-        model = Infractions
+        model = Infraction
         exclude = ("member",)
 
 
