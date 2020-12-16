@@ -4,7 +4,7 @@ from tortoise_api.models import Admins, Guild
 
 
 def get_admin_guild_list(guilds):
-    tortoise_guilds = Guild.get_id_list()
+    tortoise_guilds = Guild.objects.all().values_list("id", flat=True)
     return [
         guild["id"] for guild in guilds if int(guild["permissions"]) & 8 and int(guild["id"]) in tortoise_guilds
     ]

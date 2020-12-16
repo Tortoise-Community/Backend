@@ -33,11 +33,6 @@ class Guild(models.Model):
     update_log_channel_id = DiscordIDField()
     deterrence_log_channel_id = DiscordIDField()
 
-    @classmethod
-    def get_id_list(cls):
-        # TODO unneeded
-        return [obj.id for obj in cls.objects.all()]
-
 
 class Role(models.Model):
     id = DiscordIDField(primary_key=True)
@@ -124,13 +119,7 @@ class Suggestions(models.Model):
 class Admins(models.Model):
     auth_user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     user: User = models.OneToOneField(User, on_delete=models.CASCADE)
-    guild: Guild = models.ManyToManyField(Guild)
-
-    def get_admin_guilds(self):
-        # TODO why are guilds even important? If it's needed then remove user and guild and just have
-        #  foreign key pointing to member
-        return [guild.id for guild in self.guild.all()]
+    guilds: Guild = models.ManyToManyField(Guild)
 
     def get_admin_guild_names(self):
-        # TODO read above todo
-        return {guild.id: guild.name for guild in self.guild.all()}
+        return {guild.id: guild.name for guild in self.guilds.all()}
