@@ -18,11 +18,19 @@ class User(models.Model):
 class Guild(models.Model):
     id = DiscordIDField(primary_key=True)
     name = models.CharField(max_length=100)
+    suggestion_message_id = DiscordIDField()
+
+
+class GuildOptions(models.Model):
+    guild: Guild = models.OneToOneField(Guild, on_delete=models.CASCADE, related_name="options")
     event_submission = models.BooleanField(default=False)
     bug_report = models.BooleanField(default=False)
     mod_mail = models.BooleanField(default=False)
     suggestions = models.BooleanField(default=False)
-    suggestion_message_id = DiscordIDField()
+
+
+class GuildChannels(models.Model):
+    guild: Guild = models.OneToOneField(Guild, on_delete=models.CASCADE, related_name="channels")
     suggestion_channel_id = DiscordIDField()
     verification_channel_id = DiscordIDField()
     rules_channel_id = DiscordIDField()
@@ -131,7 +139,7 @@ class Suggestion(models.Model):
 
 class Admin(models.Model):
     auth_user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    user: User = models.OneToOneField(User, on_delete=models.CASCADE, related_name="admins")
+    user: User = models.OneToOneField(User, on_delete=models.CASCADE)
     guilds: Guild = models.ManyToManyField(Guild)
 
     def get_admin_guild_names(self):
