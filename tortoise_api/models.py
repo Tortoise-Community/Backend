@@ -66,7 +66,7 @@ class SelfAssignableRole(models.Model):
     )
 
     class Meta:
-        unique_together = (('role__guild', 'category'), ('order', 'category'), ('role__id', 'emoji_id'))
+        unique_together = (('order', 'category'), ('role', 'emoji_id'))
 
 
 class Member(models.Model):
