@@ -56,7 +56,7 @@ class GuildPanelView(View, LoginRequiredMixin, ResponseMixin):
     model = Admin
 
     def get(self, request, guild_id):
-        admin_guilds = request.user.admins.get_admin_guild_names()
+        admin_guilds = request.user.admin.get_admin_guild_names()
         if int(guild_id) in admin_guilds:
             self.context["guilds"] = admin_guilds
             return render(request, self.template_name, self.context)

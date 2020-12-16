@@ -9,7 +9,7 @@ def permission_required(func):
                 guild = Guild.objects.get(id=guild_id)
             except Guild.DoesNotExist:
                 return Res.html_response_404(request)
-            if guild in request.user.admins.guild.all():
+            if guild in request.user.admin.guilds.all():
                 return func(request, guild_id)
             else:
                 return Res.html_response_403(request)
