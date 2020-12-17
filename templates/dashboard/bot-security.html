@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="card-block">
                                     <div class="row">
-                                        <div class="col-md-5 col-lg-3">
+                                        <div class="col-md-5 col-lg-6">
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h5>Auto Moderation</h5>
@@ -53,11 +53,42 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-footer">
-                                                    Warning/Infraction applied automatically based on severity of the action.
+                                                    Infraction like mute/kick/ban will be applied automatically based on severity of the action.<br><br>
+                                                <h6>Moderation level</h6>
+                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                  <label class="btn btn-info active">
+                                                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Low
+                                                  </label>
+                                                  <label class="btn btn-info">
+                                                    <input type="radio" name="options" id="option2" autocomplete="off"> Moderate
+                                                  </label>
+                                                  <label class="btn btn-info">
+                                                    <input type="radio" name="options" id="option3" autocomplete="off"> High
+                                                  </label>
+                                                </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-5 col-lg-3">
+                                        <div class="col-md-5 col-lg-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Raid protection</h5>
+                                                    <div class="input_wrapper float-right">
+                                                            <input type="checkbox" class="switch_4">
+                                                            <svg class="is_checked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 426.67 426.67">
+                                                              <path d="M153.504 366.84c-8.657 0-17.323-3.303-23.927-9.912L9.914 237.265c-13.218-13.218-13.218-34.645 0-47.863 13.218-13.218 34.645-13.218 47.863 0l95.727 95.727 215.39-215.387c13.218-13.214 34.65-13.218 47.86 0 13.22 13.218 13.22 34.65 0 47.863L177.435 356.928c-6.61 6.605-15.27 9.91-23.932 9.91z"/>
+                                                            </svg>
+                                                                <svg class="is_unchecked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212.982 212.982">
+                                                              <path d="M131.804 106.49l75.936-75.935c6.99-6.99 6.99-18.323 0-25.312-6.99-6.99-18.322-6.99-25.312 0L106.49 81.18 30.555 5.242c-6.99-6.99-18.322-6.99-25.312 0-6.99 6.99-6.99 18.323 0 25.312L81.18 106.49 5.24 182.427c-6.99 6.99-6.99 18.323 0 25.312 6.99 6.99 18.322 6.99 25.312 0L106.49 131.8l75.938 75.937c6.99 6.99 18.322 6.99 25.312 0 6.99-6.99 6.99-18.323 0-25.313l-75.936-75.936z" fill-rule="evenodd" clip-rule="evenodd"/>
+                                                            </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    An AI powered raid protection system against automated user account raids.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-lg-6">
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h5>Invite Detection</h5>
@@ -72,11 +103,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-footer">
-                                                    Discord Advertisement links of other servers will be detected and deleted.
+                                                    Discord advertisement links of other servers will be detected, deleted and logged.<br>
+                                                    <b>Note:</b> require auto moderation at <u>moderate</u> setting for applying infraction.
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-5 col-lg-3">
+                                        <div class="col-md-5 col-lg-6">
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h5>Slur Filter</h5>
@@ -91,26 +123,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-footer">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5 col-lg-3">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Join log</h5>
-                                                    <div class="input_wrapper float-right">
-                                                            <input type="checkbox" class="switch_4">
-                                                            <svg class="is_checked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 426.67 426.67">
-                                                              <path d="M153.504 366.84c-8.657 0-17.323-3.303-23.927-9.912L9.914 237.265c-13.218-13.218-13.218-34.645 0-47.863 13.218-13.218 34.645-13.218 47.863 0l95.727 95.727 215.39-215.387c13.218-13.214 34.65-13.218 47.86 0 13.22 13.218 13.22 34.65 0 47.863L177.435 356.928c-6.61 6.605-15.27 9.91-23.932 9.91z"/>
-                                                            </svg>
-                                                                <svg class="is_unchecked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212.982 212.982">
-                                                              <path d="M131.804 106.49l75.936-75.935c6.99-6.99 6.99-18.323 0-25.312-6.99-6.99-18.322-6.99-25.312 0L106.49 81.18 30.555 5.242c-6.99-6.99-18.322-6.99-25.312 0-6.99 6.99-6.99 18.323 0 25.312L81.18 106.49 5.24 182.427c-6.99 6.99-6.99 18.323 0 25.312 6.99 6.99 18.322 6.99 25.312 0L106.49 131.8l75.938 75.937c6.99 6.99 18.322 6.99 25.312 0 6.99-6.99 6.99-18.323 0-25.313l-75.936-75.936z" fill-rule="evenodd" clip-rule="evenodd"/>
-                                                            </svg>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer">
-                                                    Will log when a member joins the server
+                                                    Detect and logs slurs/curse words from chat with user info.<br>
+                                                    <b>Note:</b> require auto moderation at <u>high</u> setting for message deletion and infraction.
                                                 </div>
                                             </div>
                                         </div>
