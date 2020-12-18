@@ -77,9 +77,10 @@ class Member(models.Model):
     member = models.BooleanField(default=False)
     join_date = models.DateTimeField(auto_now_add=True)
     leave_date = models.DateTimeField(null=True, blank=True, default=None)
+    invited_by = models.ForeignKey("Invite", on_delete=models.SET_NULL, related_name="members", null=True, blank=True)
 
     class Meta:
-        unique_together = (('user', 'guild'),)
+        unique_together = (('user', 'guild'), ('user', 'guild', 'invited_by'))
 
 
 class Strike(models.Model):
@@ -144,3 +145,8 @@ class Admin(models.Model):
 
     def get_admin_guild_names(self):
         return {guild.id: guild.name for guild in self.guilds.all()}
+
+
+class Invite(models.Model):
+    code = models.CharField(max_length=8, unique=True)
+    creator: Member = models.OneToOneField(Member, on_delete=models.CASCADE)
