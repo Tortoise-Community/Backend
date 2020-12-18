@@ -33,12 +33,12 @@ urlpatterns = [
 
     path('private/user/<int:user_id>/', UserDataView.as_view()),
     path('private/user/', UserDataView.as_view()),
+    path('private/user/<int:user_id>/strikes/', StrikeDataView.as_view()),
 
     path('private/roles/<int:guild_id>/', RolesDataView.as_view()),
     path('private/roles/', RolesDataView.as_view()),
 
     path('private/strikes/', StrikeDataView.as_view()),
-    path('private/strikes/<int:user_id>/', StrikeDataView.as_view()),
 
     path('private/warnings/', MemberWarningView.as_view()),
     path('private/warnings/<int:guild_id>/<int:user_id>/', MemberWarningView.as_view()),
