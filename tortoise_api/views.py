@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-
+from django.db.models import Q
 from utils.handlers import log_error
 from utils.mixins import ResponseMixin
 from tortoise_web.models import Projects
@@ -204,7 +204,17 @@ class UserDataView(APIView, ResponseMixin):
             serializer = self.serializers(queryset)
             return Response(serializer.data, status=200)
         else:
-            queryset = self.model.objects.filter(verified=True).order_by('-perks')[:20]
+            limit = int(self.request.query_params.get("limit", None))
+            verified = self.request.query_params.get("verified", None)
+            perks = self.request.query_params.get("perks", None)
+            if perks and verified is not None:
+                queryset = self.model.objects.filter(
+                    Q(verified=verified) & Q(perks=perks)
+                )[:int(limit) if limit else None]
+            else:
+                queryset = self.model.objects.filter(
+                    Q(verified=verified) | Q(perks=perks)
+                )[:int(limit) if limit else None]
             serializer = self.serializers(queryset, many=True)
             return JsonResponse(serializer.data, safe=False, status=200)
 
