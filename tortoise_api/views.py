@@ -208,23 +208,14 @@ class UserDataView(APIView, ResponseMixin):
             verified = self.request.query_params.get("verified", None)
             perks_lt = self.request.query_params.get("perks_lt", None)
             perks_gt = self.request.query_params.get("perks_gt", None)
-            if perks_gt and perks_lt and verified is not None:
-                queryset = self.model.objects.filter(
-                    Q(verified=verified) & Q(perks__lt=perks_lt) & Q(perks__lt=perks_gt)
-                )[:int(limit) if limit else None]
-            else:
-                if not perks_gt:
-                    queryset = self.model.objects.filter(
-                        Q(verified=verified) | Q(perks__lt=perks_lt)
-                    )[:int(limit) if limit else None]
-                elif not perks_lt:
-                    queryset = self.model.objects.filter(
-                        Q(verified=verified) | Q(perks__gt=perks_gt)
-                    )[:int(limit) if limit else None]
-                else:
-                    queryset = self.model.objects.filter(
-                        Q(verified=verified) | Q(perks__gt=perks_gt) | Q(perks__lt=perks_lt)
-                    )[:int(limit) if limit else None]
+            query_filter = {}
+            if verified:
+                query_filter["verified"] = verified
+            if perks_lt:
+                query_filter["perks__lt"] = perks_lt
+            if perks_gt:
+                query_filter["perks__gt"] = perks_gt
+            queryset = self.model.objects.filter(**query_filter)[:int(limit) if limit else None]
             serializer = self.serializers(queryset, many=True)
             return JsonResponse(serializer.data, safe=False, status=200)
 
