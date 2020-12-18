@@ -204,7 +204,7 @@ class UserDataView(APIView, ResponseMixin):
             serializer = self.serializers(queryset)
             return Response(serializer.data, status=200)
         else:
-            limit = int(self.request.query_params.get("limit", None))
+            limit = self.request.query_params.get("limit", None)
             verified = self.request.query_params.get("verified", None)
             perks = self.request.query_params.get("perks", None)
             if perks and verified is not None:
