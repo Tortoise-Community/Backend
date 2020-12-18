@@ -31,14 +31,31 @@ class GuildOptions(models.Model):
 
 class GuildChannels(models.Model):
     guild: Guild = models.OneToOneField(Guild, on_delete=models.CASCADE, related_name="channels")
-    suggestion_channel_id = DiscordIDField()
-    verification_channel_id = DiscordIDField()
-    rules_channel_id = DiscordIDField()
-    roles_channel_id = DiscordIDField()
+    welcome_channel_id = DiscordIDField()
+    announcements_channel_id = DiscordIDField()
+    react_for_roles_channel_id = DiscordIDField()
+    mod_mail_report_channel_id = DiscordIDField()
+    bug_reports_channel_id = DiscordIDField()
+    code_submissions_channel_id = DiscordIDField()
+    suggestions_channel_id = DiscordIDField()
+    system_log_channel_id = DiscordIDField()
+    deterrence_log_channel_id = DiscordIDField()
     bot_log_channel_id = DiscordIDField()
+    successful_verifications_channel_id = DiscordIDField()
+    verification_channel_id = DiscordIDField()
+    member_count_channel_id = DiscordIDField()
+    general_channel_id = DiscordIDField()
+    rules_channel_id = DiscordIDField()
     member_log_channel_id = DiscordIDField()
     update_log_channel_id = DiscordIDField()
-    deterrence_log_channel_id = DiscordIDField()
+
+
+class GuildRolesSpecial(models.Model):
+    guild: Guild = models.OneToOneField(Guild, on_delete=models.CASCADE, related_name="roles_special")
+    muted_role_id = DiscordIDField()
+    verified_role_id = DiscordIDField()
+    trusted_role_id = DiscordIDField()
+    new_member_role = DiscordIDField()
 
 
 class Role(models.Model):
@@ -83,6 +100,11 @@ class Member(models.Model):
         unique_together = (('user', 'guild'), ('user', 'guild', 'invited_by'))
 
 
+class Invite(models.Model):
+    code = models.CharField(max_length=8, unique=True)
+    creator: Member = models.OneToOneField(Member, on_delete=models.CASCADE)
+
+
 class Strike(models.Model):
     ads = models.PositiveSmallIntegerField(default=0)
     spam = models.PositiveSmallIntegerField(default=0)
@@ -99,16 +121,14 @@ class MemberWarning(models.Model):
 
 class Infraction(models.Model):
     class InfractionsChoice(models.TextChoices):
-        SHORT_MUTE = "SM", "Short Mute"
-        LONG_TEMPORARY_MUTE = "LM", "Long Temporary Mute"
-        KICK = "SK", "Kick"
-        SHORT_TEMPORARY_BAN = "SB", "Short Temporary Ban"
-        LONG_TEMPORARY_BAN = "LB", "Long Temporary Ban"
-        PERMANENT_BAN = "PB", "Permanent Ban"
+        MUTE = "M", "Mute"
+        KICK = "K", "Kick"
+        BAN = "B", "Ban"
 
     member: Member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name="infractions")
-    type = models.CharField(max_length=30, choices=InfractionsChoice.choices, default=InfractionsChoice.SHORT_MUTE)
-    revoke_date = models.DateTimeField(null=True, blank=True, default=None)
+    type = models.CharField(max_length=30, choices=InfractionsChoice.choices)
+    date = models.DateTimeField(auto_now_add=True)
+    duration = models.PositiveIntegerField()
 
 
 class Rule(models.Model):
@@ -145,8 +165,3 @@ class Admin(models.Model):
 
     def get_admin_guild_names(self):
         return {guild.id: guild.name for guild in self.guilds.all()}
-
-
-class Invite(models.Model):
-    code = models.CharField(max_length=8, unique=True)
-    creator: Member = models.OneToOneField(Member, on_delete=models.CASCADE)
