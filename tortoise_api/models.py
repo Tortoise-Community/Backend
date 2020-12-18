@@ -139,7 +139,7 @@ class Suggestion(models.Model):
 
 class Admin(models.Model):
     auth_user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    user: User = models.OneToOneField(User, on_delete=models.CASCADE)
+    user: User = models.OneToOneField(User, on_delete=models.CASCADE, related_name="admin")
     guilds: Guild = models.ManyToManyField(Guild)
 
     def get_admin_guild_names(self):

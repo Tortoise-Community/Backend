@@ -3,8 +3,7 @@
         <div class="navbar-wrapper">
             <div class="navbar-brand header-logo">
                 <a target="_blank" href="https://tortoisecommunity.com" class="b-brand">
-                    <div class="b-bg">
-                        <img src="https://avatars3.githubusercontent.com/u/54438042">
+                    <div class="b-bg b-brand">
                     </div>
                     <span class="b-title">Tortoise Dash</span>
                 </a>
@@ -18,7 +17,7 @@
                     <li data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe" class="nav-item pcoded-hasmenu">
                         <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
                         <ul class="pcoded-submenu">
-                            {% for id, name in guilds.items %}
+                            {% for id, name in request.user.admin.get_admin_guild_names.items %}
                             <li class=""><a href="guild/{{ id }}" class="">{{ name }}</a></li>
                             {% endfor %}
                         </ul>
