@@ -350,11 +350,15 @@ class StrikeDataView(APIView, ResponseMixin):
     params = ["ads", "spam", "bad_words"]
 
     def get(self, request, user_id=None):
-        queryset = get_object_or_404(self.model, user__id=user_id)
-        serializer = self.serializer(queryset)
-        return Response(serializer.data, status=200)
+        if user_id is not None:
+            queryset = get_object_or_404(self.model, user__id=user_id)
+            serializer = self.serializer(queryset)
+            return Response(serializer.data, status=200)
+        return self.json_response_405()
 
     def put(self, request, user_id=None):
+        if user_id is None:
+            return self.json_response_405()
         strike = get_object_or_404(self.model, user_id=user_id)
         for param in self.params:
             operation = self.request.query_params.get(param, None)
