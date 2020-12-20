@@ -5,6 +5,7 @@ from tortoise_api import models
 
 admin.site.register(models.User)
 admin.site.register(models.Guild)
+admin.site.register(models.GuildOption)
 admin.site.register(models.Role)
 admin.site.register(models.Member)
 admin.site.register(models.Strike)

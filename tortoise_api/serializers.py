@@ -16,7 +16,15 @@ class UserDataSerializer(serializers.ModelSerializer):
         }
 
 
+class GuildOptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        models = models.GuildOption
+        fields = "__all__"
+
+
 class GuildDataSerializer(serializers.ModelSerializer):
+    options = GuildOptionSerializer()
+
     class Meta:
         model = models.Guild
         fields = "__all__"

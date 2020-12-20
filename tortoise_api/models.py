@@ -15,7 +15,7 @@ class User(models.Model):
     perks = models.PositiveIntegerField(default=0)
 
     def get_avatar_url(self):
-        if self.avatar is not "":
+        if self.avatar != "":
             return f"https://cdn.discordapp.com/avatars/{self.id}/{self.avatar}.png"
         else:
             return "https://cdn.discordapp.com/embed/avatars/1.png"
@@ -27,7 +27,7 @@ class Guild(models.Model):
     suggestion_message_id = DiscordIDField()
 
 
-class GuildOptions(models.Model):
+class GuildOption(models.Model):
     guild: Guild = models.OneToOneField(Guild, on_delete=models.CASCADE, related_name="options")
     event_submission = models.BooleanField(default=False)
     bug_report = models.BooleanField(default=False)
@@ -35,7 +35,7 @@ class GuildOptions(models.Model):
     suggestions = models.BooleanField(default=False)
 
 
-class GuildChannels(models.Model):
+class GuildChannel(models.Model):
     guild: Guild = models.OneToOneField(Guild, on_delete=models.CASCADE, related_name="channels")
     welcome_channel_id = DiscordIDField()
     announcements_channel_id = DiscordIDField()
