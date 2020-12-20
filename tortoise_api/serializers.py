@@ -2,12 +2,12 @@ from rest_framework import serializers
 from django.contrib.auth.validators import UnicodeUsernameValidator
 
 from tortoise_web.models import Projects
-from .models import User, Member, Guild, Suggestion, Rule, Role, MemberWarning, Strike, Infraction
+from . import models
 
 
 class UserDataSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = models.User
         exclude = ("email",)
         extra_kwargs = {
             'id': {
@@ -18,7 +18,7 @@ class UserDataSerializer(serializers.ModelSerializer):
 
 class GuildDataSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Guild
+        model = models.Guild
         fields = "__all__"
         extra_kwargs = {
             'id': {
@@ -29,7 +29,7 @@ class GuildDataSerializer(serializers.ModelSerializer):
 
 class RuleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Rule
+        model = models.Rule
         fields = ('number', 'name', 'alias', 'statement')
 
 
@@ -41,47 +41,47 @@ class ProjectStatsSerializer(serializers.ModelSerializer):
 
 class SuggestionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Suggestion
+        model = models.Suggestion
         fields = '__all__'
 
 
 class GuildMetaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Guild
+        model = models.Guild
         exclude = ("id", "name")
 
 
 class MemberDataSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Member
+        model = models.Member
         exclude = ("user", "guild")
 
 
 class SuggestionPutSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Suggestion
+        model = models.Suggestion
         fields = ('status', 'reason')
 
 
 class RoleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Role
+        model = models.Role
         fields = "__all__"
 
 
 class WarningSerializer(serializers.ModelSerializer):
     class Meta:
-        model = MemberWarning
+        model = models.MemberWarning
         exclude = ("id", "date")
 
 
 class StrikeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Strike
+        model = models.Strike
         exclude = ("id",)
 
     def update(self, instance, validated_data):
-        instance = Strike.objects.update_or_create(**validated_data)
+        instance = models.Strike.objects.update_or_create(**validated_data)
         return instance
 
 
@@ -89,11 +89,11 @@ class InfractionSerializer(serializers.ModelSerializer):
     warning = WarningSerializer()
 
     class Meta:
-        model = Infraction
+        model = models.Infraction
         exclude = ("member",)
 
 
 class UserPutSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = models.User
         exclude = ("name", "email", "tag", "id")

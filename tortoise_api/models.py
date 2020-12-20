@@ -9,10 +9,16 @@ class User(models.Model):
     id = DiscordIDField(primary_key=True)
     name = models.CharField(max_length=32)
     tag = models.CharField(max_length=6)
-    avatar = models.URLField(max_length=150, blank=True, default="https://cdn.discordapp.com/embed/avatars/4.png")
+    avatar = models.URLField(max_length=150, blank=True, default="")
     email = models.CharField(max_length=50, default="", blank=True)  # TODO email validator
     verified = models.BooleanField(default=False)
     perks = models.PositiveIntegerField(default=0)
+
+    def get_avatar_url(self):
+        if self.avatar is not "":
+            return f"https://cdn.discordapp.com/avatars/{self.id}/{self.avatar}.png"
+        else:
+            return "https://cdn.discordapp.com/embed/avatars/1.png"
 
 
 class Guild(models.Model):
