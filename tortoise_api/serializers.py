@@ -18,12 +18,19 @@ class UserDataSerializer(serializers.ModelSerializer):
 
 class GuildOptionSerializer(serializers.ModelSerializer):
     class Meta:
-        models = models.GuildOption
-        fields = "__all__"
+        model = models.GuildOption
+        exclude = ("id",)
+
+
+class GuildChannelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.GuildChannel
+        exclude = ("id",)
 
 
 class GuildDataSerializer(serializers.ModelSerializer):
     options = GuildOptionSerializer()
+    channels = GuildChannelSerializer()
 
     class Meta:
         model = models.Guild
