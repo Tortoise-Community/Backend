@@ -3,7 +3,6 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-from django.db.models import Q
 from utils.handlers import log_error
 from utils.mixins import ResponseMixin
 from tortoise_web.models import Projects
@@ -39,7 +38,6 @@ class MemberDataView(APIView, ResponseMixin):
         else:
             try:
                 user, created = User.objects.get_or_create(**request.data.pop("user"))
-                print(created)
                 guild = Guild.objects.get(id=request.data.get("guild_id"))
                 Member.objects.create(user=user, guild=guild)
             except Exception as e:

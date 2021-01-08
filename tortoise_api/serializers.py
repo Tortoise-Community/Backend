@@ -28,9 +28,16 @@ class GuildChannelSerializer(serializers.ModelSerializer):
         exclude = ("id",)
 
 
+class GuildRolesSpecialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.GuildRolesSpecial
+        exclude = ("id",)
+
+
 class GuildDataSerializer(serializers.ModelSerializer):
     options = GuildOptionSerializer()
     channels = GuildChannelSerializer()
+    roles_special = GuildRolesSpecialSerializer()
 
     class Meta:
         model = models.Guild
