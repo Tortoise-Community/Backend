@@ -1,6 +1,4 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField
-
 from utils.misc import empty_dict
 
 
@@ -78,7 +76,7 @@ class Events(models.Model):
     page_theme = models.CharField(max_length=35, choices=EventPageThemes.choices, default=EventPageThemes.LIGHT_THEME)
     due_date = models.DateField()
     end_date = models.DateField()
-    sponsors = JSONField(default=empty_dict, blank=True)
+    sponsors = models.JSONField(default=empty_dict, blank=True)
     winner = models.CharField(max_length=100, blank=True)
 
 
