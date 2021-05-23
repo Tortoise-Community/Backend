@@ -17,7 +17,7 @@ hasing = Hashing()
 
 
 class LoginView(View):
-    template_name = "dashboard/accounts/login.html"
+    template_name = "accounts/login.html"
     context = {}
     user_json = None
     access_token = None
@@ -53,7 +53,7 @@ class LoginView(View):
 
 @method_decorator(permission_required, name="dispatch")
 class GuildPanelView(View, LoginRequiredMixin, ResponseMixin):
-    template_name = "dashboard/index.html"
+    template_name = "dashboard.html"
     context = {}
     model = Admin
 
@@ -66,7 +66,7 @@ class GuildPanelView(View, LoginRequiredMixin, ResponseMixin):
 
 @method_decorator(permission_required, name="dispatch")
 class GuildRulesView(View, LoginRequiredMixin):
-    template_name = "dashboard/rules.html"
+    template_name = "dash-rules.html"
     context = {}
 
     def get(self, request, guild_id):
@@ -76,7 +76,7 @@ class GuildRulesView(View, LoginRequiredMixin):
 
 @method_decorator(permission_required, name="dispatch")
 class GuildRolesView(View, LoginRequiredMixin):
-    template_name = "dashboard/roles.html"
+    template_name = "dash-roles.html"
     context = {}
 
     def get(self, request, guild_id):
@@ -85,7 +85,7 @@ class GuildRolesView(View, LoginRequiredMixin):
 
 @method_decorator(permission_required, name="dispatch")
 class GuildInfractionView(View, LoginRequiredMixin):
-    template_name = "dashboard/infractions.html"
+    template_name = "infractions.html"
     model = Infraction
     context = {}
 
@@ -113,7 +113,7 @@ class GuildInfractionView(View, LoginRequiredMixin):
 
 @method_decorator(permission_required, name="dispatch")
 class GuildWarningsView(View, LoginRequiredMixin):
-    template_name = "dashboard/warnings.html"
+    template_name = "dash-warnings.html"
     model = MemberWarning
 
     def get(self, request, guild_id):
@@ -123,7 +123,7 @@ class GuildWarningsView(View, LoginRequiredMixin):
 
 @method_decorator(permission_required, name="dispatch")
 class BotSecurityView(View, LoginRequiredMixin):
-    template_name = "dashboard/bot-security.html"
+    template_name = "bot-security.html"
 
     def get(self, request, guild_id):
         return render(request, self.template_name)
@@ -131,7 +131,7 @@ class BotSecurityView(View, LoginRequiredMixin):
 
 @method_decorator(permission_required, name="dispatch")
 class BotLoggingView(View, LoginRequiredMixin):
-    template_name = "dashboard/bot-logging.html"
+    template_name = "bot-logging.html"
 
     def get(self, request, guild_id):
         return render(request, self.template_name)
@@ -139,7 +139,7 @@ class BotLoggingView(View, LoginRequiredMixin):
 
 @method_decorator(permission_required, name="dispatch")
 class BotUtilityView(View, LoginRequiredMixin):
-    template_name = "dashboard/bot-utility.html"
+    template_name = "bot-utility.html"
 
     def get(self, request, guild_id):
         return render(request, self.template_name)
@@ -147,7 +147,7 @@ class BotUtilityView(View, LoginRequiredMixin):
 
 @method_decorator(permission_required, name="dispatch")
 class BotMusicView(View, LoginRequiredMixin):
-    template_name = "dashboard/bot-music.html"
+    template_name = "bot-music.html"
 
     def get(self, request, guild_id):
         return render(request, self.template_name)
@@ -155,7 +155,7 @@ class BotMusicView(View, LoginRequiredMixin):
 
 @method_decorator(permission_required, name="dispatch")
 class BotFunView(View, LoginRequiredMixin):
-    template_name = "dashboard/bot-fun.html"
+    template_name = "bot-fun.html"
 
     def get(self, request, guild_id):
         return render(request, self.template_name)
@@ -163,7 +163,7 @@ class BotFunView(View, LoginRequiredMixin):
 
 @method_decorator(permission_required, name="dispatch")
 class BotOtherView(View, LoginRequiredMixin):
-    template_name = "dashboard/bot-other.html"
+    template_name = "bot-other.html"
 
     def get(self, request, guild_id):
         return render(request, self.template_name)

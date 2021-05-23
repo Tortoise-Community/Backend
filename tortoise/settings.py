@@ -37,7 +37,6 @@ DATE_INPUT_FORMATS = ['%Y-%m-%d']
 # Application definition
 
 INSTALLED_APPS = [
-    'tortoise_web.apps.TortoiseWebConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,7 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'tortoise_web.apps.TortoiseWebConfig',
     'tortoise_api.apps.TortoiseAPIConfig',
+    'tortoise_dash.apps.TortoiseDashConfig',
     'rest_framework.authtoken',
     'django_hosts',
 ]
@@ -69,7 +70,7 @@ DEFAULT_HOST = 'www'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class AdminDashboardConfig(AppConfig):
+class TortoiseDashConfig(AppConfig):
     name = 'tortoise_dash'
