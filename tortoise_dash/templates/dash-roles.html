@@ -34,61 +34,81 @@
                         <div class="col-sm-8">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Hello card</h5>
+                                    <h5>Self Assignable Roles</h5>
                                 </div>
                                 <div class="card-block">
-                                <div class="container">
-                                    <div class="row clearfix">
-                                      <div class="col-md-12 table-responsive">
-                                      <table class="table table-bordered table-hover table-sortable" id="tab_logic">
-                                        <thead>
-                                          <tr >
-                                            <th class="text-center">
-                                              Name
-                                            </th>
-                                            <th class="text-center">
-                                              Role
-                                            </th>
-                                            <th class="text-center">
-                                              Emote
-                                            </th>
-                                            <th class="text-center">
-                                              Category
-                                            </th>
-                                            <th colspan="2" class="text-center">
-                                              Manage
-                                            </th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr id='addr0' data-id="0" class="hidden">
-                                            <td data-name="name">
-                                                <input type="text" name='name0'  placeholder='Name' class="form-control"/>
-                                            </td>
-                                            <td data-name="mail">
-                                                <input type="text" name='mail0' placeholder='Email' class="form-control"/>
-                                            </td>
-                                              <td data-name="sel">
-                                                <select name="sel0" class="form-control">
-                                                        <option value="">Select Option</option>
-                                                        <option value="1">Option 1</option>
-                                                        <option value="2">Option 2</option>
-                                                        <option value="3">Option 3</option>
-                                                </select>
-                                            </td>
-                                            <td data-name="del">
-                                                <button name="del0" class='btn btn-danger glyphicon row-remove'>Remove</button>
-                                            </td>
-                                            <td data-name="del">
-                                                <button name="del0" class='btn btn-success'>Save</button>
-                                            </td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Role</th>
+                                                    <th>Emote</th>
+                                                    <th>Category</th>
+                                                    <th>Manage</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="unread">
+                                                    <td>1</td>
+                                                    <td>
+                                                        <select class="form-select" aria-label="Default select example">
+                                                          <option selected>Open this select menu</option>
+                                                          <option value="1">One</option>
+                                                          <option value="2">Two</option>
+                                                          <option value="3">Three</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-select" aria-label="Default select example">
+                                                          <option style="background-image: url('https://cdn.discordapp.com/emojis/739077691260665906.png');">cat</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-select" aria-label="Default select example">
+                                                          <option selected>Open this select menu</option>
+                                                          <option value="1">One</option>
+                                                          <option value="2">Two</option>
+                                                          <option value="3">Three</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><button href="#!" class="btn-sm btn-info text-white f-12">Save</button>  <button href="#!" class="btn-sm btn-danger text-white f-12">Delete</button></td>
+                                                </tr>
+                                                <td><button class="btn-sm btn-outline-primary">Add more</button></td>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                  </div>
-                                  <a id="add_row" class="btn btn-primary text-white float-right">Add Row</a>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Assignable Role Configuration</h5>
+                                </div>
+                                <div class="card-block">
+                                    <select class="form-select form-select-lg mb-3">
+                                      <option selected disabled>Choose React to Role Channel</option>
+                                      <option value="1">One</option>
+                                    </select>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Category Name</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="unread">
+                                                    <td>1</td>
+                                                    <td><input class="form-control-sm" type="text"></td>
+                                                    <td><button href="#!" class="btn-sm btn-info text-white f-12">Save</button>  <button href="#!" class="btn-sm btn-danger text-white f-12">Delete</button></td>
+                                                </tr>
+                                                <td style="float: right"><button class="btn-sm btn-outline-primary">Add more</button></td>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -98,96 +118,6 @@
             </div>
         </div>
     </div>
-
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-$(document).ready(function() {
-    $("#add_row").on("click", function() {
-        // Dynamic Rows Code
-
-        // Get max row id and set new id
-        var newid = 0;
-        $.each($("#tab_logic tr"), function() {
-            if (parseInt($(this).data("id")) > newid) {
-                newid = parseInt($(this).data("id"));
-            }
-        });
-        newid++;
-
-        var tr = $("<tr></tr>", {
-            id: "addr"+newid,
-            "data-id": newid
-        });
-
-        // loop through each td and create new elements with name of newid
-        $.each($("#tab_logic tbody tr:nth(0) td"), function() {
-            var td;
-            var cur_td = $(this);
-
-            var children = cur_td.children();
-
-            // add new td and element if it has a nane
-            if ($(this).data("name") !== undefined) {
-                td = $("<td></td>", {
-                    "data-name": $(cur_td).data("name")
-                });
-
-                var c = $(cur_td).find($(children[0]).prop('tagName')).clone().val("");
-                c.attr("name", $(cur_td).data("name") + newid);
-                c.appendTo($(td));
-                td.appendTo($(tr));
-            } else {
-                td = $("<td></td>", {
-                    'text': $('#tab_logic tr').length
-                }).appendTo($(tr));
-            }
-        });
-
-        // add delete button and td
-        /*
-        $("<td></td>").append(
-            $("<button class='btn btn-danger glyphicon glyphicon-remove row-remove'></button>")
-                .click(function() {
-                    $(this).closest("tr").remove();
-                })
-        ).appendTo($(tr));
-        */
-
-        // add the new row
-        $(tr).appendTo($('#tab_logic'));
-
-        $(tr).find("td button.row-remove").on("click", function() {
-             $(this).closest("tr").remove();
-        });
-});
-
-
-
-
-    // Sortable Code
-    var fixHelperModified = function(e, tr) {
-        var $originals = tr.children();
-        var $helper = tr.clone();
-
-        $helper.children().each(function(index) {
-            $(this).width($originals.eq(index).width())
-        });
-
-        return $helper;
-    };
-
-    $(".table-sortable tbody").sortable({
-        helper: fixHelperModified
-    }).disableSelection();
-
-    $(".table-sortable thead").disableSelection();
-
-
-
-    $("#add_row").trigger("click");
-});
-    </script>
 
 {% endblock content %}
 
