@@ -5,7 +5,7 @@ from django.conf import settings
 from django.shortcuts import render
 
 from utils.oauth import Oauth
-from tortoise_web.models import Events, Projects
+from tortoise_web.models import Event, Project
 from utils.tools import bot_socket, webhook
 from tortoise_api.models import User
 from utils.handlers import EmailHandler, log_error
@@ -16,7 +16,7 @@ oauth = Oauth()
 
 
 class ProjectView(ModelDataMixin, View, ResponseMixin):
-    model = Projects
+    model = Project
     template_name = 'projects.html'
     context = {}
 
@@ -37,7 +37,7 @@ class ProjectView(ModelDataMixin, View, ResponseMixin):
 
 
 class EventView(ModelDataMixin, ResponseMixin, View):
-    model = Events
+    model = Event
     template_name = 'events.html'
     context = {}
 

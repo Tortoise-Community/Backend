@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from utils.handlers import log_error
 from utils.mixins import ResponseMixin
-from tortoise_web.models import Projects
+from tortoise_web.models import Project
 from .models import Member, Rule, Guild, Suggestion, User, Role, Infraction, MemberWarning, Strike
 from .serializers import (
     MemberDataSerializer, SuggestionSerializer, SuggestionPutSerializer, ProjectStatsSerializer,
@@ -67,7 +67,7 @@ class MemberDataView(APIView, ResponseMixin):
 
 
 class ProjectStatsView(APIView, ResponseMixin):
-    model = Projects
+    model = Project
     serializers = ProjectStatsSerializer
 
     def get(self, request, item_id=None):

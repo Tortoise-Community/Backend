@@ -13,7 +13,7 @@ class Slider(models.Model):
     button = models.BooleanField(default=True)
 
 
-class News(models.Model):
+class New(models.Model):
     class NewsStatus(models.TextChoices):
         NEWS = "News"
         LIVE = "Live"
@@ -30,7 +30,7 @@ class Team(models.Model):
     designation = models.CharField(max_length=12, help_text="Complete this, what is it?")  # TODO
 
 
-class Events(models.Model):
+class Event(models.Model):
     class EventPageThemes(models.TextChoices):
         LIGHT_THEME = "event-light-theme", "Light Theme"
         DARK_THEME = "event-dark-theme", "Dark Theme"
@@ -80,7 +80,7 @@ class Events(models.Model):
     winner = models.CharField(max_length=100, blank=True)
 
 
-class Projects(models.Model):
+class Project(models.Model):
     class StatusCSS(models.TextChoices):
         CATA_RED = "cata red", "Started"
         CATA_GREEN = "cata green", "Upcoming"
@@ -107,6 +107,6 @@ class Privacy(models.Model):
     extra = models.TextField(blank=True)
 
 
-class Changes(models.Model):
+class Change(models.Model):
     date = models.DateField()
     content = models.TextField(default="")

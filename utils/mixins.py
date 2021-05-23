@@ -3,18 +3,18 @@ from django.http import JsonResponse, HttpResponse
 
 from tortoise.models import SiteUrls
 from tortoise_api.models import Rule
-from tortoise_web.models import News, Team, Slider, Events, Privacy, Changes
+from tortoise_web.models import New, Team, Slider, Event, Privacy, Change
 
 
 class ModelDataMixin(object):
     context = {}
     siteurls = SiteUrls # noqa
-    news = News.objects.all()
+    news = New.objects.all()
     team = Team.objects.all()
     slider = Slider.objects.all()
-    events = Events.objects.all()
+    events = Event.objects.all()
     privacy = Privacy.objects.all()
-    changes = Changes.objects.all()
+    changes = Change.objects.all()
     rules = Rule.objects.all().order_by('number')[1:]
 
     def get_main_context(self):

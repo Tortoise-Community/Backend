@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.validators import UnicodeUsernameValidator
 
-from tortoise_web.models import Projects
+from tortoise_web.models import Project
 from . import models
 
 
@@ -57,7 +57,7 @@ class RuleSerializer(serializers.ModelSerializer):
 
 class ProjectStatsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Projects
+        model = Project
         fields = ('pk', 'stars', 'forks', 'commits', 'contributors', 'github')
 
 
