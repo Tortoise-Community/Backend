@@ -7,7 +7,7 @@ verify_ssl = true
 flake8 = "*"
 
 [packages]
-django = "==3.0.7"
+django = "==3.1.9"
 djangorestframework = "==3.11.0"
 requests = "*"
 django-environ = "*"
