@@ -25,6 +25,12 @@ class Guild(models.Model):
     id = DiscordIDField(primary_key=True)
     name = models.CharField(max_length=100)
     suggestion_message_id = DiscordIDField()
+    emotes = ArrayField(DiscordIDField(), null=True, blank=True)
+
+    @property
+    def unused_emotes(self):
+        # return [emote for emote in self.emotes if emote not in SelfAssignableRole.attached_emotes(self)]
+        return list(SelfAssignableRole.attached_emotes(self))
 
 
 class GuildOption(models.Model):
@@ -90,6 +96,10 @@ class SelfAssignableRole(models.Model):
 
     class Meta:
         unique_together = (('order', 'category'), ('role', 'emoji_id'))
+
+    @classmethod
+    def attached_emotes(cls, guild):
+        return cls.objects.values_list('emoji_id').filter(role__guild=guild)
 
 
 class Member(models.Model):

@@ -8,7 +8,7 @@ from utils.oauth import Oauth
 from utils.mixins import ResponseMixin
 from utils.decorators import permission_required
 from utils.hash import Hashing
-from tortoise_api.models import Admin, MemberWarning, Infraction
+from tortoise_api.models import Admin, MemberWarning, Infraction, Guild
 from utils.operations import create_admin, update_guilds, get_admin_guild_list
 
 oauth = Oauth(redirect_uri="http://dash.tortoisecommunity.co:8000/", scope="guilds%20identify%20email")
@@ -80,6 +80,8 @@ class GuildRolesView(View, LoginRequiredMixin):
     context = {}
 
     def get(self, request, guild_id):
+        guild = Guild.objects.get(id=guild_id)
+        print(guild.unused_emotes)
         return render(request, self.template_name)
 
 
