@@ -212,6 +212,7 @@ class ContactView(ModelDataMixin, View):
                     data[param] = value
             except Exception as exp:
                 log_error(exp, "Item unavailable, Ignoring...")
-        EmailHandler(recipient=data['email'], name=data['name'], subject=data['subject'], pre=True)
+        # EmailHandler(recipient=data['email'], name=data['name'], subject=data['subject'], pre=True)
         bot_socket.send_contact_data(data)
+        self.context["form_success"] = True
         return render(request, self.template_name, self.context)
