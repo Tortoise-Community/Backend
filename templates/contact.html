@@ -409,8 +409,8 @@
     {% if form_success %}
         <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
         <script>
-        var notyf = new Notyf();
-        notyf.success('Successfully submitted!');
+            var notyf = new Notyf({duration: 3000, position: {x: 'right', y: 'top',}});
+            notyf.success('Successfully submitted!');
         </script>
     {% endif %}
 
