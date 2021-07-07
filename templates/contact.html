@@ -206,7 +206,7 @@
 				<div class="col-lg-8">
 					<div class="contact-form-warp">
 						<h4 class="comment-title">Reach Us</h4>
-						<form class="comment-form" action="contact" method="POST" id="contactForm">
+						<form class="comment-form" action="contact" method="POST" id="contactForm" onsubmit="return submitUserForm();">
 							{% csrf_token %}
 							<div class="row">
 								<div class="col-md-6">
@@ -292,13 +292,28 @@
 												
 											</div>
                                     <br><textarea placeholder="Message" name="message"></textarea><br>
-                                    <div class="g-recaptcha" data-sitekey="6Lfph3wbAAAAAALDrs3rRP_CCn0bH1S5-PNuv7e7"></div><br>
+                                    <div class="g-recaptcha" data-sitekey="6Lfph3wbAAAAAALDrs3rRP_CCn0bH1S5-PNuv7e7" data-callback="verifyCaptcha"></div>
+                                    <div id="g-recaptcha-error"></div>
+                                    <br>
 									<button class="site-btn btn-sm" type="submit">Send</button>
 								</div>
 							</div>
 						</form>
 					</div>
                      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                     <script>
+                        function submitUserForm() {
+                            let response = grecaptcha.getResponse();
+                            if(response.length === 0) {
+                                document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This field is required.</span>';
+                                return false;
+                            }
+                            return true;
+                        }
+                        function verifyCaptcha() {
+                            document.getElementById('g-recaptcha-error').innerHTML = '';
+                        }
+                     </script>
 				</div>
 			</div>
 		</div>
