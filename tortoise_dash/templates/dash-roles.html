@@ -1,9 +1,11 @@
 {% extends "layouts/base.html" %}
-
+{% load static %}
 {% block title %} Page Blank {% endblock %} 
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+        <link rel="stylesheet" href="{% static 'dashboard/css/iconselect.css' %}">
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -118,6 +120,12 @@
             </div>
         </div>
     </div>
+{% endblock content %}
+
+{% block javascripts %}
+
+    <script src="/static/dashboard/js/iconselect-js/lib/control/iconselect.js"></script>
+    <script src="/static/dashboard/js/iconselect-js/lib/iscroll.js"></script>
     <script>
         var iconSelect;
 
@@ -139,13 +147,8 @@
             icons.push({'iconFilePath':'https://cdn.discordapp.com/emojis/778000155470987284.png?v=1', 'iconValue':'3'});
             icons.push({'iconFilePath':'https://cdn.discordapp.com/emojis/794582480828366849.png?v=1', 'iconValue':'4'});
             icons.push({'iconFilePath':'https://cdn.discordapp.com/emojis/803727129288114196.png?v=1', 'iconValue':'5'});
-
             iconSelect.refresh(icons);
-
         };
     </script>
+{% endblock javascripts %}
 
-{% endblock content %}
-
-<!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
