@@ -10,7 +10,7 @@
     function setParam(status_code)
     {
 
-        {#let param = "https://www.tortoisecommunity.com/verification/?status=" + status_code#}
+        {#let param = "https://www.tortoisecommunity.org/verification/?status=" + status_code#}
         let param = "http://127.0.0.1:8000/verification/?status=" + status_code
         window.opener.location.replace(param);
         window.close();

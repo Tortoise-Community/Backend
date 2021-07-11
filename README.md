@@ -3,7 +3,7 @@
 ![Python-Versions](https://img.shields.io/badge/python-3.8.3-blue?style=flat-square)
 ![Django-Version](https://img.shields.io/badge/django-3.0.7-%23042e24)
 ![Django-Rest-Framwork-Version](https://img.shields.io/badge/django%20rest%20framework-3.11.0-darkred)
-[![Status](https://img.shields.io/website?url=https%3A%2F%2Ftortoisecommunity.com)][1]
+[![Status](https://img.shields.io/website?url=https%3A%2F%2Ftortoisecommunity.org)][1]
 
 ### Website build with Django for the Tortoise Community Discord Server
 
@@ -93,4 +93,4 @@ Run development server
 ## License
 MIT - see [LICENSE](https://github.com/Tortoise-Community/Website/blob/dev/LICENSE) file for details.
 
-[1]: https://tortoisecommunity.com
+[1]: https://tortoisecommunity.org

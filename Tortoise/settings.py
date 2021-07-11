@@ -32,7 +32,7 @@ DEBUG = env('DEBUG')
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 else:
-    ALLOWED_HOSTS = ['.tortoisecommunity.com', '.tortoisecommunity.org']
+    ALLOWED_HOSTS = ['.tortoisecommunity.org']
 
 DATE_INPUT_FORMATS = ['%Y-%m-%d']
 
