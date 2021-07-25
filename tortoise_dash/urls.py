@@ -22,5 +22,5 @@ urlpatterns = [
     url(r'^guild/(?P<guild_id>[0-9]{18})/bot-other', BotOtherView.as_view(), name='bot_other'),
     url(r'^guild/(?P<guild_id>[0-9]{18})/bot-fun', BotFunView.as_view(), name='bot_fun'),
     url(r'^guild/(?P<guild_id>[0-9]{18})/$', GuildPanelView.as_view(), name='guild'),
-    url(r'^logout/', logout_request, name='logout'),
+    url(r'^logout/', logout_request, name='logout')
 ]

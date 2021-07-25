@@ -10,7 +10,7 @@ class User(models.Model):
     name = models.CharField(max_length=32)
     tag = models.CharField(max_length=6)
     avatar = models.URLField(max_length=150, blank=True, default="")
-    email = models.CharField(max_length=50, default="", blank=True)  # TODO email validator
+    email = models.CharField(max_length=50, default="", blank=True)
     verified = models.BooleanField(default=False)
     perks = models.PositiveIntegerField(default=0)
 

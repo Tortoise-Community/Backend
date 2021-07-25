@@ -5,7 +5,7 @@
                 <a target="_blank" href="https://tortoisecommunity.com" class="b-brand">
                     <div class="b-bg b-brand">
                     </div>
-                    <span class="b-title">Tortoise Dash</span>
+                    <span class="b-title">Tortoise Dashboard</span>
                 </a>
                 <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
             </div>
@@ -18,7 +18,7 @@
                         <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
                         <ul class="pcoded-submenu">
                             {% for id, name in request.user.admin.get_admin_guild_names.items %}
-                            <li class=""><a href="guild/{{ id }}" class="">{{ name }}</a></li>
+                            <li class=""><a href="{% url 'guild' guild_id=id %}" class="">{{ name }}</a></li>
                             {% endfor %}
                         </ul>
                     </li>

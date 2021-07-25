@@ -58,7 +58,7 @@ class EventView(ModelDataMixin, ResponseMixin, View):
 
 
 class IndexView(ModelDataMixin, View):
-    template_name = 'dashboard.html'
+    template_name = 'index.html'
     context = {}
 
     def get(self, request):
