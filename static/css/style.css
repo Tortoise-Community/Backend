@@ -1,12 +1,7 @@
-
-/*---------------------------*/
-/* Template default CSS
-/*---------------------------*/
-
 html,
 body {
 	height: 100%;
-	font-family: 'Lilita One', cursive;
+	font-family: 'Poppins', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
 }
