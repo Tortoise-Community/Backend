@@ -3,7 +3,6 @@ from utils.misc import empty_dict
 
 
 class Slider(models.Model):
-    # TODO is this model even used?
     head_crumb_1 = models.CharField(max_length=20, default="", blank=True)
     head_crumb_2 = models.CharField(max_length=20, default="", blank=True)
     span = models.CharField(max_length=20, default="", blank=True)

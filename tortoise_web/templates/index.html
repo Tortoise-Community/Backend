@@ -5,15 +5,16 @@
 {% block content %}
     <!-- Header section end -->
     <section class="hero-section">
-        <div class="hero-slider owl-carousel"> {% for s in slides %}
-            <div class="hs-item set-bg" data-setbg="{{s.Slideimageurl}}">
+        <div class="hero-slider owl-carousel">
+            <div class="hs-item set-bg" data-setbg="https://cdn.discordapp.com/attachments/649868379372388352/698290156280741950/1_IthmK3QJv5Jvt6XKyMM1bw.jpg">
                 <div class="hs-text">
                     <div class="container">
-                        <h2>{{s.HeadCrumb1}} <span>{{s.Span}}</span> {{s.HeadCrumb2}}</h2>
-                        <p style="font-size: 25px; ">{{s.Subhead}}</p>
-                        <p style="font-size:18px;">{{s.Note}}</p> {% if S.button %} <a href="https://discord.gg/GQdZjmW" target="_blank" class="joinus">Join Us</a> {% endif %} </div>
+                        <h2>TEST <span>test</span> test</h2>
+                        <p style="font-size: 25px; ">test</p>
+                        <p style="font-size:18px;">test</p><a href="https://discord.gg/GQdZjmW" target="_blank" class="joinus">Join Us</a></div>
                 </div>
-            </div> {% endfor %} </div>
+            </div>
+        </div>
     </section>
 
     <!-- Live events section  -->

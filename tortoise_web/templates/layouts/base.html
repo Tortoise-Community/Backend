@@ -15,7 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+
+    <link href= "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
 	<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}" />
 	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
@@ -53,25 +54,6 @@
 			</nav>
 		</div>
 	</header>
-    <!-- Latest news section -->
-    {% if news %}
-	<div class="latest-news-section">
-		<div class="ln-title">UPDATES</div>
-		<div class="news-ticker">
-			<div class="news-ticker-contant"> {% for n in news %} {% if n.choice == 'Live' %}
-				<a href="events">
-					<div class="nt-item"><span class="red">Live</span>{{n.news}}</div>
-				</a> {% elif n.choice == 'News' %}
-				<a href="events">
-					<div class="nt-item"><span class="green">News</span>{{n.news}}</div>
-				</a> {% else %}
-				<a href="events">
-					<div class="nt-item"><span class="purple">Announcement</span>{{n.news}}</div>
-				</a> {% endif %} {% endfor %} </div>
-		</div>
-	</div>
-    {% endif %}
-	<!-- Latest news section end -->
 
     {% block content %}{% endblock content %}
 
@@ -91,7 +73,8 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-widget">
 						<h4 class="fw-title">Team Tortoise</h4>
-						<div class="top-comment"> {% for t in team %}
+						<div class="top-comment">
+                            {% for t in team %}
 							<div class="tc-item">
 								<div class="tc-thumb set-bg" data-setbg="{{t.profilepic.url}}"></div>
 								<div class="tc-content">
@@ -99,7 +82,9 @@
 										<br><span>Designation: </span>{{t.designation}}</p>
 									<p><span>Nickname: </span> <a class="tc-date">{{t.nickname}}</a></p>
 								</div>
-							</div> {% endfor %} </div>
+							</div>
+                            {% endfor %}
+                        </div>
 					</div>
 				</div>
 			</div>
@@ -121,10 +106,9 @@
 				</script> Tortoise Community | <a href="{% url 'credits' %}" target='_blank'>All rights reserved </a></p>
 		</div>
 	</footer>
-	<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
-	<script src="{% static 'js/bootstrap.min.js' %}"></script>
-	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
-	<script src="{% static 'js/jquery.marquee.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.Marquee/1.6.0/jquery.marquee.min.js" integrity="sha512-JHJv/L48s1Hod24iSI0u9bcF/JlUi+YaxliKdbasnw/U1Lp9xxWkaZ3O5OuQPMkVwOVXeFkF4n4176ouA6Py3A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="{% static 'js/main.js' %}"></script>
     <script src="https://kit.fontawesome.com/869e252412.js" crossorigin="anonymous"></script>
     {% block scripts %} {% endblock scripts %}
