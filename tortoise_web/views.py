@@ -21,18 +21,9 @@ class ProjectView(ModelDataMixin, View, ResponseMixin):
     context = {}
 
     def get(self, request, item_no=None):
-        if item_no is not None:
-            self.context = self.get_blog_context()
-            self.template_name = 'project.html'
-            try:
-                project = self.model.objects.get(pk=item_no)
-                self.context['project'] = project
-            except self.model.DoesNotExist:
-                return self.html_response_404(request)
-        else:
-            self.context = self.get_common_context()
-            self.context['projects'] = self.model.objects.all().order_by('id')
-
+        self.context = self.get_common_context()
+        self.context['projects'] = self.model.objects.all().order_by('id')
+        self.context['nav_shadow'] = True
         return render(request, self.template_name, self.context)
 
 
@@ -54,6 +45,7 @@ class EventView(ModelDataMixin, ResponseMixin, View):
                 return self.html_response_404(request)
         else:
             self.get_events_context()
+            self.context['nav_shadow'] = True
         return render(request, self.template_name, self.context)
 
 
@@ -192,6 +184,7 @@ class ContactView(ModelDataMixin, View):
 
     def get(self, request):
         self.get_common_context()
+        self.context['nav_shadow'] = True
         return render(request, self.template_name, self.context)
 
     def post(self, request):

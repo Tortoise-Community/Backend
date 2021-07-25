@@ -1,21 +1,14 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 
-
 {% block content %}
     <!-- Header section end -->
-    <section class="hero-section">
-        <div class="hero-slider owl-carousel">
-            <div class="hs-item set-bg" data-setbg="https://cdn.discordapp.com/attachments/649868379372388352/698290156280741950/1_IthmK3QJv5Jvt6XKyMM1bw.jpg">
-                <div class="hs-text">
-                    <div class="container">
-                        <h2>TEST <span>test</span> test</h2>
-                        <p style="font-size: 25px; ">test</p>
-                        <p style="font-size:18px;">test</p><a href="https://discord.gg/GQdZjmW" target="_blank" class="joinus">Join Us</a></div>
-                </div>
-            </div>
+    <div id="hero">
+        <div class="hero-container">
+          <h1>Welcome to Tortoise</h1>
+          <a href="#about" class="btn-get-started scrollto">Join now</a>
         </div>
-    </section>
+    </div>
 
     <!-- Live events section  -->
     {% if levents %}

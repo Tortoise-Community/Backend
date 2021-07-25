@@ -4,26 +4,11 @@
 
 {% block content %}
 
-	<!-- Page info section -->
-	<section class="page-info-section set-bg" data-setbg="{{siteurls.img3}}">
-		<div class="pi-content">
-			<div class="container">
-				<div class="row">
-					<div class="col-xl-5 col-lg-6 text-white blurcard">
-						<h2 style="color: black;">Projects</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Page info section -->
-
     <!-- Review section -->
-    <section class="review-section review-dark spad set-bg" data-setbg="{% static 'img/review-bg-2.jpg' %}">
+    <section class="review-section review-dark spad set-bg">
         <div class="container">
             <div class="section-title text-white">
-                <div class="cata red">new</div>
-                <h2>Our Projects</h2>
+                <h2 class="text-black-50">Our Projects</h2>
             </div>
             <div class="row text-white">
                 {% for p in projects %}

@@ -5,18 +5,18 @@
 {% block content %}
 
 	<!-- Page info section -->
-	<section class="page-info-section set-bg" data-setbg="{{siteurls.img5}}">
-		<div class="pi-content">
-			<div class="container">
-				<div class="row">
-					<div class="col-xl-5 col-lg-6 text-white">
-						<h2>Contact us</h2>
-						<p>Reach us from here if you are not part of the community. You can report issues, sponsor our events, report violations or appeal for the infraction you have recieved</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+{#	<section class="page-info-section set-bg" data-setbg="{{siteurls.img5}}">#}
+{#		<div class="pi-content">#}
+{#			<div class="container">#}
+{#				<div class="row">#}
+{#					<div class="col-xl-5 col-lg-6 text-white">#}
+{#						<h2>Contact us</h2>#}
+{#						<p>Reach us from here if you are not part of the community. You can report issues, sponsor our events, report violations or appeal for the infraction you have recieved</p>#}
+{#					</div>#}
+{#				</div>#}
+{#			</div>#}
+{#		</div>#}
+{#	</section>#}
 	<!-- Page info section -->
 	{% if H %}
 	<div id="myModal" class="poppup" style="display:block;" >
@@ -79,6 +79,7 @@
 											 <option value="Other">Other</option>
 									      </select>  
 									   </div>
+                                       <br>
 											<div id="other" style="display:none;"><br/>
 												<label>Enter the subject:</label>
 												<input type="text" placeholder="subject"  name="othersub">

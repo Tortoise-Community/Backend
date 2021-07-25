@@ -34,62 +34,86 @@
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
-	<!-- Header section -->
-	<header class="header-section">
-		<div class="container">
-			<!-- logo -->
-			<a class="site-logo" href="{% url 'home' %}"> <img src="{{siteurls.site_logo}}" alt=""> </a>
-			<!-- responsive -->
-			<div class="nav-switch"> <i class="fa fa-bars"></i> </div>
-			<br>
-			<!-- site menu -->
-			<nav class="main-menu">
-				<ul>
-					<li><a href="{% url 'home' %}">Home</a></li>
-					<li><a href="{% url 'events' %}">Events</a></li>
-					<li><a href="{% url 'projects' %}">Projects</a></li>
-					<li><a href="{% url 'members' %}">Community</a></li>
-					<li><a href="{% url 'contact' %}">Contact</a></li>
-				</ul>
-			</nav>
-		</div>
-	</header>
+    <nav class="navbar {% if not nav_shadow %}fixed-top{% endif %} navbar-expand-sm navbar-dark p-md-3 {% if nav_shadow %}bg-darker{% endif %}">
+      <div class="container-fluid">
+        <a class="site-logo" href="{% url 'home' %}"> <img src="{{siteurls.site_logo}}" height="50px" alt=""> </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="mx-auto"></div>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'events' %}">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'projects' %}">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'contact' %}">Contact</a>
+            </li>
+            <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                More
+              </a>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Blogs</a>
+                <a class="dropdown-item" href="#">Resources</a>
+                <a class="dropdown-item" href="#">Tutorials</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
     {% block content %}{% endblock content %}
 
-	<!-- Footer top section -->
-	<section class="footer-top-section">
-		<div class="container">
-			<div class="footer-top-bg"> <img src="{{siteurls.footer_img}}" alt=""> </div>
-			<div class="row">
-				<div class="col-lg-4">
-					<div class="footer-logo text-white"> <img src="{{siteurls.footer_logo}}" alt="">
-						<p>Rush to our discord server</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<iframe src="https://discordapp.com/widget?id=577192344529404154&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="footer-widget">
-						<h4 class="fw-title">Team Tortoise</h4>
-						<div class="top-comment">
-                            {% for t in team %}
-							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="{{t.profilepic.url}}"></div>
-								<div class="tc-content">
-									<p><a href="#">{{t.name}}</a>
-										<br><span>Designation: </span>{{t.designation}}</p>
-									<p><span>Nickname: </span> <a class="tc-date">{{t.nickname}}</a></p>
-								</div>
-							</div>
-                            {% endfor %}
-                        </div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+{#	<!-- Footer top section -->#}
+{#	<section class="footer-top-section">#}
+{#		<div class="container">#}
+{#			<div class="footer-top-bg"> <img src="{{siteurls.footer_img}}" alt=""> </div>#}
+{#			<div class="row">#}
+{#				<div class="col-lg-4">#}
+{#					<div class="footer-logo text-white"> <img src="{{siteurls.footer_logo}}" alt="">#}
+{#						<p>Rush to our discord server</p>#}
+{#					</div>#}
+{#				</div>#}
+{#				<div class="col-lg-4 col-md-6">#}
+{#					<iframe src="https://discordapp.com/widget?id=577192344529404154&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>#}
+{#				</div>#}
+{#				<div class="col-lg-4 col-md-6">#}
+{#					<div class="footer-widget">#}
+{#						<h4 class="fw-title">Team Tortoise</h4>#}
+{#						<div class="top-comment">#}
+{#                            {% for t in team %}#}
+{#							<div class="tc-item">#}
+{#								<div class="tc-thumb set-bg" data-setbg="{{t.profilepic.url}}"></div>#}
+{#								<div class="tc-content">#}
+{#									<p><a href="#">{{t.name}}</a>#}
+{#										<br><span>Designation: </span>{{t.designation}}</p>#}
+{#									<p><span>Nickname: </span> <a class="tc-date">{{t.nickname}}</a></p>#}
+{#								</div>#}
+{#							</div>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{#					</div>#}
+{#				</div>#}
+{#			</div>#}
+{#		</div>#}
+{#	</section>#}
 
 	<!-- Footer top section end -->
 	<footer class="footer-section">
@@ -111,6 +135,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="{% static 'js/main.js' %}"></script>
     <script src="https://kit.fontawesome.com/869e252412.js" crossorigin="anonymous"></script>
+
+    {% if not nav_shadow %}
+    <script>
+      let nav = document.querySelector('nav');
+      window.addEventListener('scroll', function () {
+        if (window.pageYOffset > 100) {
+          nav.classList.add('bg-darker-shadow', 'shadow');
+        } else {
+          nav.classList.remove('bg-darker-shadow', 'shadow');
+        }
+      });
+    </script>
+    {% endif %}
+
     {% block scripts %} {% endblock scripts %}
 
 </body>
