@@ -74,6 +74,18 @@ ol {
 /*---------------------
   Helper CSS
 -----------------------*/
+.card-header, .card-footer{
+	border: none;
+}
+
+.list-inline{
+	display: flex;
+}
+.list-inline-item{
+	font-size: 14px !important;
+	flex: 1;
+  	text-align: center;
+}
 
 .section-title {
 	text-align: center;

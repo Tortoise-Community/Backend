@@ -5,25 +5,28 @@
 {% block content %}
 
     <!-- Review section -->
-    <section class="review-section review-dark spad set-bg">
+    <section class="page-section single-blog-page spad">
         <div class="container">
-            <div class="section-title text-white">
-                <h2 class="text-black-50">Our Projects</h2>
+            <div class="section-title text-left">
+                <h2 class="text-dark">Projects</h2>
             </div>
-            <div class="row text-white">
-                {% for p in projects %}
-                <div class="col-lg-3 col-md-6">
-                    <a href="{{p.pk}}"><div class="review-item">
-                        <div class="review-cover set-bg" data-setbg="{{p.cover_image.url}}">
-                            <div class="score pink">{{p.rating}}</div>
-                        </div>
-                        <div class="review-text">
-                            <h5>{{p.name}}</h5>
-                            <p>{{p.label}}</p>
-                        </div>
-                    </div></a>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                   <div class="card pt-md-3 px-md-2 pb--3">
+                      <a href="#"><h5 class="card-header bg-transparent"><i class="fa fa-github"></i> Tortoise-Bot</h5></a>
+                      <div class="card-body">
+                        <p class="card-text text-dark">With supporting text below as a natural lead-in to additional content.</p>
+                      </div>
+                      <div class="card-footer bg-transparent mb--3">
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><i class="fa fa-circle text-info"></i> Python</li>
+                            <li class="list-inline-item"><i class="fa fa-star"></i> 34</li>
+                            <li class="list-inline-item"><i class="fa fa-code-fork"></i> 34</li>
+                            <li class="list-inline-item"><i class="fa fa-history"></i> 34</li>
+                        </ul>
+                      </div>
+                   </div>
                 </div>
-                {% endfor %}
             </div>
         </div>
     </section>
