@@ -1,0 +1,75 @@
+
+    <nav class="pcoded-navbar">
+        <div class="navbar-wrapper">
+            <div class="navbar-brand header-logo">
+                <a target="_blank" href="https://tortoisecommunity.com" class="b-brand">
+                    <div class="b-bg">
+                        <img src="https://avatars3.githubusercontent.com/u/54438042">
+                    </div>
+                    <span class="b-title">Tortoise Dash</span>
+                </a>
+                <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+            </div>
+            <div class="navbar-content scroll-div">
+                <ul class="nav pcoded-inner-navbar">
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Navigation</label>
+                    </li>
+                    <li data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                        <ul class="pcoded-submenu">
+                            {% for id, name in guilds.items %}
+                            <li class=""><a href="guild/{{ id }}" class="">{{ name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Bot Management</label>
+                    </li>
+                    <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-cpu"></i></span><span class="pcoded-mtext">Tortoise Bot</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="bot-security" class=""><i class="feather icon-shield"></i> Security</a></li>
+                            <li class=""><a href="bot-logging" class=""><i class="feather icon-clipboard"></i> Logging</a></li>
+                            <li class=""><a href="bot-utility" class=""><i class="feather icon-grid"></i> Utility</a></li>
+                            <li class=""><a href="bot-fun" class=""><i class="feather icon-star"></i> Fun</a></li>
+                            <li class=""><a href="bot-music" class=""><i class="feather icon-music"></i> Music</a></li>
+                            <li class=""><a href="bot-other" class=""><i class="feather icon-command"></i> Other</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Your Server</label>
+                    </li>
+                    <li data-username="Server Rules"
+                        class="nav-item {% if 'server-rules' in segment %} active {% endif %}">
+                        <a href="rules" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Rules</span></a></li>
+                    <li data-username="Server Roles"
+                        class="nav-item {% if 'server-roles' in segment %} active {% endif %}">
+                        <a href="roles" class="nav-link "><span class="pcoded-micon"><i class="feather icon-sliders"></i></span><span class="pcoded-mtext">Roles</span></a></li>
+                    <li data-username="Member Infractions"
+                        class="nav-item {% if 'server-infractions' in segment %} active {% endif %}">
+                        <a href="infractions" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user-x"></i></span><span class="pcoded-mtext">Infractions</span></a></li>
+                    <li data-username="Member Warnings"
+                        class="nav-item {% if 'server-infractions' in segment %} active {% endif %}">
+                        <a href="warnings" class="nav-link "><span class="pcoded-micon"><i class="feather icon-slack"></i></span><span class="pcoded-mtext">Warnings</span></a></li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Your Account</label>
+                    </li>
+                    <li data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Account</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="/templates/auth-reset-pass.html" class="">Reset Pass</a></li>
+                        </ul>
+                    </li>
+                    <li data-username="Disabled Menu" class="nav-item">
+                        <a href="{% url 'logout' %}" class="nav-link">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-power"></i>
+                            </span>
+                            <span class="pcoded-mtext">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>

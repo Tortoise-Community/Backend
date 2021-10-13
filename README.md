@@ -70,7 +70,6 @@ OAUTH_CLIENT_SECRET = put_something_here
 # Other application credentials 
 EMAIL_TOKEN = put_something_here
 GITHUB_ACCESS_TOKEN = put_something_here
-DELETION_CONFIRMATION_KEY = put_something_here
 
 # Django credentials
 DEBUG = False
@@ -81,9 +80,6 @@ SERVER_ID = put_something_here
 WEBHOOK_ID = put_something_here
 WEBHOOK_SECRET = put_something_here
 
-# Hashing credentials
-HASH_SALT = put_something_here
-HASH_ITERATION = put_something_here
 ```
 
 #### After setup 
@@ -91,6 +87,8 @@ HASH_ITERATION = put_something_here
 Run development server 
 
 `pipenv run server` (windows)
+
+`pipenv run server-l` (linux)
 
 ## License
 MIT - see [LICENSE](https://github.com/Tortoise-Community/Website/blob/dev/LICENSE) file for details.

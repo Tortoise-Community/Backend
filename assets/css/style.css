@@ -1,3 +1,9 @@
+/* =================================
+------------------------------------
+  Game Warrior Template
+  Version: 1.0
+ ------------------------------------ 
+ ====================================*/
 
 /*---------------------------*/
 /* Template default CSS
@@ -112,9 +118,7 @@ ol {
 .text-white a {
 	color: #fff;
 }
-.text-white h2{
-	color: #fff !important;
-}
+
 .rating i {
 	color: #fbb710;
 }
@@ -307,7 +311,7 @@ ol {
 ---------------------*/
 
 .header-section {
-	background: #02020A;
+	background: #131313;
 	clear: both;
 	overflow: hidden;
 	padding: 18px 0;
@@ -397,9 +401,6 @@ ol {
 
 .hero-slider .hs-text h2 span {
 	color: #ffb320;
-}
-.hero-slider h2{
-	color: white !important;
 }
 
 .hero-slider .hs-text p {
@@ -581,18 +582,18 @@ ol {
   Recent Game Section
 ------------------------*/
 
-.recent-event-section {
+.recent-game-section {
 	background-color: #eef2f6;
 	border-top: 1px solid #d6dee7;
 	border-bottom: 1px solid #d6dee7;
 }
 
-.recent-event-item .rgi-thumb {
+.recent-game-item .rgi-thumb {
 	height: 204px;
 	padding: 25px 28px;
 }
 
-.recent-event-item .rgi-content {
+.recent-game-item .rgi-content {
 	padding: 34px 22px 20px;
 	background: #fff;
 	border: 1px solid #d6dee7;
@@ -600,25 +601,25 @@ ol {
 	position: relative;
 }
 
-.recent-event-item .rgi-content h5 {
+.recent-game-item .rgi-content h5 {
 	margin-bottom: 20px;
 	line-height: 1.5;
 }
 
-.recent-event-item .rgi-content .comment {
+.recent-game-item .rgi-content .comment {
 	font-size: 12px;
 	color: #737373;
 }
 
-.recent-event-item .rgi-extra {
+.recent-game-item .rgi-extra {
 	position: absolute;
 	right: 0;
 	bottom: 0;
 	width: 70px;
 }
 
-.recent-event-item .rgi-extra .rgi-star,
-.recent-event-item .rgi-extra .rgi-heart {
+.recent-game-item .rgi-extra .rgi-star,
+.recent-game-item .rgi-extra .rgi-heart {
 	height: 35px;
 	width: 35px;
 	float: left;
@@ -626,11 +627,11 @@ ol {
 	padding: 6px 8px 0;
 }
 
-.recent-event-item .rgi-extra .rgi-star {
+.recent-game-item .rgi-extra .rgi-star {
 	background: #ffb320;
 }
 
-.recent-event-item .rgi-extra .rgi-heart {
+.recent-game-item .rgi-extra .rgi-heart {
 	background: #ff205f;
 }
 
@@ -972,7 +973,6 @@ ol {
 	font-size: 60px;
 	margin-bottom: 25px;
 	font-weight: 400;
-	color: white !important;
 }
 
 .site-pagination {
@@ -1068,7 +1068,7 @@ ol {
   Categories page
 --------------------*/
 
-.recent-event-page .recent-event-item {
+.recent-game-page .recent-game-item {
 	margin-bottom: 42px;
 }
 
@@ -1095,10 +1095,7 @@ ol {
 	background-color: #131313;
 	
 }
-.verification-top h3
-{
-	color:#FF8000 !important;
-}
+
 .gittint{
 	background-color: #202020;
 }
@@ -1125,13 +1122,13 @@ ol {
 	background: #ff205f;
 }
 
-.single-blog-page  h4 {
+.single-blog-page .blog-content h4 {
 	margin-bottom: 10px;
-	text-align: left;
+	text-align: center;
 	color: #ffa60b;
 }
 
-.single-blog-page .meta-comment {
+.single-blog-page .blog-content .meta-comment {
 	display: block;
 	font-size: 15px;
 	color: black;
@@ -1139,7 +1136,7 @@ ol {
 
 }
 
-.single-blog-page  pre {
+.single-blog-page .blog-content pre {
 	margin-bottom: 25px;
 }
 
@@ -1447,7 +1444,7 @@ ol {
 	.hero-slider .owl-dots {
 		max-width: 690px;
 	}
-	.recent-event-item {
+	.recent-game-item {
 		margin-bottom: 42px;
 	}
 	.tournament-item .ti-thumb {
@@ -1537,7 +1534,7 @@ ol {
 	.feature-item {
 		margin-bottom: 30px;
 	}
-	.recent-event-item {
+	.recent-game-item {
 		margin-bottom: 42px;
 	}
 	.review-section {
@@ -1598,9 +1595,6 @@ ol {
 		border-radius: 8px;
 	    box-shadow: 0 5px #2C2F33;
 	}
-	.verification-statement{
-		display: none;
-	}
 
 }
 
@@ -1659,9 +1653,6 @@ ol {
 		border-radius: 8px;
 	    box-shadow: 0 5px #2C2F33;
 	}
-	.verification-statement{
-		display: none;
-	}
 }
 }
 
@@ -1679,14 +1670,13 @@ ol {
 	background-color: rgb(0,0,0); /* Fallback color */
 	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
-  
+
   /* poppup Content */
   .poppup-content {
 	background-color:#7289da;
 	margin: auto;
 	padding: 20px;
 	border: 1px solid #888;
-	border-radius:3px;
 	width: 80%;
 	text-align: center;
 	font-family: Lilita One;
@@ -1704,7 +1694,7 @@ ol {
 	font-size: 30px;
 	font-weight: bold;
   }
-  
+
   .close:hover,
   .close:focus {
 	color: #000;
@@ -1718,15 +1708,14 @@ ol {
 	  font-size: 18px;
   }
   .buttonactive{
-	  background-color: #02020A !important;
+	  background-color: #333 !important;
 	  color:#f5f5f5 !important;
-	  border: 2px solid #333;
-
   }
   .githux{
 	  color:#333;
+	  border:none;
 	  background : #f5f5f5;
-	  padding: 13px 28px;
+	  padding: 16px 32px;
 	  text-align: center;
 	  text-decoration: none;
 	  display: inline-block;
@@ -1735,12 +1724,12 @@ ol {
 	  -webkit-transition-duration: 0.4s; /* Safari */
 	  transition-duration: 0.4s;
 	  cursor: pointer;
-	  border: 2px solid #02020A;
+	  border: 2px solid #333;
 	  border-radius: 12px;
   }
   .githux:hover{
-	  background:#02020A;
-	  color:white;
+	  background:#333;
+	  color:white
   }
 
   .invite
@@ -1780,7 +1769,7 @@ ol {
 	font-family: Lilita One;
 }
 .blurcard{
-	background-color: rgba(255, 255, 255, .10);  
+	background-color: rgba(255, 255, 255, .10);
 	backdrop-filter: blur(15px);
 }
 .centerpiece
@@ -1791,19 +1780,18 @@ ol {
 }
 
 .verification{
-	position: relative; 
+	position: relative;
 	top: 25%;
 	margin-left: auto;
 	margin-right: auto;
 	min-width: 300px;
-	width: 23%; 
-	height: 60%; 
-	background: #101010;
+	width: 23%;
+	height: 60%;
+	background: #1a1a1a;
 	border-radius: 20px;
 	box-shadow: 0 0 30px 0 #333;
 	max-height: 400px;
-	padding-bottom: 3px;
-} 
+}
 .verification-wrapper{
 	padding: 2px 5px;
 }
@@ -1827,32 +1815,31 @@ ol {
 	border:1px white solid;
 	width: 80%;
 	height: 70%;
-	margin-top: 20px;
+	margin-top: 30px;
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
-	border-radius: 10px 10px 10px 10px;
+	border-radius: 10px 20px 20px 20px;
 	font-size: 18px;
-	border-color: grey !important;
-	padding-bottom: 6px;
+	color: white;
 }
 .verification-bottom{
-	text-align: center;
-	margin-left: auto;
-	margin-right: 5px;
+	text-align: left;
+	margin-left: 35px;
+	margin-right: auto;
 	position: relative;
 }
 .verification-footer{
 	margin-left: 45px;
 	margin-right: 45px;
-	margin-top: 20px;
+	margin-top: 55px;
 }
 
 .verified{
 	padding: 5px 5px;
 }
 .emailerror{
-	background-color:  rgba(255, 255, 255, .15);  
+	background-color:  rgba(255, 255, 255, .15);
 	backdrop-filter: blur(5px);
 	color: #131313;
 	text-align: center;
@@ -1869,15 +1856,15 @@ ol {
 
 .privacypolicy
 {
-	background-color: #FFFFFF;
+	background-color: #f0f3f4;
 	padding: 20px 30px;
 	font-weight: bold;
-	
+
 }
 
 .change-log
 {
-	background-color:#f0f8ff;
+	background-color: #f0f3f4;
 	padding: 40px 30px;
 	font-family: 'Roboto', sans-serif !important;
 	font-weight: bold;
@@ -1885,117 +1872,9 @@ ol {
 
 .privacyx
 {
-	background-color: #f0f8ff;
+	background-color:  #eaeaea;
 	padding: 20px 30px;
 	font-family: 'Roboto', sans-serif !important;
 
-}
 
-/*##################*/
-/* MARKDOWN CONTENT */
-/*##################*/
-
-.blog-content p{
-	color: black !important;
-}
-.outertint{
-	background-color: #fbfbff;
-}
-.innertint{
-	background-color: #040F16;
-}
-
-.blog-content h1{
-	color: #01BAEF !important;
-	font-size: 45px !important;
-}
-.blog-content h2{
-	color: #0090C1;
-	font-size: 35px !important;
-}
-.blog-content h3{
-	color: white;
-	font-size: 30px !important;
-	text-align: left !important;
-}
-.blog-content h4{
-	color: white !important;
-	font-size: 25px !important;
-}
-.blog-content p,pre,li{
-	color: grey !important;
-	font-size: 16px !important;
-}
-.blog-content ul, ol{
-	padding: 4px 15px !important;
-}
-.eventblog p,pre,li{
-	font-size: 19px !important;
-}
-
-.eventblog h1,h2,h3,h4,h5,h6{
-color: #0f0f0f!important;
-}
-
-code{
-  min-width:400px !imporant;
-  display:inline-block !imporant;
-  border-radius:6px;
-  padding:0px 8px 8px 8px;
-  font-size:16px !important;
-}
-.event-light-theme{
-	background-color: #f8f8ff !important;
-}
-.event-light-theme h1,h2,h3,h4,h5,h6{
-	color: #0f0f0f !important;
-}
-
-
-.iconcenter {
-	text-align: center;
-	width: 100%;
-	color: #ffb101;
-	}
-
-.verification-handler-container{
-
-}
-.verification-handler-content{
-	margin-top: 100px;
-	max-width: 1000px;
-	margin-left: auto;
-	margin-right: auto;
-	color: #00ad5f;
-	text-align: center;
-}
-
-.eventoverride{
-	padding: 20px 10px;
-}
-.eventoverride ul {
-    margin-left: 0;
-    padding-left: 20px;
-}
-
-.register-btn
-  {
-	  color: #333;
-	  background: #f5f5f5;
-	  border:none;
-	  padding: 5px 10px;
-	  text-align: center;
-	  text-decoration: none;
-	  display: inline-block;
-	  font-size: 16px;
-	  margin: 4px 2px;
-	  -webkit-transition-duration: 0.4s; /* Safari */
-	  transition-duration: 0.4s;
-	  cursor: pointer;
-	  border: 2px solid #333;
-	  border-radius: 12px;
-  }
-.register-btn:hover{
-	  color:white;
-	  background: #02020A;
 }

@@ -7,7 +7,7 @@ verify_ssl = true
 flake8 = "*"
 
 [packages]
-django = "*"
+django = "==3.0.7"
 djangorestframework = "==3.11.0"
 requests = "*"
 django-environ = "*"
@@ -20,8 +20,11 @@ markdown = "*"
 django-celery-results = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.8"
 
 [scripts]
+makemigrations = 'python manage.py makemigrations'
+fakemigrations = 'python manage.py migrate --fake'
+migrate = 'python manage.py migrate'
 server = 'python manage.py runserver'
 lint = 'python -m flake8'
