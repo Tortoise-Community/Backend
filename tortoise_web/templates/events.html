@@ -23,7 +23,7 @@
 
 
 	<!-- Page section -->
-	<section class="page-section recent-game-page spad">
+	<section class="page-section recent-event-page spad">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
@@ -31,7 +31,7 @@
 						{% for e in events %}
 						<div class="col-md-6">
 							<a href="{{e.pk}}">
-							<div class="recent-game-item">
+							<div class="recent-event-item">
 								<div class="rgi-thumb set-bg" data-setbg="{{e.cover_image.url}}">
 									<div class="{{e.status}}">{{e.status}}</div>
 								</div>

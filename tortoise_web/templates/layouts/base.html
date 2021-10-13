@@ -19,8 +19,8 @@
     <link href= "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
 	<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}" />
-	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
 	<link rel="stylesheet" href="{% static 'css/animate.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
     {% block stylesheet %} {% endblock stylesheet %}
 
 	<!--[if lt IE 9]>
@@ -81,39 +81,39 @@
 
     {% block content %}{% endblock content %}
 
-{#	<!-- Footer top section -->#}
-{#	<section class="footer-top-section">#}
-{#		<div class="container">#}
-{#			<div class="footer-top-bg"> <img src="{{siteurls.footer_img}}" alt=""> </div>#}
-{#			<div class="row">#}
-{#				<div class="col-lg-4">#}
-{#					<div class="footer-logo text-white"> <img src="{{siteurls.footer_logo}}" alt="">#}
+	<!-- Footer top section -->
+	<section class="footer-top-section">
+		<div class="container-fluid">
+			<div class="footer-top-bg"> <img src="{{siteurls.footer_img}}" alt=""> </div>
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="footer-logo text-white"> <img src="{{siteurls.footer_logo}}" alt="">
 {#						<p>Rush to our discord server</p>#}
-{#					</div>#}
-{#				</div>#}
-{#				<div class="col-lg-4 col-md-6">#}
-{#					<iframe src="https://discordapp.com/widget?id=577192344529404154&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>#}
-{#				</div>#}
-{#				<div class="col-lg-4 col-md-6">#}
-{#					<div class="footer-widget">#}
-{#						<h4 class="fw-title">Team Tortoise</h4>#}
-{#						<div class="top-comment">#}
-{#                            {% for t in team %}#}
-{#							<div class="tc-item">#}
-{#								<div class="tc-thumb set-bg" data-setbg="{{t.profilepic.url}}"></div>#}
-{#								<div class="tc-content">#}
-{#									<p><a href="#">{{t.name}}</a>#}
-{#										<br><span>Designation: </span>{{t.designation}}</p>#}
-{#									<p><span>Nickname: </span> <a class="tc-date">{{t.nickname}}</a></p>#}
-{#								</div>#}
-{#							</div>#}
-{#                            {% endfor %}#}
-{#                        </div>#}
-{#					</div>#}
-{#				</div>#}
-{#			</div>#}
-{#		</div>#}
-{#	</section>#}
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<iframe src="https://discordapp.com/widget?id=577192344529404154&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-widget">
+						<h4 class="fw-title">Team Tortoise</h4>
+						<div class="top-comment">
+                            {% for t in team %}
+							<div class="tc-item">
+								<div class="tc-thumb set-bg" data-setbg="{{t.profilepic.url}}"></div>
+								<div class="tc-content">
+									<p><a href="#">{{t.name}}</a>
+										<br><span>Designation: </span>{{t.designation}}</p>
+									<p><span>Nickname: </span> <a class="tc-date">{{t.nickname}}</a></p>
+								</div>
+							</div>
+                            {% endfor %}
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<!-- Footer top section end -->
 	<footer class="footer-section">

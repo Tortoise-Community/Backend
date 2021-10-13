@@ -12,7 +12,7 @@
 
     <!-- Live events section  -->
     {% if levents %}
-    <section class="recent-game-section spad set-bg" data-setbg="{{siteurls.live_event_img}}">
+    <section class="recent-event-section spad set-bg">
         <div class="container">
             <div class="section-title">
                 <h2>Live Events</h2> </div>
@@ -61,24 +61,20 @@
 
     <!-- Recent events section  -->
     {% if revents %}
-    <section class="recent-game-section spad set-bg" data-setbg="{{siteurls.recent_event_img}}">
+    <section class="recent-event-section spad">
         <div class="container">
             <div class="section-title text-white">
                 <h2 style="color: white;">Recent Events</h2> </div>
             <div class="row"> {% for r in revents %}
                 <a href="pages/events/{{r.pk}}">
                     <div class="col-lg-4 col-md-6">
-                        <div class="recent-game-item">
+                        <div class="recent-event-item">
                             <div class="rgi-thumb set-bg" data-setbg="{{r.cover_image.url}}"> {%if R.eventtype == 'CTF-Event' %}
                                 <div class="cata purple">{{r.eventtype}}</div> {% else %}
                                 <div class="cata green">{{r.eventtype}}</div> {% endif %} </div>
                             <div class="rgi-content">
                                 <h5>{{r.name}}</h5>
                                 <p>{{r.task}}</p> <a href="#" class="comment"><span style="color:black;">Winner: </span>{{r.winner}}</a>
-                                <div class="rgi-extra">
-                                    <div class="rgi-star"><img src="{% static 'img/icons/star.png' %}" alt=""></div>
-                                    <div class="rgi-heart"><img src="{% static 'img/icons/heart.png' %}" alt=""></div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -88,32 +84,65 @@
     {% endif %}
     <!-- Recent events section end -->
 
-    <!-- Project section -->
-    {% if projects %}
-    <section class="review-section spad set-bg" data-setbg="{% static 'img/review-bg-1.png' %}">
-        <div class="container">
-            <div class="section-title">
-                <div class="cata red">new</div>
-                <h2>Recent Projects</h2>
+    <section class="page-section single-blog-page spad">
+        <div class="container-lg">
+            <div class="section-title text-left">
+                <h2 class="text-dark" style="text-align: left !important;">Projects</h2>
             </div>
-            <div class="row">
-                {% for p in Projects %} <a href="projects/{p.pk}"></a>
-                <div class="col-lg-3 col-md-6">
-                    <div class="review-item">
-                        <div class="review-cover set-bg" data-setbg="{{p.cover_image.url}}">
-                            <div class="{{p.status}}">{{p.rating}}</div>
-                        </div>
-                        <div class="review-text">
-                            <h5>{{p.name}}</h5>
-                            <p>{{p.label}}</p>
-                        </div>
-                    </div>
+            <div class="row g-4">
+
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                   <div class="card pt-md-3 px-md-2 pb--3">
+                      <a class="stretched-link" href="#"><h5 class="card-header bg-transparent"><i class="fa fa-github"></i> Tortoise-Bot</h5></a>
+                      <div class="card-body">
+                        <p class="card-text text-dark">With supporting text below as a natural lead-in to additional content.</p>
+                      </div>
+                      <div class="card-footer bg-transparent mb--3">
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><i class="fa fa-circle text-info"></i> Python</li>
+                            <li class="list-inline-item"><i class="fa fa-star"></i> 34</li>
+                            <li class="list-inline-item"><i class="fa fa-code-fork"></i> 34</li>
+                            <li class="list-inline-item"><i class="fa fa-history"></i> 34</li>
+                        </ul>
+                      </div>
+                   </div>
                 </div>
-                {% endfor %}
+
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                   <div class="card pt-md-3 px-md-2 pb--3">
+                      <a class="stretched-link" href="#"><h5 class="card-header bg-transparent"><i class="fa fa-github"></i> Tortoise-Bot</h5></a>
+                      <div class="card-body">
+                        <p class="card-text text-dark">With supporting text below as a natural lead-in to additional content.</p>
+                      </div>
+                      <div class="card-footer bg-transparent mb--3">
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><i class="fa fa-circle text-info"></i> Python</li>
+                            <li class="list-inline-item"><i class="fa fa-star"></i> 34</li>
+                            <li class="list-inline-item"><i class="fa fa-code-fork"></i> 34</li>
+                            <li class="list-inline-item"><i class="fa fa-history"></i> 34</li>
+                        </ul>
+                      </div>
+                   </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                   <div class="card pt-md-3 px-md-2 pb--3">
+                      <a class="stretched-link" href="#"><h5 class="card-header bg-transparent"><i class="fa fa-github"></i> Tortoise-Bot</h5></a>
+                      <div class="card-body">
+                        <p class="card-text text-dark">With supporting text below as a natural lead-in to additional content.</p>
+                      </div>
+                      <div class="card-footer bg-transparent mb--3">
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><i class="fa fa-circle text-info"></i> Python</li>
+                            <li class="list-inline-item"><i class="fa fa-star"></i> 34</li>
+                            <li class="list-inline-item"><i class="fa fa-code-fork"></i> 34</li>
+                            <li class="list-inline-item"><i class="fa fa-history"></i> 34</li>
+                        </ul>
+                      </div>
+                   </div>
+                </div>
             </div>
         </div>
     </section>
-    {% endif %}
-    <!-- Project section end -->
 
 {% endblock content %}

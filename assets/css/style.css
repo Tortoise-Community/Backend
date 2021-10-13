@@ -581,18 +581,18 @@ ol {
   Recent Game Section
 ------------------------*/
 
-.recent-game-section {
+.recent-event-section {
 	background-color: #eef2f6;
 	border-top: 1px solid #d6dee7;
 	border-bottom: 1px solid #d6dee7;
 }
 
-.recent-game-item .rgi-thumb {
+.recent-event-item .rgi-thumb {
 	height: 204px;
 	padding: 25px 28px;
 }
 
-.recent-game-item .rgi-content {
+.recent-event-item .rgi-content {
 	padding: 34px 22px 20px;
 	background: #fff;
 	border: 1px solid #d6dee7;
@@ -600,25 +600,25 @@ ol {
 	position: relative;
 }
 
-.recent-game-item .rgi-content h5 {
+.recent-event-item .rgi-content h5 {
 	margin-bottom: 20px;
 	line-height: 1.5;
 }
 
-.recent-game-item .rgi-content .comment {
+.recent-event-item .rgi-content .comment {
 	font-size: 12px;
 	color: #737373;
 }
 
-.recent-game-item .rgi-extra {
+.recent-event-item .rgi-extra {
 	position: absolute;
 	right: 0;
 	bottom: 0;
 	width: 70px;
 }
 
-.recent-game-item .rgi-extra .rgi-star,
-.recent-game-item .rgi-extra .rgi-heart {
+.recent-event-item .rgi-extra .rgi-star,
+.recent-event-item .rgi-extra .rgi-heart {
 	height: 35px;
 	width: 35px;
 	float: left;
@@ -626,11 +626,11 @@ ol {
 	padding: 6px 8px 0;
 }
 
-.recent-game-item .rgi-extra .rgi-star {
+.recent-event-item .rgi-extra .rgi-star {
 	background: #ffb320;
 }
 
-.recent-game-item .rgi-extra .rgi-heart {
+.recent-event-item .rgi-extra .rgi-heart {
 	background: #ff205f;
 }
 
@@ -1068,7 +1068,7 @@ ol {
   Categories page
 --------------------*/
 
-.recent-game-page .recent-game-item {
+.recent-event-page .recent-event-item {
 	margin-bottom: 42px;
 }
 
@@ -1447,7 +1447,7 @@ ol {
 	.hero-slider .owl-dots {
 		max-width: 690px;
 	}
-	.recent-game-item {
+	.recent-event-item {
 		margin-bottom: 42px;
 	}
 	.tournament-item .ti-thumb {
@@ -1537,7 +1537,7 @@ ol {
 	.feature-item {
 		margin-bottom: 30px;
 	}
-	.recent-game-item {
+	.recent-event-item {
 		margin-bottom: 42px;
 	}
 	.review-section {
