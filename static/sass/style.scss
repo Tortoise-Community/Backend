@@ -501,14 +501,14 @@ ol {
 /*----------------------
   Recent Game Section
 ------------------------*/
-.recent-game-section {
+.recent-event-section {
   background-color: #eef2f6;
   border-top: 1px solid #d6dee7;
   border-bottom: 1px solid #d6dee7;
 }
 
 
-.recent-game-item {
+.recent-event-item {
   .rgi-thumb {
     height: 204px;
     padding: 25px 28px;
@@ -921,8 +921,8 @@ ol {
 /*-----------------
   Categories page
 --------------------*/
-.recent-game-page {
-  .recent-game-item {
+.recent-event-page {
+  .recent-event-item {
     margin-bottom: 42px;
   }
 }
@@ -1259,7 +1259,7 @@ ol {
   .hero-slider .owl-dots {
     max-width: 690px;
   }
-  .recent-game-item{
+  .recent-event-item{
     margin-bottom: 42px;
   }
   .tournament-item .ti-thumb {
@@ -1348,7 +1348,7 @@ ol {
   .feature-item  {
     margin-bottom: 30px;
   }
-  .recent-game-item{
+  .recent-event-item{
     margin-bottom: 42px;
   }
   .review-section {

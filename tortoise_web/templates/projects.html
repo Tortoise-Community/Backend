@@ -1,0 +1,36 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <!-- Review section -->
+    <section class="page-section single-blog-page spad">
+        <div class="container-lg">
+            <div class="section-title text-left">
+                <h2 class="text-dark">Projects</h2>
+            </div>
+            <div class="row g-4">
+
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                   <div class="card pt-md-3 px-md-2 pb--3">
+                      <a class="stretched-link" href="#"><h5 class="card-header bg-transparent"><i class="fa fa-github"></i> Tortoise-Bot</h5></a>
+                      <div class="card-body">
+                        <p class="card-text text-dark">With supporting text below as a natural lead-in to additional content.</p>
+                      </div>
+                      <div class="card-footer bg-transparent mb--3">
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><i class="fa fa-circle text-info"></i> Python</li>
+                            <li class="list-inline-item"><i class="fa fa-star"></i> 34</li>
+                            <li class="list-inline-item"><i class="fa fa-code-fork"></i> 34</li>
+                            <li class="list-inline-item"><i class="fa fa-history"></i> 34</li>
+                        </ul>
+                      </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Review section end -->
+
+{% endblock content %}

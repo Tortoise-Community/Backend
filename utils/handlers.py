@@ -1,7 +1,7 @@
+import json
 import socket
 import logging
 
-import json
 import requests
 
 from django.conf import settings
@@ -42,8 +42,7 @@ class WebhookHandler:
         self._send_to_webhook(payload)
 
 
-alert_hook = WebhookHandler(settings.WEBHOOK_ID,
-                            settings.WEBHOOK_SECRET)
+alert_hook = WebhookHandler(settings.WEBHOOK_ID, settings.WEBHOOK_SECRET)
 
 
 class SocketHandler:
@@ -67,10 +66,11 @@ class SocketHandler:
             self.server.send(payload.encode('utf-8'))
             self.response = self.server.recv(2000).decode('unicode_escape')
         except Exception as exp:
-            data = {"title": "Socket Error", "description": f"Error: {exp}\n"
-                                                            f"Payload: {payload}",
-                    "color": 0xff0000
-                    }
+            data = {
+                "title": "Socket Error",
+                "description": f"Error: {exp}\nPayload: {payload}",
+                "color": 0xff0000
+            }
             alert_hook.send_embed(data)
             log_error(exp, self.server)
         return self.response
@@ -101,32 +101,37 @@ class SocketHandler:
         self._safe_packet_transfer(payload)
 
     def dm_user(self, member_id: int, message: str):
-        payload = {"endpoint": "send",
-                   "data": {"user_id": member_id,
-                            "message": message
-                            }
-                   }
+        payload = {
+            "endpoint": "send",
+            "data": {
+                "user_id": member_id,
+                "message": message
+            }
+        }
         self._safe_packet_transfer(payload)
 
     def send_to_channel(self, channel_id: int, message: str):
-        payload = {"endpoint": "send",
-                   "data": {"user_id": channel_id,
-                            "message": message
-                            }
-                   }
+        payload = {
+            "endpoint": "send",
+            "data": {
+                "user_id": channel_id,
+                "message": message
+            }
+        }
         self._safe_packet_transfer(payload)
 
     def send_contact_data(self, data: dict):
-        payload = {"endpoint": "contact",
-                   "data": data
-                   }
+        payload = {
+            "endpoint": "contact",
+            "data": data
+        }
         self._safe_packet_transfer(payload)
 
 
 class EmailHandler:
 
     def __init__(self, recipient: str, name: str, subject: str, msg=None, pre=None):
-        self.recipiant = recipient
+        self.recipient = recipient
         self.name = name
         self.subject = subject
         self.msg = msg
@@ -149,7 +154,7 @@ class EmailHandler:
                       "So we won't be tolerating attempts to frame someone or fake reports." \
                       " Please don't indulge in such activites or you could face consequences."
         elif self.subject == 'Data-Deletion':
-            content = "Greetings from the Tortoise Community. We are sorry to see you leave. Our staff will look" \
+            content = "Greetings from the tortoise Community. We are sorry to see you leave. Our staff will look" \
                       " into your data deletion request.\nYou will receive a confirmation email before the data" \
                       " is deleted permanently from our database.\nIf you'd like to come back to the server," \
                       " please use this link: https://discord.gg/6xsaVQN"
@@ -160,7 +165,7 @@ class EmailHandler:
             content = "Thank you for contacting us.\nWe will review the details submitted below and reach you here." \
                       " So make sure you check your emails frequently"
 
-        formatted_msg = f"Hi {self.name}!\n\n{content}\n\nTeam Tortoise"
+        formatted_msg = f"Hi {self.name}!\n\n{content}\n\nTeam tortoise"
 
         return formatted_msg
 
@@ -168,22 +173,30 @@ class EmailHandler:
         if self.pre is True:
             self.msg = self._get_preformatted_message()
         try:
-            send_mail(self.subject, self.msg, 'Tortoise Community <tortoisecommunity@gmail.com>',
-                      ['{}'.format(self.recipiant)])
+            send_mail(
+                subject=self.subject,
+                message=self.msg,
+                from_email='tortoise Community <tortoisecommunity@gmail.com>',
+                recipient_list=['{}'.format(self.recipient)]
+            )
         except Exception as exp:
-            embed = {"title": "Exception while sending email",
-                     "description": f"Exception: {exp}\n\n"
-                                    f"Recipient: {self.recipiant}"
-                                    f"Subject: {self.subject}",
-                     "color": 0xff0000
-                     }
+            embed = {
+                "title": "Exception while sending email",
+                "description": (
+                    f"Exception: {exp}\n\n"
+                    f"Recipient: {self.recipient}"
+                    f"Subject: {self.subject}"
+                ),
+                "color": 0xff0000
+            }
             alert_hook.send_embed(embed)
 
 
 def log_error(exp, msg):
     logger.debug(f"{exp} raised on activity {msg}")
-    embed = {"title": "API Error",
-             "description": f"`{exp}`\n\n",
-             "color": 0xff0000
-             }
+    embed = {
+        "title": "API Error",
+        "description": f"`{exp}`\n\n",
+        "color": 0xff0000
+    }
     alert_hook.send_embed(embed)

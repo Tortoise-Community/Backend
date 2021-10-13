@@ -1,0 +1,63 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+	<!-- Page info section -->
+	<section class="page-info-section set-bg" data-setbg="{{siteurls.img1}}">
+		<div class="pi-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-5 col-lg-6 text-white">
+						<h2>Privacy Policy</h2>
+						<p>Information on the data we collect about you and their usage.</p>
+					</div>
+				</div>
+				<a href="{% url 'members' %}"><button class="githux mod1">Developers</button></a>
+				<a href="{% url 'rules' %}"><button class="githux mod1">Rules</button></a>
+				<a href="{% url 'privacy' %}"><button class="githux mod1 buttonactive">Privacy</button></a>
+			</div>
+		</div>
+	</section>
+	<!-- Page info section -->
+
+
+	<!-- Page section -->
+		<section class="page-section single-blog-page spad tintx">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 privacyx">
+						<div class="row">	
+                        {% if privacy %}
+                        {% for p in privacy %}
+						<h2>{{p.header}}</h2>
+						<div class="privacypolicy" >
+						  <p style="color: black !important; font-size: 16px;">{{p.content}}</p>
+                          <p style="color: black !important; font-size: 16px;">{{p.extra}}</p>
+						</div>
+                        {% endfor %}
+                        {% endif %}
+						</div>
+
+					</div>
+				<!-- sidebar -->
+				<div class="col-lg-4 col-md-7 sidebar pt-5 pt-lg-0 change-log">
+					<!-- widget --> 
+					<div class="widget-item">
+						<h3><u>Change log</u></h3>
+					</div>
+                    {% if changes %}
+                    {% for c in changes %}
+                    <h6><span>{{c.date}}</span> : {{c.content}}</h6>
+                    {% endfor %}
+					{% else %}
+					<h6>No changes untill now</h6>
+					{% endif %}
+				</div>
+				</div>
+			</div>
+     	</section>
+	<!-- Page section end -->
+{% endblock content %}
