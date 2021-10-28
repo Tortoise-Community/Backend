@@ -11,33 +11,46 @@ class Oauth(object):
                         "redirect_uri={}&response_type=code&scope={}".format(client_id, redirect_uri, scope)
     discord_token_url = "https://discord.com/api/oauth2/token"
     discord_api_url = "https://discord.com/api"
+    client_id = settings.OAUTH_CLIENT_ID
 
-    @staticmethod
-    def get_access_token(code):
+    def __init__(self,
+                 redirect_uri="https://www.tortoisecommunity.com/verification/handlers/",
+                 scope="identify%20email"
+                 ):
+        self.redirect_uri = redirect_uri
+        self.scope = scope
+        self.discord_login_url = (
+            f"https://discord.com/api/oauth2/authorize?client_id={self.client_id}"
+            f"&redirect_uri={self.redirect_uri}&response_type=code&scope={self.scope}"
+        )
+
+    def get_access_token(self, code):
         payload = {
-            'client_id': Oauth.client_id,
-            'client_secret': Oauth.client_secret,
+            'client_id': self.client_id,
+            'client_secret': self.client_secret,
             'grant_type': 'authorization_code',
             'code': code,
-            'redirect_uri': Oauth.redirect_uri,
-            'scope': Oauth.scope
+            'redirect_uri': self.redirect_uri,
+            'scope': self.scope
         }
 
-        headers = {
-         'Content-Type': 'application/x-www-form-urlencoded'
-        }
+        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
 
-        access_token = requests.post(url=Oauth.discord_token_url, data=payload, headers=headers)
+        access_token = requests.post(url=self.discord_token_url, data=payload, headers=headers)
         json = access_token.json()
         return json.get("access_token")
 
     @staticmethod
-    def get_user_json(access_token):
-        url = Oauth.discord_api_url + '/users/@me'
+    def get(access_token, endpoint):
 
-        headers = {
-            "Authorization": "Bearer {}".format(access_token)
-        }
-        user_object = requests.get(url=url, headers=headers)
-        user_json = user_object.json()
-        return user_json
+        headers = {"Authorization": f"Bearer {access_token}"}
+        response_object = requests.get(url=endpoint, headers=headers)
+        return response_object.json()
+
+    def get_user_json(self, access_token):
+        url = f"{self.discord_api_url}/users/@me"
+        return self.get(access_token, endpoint=url)
+
+    def get_guild_info_json(self, access_token):
+        url = f"{self.discord_api_url}/users/@me/guilds"
+        return self.get(access_token, endpoint=url)

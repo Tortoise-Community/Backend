@@ -1,0 +1,65 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+	<!-- Page info section -->
+	<section class="page-info-section set-bg" data-setbg="{{siteurls.img1}}">
+		<div class="pi-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-5 col-lg-6 text-white">
+						<h2>Rules</h2>
+					</div>
+				</div>
+				<a href="{% url 'members' %}"><button class="githux mod1">Developers</button></a>
+				<a href="{% url 'rules' %}"><button class="githux mod1 buttonactive">Rules</button></a>
+				<a href="{% url 'privacy' %}"><button class="githux mod1">Privacy</button></a>
+			</div>
+		</div>
+	</section>
+	<!-- Page info section -->
+
+	<!-- Page section -->
+	<section class="page-section single-blog-page spad">
+        <div class="container">
+			<div class="row">
+				<div class="col-lg-11">
+					<div class="row"></div>
+                        <h2 style="font-family: 'Roboto', sans-serif;">Rules</h2>
+                        <p style="font-size: 18px; color: black;font-family: 'Roboto', sans-serif; font-weight: bolder;">We impose a strict set of rules that all members are obliged to follow. Violation of them will result in an Infraction.</p>
+                        <div class="rules-block">
+                            <blockquote>
+                                <ol>
+                                    <li>Follow the <a href="https://discordapp.com/guidelines">Discord Community Guidelines</a> and <a href="https://discordapp.com/terms">Terms Of Service.</a></li>
+                                    {% for r in rules %}
+                                    <li>{{r.statement}}</li>
+                                    {% endfor %}
+                                </ol>
+                            </blockquote>
+                        </div>
+                            <br>
+                            <h2 style="font-family: 'Roboto', sans-serif;">Infraction Details</h2>
+                            <p style="font-size: 18px;color: black;font-family: 'Roboto', sans-serif; font-weight: bold;">We have a few types of infractions. The severity of the actions will decide the infraction type for the user.</p>
+                        <div class="rules-block">
+                            <blockquote>
+                                <ul>
+                                    <li>A flagged verbal warning</li>
+                                    <li>A short temporary mute (1 hour)</li>
+                                    <li>A long temporary mute (1 day) </li>
+                                    <li>A kick from the server (2 days)</li>
+                                    <li>A short temporary ban (1 week) </li>
+                                    <li>A long temporary ban (1 month)</li>
+                                    <li>A permanent ban from the server</li>
+                                </ul>
+                            </blockquote>
+                        </div>
+                        <p style="font-size: 18px;color: black;font-family: 'Roboto', sans-serif; font-weight: bold;">If you wish to appeal against an Infraction you received, head over to the <a href="{% url 'contact' %}">contact page</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+	<!-- Page section end -->
+
+{% endblock content %}

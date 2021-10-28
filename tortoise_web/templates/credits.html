@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+	<!-- Page info section -->
+	<section class="page-info-section set-bg" data-setbg="{{siteurls.img1}}">
+		<div class="pi-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-5 col-lg-6 text-white">
+						<h2>Credits</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page info section -->
+
+
+	<!-- Page section -->
+	<section class="page-section single-blog-page spad">
+        <div class="container">
+			<div class="row">
+				<div class="col-lg-11">
+                    <h2 style="font-family: 'Roboto', sans-serif;">Credits</h2>
+                    <p style="font-size: 18px; color: black;font-family: 'Roboto', sans-serif; font-weight: bolder;">Info about the members who contributed to the website</p>
+                    <br>
+                    <div class="rules-block">
+                        <blockquote>
+                            <ul>
+                                <li>Core developer : Ryuga #7765</li>
+                            </ul>
+                        </blockquote>
+                    </div>
+			        <p style="font-size: 18px;color: black;font-family: 'Roboto', sans-serif; font-weight: bold;">If you wish to contribute, head over to our <a href="https://github.com/Tortoise-Community/">Github</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+	<!-- Page section end -->
+
+{% endblock content %}

@@ -1,0 +1,12 @@
+.event-theme {
+	background-color: #5cdb95 !important;
+}
+.event-theme p,li{
+		color: #edf5e7 !important;
+}
+.event-theme h1,h2,h3,h4,h5,h6{
+		color: #05386b !important;
+}
+.event-theme a{
+		color: #379683 !important;
+}
