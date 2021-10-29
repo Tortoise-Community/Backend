@@ -13,11 +13,8 @@ requests = "*"
 django-environ = "*"
 psycopg2-binary = "*"
 django-hosts = "*"
-sockets = "*"
 pillow = "*"
 gunicorn = "*"
-markdown = "*"
-django-celery-results = "*"
 
 [requires]
 python_version = "3.9"

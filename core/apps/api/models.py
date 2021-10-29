@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import settings
 from django.contrib.postgres.fields import ArrayField
 
-from utils.misc import empty_array, DiscordIDField
+from core.utils.misc import empty_array, DiscordIDField
 
 
 class User(models.Model):
@@ -11,7 +11,7 @@ class User(models.Model):
     tag = models.CharField(max_length=6)
     avatar = models.URLField(max_length=150, blank=True, default="")
     email = models.CharField(max_length=50, default="", blank=True)
-    verified = models.BooleanField(default=False)
+    email_verified = models.BooleanField(default=False)
     perks = models.PositiveIntegerField(default=0)
 
     def get_avatar_url(self):
@@ -29,7 +29,6 @@ class Guild(models.Model):
 
     @property
     def unused_emotes(self):
-        # return [emote for emote in self.emotes if emote not in SelfAssignableRole.attached_emotes(self)]
         return list(SelfAssignableRole.attached_emotes(self))
 
 

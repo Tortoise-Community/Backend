@@ -3,7 +3,6 @@ import environ
 
 env = environ.Env(DEBUG=(bool, False))
 
-# Fetches .env file from two folders back (/a/b/ - 2 = /)
 env_path = environ.Path(__file__) - 2
 environ.Env.read_env(env_file=env_path('.env'))
 
@@ -28,9 +27,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'tortoise_web.apps.TortoiseWebConfig',
-    'tortoise_api.apps.TortoiseAPIConfig',
-    'tortoise_dash.apps.TortoiseDashConfig',
+    'core.apps.web',
+    'core.apps.api',
+    'core.apps.dash',
     'rest_framework.authtoken',
     'django_hosts',
 ]
@@ -47,8 +46,8 @@ MIDDLEWARE = [
     'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
-ROOT_URLCONF = 'tortoise.urls'
-ROOT_HOSTCONF = 'tortoise.hosts'
+ROOT_URLCONF = 'core.urls'
+ROOT_HOSTCONF = 'core.hosts'
 DEFAULT_HOST = 'www'
 
 TEMPLATES = [
@@ -145,9 +144,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core/static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'core/assets')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'core/media')
 MEDIA_URL = '/media/'
 
 
