@@ -3,7 +3,6 @@ import environ
 
 env = environ.Env(DEBUG=(bool, False))
 
-# Fetches .env file from two folders back (/a/b/ - 2 = /)
 env_path = environ.Path(__file__) - 2
 environ.Env.read_env(env_file=env_path('.env'))
 
@@ -145,9 +144,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core/static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'core/assets')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'core/media')
 MEDIA_URL = '/media/'
 
 
