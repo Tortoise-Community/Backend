@@ -28,9 +28,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'tortoise_web.apps.TortoiseWebConfig',
-    'tortoise_api.apps.TortoiseAPIConfig',
-    'tortoise_dash.apps.TortoiseDashConfig',
+    'core.apps.web',
+    'core.apps.api',
+    'core.apps.dash',
     'rest_framework.authtoken',
     'django_hosts',
 ]
@@ -47,8 +47,8 @@ MIDDLEWARE = [
     'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
-ROOT_URLCONF = 'tortoise.urls'
-ROOT_HOSTCONF = 'tortoise.hosts'
+ROOT_URLCONF = 'core.urls'
+ROOT_HOSTCONF = 'core.hosts'
 DEFAULT_HOST = 'www'
 
 TEMPLATES = [
