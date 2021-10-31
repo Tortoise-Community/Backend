@@ -5,13 +5,16 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from core.utils.handlers import log_error
 from core.utils.mixins import ResponseMixin
-from core.apps.web.models import Project
 from .models import Member, Rule, Guild, Suggestion, User, Role, Infraction, MemberWarning, Strike
 from .serializers import (
-    MemberDataSerializer, SuggestionSerializer, SuggestionPutSerializer, ProjectStatsSerializer,
+    MemberDataSerializer, SuggestionSerializer, SuggestionPutSerializer,
     RuleSerializer, GuildDataSerializer, GuildMetaSerializer, UserDataSerializer, RoleSerializer,
     InfractionSerializer, StrikeSerializer, WarningSerializer
 )
+
+
+def test(request):
+    return JsonResponse({"message": "Ok"}, status=200)
 
 
 class MemberDataView(APIView, ResponseMixin):
@@ -62,33 +65,6 @@ class MemberDataView(APIView, ResponseMixin):
             queryset = get_object_or_404(self.model, user__id=user_id, guild__id=guild_id)
             queryset.delete()
             return self.json_response_204()
-        else:
-            return self.json_response_405()
-
-
-class ProjectStatsView(APIView, ResponseMixin):
-    model = Project
-    serializers = ProjectStatsSerializer
-
-    def get(self, request, item_id=None):
-        if item_id is not None:
-            queryset = get_object_or_404(self.model, pk=item_id)
-            serializer = self.serializers(queryset)
-            return Response(serializer.data, status=200)
-        else:
-            queryset = self.model.objects.all()
-            serializer = self.serializers(queryset, many=True)
-            return JsonResponse(serializer.data, safe=False, status=200)
-
-    def put(self, request, item_id=None):
-        if item_id is not None:
-            queryset = get_object_or_404(self.model, pk=item_id)
-            serializer = self.serializers(queryset, data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=200)
-            else:
-                return self.json_response_500()
         else:
             return self.json_response_405()
 

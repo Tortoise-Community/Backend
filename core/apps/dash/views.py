@@ -81,7 +81,6 @@ class GuildRolesView(View, LoginRequiredMixin):
 
     def get(self, request, guild_id):
         guild = Guild.objects.get(id=guild_id)
-        print(guild.unused_emotes)
         return render(request, self.template_name)
 
 
