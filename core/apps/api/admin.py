@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from tortoise_api import models
+from . import models
 
 
 admin.site.register(models.User)

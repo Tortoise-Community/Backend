@@ -1,16 +1,13 @@
-import os
-import environ
-
-env = environ.Env(DEBUG=(bool, False))
-
-env_path = environ.Path(__file__) - 2
-environ.Env.read_env(env_file=env_path('.env'))
+import os, sys
+from decouple import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = env('SECRET_KEY')
+sys.path.append(os.path.join(BASE_DIR, "core/apps"))
 
-DEBUG = env('DEBUG')
+SECRET_KEY = config('SECRET_KEY')
+
+DEBUG = config('DEBUG')
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
@@ -20,6 +17,9 @@ else:
 DATE_INPUT_FORMATS = ['%Y-%m-%d']
 
 INSTALLED_APPS = [
+    'core.apps.web',
+    'core.apps.api',
+    'core.apps.dash',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -27,9 +27,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'core.apps.web',
-    'core.apps.api',
-    'core.apps.dash',
     'rest_framework.authtoken',
     'django_hosts',
 ]
@@ -66,7 +63,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'tortoise.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.application'
 # SECURE_SSL_REDIRECT = 'True'
 
 
@@ -76,10 +73,10 @@ WSGI_APPLICATION = 'tortoise.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
         'PORT': '5432'
     }
 }
@@ -156,22 +153,22 @@ MEDIA_URL = '/media/'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'tortoisecommunity@gmail.com'
-EMAIL_HOST_PASSWORD = env('EMAIL_TOKEN')
+EMAIL_HOST_PASSWORD = config('EMAIL_TOKEN')
 EMAIL_USE_TLS = True
 
-HASH_SALT = env('HASH_SALT')
-HASH_ITERATION = env('HASH_ITERATION')
+HASH_SALT = config('HASH_SALT')
+HASH_ITERATION = config('HASH_ITERATION')
 
 
 # Discord configuration for bot and verification
 
-SERVER_ID = env('SERVER_ID')
-WEBHOOK_ID = env('WEBHOOK_ID')
-WEBHOOK_SECRET = env('WEBHOOK_SECRET')
-BOT_SOCKET_IP = env('BOT_SOCKET_IP')
-BOT_SOCKET_PORT = env('BOT_SOCKET_PORT')
-BOT_SOCKET_TOKEN = env('BOT_SOCKET_TOKEN')
-OAUTH_CLIENT_ID = env('OAUTH_CLIENT_ID')
-OAUTH_CLIENT_SECRET = env('OAUTH_CLIENT_SECRET')
-GITHUB_ACCESS_TOKEN = env('GITHUB_ACCESS_TOKEN')
-DELETION_CONFIRMATION_KEY = env('DELETION_CONFIRMATION_KEY')
+SERVER_ID = config('SERVER_ID')
+WEBHOOK_ID = config('WEBHOOK_ID')
+WEBHOOK_SECRET = config('WEBHOOK_SECRET')
+BOT_SOCKET_IP = config('BOT_SOCKET_IP')
+BOT_SOCKET_PORT = config('BOT_SOCKET_PORT')
+BOT_SOCKET_TOKEN = config('BOT_SOCKET_TOKEN')
+OAUTH_CLIENT_ID = config('OAUTH_CLIENT_ID')
+OAUTH_CLIENT_SECRET = config('OAUTH_CLIENT_SECRET')
+GITHUB_ACCESS_TOKEN = config('GITHUB_ACCESS_TOKEN')
+DELETION_CONFIRMATION_KEY = config('DELETION_CONFIRMATION_KEY')

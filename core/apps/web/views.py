@@ -4,12 +4,12 @@ from django.views import View
 from django.conf import settings
 from django.shortcuts import render
 
-from utils.oauth import Oauth
-from tortoise_web.models import Event, Project
-from utils.tools import bot_socket, webhook
-from tortoise_api.models import User, Member
-from utils.handlers import log_error
-from utils.mixins import ModelDataMixin, ResponseMixin
+from core.utils.oauth import Oauth
+from .models import Event, Project
+from core.utils.tools import bot_socket, webhook
+from core.apps.api.models import User, Member
+from core.utils.handlers import log_error
+from core.utils.mixins import ModelDataMixin, ResponseMixin
 
 oauth = Oauth()
 

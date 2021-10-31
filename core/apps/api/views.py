@@ -3,9 +3,9 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-from utils.handlers import log_error
-from utils.mixins import ResponseMixin
-from tortoise_web.models import Project
+from core.utils.handlers import log_error
+from core.utils.mixins import ResponseMixin
+from core.apps.web.models import Project
 from .models import Member, Rule, Guild, Suggestion, User, Role, Infraction, MemberWarning, Strike
 from .serializers import (
     MemberDataSerializer, SuggestionSerializer, SuggestionPutSerializer, ProjectStatsSerializer,

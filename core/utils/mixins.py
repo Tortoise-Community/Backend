@@ -1,60 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 
-from tortoise.models import SiteUrls
-from tortoise_api.models import Rule
-from tortoise_web.models import New, Team, Slider, Event, Privacy, Change
-
-
-class ModelDataMixin(object):
-    context = {}
-    siteurls = SiteUrls # noqa
-    news = New.objects.all()
-    team = Team.objects.all()
-    slider = Slider.objects.all()
-    events = Event.objects.all()
-    privacy = Privacy.objects.all()
-    changes = Change.objects.all()
-    rules = Rule.objects.all().order_by('number')[1:]
-
-    def get_main_context(self):
-        self.context['slides'] = self.slider
-        self.get_common_context()
-        self.get_category_events()
-        return self.context
-
-    def get_events_context(self):
-        self.context['events'] = self.events.filter(status__in=['Live', 'Ended']).order_by('-id')
-        self.get_upcoming_context()
-        self.get_common_context()
-        return self.context
-
-    def get_upcoming_context(self):
-        self.context['upcoming'] = self.events.filter(status='Upcoming')[:2]
-        return self.context
-
-    def get_category_events(self):
-        self.context['levents'] = self.events.filter(status='Live')[:2] # noqa
-        self.context['revents'] = self.events.filter(status='Ended')[:3] # noqa
-        self.get_upcoming_context()
-        return self.context
-
-    def get_common_context(self):
-        self.context["team"] = self.team
-        self.context["siteurls"] = self.siteurls
-        self.context["news"] = self.news
-        return self.context
-
-    def get_blog_context(self):
-        self.context["siteurls"] = self.siteurls
-        return self.context
-
-    def get_generic_context(self):
-        self.context["privacy"] = self.privacy
-        self.context['rules'] = self.rules
-        self.context['changes'] = self.changes
-        self.get_blog_context()
-
 
 class ResponseMixin(object):
 

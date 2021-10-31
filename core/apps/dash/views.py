@@ -4,12 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login, authenticate
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
-from utils.oauth import Oauth
-from utils.mixins import ResponseMixin
-from utils.decorators import permission_required
-from utils.hash import Hashing
-from tortoise_api.models import Admin, MemberWarning, Infraction, Guild
-from utils.operations import create_admin, update_guilds, get_admin_guild_list
+from core.utils.oauth import Oauth
+from core.utils.mixins import ResponseMixin
+from core.utils.decorators import permission_required
+from core.utils.hash import Hashing
+from core.apps.api.models import Admin, MemberWarning, Infraction, Guild
+from core.utils.operations import create_admin, update_guilds, get_admin_guild_list
 
 oauth = Oauth(redirect_uri="http://dash.tortoisecommunity.co:8000/", scope="guilds%20identify%20email")
 
