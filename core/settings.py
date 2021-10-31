@@ -11,6 +11,7 @@ DEBUG = config('DEBUG')
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
+    CORS_ORIGIN_ALLOW_ALL = True
 else:
     ALLOWED_HOSTS = ['.tortoisecommunity.org']
 
@@ -26,6 +27,7 @@ INSTALLED_APPS = [
     'core.apps.web.apps.WebConfig',
     'core.apps.api',
     'core.apps.dash',
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'django_hosts',
@@ -36,6 +38,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',

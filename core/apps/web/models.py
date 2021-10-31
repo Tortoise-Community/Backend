@@ -56,3 +56,7 @@ class Project(models.Model):
     def save(self, *args, **kwargs):
         self.slug = self.github.rsplit("/")[-1].lower()
         super(Project, self).save(*args, **kwargs)
+
+    @property
+    def language(self):
+        return "Python"
