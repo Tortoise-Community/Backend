@@ -4,15 +4,15 @@ from django.urls import path, include
 from .views import (
     UserDataView, SuggestionDataView, MemberDataView, GuildDataView,
     ProjectStatsView, RulesDataView, RolesDataView, InfractionDataView,
-    MemberWarningView, StrikeDataView
+    MemberWarningView, StrikeDataView, test
 )
 
-# TODO REFACTOR REQUIRED
 
 router = routers.DefaultRouter()
 
 
 urlpatterns = [
+    path('', test),
     path('private/bot/', include(router.urls)),
     path('private/auth/', include('rest_framework.urls')),
 
