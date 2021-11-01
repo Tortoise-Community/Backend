@@ -45,8 +45,8 @@ class Event(models.Model):
 class Project(models.Model):
     slug = models.SlugField(auto_created=True, blank=True, unique=True)
     name = models.CharField(max_length=15)
-    description = models.CharField(max_length=200)
-    brief = models.TextField()
+    short_desc = models.CharField(max_length=200)
+    long_desc = models.TextField()
     github = models.URLField(blank=True)
     commits = models.PositiveSmallIntegerField(blank=True, default=0)
     stars = models.PositiveSmallIntegerField(blank=True, default=0)
