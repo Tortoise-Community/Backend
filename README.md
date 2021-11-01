@@ -27,24 +27,24 @@ To ease out this process follow the project setup instruction for developers.
 
 ### Project Setup Instruction
 
-**Python 3.8 reqiuired**
+**Python 3.9 reqiuired**
 ```git
 # Begin by forking the repo to your github account (makes managing conflicts easier)
 
 # Your global Python installation needs to have pipenv
-pip install pipenv
+pip install poetry
 
 # Clone the repository from your profile 
 https://github.com/<Your-Github-Username>/Website.git
 
 # [development installation] If you are developer/looking to contribute you need to install dependencies for dev
-pipenv install --dev
+poetry install --dev
 
 # [production installation] If you are setting up site for production just install required dependencies like this
-pipenv install
+poetry install --no-dev
 
 # Activate the Pipenv shell (aka tell your terminal/whatever to use dependencies from the env in this project)
-pipenv shell
+poetry shell
 
 # The site should now be setup, You won't be able to run the test server because of the missing credentials.
 
@@ -90,7 +90,7 @@ HASH_ITERATION = put_something_here
 
 Run development server 
 
-`pipenv run server` (windows)
+`poetry run python manage.py runserver`
 
 ## License
 MIT - see [LICENSE](https://github.com/Tortoise-Community/Website/blob/dev/LICENSE) file for details.
