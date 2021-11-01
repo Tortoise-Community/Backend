@@ -80,7 +80,7 @@ class GuildRolesView(View, LoginRequiredMixin):
     context = {}
 
     def get(self, request, guild_id):
-        guild = Guild.objects.get(id=guild_id)
+        Guild.objects.get(id=guild_id)
         return render(request, self.template_name)
 
 
