@@ -24,7 +24,7 @@ class Event(models.Model):
     host = models.CharField(max_length=100)
     short_desc = models.CharField(max_length=300)
     long_desc = models.TextField()
-    event_type = ArrayField(models.CharField(max_length=20), size=5, help_text="You can add 5 labels (max)")
+    event_tags = ArrayField(models.CharField(max_length=20), size=5, help_text="You can add 5 labels (max)")
     style = models.CharField(max_length=50, choices=EventPageCodeStyles.choices, default=EventPageCodeStyles.DEFAULT)
     due_date = models.DateField()
     end_date = models.DateField()
@@ -35,10 +35,14 @@ class Event(models.Model):
 
     @property
     def status(self):
-        return "Ended"
+        return "Upcoming"
 
     @property
     def host_name(self):
+        return self.host
+
+    @property
+    def winner_name(self):
         return self.host
 
 

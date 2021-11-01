@@ -28,8 +28,8 @@ class EventSerializer(serializers.ModelSerializer):
         fields = (
             "pk", "slug", "name",
             "short_desc", "status",
-            "end_date", "prize", "host",
-            "event_tags", "winner_name", "due_date"
+            "event_tags", "winner_name", "due_date",
+            "end_date", "prize", "host", "winner_name"
         )
 
 
