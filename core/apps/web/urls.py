@@ -7,9 +7,7 @@ from .views import (
 
 urlpatterns = [
     path('projects/', ProjectView.as_view(), name='projects'),
-    path('projects/<str:slug>', ProjectView.as_view(), name='project_item'),
     path('events/', EventView.as_view(), name='event'),
+    path('projects/<str:slug>', ProjectView.as_view(), name='project_item'),
     path('events/<str:slug>', EventView.as_view(), name='event_item'),
 ]
-
-# urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
