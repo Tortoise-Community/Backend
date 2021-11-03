@@ -16,10 +16,11 @@ else:
     ALLOWED_HOSTS = ['.tortoisecommunity.org']
 
 CORS_ALLOWED_ORIGINS = [
-    "https://tortoisecommunity.com",
-    "https://www.tortoisecommunity.org",
-    "http://localhost:8080",
-    "http://127.0.0.1:9000"
+    # "https://tortoisecommunity.com",
+    # "https://www.tortoisecommunity.org",
+    # "http://localhost:8080",
+    # "http://127.0.0.1:9000"
+    "*"
 ]
 
 DATE_INPUT_FORMATS = ['%Y-%m-%d']
