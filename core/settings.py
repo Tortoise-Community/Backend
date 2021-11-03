@@ -15,13 +15,15 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = ['.tortoisecommunity.org']
 
-CORS_ALLOWED_ORIGINS = [
+# CORS_ALLOWED_ORIGINS = [
     # "https://tortoisecommunity.com",
     # "https://www.tortoisecommunity.org",
     # "http://localhost:8080",
     # "http://127.0.0.1:9000"
-    "*"
-]
+    # "*"
+# ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 DATE_INPUT_FORMATS = ['%Y-%m-%d']
 
