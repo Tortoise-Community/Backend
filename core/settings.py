@@ -8,7 +8,7 @@ sys.path.append(os.path.join(BASE_DIR, "core/apps"))
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = config('DEBUG')
+DEBUG = config('DEBUG', False)
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
@@ -32,13 +32,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+    'django_hosts',
+    'rest_framework',
+    'rest_framework.authtoken',
     'core.apps.web.apps.WebConfig',
     'core.apps.api',
     'core.apps.dash',
-    'corsheaders',
-    'rest_framework',
-    'rest_framework.authtoken',
-    'django_hosts',
 ]
 
 MIDDLEWARE = [
@@ -46,7 +46,6 @@ MIDDLEWARE = [
     'django_hosts.middleware.HostsRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
