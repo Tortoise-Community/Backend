@@ -8,7 +8,7 @@ sys.path.append(os.path.join(BASE_DIR, "core/apps"))
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = config('DEBUG', False)
+DEBUG = config('DEBUG')
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
