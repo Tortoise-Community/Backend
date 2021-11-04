@@ -17,10 +17,10 @@ else:
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    "https://tortoisecommunity.com",
+    "https://tortoisecommunity.org",
     "https://www.tortoisecommunity.org",
-    "http://localhost:8080",
-    "http://127.0.0.1:9000"
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
 ]
 
 DATE_INPUT_FORMATS = ['%Y-%m-%d']
