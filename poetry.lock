@@ -42,7 +42,7 @@ category = "main"
 optional = false
 python-versions = ">=3.5.0"
 
-[package.extras]
+[package.extras].
 unicode_backport = ["unicodedata2"]
 
 [[package]]
