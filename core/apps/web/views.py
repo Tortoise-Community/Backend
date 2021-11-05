@@ -39,6 +39,6 @@ class EventView(APIView, ResponseMixin):
             serializer = self.serializers(queryset)
             return Response(serializer.data, status=200)
         else:
-            queryset = self.model.objects.all()
+            queryset = self.model.objects.all().order_by("-end_date")
             serializer = self.serializers(queryset, many=True)
             return JsonResponse(serializer.data, safe=False, status=200)
