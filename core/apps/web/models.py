@@ -1,3 +1,5 @@
+from datetime import datetime, timezone
+
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.utils.text import slugify
@@ -35,6 +37,11 @@ class Event(models.Model):
 
     @property
     def status(self):
+        current_date = datetime.now(timezone.utc).date()
+        if current_date > self.end_date:
+            return "Ended"
+        elif current_date >= self.due_date:
+            return "Live"
         return "Upcoming"
 
     @property
@@ -56,11 +63,8 @@ class Project(models.Model):
     stars = models.PositiveSmallIntegerField(blank=True, default=0)
     forks = models.PositiveSmallIntegerField(blank=True, default=0)
     contributors = models.PositiveSmallIntegerField(blank=True, default=0)
+    language = models.CharField(max_length=15, default="Python")
 
     def save(self, *args, **kwargs):
         self.slug = self.github.rsplit("/")[-1].lower()
         super(Project, self).save(*args, **kwargs)
-
-    @property
-    def language(self):
-        return "Python"

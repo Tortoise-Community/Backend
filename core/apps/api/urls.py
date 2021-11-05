@@ -3,8 +3,8 @@ from django.urls import path, include
 
 from .views import (
     UserDataView, SuggestionDataView, MemberDataView, GuildDataView,
-    ProjectStatsView, RulesDataView, RolesDataView, InfractionDataView,
-    MemberWarningView, StrikeDataView, test
+    RulesDataView, RolesDataView, InfractionDataView,
+    MemberWarningView, StrikeDataView
 )
 
 
@@ -12,7 +12,6 @@ router = routers.DefaultRouter()
 
 
 urlpatterns = [
-    path('', test),
     path('private/bot/', include(router.urls)),
     path('private/auth/', include('rest_framework.urls')),
 
@@ -24,8 +23,6 @@ urlpatterns = [
     path('private/guild/', GuildDataView.as_view()),
     path('private/guild/<int:guild_id>/', GuildDataView.as_view()),
 
-    path('private/projects/', ProjectStatsView.as_view()),
-    path('private/projects/<int:item_id>/', ProjectStatsView.as_view()),
 
     path('private/members/', MemberDataView.as_view()),
     path('private/members/<int:guild_id>/', MemberDataView.as_view()),

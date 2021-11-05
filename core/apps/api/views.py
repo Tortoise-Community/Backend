@@ -13,10 +13,6 @@ from .serializers import (
 )
 
 
-def test(request):
-    return JsonResponse({"message": "Ok"}, status=200)
-
-
 class MemberDataView(APIView, ResponseMixin):
     model = Member
     serializers = MemberDataSerializer
