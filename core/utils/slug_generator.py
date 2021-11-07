@@ -6,7 +6,7 @@ class SlugGenerator:
     first_words = [
         "curious", "magical", "soft", "random", "bland",
         "bioluminescent", "serverless", "wholesome", "idle",
-        "local", "detective", "faithless", "adamant", "anonymous"
+        "local", "detective", "faithless", "adamant", "anonymous",
         "bannable", "energetic", "punchable", "superstitious"
 
     ]
