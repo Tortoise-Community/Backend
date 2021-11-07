@@ -36,9 +36,8 @@ INSTALLED_APPS = [
     'django_hosts',
     'rest_framework',
     'rest_framework.authtoken',
-    'core.apps.web.apps.WebConfig',
-    'core.apps.api',
-    'core.apps.dash',
+    'core.apps.web',
+    'core.apps.ide'
 ]
 
 MIDDLEWARE = [

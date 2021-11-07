@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
-from .models import Paste
+from core.apps.ide.models import Paste
 from .serializers import PasteSerializer
 from core.utils.slug_generator import SlugGenerator
 from core.utils.mixins import ResponseMixin  # TODO: REFACTOR

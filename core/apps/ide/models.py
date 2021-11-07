@@ -6,5 +6,5 @@ class Paste(models.Model):
     body = models.TextField()
     creation_time = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        app_label = "ide"
+    # class Meta:
+    #     app_label = "ide"
