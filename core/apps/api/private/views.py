@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from core.utils.handlers import log_error
 from core.utils.mixins import ResponseMixin
-from .models import Member, Rule, Guild, Suggestion, User, Role, Infraction, MemberWarning, Strike
+from ..models import Member, Rule, Guild, Suggestion, User, Role, Infraction, MemberWarning, Strike
 from .serializers import (
     MemberDataSerializer, SuggestionSerializer, SuggestionPutSerializer,
     RuleSerializer, GuildDataSerializer, GuildMetaSerializer, UserDataSerializer, RoleSerializer,

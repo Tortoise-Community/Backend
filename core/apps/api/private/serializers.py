@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.validators import UnicodeUsernameValidator
 
-from . import models
+from .. import models
 
 
 class UserDataSerializer(serializers.ModelSerializer):
