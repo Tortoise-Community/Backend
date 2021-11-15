@@ -2,7 +2,7 @@ import json
 import socket
 import logging
 
-import requests
+import httpx
 
 from django.conf import settings
 from django.core.mail import send_mail
@@ -27,9 +27,8 @@ class WebhookHandler:
         self.url = "https://discordapp.com/api/webhooks/{}/{}".format(self.webhook_id, self.secret)
 
     def _send_to_webhook(self, payload):
-        payload = json.dumps(payload)
         try:
-            self.resp = requests.post(url=self.url, headers=self.headers, data=payload)
+            self.resp = httpx.post(url=self.url, headers=self.headers, json=payload)
         except Exception as exp:
             log_error(exp, payload)
 
