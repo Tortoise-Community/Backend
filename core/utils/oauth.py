@@ -1,4 +1,4 @@
-import requests
+import httpx
 from django.conf import settings
 
 
@@ -36,7 +36,7 @@ class Oauth(object):
 
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
 
-        access_token = requests.post(url=self.discord_token_url, data=payload, headers=headers)
+        access_token = httpx.post(url=self.discord_token_url, data=payload, headers=headers)
         json = access_token.json()
         return json.get("access_token")
 
@@ -44,7 +44,7 @@ class Oauth(object):
     def get(access_token, endpoint):
 
         headers = {"Authorization": f"Bearer {access_token}"}
-        response_object = requests.get(url=endpoint, headers=headers)
+        response_object = httpx.get(url=endpoint, headers=headers)
         return response_object.json()
 
     def get_user_json(self, access_token):
